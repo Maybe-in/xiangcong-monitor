@@ -120,9 +120,10 @@ def build_svg_trend(hist_pts: Sequence[tuple], fc_pts: Sequence[tuple],
     for k in range(5):
         v = y_min + (y_max - y_min) * k / 4
         y = py(v)
+        dash = ' stroke-dasharray="4 4"' if k > 0 else ""
         grid.append(f'<line x1="{ml}" y1="{y:.1f}" x2="{width-mr}" y2="{y:.1f}" '
                     f'stroke="{"#c9d1da" if k==0 else "#e6eaf0"}" stroke-width="1"'
-                    f'{" stroke-dasharray=\"4 4\"" if k>0 else ""}/>')
+                    f'{dash}/>')
         grid.append(f'<text x="{ml-8}" y="{y+4:.1f}" font-size="11" fill="#7b8595" '
                     f'text-anchor="end">{v:.1f}</text>')
 
