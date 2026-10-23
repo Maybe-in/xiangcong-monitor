@@ -1,88 +1,88 @@
 {
-  "date": "2026-10-24",
-  "generated_at": "2026-10-24 02:48:48",
+  "date": "2026-10-23",
+  "generated_at": "2026-10-23 19:38:45",
   "price_source": "人工录入实测观测点（6 条）+ 模型估算（公开行情接口未接入）",
   "core_region": "泸西县",
   "weather_windows": {
     "d3": {
-      "tmax_avg": 26.8,
-      "tmin_avg": 15.8,
+      "tmax_avg": 27.0,
+      "tmin_avg": 15.9,
       "precip_total": 0,
       "rainy_days": 0,
       "heavy_rain_days": 0,
       "gale_days": 1,
-      "wind_max": 18.5,
+      "wind_max": 19.1,
       "dominant": "雾"
     },
     "w1": {
-      "tmax_avg": 24.8,
+      "tmax_avg": 25.3,
       "tmin_avg": 15.3,
       "precip_total": 2.9,
       "rainy_days": 1,
       "heavy_rain_days": 0,
-      "gale_days": 2,
-      "wind_max": 18.9,
+      "gale_days": 3,
+      "wind_max": 20.6,
       "dominant": "毛毛雨"
     },
     "h1": {
-      "tmax_avg": 22.5,
-      "tmin_avg": 14.4,
-      "precip_total": 15.6,
+      "tmax_avg": 22.9,
+      "tmin_avg": 13.7,
+      "precip_total": 18.3,
       "rainy_days": 5,
-      "heavy_rain_days": 0,
+      "heavy_rain_days": 1,
       "gale_days": 5,
-      "wind_max": 21.6,
+      "wind_max": 22.3,
       "dominant": "毛毛雨"
     },
     "m1": {
-      "tmax_avg": 23.6,
-      "tmin_avg": 14.8,
-      "precip_total": 18.5,
+      "tmax_avg": 24.0,
+      "tmin_avg": 14.4,
+      "precip_total": 21.2,
       "rainy_days": 6,
-      "heavy_rain_days": 0,
-      "gale_days": 7,
-      "wind_max": 21.6,
+      "heavy_rain_days": 1,
+      "gale_days": 8,
+      "wind_max": 22.3,
       "dominant": "毛毛雨"
     }
   },
   "weather_daily": [
     {
       "date": "2026-10-24",
-      "tmax": 26.9,
+      "tmax": 26.8,
       "tmin": 15.6,
       "precip": 0,
       "pop": 2,
-      "wind": 18.5,
+      "wind": 19.1,
       "code": 45,
       "weather": "雾"
     },
     {
       "date": "2026-10-25",
-      "tmax": 26.7,
-      "tmin": 14.6,
+      "tmax": 26.8,
+      "tmin": 14.5,
       "precip": 0,
       "pop": 0,
-      "wind": 15.4,
+      "wind": 15.3,
       "code": 45,
       "weather": "雾"
     },
     {
       "date": "2026-10-26",
-      "tmax": 26.8,
-      "tmin": 17.2,
+      "tmax": 27.3,
+      "tmin": 17.5,
       "precip": 0,
       "pop": 28,
-      "wind": 15.1,
+      "wind": 14.7,
       "code": 45,
       "weather": "雾"
     },
     {
       "date": "2026-10-27",
-      "tmax": 22.7,
+      "tmax": 23.4,
       "tmin": 16.6,
       "precip": 2.6,
       "pop": 65,
-      "wind": 11.5,
+      "wind": 10.7,
       "code": 51,
       "weather": "毛毛雨"
     },
@@ -92,108 +92,108 @@
       "tmin": 15.3,
       "precip": 0.3,
       "pop": 59,
-      "wind": 18.9,
+      "wind": 18.6,
       "code": 51,
       "weather": "毛毛雨"
     },
     {
       "date": "2026-10-29",
-      "tmax": 23.1,
-      "tmin": 13.9,
+      "tmax": 24.1,
+      "tmin": 13.4,
       "precip": 0,
       "pop": 8,
-      "wind": 16.7,
+      "wind": 16.1,
       "code": 3,
       "weather": "阴"
     },
     {
       "date": "2026-10-30",
-      "tmax": 24.3,
-      "tmin": 14.2,
+      "tmax": 25.4,
+      "tmin": 14.0,
       "precip": 0,
       "pop": 10,
-      "wind": 15.8,
+      "wind": 20.6,
+      "code": 45,
+      "weather": "雾"
+    },
+    {
+      "date": "2026-10-31",
+      "tmax": 26.2,
+      "tmin": 14.5,
+      "precip": 0,
+      "pop": 22,
+      "wind": 21.8,
       "code": 3,
       "weather": "阴"
     },
     {
-      "date": "2026-10-31",
-      "tmax": 24.5,
-      "tmin": 14.3,
+      "date": "2026-11-01",
+      "tmax": 26.5,
+      "tmin": 15.7,
       "precip": 1.2,
-      "pop": 22,
-      "wind": 16.5,
+      "pop": 37,
+      "wind": 21.5,
       "code": 51,
       "weather": "毛毛雨"
     },
     {
-      "date": "2026-11-01",
-      "tmax": 24.2,
-      "tmin": 14.9,
-      "precip": 5.7,
-      "pop": 37,
-      "wind": 15.9,
-      "code": 53,
-      "weather": "毛毛雨"
-    },
-    {
       "date": "2026-11-02",
-      "tmax": 23.7,
-      "tmin": 15.6,
-      "precip": 1.5,
+      "tmax": 20.7,
+      "tmin": 12.6,
+      "precip": 1.2,
       "pop": 39,
-      "wind": 21.6,
+      "wind": 12.5,
       "code": 51,
       "weather": "毛毛雨"
     },
     {
       "date": "2026-11-03",
-      "tmax": 24.1,
-      "tmin": 15.3,
+      "tmax": 22.4,
+      "tmin": 12.5,
       "precip": 0,
       "pop": 42,
-      "wind": 20.4,
+      "wind": 19.0,
       "code": 3,
       "weather": "阴"
     },
     {
       "date": "2026-11-04",
-      "tmax": 24.5,
-      "tmin": 15.5,
-      "precip": 0.6,
+      "tmax": 23.5,
+      "tmin": 14.9,
+      "precip": 1.8,
       "pop": 39,
-      "wind": 17.5,
+      "wind": 22.3,
       "code": 51,
       "weather": "毛毛雨"
     },
     {
       "date": "2026-11-05",
-      "tmax": 25.1,
-      "tmin": 15.8,
+      "tmax": 24.1,
+      "tmin": 14.5,
       "precip": 0.6,
       "pop": 39,
-      "wind": 18.3,
+      "wind": 18.2,
       "code": 51,
       "weather": "毛毛雨"
     },
     {
       "date": "2026-11-06",
-      "tmax": 19.5,
-      "tmin": 12.2,
-      "precip": 1.8,
+      "tmax": 19.4,
+      "tmin": 13.4,
+      "precip": 11.4,
       "pop": 39,
-      "wind": 17.0,
-      "code": 51,
-      "weather": "毛毛雨"
+      "wind": 12.1,
+      "code": 80,
+      "weather": "阵雨"
     },
     {
       "date": "2026-11-07",
-      "tmax": 14.7,
+      "tmax": 20.4,
       "tmin": 11.6,
-      "precip": 4.2,
+      "precip": 2.1,
       "pop": 68,
-      "wind": 8.3,
-      "code": 53,
+      "wind": 11.1,
+      "code": 51,
       "weather": "毛毛雨"
     },
     {
@@ -212,7 +212,7 @@
     "hazard_stats": [
       [
         "大雾",
-        45
+        47
       ],
       [
         "大风",
@@ -224,14 +224,14 @@
       ],
       [
         "台风",
-        12
-      ],
-      [
-        "沙尘暴",
-        6
+        11
       ],
       [
         "暴雪",
+        5
+      ],
+      [
+        "沙尘暴",
         5
       ],
       [
@@ -538,52 +538,52 @@
         {
           "key": "d3",
           "label": "未来3天",
-          "target_date": "2026-10-27",
-          "low": 4.4,
-          "high": 5.01,
-          "center": 4.7,
-          "delta_pct": 0.0,
+          "target_date": "2026-10-26",
+          "low": 4.39,
+          "high": 5.0,
+          "center": 4.69,
+          "delta_pct": -0.1,
           "reasons": [
             "大风(≥8级)1天",
-            "气温较常年偏高2.0℃，加速生长供给增"
+            "气温较常年偏高2.1℃，加速生长供给增"
           ]
         },
         {
           "key": "w1",
           "label": "未来1周",
-          "target_date": "2026-10-31",
-          "low": 4.63,
-          "high": 5.27,
-          "center": 4.95,
-          "delta_pct": 5.4,
+          "target_date": "2026-10-30",
+          "low": 4.65,
+          "high": 5.3,
+          "center": 4.98,
+          "delta_pct": 5.9,
           "reasons": [
-            "大风(≥8级)2天"
+            "大风(≥8级)3天"
           ]
         },
         {
           "key": "h1",
           "label": "未来半月",
-          "target_date": "2026-11-08",
+          "target_date": "2026-11-07",
           "low": 5.08,
           "high": 5.79,
           "center": 5.43,
           "delta_pct": 15.6,
           "reasons": [
-            "大风(≥8级)7天",
-            "气温较常年偏低1.2℃，生长放缓供给延后"
+            "强降水(≥10mm)1天，采收受阻",
+            "大风(≥8级)8天"
           ]
         },
         {
           "key": "m1",
           "label": "未来1月",
-          "target_date": "2026-11-23",
+          "target_date": "2026-11-22",
           "low": 5.42,
-          "high": 6.18,
-          "center": 5.8,
-          "delta_pct": 23.4,
+          "high": 6.17,
+          "center": 5.79,
+          "delta_pct": 23.3,
           "reasons": [
-            "大风(≥8级)7天",
-            "气温较常年偏低1.2℃，生长放缓供给延后",
+            "强降水(≥10mm)1天，采收受阻",
+            "大风(≥8级)8天",
             "超出逐日预报范围，叠加厄尔尼诺背景下11 月云南降水偏多 10%-20% 的气候态预期"
           ]
         }
@@ -596,52 +596,52 @@
         {
           "key": "d3",
           "label": "未来3天",
-          "target_date": "2026-10-27",
-          "low": 3.89,
-          "high": 4.43,
-          "center": 4.16,
-          "delta_pct": 0.2,
+          "target_date": "2026-10-26",
+          "low": 3.88,
+          "high": 4.42,
+          "center": 4.15,
+          "delta_pct": 0.1,
           "reasons": [
             "大风(≥8级)1天",
-            "气温较常年偏高2.0℃，加速生长供给增"
+            "气温较常年偏高2.1℃，加速生长供给增"
           ]
         },
         {
           "key": "w1",
           "label": "未来1周",
-          "target_date": "2026-10-31",
-          "low": 4.11,
-          "high": 4.68,
-          "center": 4.39,
-          "delta_pct": 5.8,
+          "target_date": "2026-10-30",
+          "low": 4.13,
+          "high": 4.7,
+          "center": 4.41,
+          "delta_pct": 6.3,
           "reasons": [
-            "大风(≥8级)2天"
+            "大风(≥8级)3天"
           ]
         },
         {
           "key": "h1",
           "label": "未来半月",
-          "target_date": "2026-11-08",
+          "target_date": "2026-11-07",
           "low": 4.53,
           "high": 5.16,
           "center": 4.84,
           "delta_pct": 16.7,
           "reasons": [
-            "大风(≥8级)7天",
-            "气温较常年偏低1.2℃，生长放缓供给延后"
+            "强降水(≥10mm)1天，采收受阻",
+            "大风(≥8级)8天"
           ]
         },
         {
           "key": "m1",
           "label": "未来1月",
-          "target_date": "2026-11-23",
-          "low": 4.85,
+          "target_date": "2026-11-22",
+          "low": 4.84,
           "high": 5.52,
-          "center": 5.19,
-          "delta_pct": 25.0,
+          "center": 5.18,
+          "delta_pct": 24.8,
           "reasons": [
-            "大风(≥8级)7天",
-            "气温较常年偏低1.2℃，生长放缓供给延后",
+            "强降水(≥10mm)1天，采收受阻",
+            "大风(≥8级)8天",
             "超出逐日预报范围，叠加厄尔尼诺背景下11 月云南降水偏多 10%-20% 的气候态预期"
           ]
         }
