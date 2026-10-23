@@ -19,7 +19,7 @@ import os
 from collections.abc import Sequence
 from datetime import date, datetime, timedelta
 
-from .config import MODEL
+from .config import FESTIVALS, FORECAST_HORIZONS, MODEL
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 HISTORY_PATH = os.path.join(DATA_DIR, "price_history.json")
@@ -34,10 +34,10 @@ DEFAULT_HISTORY = {
          "source": "observed", "note": "云南产地蔬菜综合交易价 5.9-6.3"},
         {"date": "2026-10-14", "variety": "黑葱", "market": "云南产地", "price": 5.70,
          "source": "observed", "note": "云南产地蔬菜综合交易价 5.5-5.9"},
-        {"date": "2026-10-23", "variety": "红香葱", "market": "云南产地", "price": 4.70,
-         "source": "observed", "note": "云南产地蔬菜综合交易价 4.4-5.0"},
-        {"date": "2026-10-23", "variety": "黑葱", "market": "云南产地", "price": 4.15,
-         "source": "observed", "note": "云南产地蔬菜综合交易价 3.9-4.4"},
+        {"date": "2026-10-23", "variety": "红香葱", "market": "云南产地", "price": 4.35,
+         "source": "observed", "note": "泸西菜价红香葱 4.1-4.6，均价 4.35"},
+        {"date": "2026-10-23", "variety": "黑葱", "market": "云南产地", "price": 3.86,
+         "source": "observed", "note": "泸西菜价黑香葱 3.6-4.1，均价 3.86"},
         {"date": "2026-10-23", "variety": "小葱", "market": "昆明王旗营", "price": 3.50,
          "source": "observed", "note": "王旗营批发市场"},
     ],
@@ -186,24 +186,37 @@ def weather_impact(daily: Sequence[dict], start: int, end: int,
     return impact, reasons
 
 
+# ------------------------------------------------------------------ 节日脉冲
+def festival_factor(target: date) -> tuple[float, str]:
+    """节日备货带来的月内额外拉升（月尺度季节性之外的增量部分）。
+
+    越临近节日，渠道/加工端集中备货越强，产区收购价中枢上抬；节日一过即回落。
+    返回 (增量系数, 说明文案)，无节日窗口时返回 (0.0, '')。
+    """
+    best, label = 0.0, ""
+    for f in FESTIVALS:
+        fdate = datetime.strptime(f["date"], "%Y-%m-%d").date()
+        delta = (fdate - target).days
+        if delta < 0 or delta > f["ramp_days"]:
+            continue
+        adj = f["peak_adj"] * (1.0 - delta / float(f["ramp_days"]))
+        if adj > best:
+            best = adj
+            label = "{0}前 {1} 天，备货需求抬升".format(f["name"], delta)
+    return best, label
+
+
 # ------------------------------------------------------------------ 主预测
-FORECAST_HORIZONS = [
-    {"key": "d3",  "label": "未来3天",  "days": 3},
-    {"key": "w1",  "label": "未来1周",  "days": 7},
-    {"key": "h1",  "label": "未来半月", "days": 15},
-    {"key": "m1",  "label": "未来1月",  "days": 30},
-]
-
-
 def build_forecast(history: dict, daily: Sequence[dict], horizons=None,
                    clim: dict | None = None) -> dict:
-    """生成四档预测。daily 为产区逐日预报（最多16天）。
+    """生成六档预测。daily 为产区逐日预报（最多16天）。
 
     预测式：
         P(h) = P₀ × SeasonalRatio(target, today)
-                  × (1 + WeatherImpact[0, min(h, len(daily))))
+                  × (1 + WeatherImpact[0, min(h, n)) × Damp(h))
                   × (1 + Momentum(h))
-                  × (1 + BeyondForecastAdj)    # 仅当 h > 预报天数
+                  × (1 + BeyondForecastAdj(h))   # 仅当 h > 预报天数
+                  × (1 + FestivalPulse(target))
     """
     horizons = horizons or FORECAST_HORIZONS
     today = date.today()
@@ -222,29 +235,44 @@ def build_forecast(history: dict, daily: Sequence[dict], horizons=None,
             end = min(days, n_forecast)
             wi, reasons = weather_impact(daily, 0, end, clim=clim, ref_month=ref_month)
 
+            # 天气冲击衰减：短窗口的降雨/大风无法把远期价格顶上去
+            extra = max(0, days - n_forecast)
+            damp = 1.0 / (1.0 + extra / float(MODEL["weather_damp_days"]))
+
             sr = seasonal_ratio(target, today)
 
             # 均值回归强度随时间递增（越远越向均值靠拢）
             strength = MODEL["momentum"] * min(1.0, days / float(MODEL["mean_reversion_days"]))
             momentum = 1.0 + strength * (ma / p0 - 1.0)
 
-            # 超出预报覆盖范围的时段，用气候态修正
+            # 超出预报覆盖范围的时段，用气候态修正（随超出天数递增并封顶）
             beyond = 0.0
-            if days > n_forecast:
-                beyond = MODEL["beyond_forecast_adj"]
-                reasons = reasons + ["超出逐日预报范围，叠加厄尔尼诺背景下"
-                                      "11 月云南降水偏多 10%-20% 的气候态预期"]
+            if extra > 0:
+                mult = min(MODEL["beyond_forecast_cap"], 1.0 + extra / 20.0)
+                beyond = MODEL["beyond_forecast_adj"] * mult
+                reasons = reasons + [
+                    "超出 {0} 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下"
+                    "冬季西南降水偏多、气温冷暖起伏大".format(n_forecast)]
 
-            center = p0 * sr * (1.0 + wi) * momentum * (1.0 + beyond)
-            band = center * MODEL["band_pct"]
+            fest, fest_label = festival_factor(target)
+            if fest:
+                reasons = reasons + [fest_label]
+
+            center = p0 * sr * (1.0 + wi * damp) * momentum * (1.0 + beyond) * (1.0 + fest)
+
+            band_pct = MODEL["band_by_horizon"].get(h["key"], MODEL["band_pct"])
+            band = center * band_pct
             rows.append({
                 "key": h["key"],
                 "label": h["label"],
+                "days": days,
                 "target_date": target.isoformat(),
                 "low": round(center - band, 2),
                 "high": round(center + band, 2),
                 "center": round(center, 2),
                 "delta_pct": round((center / p0 - 1.0) * 100, 1),
+                "band_pct": round(band_pct * 100, 1),
+                "confidence": MODEL["confidence_by_horizon"].get(h["key"], "中"),
                 "reasons": reasons or ["天气条件平稳，供给节奏正常，价格以季节性驱动为主"],
             })
         results[var] = {"current": round(p0, 2), "ma20": round(ma, 2), "rows": rows}
