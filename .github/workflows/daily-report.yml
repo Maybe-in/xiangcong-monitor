@@ -15,6 +15,11 @@ concurrency:
   group: xiangcong-daily-report
   cancel-in-progress: false
 
+env:
+  # GitHub Actions 默认 UTC。北京时间 03:00 跑任务时 UTC 仍是前一日，
+  # 指定时区可让报告日期/文件名为北京时间。
+  TZ: Asia/Shanghai
+
 jobs:
   generate:
     runs-on: ubuntu-latest

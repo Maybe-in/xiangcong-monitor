@@ -430,7 +430,8 @@ def render_report(ctx: dict) -> str:
 def build_index(reports: list[dict]) -> str:
     items = "".join(
         f'<tr><td><a class="back" href="{esc(r["file"])}">{esc(r["date"])}</a></td>'
-        f'<td class="num">{esc(r.get("red_current", "—"))}</td>'
+        f'<td class="num">{esc(r.get("red_current"))}</td>'
+        f'<td class="num">{esc(r.get("black_current"))}</td>'
         f'<td>{esc(r.get("generated_at", ""))}</td></tr>'
         for r in sorted(reports, key=lambda x: x["date"], reverse=True))
     return f"""{page('香葱行情日报 · 报告归档')}
@@ -440,7 +441,7 @@ def build_index(reports: list[dict]) -> str:
 </header>
 <div class="card">
   <table>
-    <tr><th>日期</th><th>红香葱产地中枢(元/kg)</th><th>生成时间</th></tr>
+    <tr><th>日期</th><th>红香葱(元/kg)</th><th>黑葱(元/kg)</th><th>生成时间</th></tr>
     {items or '<tr><td colspan="3">暂无报告</td></tr>'}
   </table>
   <p><a class="back" href="latest.html">→ 查看最新一期报告</a></p>
@@ -479,17 +480,32 @@ def write_outputs(html_doc: str, ctx: dict) -> dict:
     with open(os.path.join(OUTPUT_DIR, "data.json"), "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
-    # index：扫描已有报告
-    reports = []
-    for name in os.listdir(OUTPUT_DIR):
-        if name.startswith("香葱行情日报_") and name.endswith(".html"):
-            reports.append({"date": name[len("香葱行情日报_"):-5], "file": name})
-    for r in reports:
+    # index：维护归档索引（每日价格写入 archive.json，历史报告也能显示价格）
+    archive_path = os.path.join(OUTPUT_DIR, "archive.json")
+    archive: list[dict] = []
+    if os.path.exists(archive_path):
         try:
-            r["red_current"] = ctx["forecast"]["红香葱"]["current"] if r["date"] == today else "—"
+            with open(archive_path, encoding="utf-8") as f:
+                archive = json.load(f)
         except Exception:  # noqa: BLE001
-            r["red_current"] = "—"
-    idx = build_index(reports)
+            archive = []
+
+    red_c = ctx["forecast"].get("红香葱", {}).get("current")
+    blk_c = ctx["forecast"].get("黑葱", {}).get("current")
+    archive = [a for a in archive if a.get("date") != today]
+    archive.append({
+        "date": today,
+        "file": fname,
+        "red_current": red_c,
+        "black_current": blk_c,
+        "generated_at": ctx["generated_at"],
+    })
+    archive.sort(key=lambda x: x["date"], reverse=True)
+    archive = archive[:90]          # 仅保留最近 90 天
+    with open(archive_path, "w", encoding="utf-8") as f:
+        json.dump(archive, f, ensure_ascii=False, indent=2)
+
+    idx = build_index(archive)
     with open(os.path.join(OUTPUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(idx)
 
