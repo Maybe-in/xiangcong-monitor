@@ -67,7 +67,29 @@ python run.py --dry-run    # 仅打印关键结果，不落盘
 
 ## 五、部署到 GitHub
 
-### 1. 创建仓库并推送
+### 1. 添加 SSH 公钥
+
+本机密钥位于 `C:\ssh-keys\`（纯英文路径，规避中文用户名导致的编码问题）：
+
+- 公钥：`C:\ssh-keys\github_id_ed25519.pub`
+- 私钥：`C:\ssh-keys\github_id_ed25519`
+
+复制公钥全文，粘贴到 https://github.com/settings/ssh/new ，
+Title 填 `xiangcong-monitor`，**Key type 保持 Authentication Key**，保存。
+
+验证连通性：
+
+```bash
+ssh -T -i C:/ssh-keys/github_id_ed25519 git@github.com
+# 出现 "Hi <用户名>! You've successfully authenticated" 即成功
+```
+
+### 2. 创建仓库并推送
+
+在 GitHub 网页新建一个**空仓库** `xiangcong-monitor`（**不要**勾选 README / .gitignore / License），
+然后双击运行 `C:\ssh-keys\push-github.bat`，按提示输入 GitHub 用户名即可完成推送。
+
+也可手动执行：
 
 ```bash
 cd xiangcong-monitor
@@ -75,12 +97,13 @@ git init
 git add .
 git commit -m "feat: 香葱行情日报自动化监测系统"
 git branch -M main
-git remote add origin https://github.com/<你的用户名>/xiangcong-monitor.git
+git remote add origin git@github.com/<你的用户名>/xiangcong-monitor.git
 git push -u origin main
 ```
 
-推送时若提示输入密码，请使用 **Personal Access Token**（Settings → Developer settings →
-Personal access tokens → Tokens (classic)，勾选 `repo` 权限），而非账户登录密码。
+> 若使用 HTTPS 方式推送，密码处需填 **Personal Access Token**，而非账户登录密码。
+> 新版 GitHub 界面入口：Settings → Developer settings → Personal access tokens →
+> **Tokens (classic)** → Generate new token，勾选 `repo` 与 `workflow` 权限。
 
 ### 2. 启用定时执行
 
