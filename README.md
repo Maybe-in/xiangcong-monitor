@@ -1,22 +1,26 @@
-# 香葱行情日报 · 自动化监测系统
+# 香葱预测
 
-每日自动采集**全国天气**与**自然灾害预警**数据，分析并预测**未来 3 天 / 1 周 / 半月 / 1 月**的香葱行情，统计市面常见香葱种类与全国种植省份分布，并**重点跟踪云南泸西县**（全国最大香葱单品生产基地）。
+> 仓库显示名：**香葱预测** ｜ 仓库地址 slug：`xiangcong-yuce`
+> 每日自动采集**全国天气**与**自然灾害预警**数据，回顾**过去 12 / 24 / 36 / 60 / 120 个月**的香葱价格走势，
+> 预测**未来 3 天 / 1 周 / 半月 / 1 月 / 2 月 / 3 月**行情，统计市面常见香葱种类与全国种植省份分布，
+> 并**重点跟踪云南泸西县**（全国最大香葱单品生产基地）。
 
-由 GitHub Actions 在**北京时间每日凌晨 3 点**定时执行，自动生成单页 HTML 报告并提交回仓库，可一键发布为 GitHub Pages 站点。
+由 GitHub Actions 在**北京时间每日早上 8:00** 定时执行，自动生成单页 HTML 报告并提交回仓库，可一键发布为 GitHub Pages 站点。
 
 ---
 
 ## 一、目录结构
 
 ```
-xiangcong-monitor/
-├── .github/workflows/daily-report.yml   # 定时任务（UTC 19:00 = 北京 03:00）
+xiangcong-yuce/
+├── .github/workflows/daily-report.yml   # 定时任务（UTC 00:00 = 北京 08:00）
 ├── run.py                               # 主入口：编排采集 → 预测 → 渲染
 ├── src/
 │   ├── config.py                        # 产区、观测点、品种、模型参数
 │   ├── weather.py                       # 天气采集（Open-Meteo）
 │   ├── disaster.py                      # 灾害预警（中央气象台）
-│   ├── price.py                         # 价格历史 + 四档预测模型
+│   ├── price.py                         # 价格历史 + 六档预测模型
+│   ├── longterm.py                      # 10 年长周期序列重建 + 窗口统计
 │   └── report.py                        # HTML 报告渲染（含 SVG 走势图）
 ├── data/
 │   └── price_history.json               # 价格历史（observed 实测 / model 估算）
@@ -75,7 +79,7 @@ python run.py --dry-run    # 仅打印关键结果，不落盘
 - 私钥：`C:\ssh-keys\github_id_ed25519`
 
 复制公钥全文，粘贴到 https://github.com/settings/ssh/new ，
-Title 填 `xiangcong-monitor`，**Key type 保持 Authentication Key**，保存。
+Title 填 `香葱预测 / xiangcong-yuce`，**Key type 保持 Authentication Key**，保存。
 
 验证连通性：
 
@@ -86,7 +90,12 @@ ssh -T -i C:/ssh-keys/github_id_ed25519 git@github.com
 
 ### 2. 创建仓库并推送
 
-在 GitHub 网页新建一个**空仓库** `xiangcong-monitor`（**不要**勾选 README / .gitignore / License），
+在 GitHub 网页新建一个**空仓库**：
+
+- **Repository name**：`xiangcong-yuce`
+- **Description（建议填）**：`香葱预测 · 每日 08:00 自动抓取天气与灾害数据，回顾 10 年行情并预测未来 3 天至 3 个月香葱价格`
+- **不要**勾选 README / .gitignore / License
+
 然后双击运行 `C:\ssh-keys\push-github.bat`，按提示输入 GitHub 用户名即可完成推送。
 
 也可手动执行：
@@ -95,9 +104,9 @@ ssh -T -i C:/ssh-keys/github_id_ed25519 git@github.com
 cd xiangcong-monitor
 git init
 git add .
-git commit -m "feat: 香葱行情日报自动化监测系统"
+git commit -m "feat: 香葱预测自动化监测系统"
 git branch -M main
-git remote add origin git@github.com/<你的用户名>/xiangcong-monitor.git
+git remote add origin git@github.com/<你的用户名>/xiangcong-yuce.git
 git push -u origin main
 ```
 
@@ -109,11 +118,12 @@ git push -u origin main
 
 推送后，进入仓库 **Settings → Actions → General**，确认
 *Workflow permissions* 为 **Read and write permissions**。
-`.github/workflows/daily-report.yml` 中的 `cron: '0 19 * * *'` 即北京时间每日 03:00。
+`.github/workflows/daily-report.yml` 中的 `cron: '0 0 * * *'` 即**北京时间每日 08:00**。
 
-> 提示：GitHub Actions 的定时任务在仓库长期无活动或负载较高时可能延迟数分钟甚至被跳过，
-> 属平台已知行为；如需严格准时，可改用外部 cron（如云服务器、云函数）触发
-> `workflow_dispatch`。
+> **关于准点**：GitHub Actions 的 `schedule` 在整点负载最高，实际触发常延迟 5–30 分钟，
+> 偶尔被跳过，属平台已知行为。若希望更贴近 8:00，可把 cron 改为错峰值
+> （如 `'55 23 * * *'` = 北京 07:55，提前进入队列）。
+> 如需严格准点，改用外部 cron（云服务器 / 云函数）调用 `workflow_dispatch`。
 
 ### 3.（可选）启用 GitHub Pages
 

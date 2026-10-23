@@ -1,9 +1,9 @@
-name: 香葱行情日报
+name: 香葱预测
 
 on:
   schedule:
-    # GitHub Actions 使用 UTC。北京时间 03:00 = 前一日 19:00 UTC
-    - cron: '0 19 * * *'
+    # GitHub Actions 使用 UTC。北京时间每日 08:00 = UTC 当日 00:00
+    - cron: '0 0 * * *'
   workflow_dispatch:      # 允许在 Actions 页面手动触发
 
 permissions:
@@ -16,8 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # GitHub Actions 默认 UTC。北京时间 03:00 跑任务时 UTC 仍是前一日，
-  # 指定时区可让报告日期/文件名为北京时间。
+  # GitHub Actions 默认 UTC。指定时区可让报告日期/文件名为北京时间。
   TZ: Asia/Shanghai
 
 jobs:
@@ -51,7 +50,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "无内容变更，跳过提交"
           else
-            git commit -m "chore: 香葱行情日报 $(date -u +'%Y-%m-%d')"
+            git commit -m "chore: 香葱预测 $(date -u +'%Y-%m-%d')"
             git push
           fi
 
