@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
+
+# 注意：outputs/ 与 data/ 需要提交入库，
+# 以便 GitHub Actions 每次运行后把报告与历史价格写回仓库。

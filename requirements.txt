@@ -1,0 +1,9 @@
+# 香葱行情日报 —— 运行依赖
+#
+# 采集与报告生成全部基于 Python 标准库（urllib / json / datetime 等），
+# 无需任何第三方包即可运行。此处保留空依赖清单，便于 CI 直接执行 pip install -r。
+#
+# 若后续需要扩展（如 pandas 分析、matplotlib 绘图、requests 重试），
+# 请在此显式声明，例如：
+#   requests>=2.31.0
+#   pandas>=2.0.0

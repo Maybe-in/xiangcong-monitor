@@ -1,0 +1,61 @@
+{
+  "unit": "元/公斤（云南产地综合交易价，非净重口径）",
+  "series": [
+    {
+      "date": "2026-10-07",
+      "variety": "小葱",
+      "market": "昆明王旗营",
+      "price": 6.0,
+      "source": "observed",
+      "note": "昆明市农业农村局批发均价统计"
+    },
+    {
+      "date": "2026-10-14",
+      "variety": "红香葱",
+      "market": "云南产地",
+      "price": 6.1,
+      "source": "observed",
+      "note": "云南产地蔬菜综合交易价 5.9-6.3"
+    },
+    {
+      "date": "2026-10-14",
+      "variety": "黑葱",
+      "market": "云南产地",
+      "price": 5.7,
+      "source": "observed",
+      "note": "云南产地蔬菜综合交易价 5.5-5.9"
+    },
+    {
+      "date": "2026-10-23",
+      "variety": "红香葱",
+      "market": "云南产地",
+      "price": 4.7,
+      "source": "observed",
+      "note": "云南产地蔬菜综合交易价 4.4-5.0"
+    },
+    {
+      "date": "2026-10-23",
+      "variety": "黑葱",
+      "market": "云南产地",
+      "price": 4.15,
+      "source": "observed",
+      "note": "云南产地蔬菜综合交易价 3.9-4.4"
+    },
+    {
+      "date": "2026-10-23",
+      "variety": "小葱",
+      "market": "昆明王旗营",
+      "price": 3.5,
+      "source": "observed",
+      "note": "王旗营批发市场"
+    },
+    {
+      "date": "2026-10-24",
+      "variety": "红香葱",
+      "market": "云南产地（模型估算）",
+      "price": 4.7,
+      "source": "model",
+      "note": "模型基准值"
+    }
+  ]
+}
