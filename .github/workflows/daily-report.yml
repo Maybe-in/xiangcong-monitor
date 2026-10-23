@@ -52,6 +52,7 @@ jobs:
 
       - name: 上传 Pages 产物
         uses: actions/upload-pages-artifact@v3
+        continue-on-error: true      # Pages 未启用时不阻断报告生成
         with:
           path: outputs
 
