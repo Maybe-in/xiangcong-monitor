@@ -280,16 +280,19 @@ def render_report(ctx: dict) -> str:
     red = fc["红香葱"]
     blk = fc["黑葱"]
     kpi = f"""
-    <div class="kpi"><div class="lab">红香葱·产地中枢</div><div class="val">{num(red['current'])}</div><div class="chg">元/公斤（云南综合交易价）</div></div>
-    <div class="kpi"><div class="lab">黑葱·产地中枢</div><div class="val">{num(blk['current'])}</div><div class="chg">元/公斤（云南综合交易价）</div></div>
+    <div class="kpi"><div class="lab">红香葱·产地中枢</div><div class="val">{num(red['current'])}</div><div class="chg">元/公斤（滇中产区集散价）</div></div>
+    <div class="kpi"><div class="lab">黑葱·产地中枢</div><div class="val">{num(blk['current'])}</div><div class="chg">元/公斤（滇中产区集散价）</div></div>
     <div class="kpi"><div class="lab">全国生效气象预警</div><div class="val">{d['total']}</div><div class="chg">条（中央气象台）</div></div>
     <div class="kpi"><div class="lab">未来7天产区降水</div><div class="val">{num(win.get('w1', {}).get('precip_total'), 1)}</div><div class="chg">mm · 雨日 {win.get('w1', {}).get('rainy_days', '—')} 天</div></div>
     """
 
     # ---- 预测总表
+    # 表头 9 列：周期 | 目标日 | 红香葱区间 | 红香葱中枢 | 黑葱区间 | 黑葱中枢 | 中枢涨跌 | 区间半宽 | 方向/置信度
     rows = []
-    rows.append(f'<tr><td>当前基准</td><td>{today}</td><td class="num">{num(red["current"])}</td>'
-                f'<td class="num">{num(blk["current"])}</td><td class="num">—</td>'
+    rows.append(f'<tr><td>当前基准</td><td>{today}</td>'
+                f'<td class="num">—</td><td class="num">{num(red["current"])}</td>'
+                f'<td class="num">—</td><td class="num">{num(blk["current"])}</td>'
+                f'<td class="num">—</td><td class="num">—</td>'
                 f'<td><span class="tag t-flat">基准</span></td></tr>')
     for r, b in zip(red["rows"], blk["rows"]):
         tag_txt, tag_cls = direction_tag(r["delta_pct"])
@@ -299,6 +302,7 @@ def render_report(ctx: dict) -> str:
             f'<td class="num">{num(r["low"])} – {num(r["high"])}</td>'
             f'<td class="num">{num(r["center"])}</td>'
             f'<td class="num">{num(b["low"])} – {num(b["high"])}</td>'
+            f'<td class="num">{num(b["center"])}</td>'
             f'<td class="num {dcls}">{r["delta_pct"]:+.1f}%</td>'
             f'<td class="num">±{r["band_pct"]:.1f}%</td>'
             f'<td><span class="tag {tag_cls}">{tag_txt}</span>'
@@ -307,7 +311,7 @@ def render_report(ctx: dict) -> str:
     forecast_table = f"""
     <table>
       <tr><th>周期</th><th>目标日</th><th>红香葱区间(元/kg)</th><th>红香葱中枢</th>
-          <th>黑葱区间(元/kg)</th><th>中枢涨跌</th><th>区间半宽</th><th>方向/置信度</th></tr>
+          <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>中枢涨跌(红葱)</th><th>区间半宽</th><th>方向/置信度</th></tr>
       {''.join(rows)}
     </table>"""
 
