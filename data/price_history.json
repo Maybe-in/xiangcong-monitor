@@ -56,6 +56,14 @@
       "price": 4.35,
       "source": "model",
       "note": "模型基准值"
+    },
+    {
+      "date": "2026-10-25",
+      "variety": "红香葱",
+      "market": "云南产地（模型估算）",
+      "price": 4.35,
+      "source": "model",
+      "note": "模型基准值"
     }
   ]
 }
