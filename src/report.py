@@ -6,6 +6,7 @@ from __future__ import annotations
 import html
 import json
 import os
+import re
 from collections.abc import Sequence
 from datetime import date, datetime
 
@@ -15,6 +16,12 @@ from .price import direction_tag
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_DIR = os.path.join(ROOT, "outputs")
+
+# 归档索引最多展示的天数。历史报告 HTML 本身永不删除，此处只限制索引页条数。
+ARCHIVE_KEEP_DAYS = 365
+
+# 日报文件名格式，用于从磁盘反向重建归档索引
+REPORT_NAME_RE = re.compile(r"^香葱行情日报_(\d{4}-\d{2}-\d{2})\.html$")
 
 CSS = """
 :root{
@@ -632,18 +639,36 @@ def write_outputs(html_doc: str, ctx: dict) -> dict:
         except Exception:  # noqa: BLE001
             archive = []
 
+    # 以磁盘上真实存在的报告为准回填索引：即便 archive.json 被旧版本覆盖、
+    # 合并冲突丢失或手工误删，历史报告也不会从归档页消失（价格字段缺失时显示 —）。
+    by_date: dict[str, dict] = {}
+    for a in archive:
+        d = a.get("date")
+        if d:
+            by_date[d] = a
+    for name in os.listdir(OUTPUT_DIR):
+        m = REPORT_NAME_RE.match(name)
+        if not m:
+            continue
+        d = m.group(1)
+        if d not in by_date:
+            by_date[d] = {"date": d, "file": name, "red_current": None,
+                          "black_current": None, "generated_at": ""}
+        else:
+            by_date[d]["file"] = name
+
     red_c = ctx["forecast"].get("红香葱", {}).get("current")
     blk_c = ctx["forecast"].get("黑葱", {}).get("current")
-    archive = [a for a in archive if a.get("date") != today]
-    archive.append({
+    by_date[today] = {
         "date": today,
         "file": fname,
         "red_current": red_c,
         "black_current": blk_c,
         "generated_at": ctx["generated_at"],
-    })
-    archive.sort(key=lambda x: x["date"], reverse=True)
-    archive = archive[:90]          # 仅保留最近 90 天
+    }
+
+    archive = sorted(by_date.values(), key=lambda x: x["date"], reverse=True)
+    archive = archive[:ARCHIVE_KEEP_DAYS]
     with open(archive_path, "w", encoding="utf-8") as f:
         json.dump(archive, f, ensure_ascii=False, indent=2)
 

@@ -2,8 +2,8 @@ name: 香葱预测
 
 on:
   schedule:
-    # GitHub Actions 使用 UTC。北京时间每日 08:00 = UTC 当日 00:00
-    - cron: '0 0 * * *'
+    # GitHub Actions 使用 UTC。北京时间每日 03:00 = UTC 前一日 19:00
+    - cron: '0 19 * * *'
   workflow_dispatch:      # 允许在 Actions 页面手动触发
 
 permissions:
@@ -39,6 +39,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: 同步远端最新产出（防止覆盖历史报告）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "${GITHUB_REF_NAME}"
+          if ! git merge --ff-only "origin/${GITHUB_REF_NAME}" 2>/dev/null; then
+            git merge --no-edit -X theirs "origin/${GITHUB_REF_NAME}" \
+              || echo "::warning::合并远端产出失败，按本地版本继续"
+          fi
+
       - name: 生成日报
         run: python run.py
 
@@ -50,7 +60,9 @@ jobs:
           if git diff --staged --quiet; then
             echo "无内容变更，跳过提交"
           else
-            git commit -m "chore: 香葱预测 $(date -u +'%Y-%m-%d')"
+            # 不加 -u：env.TZ 已是 Asia/Shanghai，取北京时间日期
+            # （cron 19:00 UTC 对应北京次日 03:00，用 -u 会让提交标题整整早一天）
+            git commit -m "chore: 香葱预测 $(date +'%Y-%m-%d')"
             git push
           fi
 
