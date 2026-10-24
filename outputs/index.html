@@ -51,6 +51,41 @@ li{margin:4px 0;}
 footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-height:1.9;}
 .legend{font-size:12px;color:var(--sub);margin-top:6px;}
 .back{display:inline-block;margin-bottom:12px;font-size:13px;color:var(--accent);text-decoration:none;}
+/* ---- 盘口直览（小程序样式） ---- */
+.board{background:linear-gradient(180deg,#e8f2ff 0%,#ffffff 150px);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;margin:12px 0 16px;}
+.board-head{padding:14px 18px 8px;}
+.board-title{font-size:18px;font-weight:700;letter-spacing:.5px;}
+.board-meta{font-size:12px;color:var(--sub);margin-top:4px;}
+.board-meta b{color:var(--up);font-weight:600;}
+.board-tabs{display:flex;gap:4px;padding:0 14px;border-bottom:2px solid var(--accent);}
+.bt{padding:8px 18px;font-size:14px;color:var(--sub);cursor:pointer;user-select:none;
+  border-radius:8px 8px 0 0;margin-bottom:-2px;}
+.bt.active{background:var(--accent);color:#fff;font-weight:600;}
+.board-panel{display:none;padding:4px 12px 12px;}
+.board-panel.active{display:block;}
+.btab{margin:8px 0 0;}
+.btab th{background:#eaf2fc;color:#33506e;}
+.btab td{border:none;border-bottom:1px solid #eef1f5;background:transparent;}
+.btab tr:nth-child(even) td{background:#f7fafd;}
+.btab .name{font-weight:600;}
+.btab .arrow-up{color:var(--up);font-weight:700;}
+.btab .arrow-down{color:var(--down);font-weight:700;}
+.btab .arrow-flat{color:var(--flat);}
+.see{color:var(--accent);font-size:12.5px;text-decoration:none;white-space:nowrap;}
+.see:hover{text-decoration:underline;}
+.mini-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:10px 4px 4px;}
+.mini-sum .ms{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;}
+.mini-sum .ms b{display:block;font-size:15px;margin-bottom:2px;}
+.mini-sum .ms a.see{margin-top:6px;display:inline-block;}
+/* 统计条：把计算好的统计落到对应模块底部 */
+.bars{display:flex;flex-wrap:wrap;gap:10px;margin:12px 2px 2px;}
+.bar{background:#f6f9fd;border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:8px;padding:8px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:12.5px;}
+.bar .bt2{font-weight:700;color:#33506e;margin-right:4px;}
+.bar i{font-style:normal;color:#5b6573;white-space:nowrap;}
+.bar i b{font-style:normal;}
+.bar i.k{color:#8a93a0;font-weight:600;}
 </style>
 </head>
 <body>
@@ -63,7 +98,7 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
 <div class="card">
   <table>
     <tr><th>日期</th><th>红香葱(元/kg)</th><th>黑葱(元/kg)</th><th>生成时间</th></tr>
-    <tr><td><a class="back" href="香葱行情日报_2026-10-25.html">2026-10-25</a></td><td class="num">4.35</td><td class="num">3.85</td><td>2026-10-25 07:24:22</td></tr><tr><td><a class="back" href="香葱行情日报_2026-10-24.html">2026-10-24</a></td><td class="num">4.35</td><td class="num">3.86</td><td>2026-10-24 10:20:22</td></tr>
+    <tr><td><a class="back" href="香葱行情日报_2026-10-25.html">2026-10-25</a></td><td class="num">4.35</td><td class="num">3.85</td><td>2026-10-25 07:58:08</td></tr><tr><td><a class="back" href="香葱行情日报_2026-10-24.html">2026-10-24</a></td><td class="num">4.35</td><td class="num">3.86</td><td>2026-10-24 10:20:22</td></tr>
   </table>
   <p><a class="back" href="latest.html">→ 查看最新一期报告</a></p>
 </div>

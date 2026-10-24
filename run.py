@@ -23,6 +23,10 @@ from src.config import CORE_REGION, MODEL  # noqa: E402
 
 WEEKDAY_CN = ['一', '二', '三', '四', '五', '六', '日']
 
+# 11 月降水假设（依据国家气候中心超强厄尔尼诺展望）：江南、西南降水偏多 5-8 成。
+# 全文统一引用此常量，避免同一天气假设在不同段落给出互相矛盾的幅度。
+RAIN_ASSUMPTION = '5-8 成'
+
 
 def _safe(d: dict, key: str, default='—'):
     v = d.get(key)
@@ -79,7 +83,23 @@ def build_context() -> dict:
     d30txt, _ = price.direction_tag(r30['delta_pct'])
     d90txt, _ = price.direction_tag(r90['delta_pct'])
 
-    drop_pct = abs((red['current'] / 6.10 - 1) * 100)
+    # 近期高点：取最近 45 天内实测最高点，不再写死「6.10 / 10 月中旬」
+    _obs = [p for p in history.get('series', [])
+            if p['variety'] == '红香葱' and p.get('source') == 'observed']
+    peak_price = peak_date = None
+    # 基准价取自最新一条实测点，把它的日期写进正文，避免读者误以为用的是当天价
+    obs_date = (sorted(_obs, key=lambda p: p['date'])[-1]['date'] if _obs else today)
+    if _obs:
+        _recent = [p for p in _obs
+                   if 0 <= (date.today() - date.fromisoformat(p['date'])).days <= 45]
+        _peak = max(_recent or _obs, key=lambda p: p['price'])
+        peak_price, peak_date = _peak['price'], _peak['date']
+    drop_pct = abs((red['current'] / peak_price - 1) * 100) if peak_price else 0.0
+    drop_txt = ('较 {0} 高点（红香葱 {1:.2f} 元/公斤）回落约 {2:.0f}%；').format(
+        peak_date, peak_price, drop_pct) if (peak_price and drop_pct >= 0.5) else ''
+
+    # 2027 年春节（丁未羊年）= 2027-02-06，除夕 2027-02-05；天数按实际目标日计算
+    cny_days = (date(2027, 2, 6) - date.fromisoformat(r90['target_date'])).days
 
     # 环比前一日：判断是仍在下跌还是已止跌企稳
     def _dod(var):
@@ -109,16 +129,16 @@ def build_context() -> dict:
     summary = (
         '当前全国香葱处于季节性供给高峰下的低位承压期。' + CORE_REGION['name'] +
         '产区红香葱产地中枢报 ' + str(red['current']) + ' 元/公斤，黑葱报 ' +
-        blk_current(fc) + ' 元/公斤；' + dod_txt +
-        '较 10 月中旬高点（红香葱 6.10 元/公斤）回落约 ' +
-        '{0:.0f}%。'.format(drop_pct) +
+        blk_current(fc) + ' 元/公斤（{0} 实测）；'.format(obs_date) + dod_txt +
+        drop_txt +
         '主导逻辑是「天气利好→丰产不丰收」的反向传导：主产区温光适宜、茬口衔接顺畅，'
         '供给持续扩容，而终端仅有刚性需求，渠道按需补库、低库存周转，缺乏集中备货拉涨动力。'
         '分周期看：未来 3 天产区以' + str(_safe(w3, 'dominant')) + '为主、累计降水 ' +
         str(_safe(w3, 'precip_total')) + ' mm，采收顺畅、出货集中，价格' + d3txt +
         '（中枢 ' + str(r3['center']) + '，' + pct(r3) + '）；'
-        '未来一周累计降水升至 ' + str(_safe(w1, 'precip_total')) + ' mm、雨日 ' +
-        str(_safe(w1, 'rainy_days')) + ' 天，后半周起采收与运输受扰，跌势有望止住并转为回升'
+        '未来一周累计降水 ' + str(_safe(w1, 'precip_total')) + ' mm、雨日 ' +
+        str(_safe(w1, 'rainy_days')) + ' 天、大风 ' + str(_safe(w1, 'gale_days')) +
+        ' 天，采收与运输存在扰动，跌势有望止住并转为回升'
         '（' + str(r7['center']) + '，' + pct(r7) + '）；'
         '半月窗口（第 8-15 天）累计降水 ' + str(_safe(h1, 'precip_total')) +
         ' mm，叠加北方秋菜退市、供给切换为「南菜北运」，中枢回升至 ' +
@@ -128,16 +148,21 @@ def build_context() -> dict:
         '两个月（目标日 ' + r60['target_date'] + '）进入冬至—元旦备货窗口，'
         '且北方产区基本退市、全国供给转向云南单极，中枢进一步抬升至 ' +
         str(r60['center']) + '（' + pct(r60) + '）；'
-        '三个月（目标日 ' + r90['target_date'] + '）距 2027 年春节（2 月 6 日）仅 15 天，'
+        '三个月（目标日 ' + r90['target_date'] + '）距 2027 年春节（2 月 6 日）仅 ' +
+        str(cny_days) + ' 天，'
         '落入全年最强的节前集中备货窗口，中枢情景值 ' + str(r90['center']) +
         '（' + pct(r90) + '），' + d90txt + '。'
-        '整体呈「近端磨底、中段修复、远端节日驱动走强」的阶梯上行形态，'
+        '整体呈「近端磨底、中段修复、远端节日支撑」的震荡上行形态，'
         '但 2-3 月档位属情景推演，置信度低于近端档位，需按月滚动修正。'
+        '口径提示：本报告预测与「当前中枢」采用精品净葱/产地集散价口径，'
+        '与第二章长周期主序列的通货毛葱口径相差约 ' +
+        '{:.2f} 倍'.format(lt['premium']) +
+        '（通货 2.62 vs 净葱 4.35），两者不可直接横比。'
     )
 
     key_variable = (
         '超强厄尔尼诺（有监测记录以来最强，海温指数峰值预计 11 月前后达 3.2-3.5℃）背景下，'
-        '11 月江南、西南降水偏多 5-8 成，是打破供大于求格局、触发行情反转的最主要潜在推手。'
+        '11 月江南、西南降水偏多 ' + RAIN_ASSUMPTION + '，是打破供大于求格局、触发行情反转的最主要潜在推手。'
         '若降雨不及预期、产区持续晴好，半月与一月预测需下修 3-8 个百分点；'
         '对 2-3 月档位而言，更关键的是冬季冷空气与雨雪冰冻的实际强度——'
         '它既决定云南外调菜的供给弹性，也决定节前备货行情的兑现幅度。'
@@ -150,7 +175,7 @@ def build_context() -> dict:
         '全国蔬菜在田面积同比增加约 100 多万亩',
     ]
     demand_trigger = [
-        '超强厄尔尼诺下 11 月江南、西南降水偏多 5-8 成',
+        '超强厄尔尼诺下 11 月江南、西南降水偏多 ' + RAIN_ASSUMPTION,
         '11 月上中旬云南两次明显降雨过程，采收与运输受扰',
         '北方秋菜退市，供给由「北菜南运」切换为「南菜北运」，云南单极供给格局形成',
         '冬季餐饮（火锅/面食）消费季节性回升',
@@ -187,10 +212,10 @@ def build_context() -> dict:
 
     risks = [
         ('极端天气缺位（最大下行风险）', 't-down', '利空',
-         '11 月云南降雨偏多 10%-20% 未兑现，产区持续晴好',
+         '11 月江南、西南降水偏多 ' + RAIN_ASSUMPTION + '未兑现，产区持续晴好',
          '下修半月/一月预测 3-8 个百分点，低位周期延长'),
         ('强降雨/渍涝超预期', 't-up', '利多',
-         '厄尔尼诺峰值叠加，江南、西南降水偏多 5-8 成',
+         '厄尔尼诺峰值叠加，江南、西南降水偏多 ' + RAIN_ASSUMPTION,
          '上调涨幅，同时关注采收与运输中断风险'),
         ('新增台风', 't-flat', '中性偏空',
          '西北太平洋预计再生成 1 个台风，影响华南/华东沿海',
@@ -223,6 +248,22 @@ def build_context() -> dict:
             m, w['start_ym'], w['end_ym'], w['start'], w['end'], direction,
             w['change_pct'], w['cagr'], w['hi'], w['hi_ym'], w['lo'], w['lo_ym'])
 
+    def _season_note(season: dict) -> str:
+        """由统一季节因子动态生成季节性结论（与 §2.7 图、预测模型同源）。"""
+        spring = [season[m] for m in (4, 5)]
+        winter = [season[m] for m in (11, 12, 1)]
+        summer = [season[m] for m in (7, 8)]
+        peak = max(season.values())
+        trough = min(season.values())
+        cur_idx = season[date.today().month]
+        pos = '旺季' if cur_idx > 1.08 else ('淡季' if cur_idx < 0.92 else '过渡窗口')
+        return ('春峰（4-5 月）季节指数 {0:.2f}-{1:.2f}、冬旺（11-1 月）{2:.2f}-{3:.2f}，'
+                '夏谷（7-8 月）仅 {4:.2f}-{5:.2f}，峰值/谷值约 {6:.1f} 倍。'
+                '当前 {7} 月指数 {8:.2f}，处于{9}，但供给节奏压制了季节性涨幅。').format(
+            min(spring), max(spring), min(winter), max(winter),
+            min(summer), max(summer), peak / trough,
+            date.today().month, cur_idx, pos)
+
     longterm_summary = (
         '把视线拉长到十年，香葱产地价整体呈「产能扩张驱动的中枢下移 + 极端天气驱动的脉冲式尖峰」'
         '双重特征。' + wfmt(120) + '。' +
@@ -233,11 +274,14 @@ def build_context() -> dict:
             win_by_month[120]['hi_ym'], win_by_month[120]['hi'],
             win_by_month[120]['lo_ym'], win_by_month[120]['lo'],
             win_by_month[120]['hi'] / win_by_month[120]['lo'] if win_by_month[120]['lo'] else 0) +
-        '中枢下移的主因是产能扩张：泸西自 2013 年引种，至 2024 年底已形成年产 116 万吨、'
-        '产值 35-36 亿元的全国最大蔬菜单品基地（占云南香葱总产 60% 以上），'
+        '中枢下移的主因是产能扩张：泸西自 2013 年引种，至 2024 年底已形成年产 {0:.0f} 万吨、'
+        '产值 {1:.0f}-{2:.0f} 亿元的全国最大蔬菜单品基地（占云南香葱总产 {3:.0f}% 以上），'.format(
+            CORE_REGION['annual_output_t'] / 10000,
+            CORE_REGION['annual_value_yi'] - 0.5, CORE_REGION['annual_value_yi'],
+            CORE_REGION['share_of_yunnan'] * 100) +
         '叠加水肥一体化（单人管理面积从 5-6 亩提升到 30 亩）带来的成本下降，'
         '使长期价格重心系统性下移。'
-        '但每年 3-5 月、10-11 月两个季节性旺季，以及台风、寒潮、雪灾等极端天气，'
+        '但每年 4-5 月（春峰）、11-1 月（冬旺/春节备货）两个旺季，以及台风、寒潮、雪灾等极端天气，'
         '仍会制造 2-5 倍的短期脉冲。'
     )
 
@@ -245,23 +289,26 @@ def build_context() -> dict:
         ('十年中枢下移，产能是主导变量',
          '120 个月窗口年化 {0:+.1f}%，期末较期初 {1:+.1f}%。'.format(
              win_by_month[120]['cagr'], win_by_month[120]['change_pct']) +
-         '泸西全县香葱种植面积从 2013 年引种时的零星规模扩至 2024 年的 13 万亩基地 / 45.5 万亩次，'
-         '供给弹性显著放大，长期价格重心难以回到 2016 年水平。'),
+         '泸西全县香葱种植面积从 2013 年引种时的零星规模扩至 2024 年的 {0:.1f} 万亩基地 / '
+         '{1:.1f} 万亩次，供给弹性显著放大，长期价格重心难以回到 2016 年水平。'.format(
+             CORE_REGION['base_mu'] / 10000, CORE_REGION['replant_mu'] / 10000)),
         ('近三年是十年里最剧烈的「过山车」',
-         '36 个月窗口 {0:+.1f}%，振幅高达 {1:.0f}%（最高 11.00 元/公斤 @ 2024-08，'
-         '最低 1.29 元/公斤 @ 2026-07）。'.format(
-             win_by_month[36]['change_pct'], win_by_month[36]['amplitude']) +
-         '2024 年夏秋极端高价 → 2024 年 11 月快速回落至 2.62 → 2026 年持续低位，'
-         '反映高价刺激扩种、扩种反过来压价的经典蛛网周期。'),
+         '36 个月窗口 {0:+.1f}%，振幅高达 {1:.0f}%（最高 {2:.2f} 元/公斤 @ {3}，'
+         '最低 {4:.2f} 元/公斤 @ {5}）。'.format(
+             win_by_month[36]['change_pct'], win_by_month[36]['amplitude'],
+             win_by_month[36]['hi'], win_by_month[36]['hi_ym'],
+             win_by_month[36]['lo'], win_by_month[36]['lo_ym']) +
+         '2024 年夏秋极端高价 → 2024 年 11 月快速回落至 {0:.2f} → 2026 年持续低位，'
+         '反映高价刺激扩种、扩种反过来压价的经典蛛网周期。'.format(
+             win_by_month[36]['end'])),
         ('近 24 个月已回到起点，处在周期底部区间',
          '24 个月窗口 {0:+.1f}%（{1:.2f} → {2:.2f}），均值 {3:.2f} 元/公斤。'.format(
              win_by_month[24]['change_pct'], win_by_month[24]['start'],
              win_by_month[24]['end'], win_by_month[24]['avg']) +
-         '当前 2.62 元/公斤（通货）贴近近三年低位区间，下行空间有限，具备季节性修复基础。'),
+         '当前 {0:.2f} 元/公斤（通货）贴近近三年低位区间，下行空间有限，具备季节性修复基础。'.format(
+             lt['series'][-1]['price'])),
         ('季节性是最可靠的短线规律',
-         '春峰（3-5 月）季节指数 1.29-1.34、秋峰（10-11 月）1.20-1.24，'
-         '夏谷（7-8 月）仅 0.66-0.72，峰值/谷值约 1.9 倍。'
-         '当前 10 月正处于秋峰窗口内，但供给高峰压制了季节性涨幅，属「旺季不旺」。'),
+         _season_note(lt['season'])),
         ('波动率极高，不宜做单边上车的久期押注',
          '各窗口年化波动率 {0:.0f}%-{1:.0f}%，远超大宗蔬菜。'.format(
              min(w['vol'] for w in lt['windows']), max(w['vol'] for w in lt['windows'])) +
@@ -290,6 +337,8 @@ def build_context() -> dict:
         'risks': risks,
         'price_source_label': price_source_label,
         'spot_quotes': history.get('spot_quotes', []),
+        'data_date': max((p['date'] for p in history.get('series', [])
+                          if p.get('source') == 'observed'), default=today),
     }
 
 

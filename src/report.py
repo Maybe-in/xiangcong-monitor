@@ -70,6 +70,41 @@ li{margin:4px 0;}
 footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-height:1.9;}
 .legend{font-size:12px;color:var(--sub);margin-top:6px;}
 .back{display:inline-block;margin-bottom:12px;font-size:13px;color:var(--accent);text-decoration:none;}
+/* ---- 盘口直览（小程序样式） ---- */
+.board{background:linear-gradient(180deg,#e8f2ff 0%,#ffffff 150px);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;margin:12px 0 16px;}
+.board-head{padding:14px 18px 8px;}
+.board-title{font-size:18px;font-weight:700;letter-spacing:.5px;}
+.board-meta{font-size:12px;color:var(--sub);margin-top:4px;}
+.board-meta b{color:var(--up);font-weight:600;}
+.board-tabs{display:flex;gap:4px;padding:0 14px;border-bottom:2px solid var(--accent);}
+.bt{padding:8px 18px;font-size:14px;color:var(--sub);cursor:pointer;user-select:none;
+  border-radius:8px 8px 0 0;margin-bottom:-2px;}
+.bt.active{background:var(--accent);color:#fff;font-weight:600;}
+.board-panel{display:none;padding:4px 12px 12px;}
+.board-panel.active{display:block;}
+.btab{margin:8px 0 0;}
+.btab th{background:#eaf2fc;color:#33506e;}
+.btab td{border:none;border-bottom:1px solid #eef1f5;background:transparent;}
+.btab tr:nth-child(even) td{background:#f7fafd;}
+.btab .name{font-weight:600;}
+.btab .arrow-up{color:var(--up);font-weight:700;}
+.btab .arrow-down{color:var(--down);font-weight:700;}
+.btab .arrow-flat{color:var(--flat);}
+.see{color:var(--accent);font-size:12.5px;text-decoration:none;white-space:nowrap;}
+.see:hover{text-decoration:underline;}
+.mini-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:10px 4px 4px;}
+.mini-sum .ms{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;}
+.mini-sum .ms b{display:block;font-size:15px;margin-bottom:2px;}
+.mini-sum .ms a.see{margin-top:6px;display:inline-block;}
+/* 统计条：把计算好的统计落到对应模块底部 */
+.bars{display:flex;flex-wrap:wrap;gap:10px;margin:12px 2px 2px;}
+.bar{background:#f6f9fd;border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:8px;padding:8px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:12.5px;}
+.bar .bt2{font-weight:700;color:#33506e;margin-right:4px;}
+.bar i{font-style:normal;color:#5b6573;white-space:nowrap;}
+.bar i b{font-style:normal;}
+.bar i.k{color:#8a93a0;font-weight:600;}
 </style>
 """
 
@@ -176,7 +211,326 @@ def build_svg_trend(hist_pts: Sequence[tuple], fc_pts: Sequence[tuple],
     return "\n".join(svg)
 
 
-# ------------------------------------------------------------------ 长周期章节
+# ------------------------------------------------------------------ 盘口直览（小程序样式）
+# 涨跌只能在「同一个市场 + 同一个品项」的口径内计算。
+# ORIGIN_SPEC / NATIONAL_SPEC 中 sequence 字段声明该项可回接哪条连续序列；
+# 留空表示该盘口目前只有单次采集，不参与涨跌统计（宁可显示 —，也不算跨口径假涨跌）。
+ORIGIN_SPEC = [
+    ("红葱（通货）", "滇中产区", "红葱", "红香葱", "产地地头/集散价，模型基准口径", "#sec7-forecast"),
+    ("黑葱（通货）", "滇中产区", "黑葱", "黑葱", "产地地头/集散价", "#sec7-forecast"),
+    ("红香葱（全省综合）", "云南产地综合", "红香葱", None, "全省加权综合价，含精品与通货", "#sec6-spot"),
+    ("黑葱（全省综合）", "云南产地综合", "黑葱", None, "全省加权综合价", "#sec6-spot"),
+    ("葱（云菜集团出货）", "云菜集团", "葱", None, "企业出货报价，高于产地综合价", "#sec6-spot"),
+]
+
+NATIONAL_SPEC = [
+    ("小葱", "王旗营", "小葱", "小葱", "昆明一级批发，销区风向标", "#sec6-market"),
+    ("葱", "黄淮", "葱", None, "河南周口销区，本地秋葱上市压制", "#sec6-market"),
+    ("大葱", "成都农产品", "大葱", None, "西南销区，非香葱口径", "#sec6-market"),
+    ("大葱", "太原河西", "大葱", None, "华北销区，非香葱口径", "#sec6-market"),
+    ("小葱", "西藏领峰", "小葱", None, "高原远端销区，运距决定溢价", "#sec6-market"),
+]
+
+
+def _obs_points(hist: dict, variety: str) -> list[dict]:
+    """某品种的实测序列（按日期升序）。"""
+    pts = [p for p in hist.get("series", [])
+           if p.get("variety") == variety and p.get("source") == "observed"]
+    pts.sort(key=lambda p: p["date"])
+    return pts
+
+
+def _latest_quote(quotes: list[dict], market_kw: str, item: str) -> dict | None:
+    """取该市场口径下该品项的最新一条报价。"""
+    qs = [q for q in quotes
+          if market_kw in q.get("market", "") and item in q.get("item", "")]
+    if not qs:
+        return None
+    qs.sort(key=lambda q: q.get("date", ""))
+    return qs[-1]
+
+
+def _dom_pair(hist: dict, quotes: list[dict], market_kw: str, item: str,
+              sequence: str | None):
+    """返回 (昨日, 今日, 昨日日期, 今日日期, 来源)。无可比昨日时昨日为 None。
+
+    优先用同一盘口的跨日报价；若盘口只有单次采集，则回退到 spec 声明的
+    同源连续序列（该序列口径必须与盘口一致，否则不得声明）。
+    """
+    qs = sorted([q for q in quotes
+                 if market_kw in q.get("market", "") and item in q.get("item", "")],
+                key=lambda q: q.get("date", ""))
+    if len(qs) >= 2:
+        a, b = qs[-2], qs[-1]
+        return a.get("mid"), b.get("mid"), a["date"], b["date"], "盘口连续采集"
+    if len(qs) == 1 and sequence:
+        pts = _obs_points(hist, sequence)
+        if len(pts) >= 2:
+            a, b = pts[-2], pts[-1]
+            return a["price"], b["price"], a["date"], b["date"], "同源日频序列"
+        if len(pts) == 1:
+            return None, pts[0]["price"], None, pts[0]["date"], "同源日频序列"
+    if len(qs) == 1:
+        return None, qs[0].get("mid"), None, qs[0]["date"], "当日单次采集"
+    if sequence:
+        pts = _obs_points(hist, sequence)
+        if pts:
+            prev = pts[-2]["price"] if len(pts) >= 2 else None
+            return prev, pts[-1]["price"], (pts[-2]["date"] if len(pts) >= 2 else None), \
+                pts[-1]["date"], "同源日频序列"
+    return None, None, None, None, None
+
+
+def _arrow(chg: float | None) -> str:
+    if chg is None:
+        return '<span class="arrow-flat">—</span>'
+    if chg > 0.005:
+        return '<span class="arrow-up">↑</span>'
+    if chg < -0.005:
+        return '<span class="arrow-down">↓</span>'
+    return '<span class="arrow-flat">→</span>'
+
+
+def _dom_row(name: str, q: dict | None, prev, today, prev_date, src,
+             note: str, link: str):
+    """盘口行：品名/口径 | 报价区间 | 昨日 | 今日 | 涨跌 | 趋势 | 查看"""
+    rg = esc(q.get("range", "—")) if q else "—"
+    today_txt = num(today) if today is not None else "暂无报价"
+    if prev is not None and today is not None:
+        chg = round(today - prev, 2)
+        chg_txt = f"{chg:+.2f}" if abs(chg) >= 0.005 else "0.00"
+    else:
+        chg, chg_txt = None, "—"
+    arrow = _arrow(chg)
+    note_html = f'<div class="legend">{esc(note)}</div>' if note else ""
+    prev_head = f'<div class="legend">{esc(prev_date[5:])}</div>' if prev_date else ""
+    day_head = f'<div class="legend">{esc(q["date"][5:])}</div>' if q and q.get("date") else ""
+    cls = ""
+    if chg is not None and chg > 0.005:
+        cls = "up"
+    elif chg is not None and chg < -0.005:
+        cls = "down"
+    return (
+        f'<tr><td class="name">{esc(name)}{note_html}</td>'
+        f'<td class="num">{rg}</td>'
+        f'<td class="num">{num(prev) if prev is not None else "—"}{prev_head}</td>'
+        f'<td class="num">{today_txt}{day_head}</td>'
+        f'<td class="num {cls}">{chg_txt}</td>'
+        f'<td class="num">{arrow}</td>'
+        f'<td><a class="see" href="{link}">查看</a></td></tr>')
+
+
+def _dom_panel_rows(hist: dict, quotes: list[dict], spec: list[tuple]):
+    """返回一个盘口表格的行 HTML，以及用于底部统计的可比样本列表。"""
+    rows, samples = [], []
+    for name, mk, item, seq, note, link in spec:
+        q = _latest_quote(quotes, mk, item)
+        prev, today, pdate, tdate, src = _dom_pair(hist, quotes, mk, item, seq)
+        if q is None and today is None:
+            continue
+        rows.append(_dom_row(name, q, prev, today, pdate, src, note, link))
+        if today is not None:
+            chg = round(today - prev, 2) if prev is not None else None
+            samples.append({"name": name, "mid": float(today), "chg": chg,
+                            "comparable": chg is not None})
+    if not rows:
+        rows.append('<tr><td colspan="7">暂无当日盘口数据</td></tr>')
+    return "".join(rows), samples
+
+
+def _stat_bars(samples: list[dict], title: str) -> str:
+    """把同类样本算出的统计量做成底部统计条。"""
+    if not samples:
+        return ""
+    vals = [s["mid"] for s in samples]
+    cmp_ = [s for s in samples if s["comparable"]]
+    up = sum(1 for s in cmp_ if s["chg"] > 0.005)
+    down = sum(1 for s in cmp_ if s["chg"] < -0.005)
+    flat = len(cmp_) - up - down
+    hi = max(samples, key=lambda s: s["mid"])
+    lo = min(samples, key=lambda s: s["mid"])
+    avg = sum(vals) / len(vals)
+
+    if cmp_:
+        chgs = [s["chg"] for s in cmp_]
+        net = sum(chgs) / len(chgs)
+        net_cls = "up" if net > 0.005 else ("down" if net < -0.005 else "")
+        move = (f'<i class="k">同口径可比 <b>{len(cmp_)}</b> 项</i>'
+                f'<i class="up">涨 <b>{up}</b></i>'
+                f'<i class="down">跌 <b>{down}</b></i>'
+                f'<i>平 <b>{flat}</b></i>'
+                f'<i>平均变动 <b class="{net_cls}">{net:+.2f}</b> 元/kg</i>')
+    else:
+        move = '<i class="k">本页暂无跨日可比口径，涨跌项空缺</i>'
+
+    return f"""
+    <div class="bars">
+      <div class="bar">
+        <span class="bt2">{esc(title)}</span>
+        {move}
+      </div>
+      <div class="bar">
+        <span class="bt2">今日中枢横截面</span>
+        <i class="k">样本 <b>{len(vals)}</b> 项</i>
+        <i>均价 <b>{avg:.2f}</b></i>
+        <i class="up">最高 <b>{hi["mid"]:.2f}</b>（{esc(hi["name"])}）</i>
+        <i class="down">最低 <b>{lo["mid"]:.2f}</b>（{esc(lo["name"])}）</i>
+        <i>极差 <b>{hi["mid"] - lo["mid"]:.2f}</b> 元/kg</i>
+      </div>
+    </div>"""
+
+
+def build_board(ctx: dict) -> str:
+    """仿「小香葱行情」小程序的三页签盘口：产地行情 / 全国行情 / 行情解析。"""
+    hist = ctx["history"]
+    quotes = ctx.get("spot_quotes", [])
+    data_date = ctx.get("data_date", ctx["today"])
+
+    # ---------- 页签一：产地行情 ----------
+    o_rows, o_samples = _dom_panel_rows(hist, quotes, ORIGIN_SPEC)
+    o_bars = _stat_bars(o_samples, "产地涨跌家数")
+
+    # ---------- 页签二：全国行情 ----------
+    n_rows, n_samples = _dom_panel_rows(hist, quotes, NATIONAL_SPEC)
+    n_bars = _stat_bars(n_samples, "销区涨跌家数")
+
+    table = (f'<table class="btab"><tr>'
+             f'<th>品名 / 口径</th><th>报价区间</th>'
+             f'<th>昨日</th><th>今日</th><th>涨跌</th><th>趋势</th><th>查看</th></tr>'
+             f'{{}}</table>')
+
+    origin_panel = f"""{table.format(o_rows)}
+    {o_bars}
+    <div class="legend">口径说明：产地行情以云南产区为主，「全省综合价」为加权综合口径，
+      高于单一产区集散价，两者不可直接横比；「昨日/今日」仅在标注了同源日期的行上计算，
+      其余为当日单次采集，故不给出涨跌。</div>"""
+
+    national_panel = f"""{table.format(n_rows)}
+    {n_bars}
+    <div class="legend">口径说明：销区「葱 / 大葱」多为大葱口径，与小香葱不可直接比价；
+      「西藏 / 黄淮」等高低价主要由运距、品种与季节错配造成，横截面极差不代表行情波动幅度。</div>"""
+
+    # ---------- 页签三：行情解析（把模型算出的统计落到本页） ----------
+    fc = ctx.get("forecast", {})
+    red = fc.get("红香葱", {})
+    rows = red.get("rows", [])
+    today_center = red.get("current")
+
+    # 3.1 今日盘面判断：由实测点数与连续走势动态生成，不写死文案
+    pts = _obs_points(hist, "红香葱")
+    day_txt, move_txt, streak = "—", "样本不足，暂不给出方向判断", ""
+    if len(pts) >= 2:
+        a, b = pts[-2], pts[-1]
+        d = round(b["price"] - a["price"], 2)
+        if d > 0.005:
+            day_txt = "温和回升"
+        elif d < -0.005:
+            day_txt = "延续下行"
+        else:
+            day_txt = "磨底企稳"
+        move_txt = "最近采集日 {0} → {1}：{2} → {3} 元/kg".format(
+            a["date"], b["date"], num(a["price"]), num(b["price"]))
+        streak = "较上一采集日 " + (f"{d:+.2f} 元/kg" if abs(d) >= 0.005 else "持平")
+    verdict = f"""
+    <div class="ms"><b>今日判断：{day_txt}</b>
+      {esc(move_txt)}；{esc(streak)}。
+      红香葱产地中枢 <b>{num(today_center)}</b> 元/kg
+      （{esc(ctx.get('price_source_label', '产地集散价'))}）。</div>"""
+
+    # 3.2 模型路径：直接复用预测表的统计结果
+    if rows:
+        r3, rh, r90 = rows[0], rows[len(rows) // 2], rows[-1]
+        path = f"""
+      <div class="ms"><b>模型路径（红香葱中枢）</b>
+        今日基准 <b>{num(today_center)}</b> →
+        {esc(r3['label'])} <b>{num(r3['center'])}</b>（{r3['delta_pct']:+.1f}%） →
+        {esc(rh['label'])} <b>{num(rh['center'])}</b>（{rh['delta_pct']:+.1f}%） →
+        {esc(r90['label'])} <b>{num(r90['center'])}</b>（{r90['delta_pct']:+.1f}%）。
+        远端区间 {num(r90['low'])} – {num(r90['high'])} 元/kg，
+        置信度 {esc(r90['confidence'])}。<a class="see" href="#sec7-forecast">看预测表 →</a></div>"""
+    else:
+        path = ""
+
+    # 3.3 天气驱动的量化统计
+    wx = ctx.get("weather", {})
+    win = wx.get("core", {}).get("windows", {}) or {}
+    w1, h1 = win.get("w1", {}), win.get("h1", {})
+    weather_card = f"""
+      <div class="ms"><b>天气驱动（未来 1 周 / 半月）</b>
+        一周累计降水 <b>{num(w1.get('precip_total'), 1)}</b> mm、雨日
+        <b>{w1.get('rainy_days', '—')}</b> 天、大风 <b>{w1.get('gale_days', '—')}</b> 天，
+        最大风速 <b>{num(w1.get('wind_max'), 1)}</b> km/h；
+        半月累计降水 <b>{num(h1.get('precip_total'), 1)}</b> mm、雨日
+        <b>{h1.get('rainy_days', '—')}</b> 天。
+        <a class="see" href="#sec3-weather">看天气 →</a></div>"""
+
+    # 3.4 长周期与季节性统计
+    lt = ctx.get("longterm") or {}
+    lt_card = ""
+    if lt:
+        w = lt.get("windows", [{}])[0]
+        season = lt.get("season", {})
+        try:
+            cur_month = date.fromisoformat(str(ctx["today"])[:10]).month
+        except (ValueError, TypeError):
+            cur_month = datetime.now().month
+        cur_idx = season.get(cur_month)
+        pos = "旺季" if (cur_idx or 0) > 1.08 else ("淡季" if (cur_idx or 0) < 0.92 else "过渡窗口")
+        lt_card = f"""
+      <div class="ms"><b>长周期与季节性</b>
+        近 12 个月 {esc(w.get('start_ym', '—'))}→{esc(w.get('end_ym', '—'))}：
+        中枢 {num(w.get('start', 0))} → {num(w.get('end', 0))} 元/kg
+        （{w.get('change_pct', 0):+.1f}%），年化波动 {w.get('vol', 0):.0f}%；
+        当前 {cur_month} 月季节指数 {num(cur_idx, 2) if cur_idx else '—'}，处于<b>{pos}</b>。
+        <a class="see" href="#sec2-longterm">看长周期 →</a></div>"""
+
+    # 3.5 关键风险（直接引用结论模块）
+    risk_card = ""
+    risks = ctx.get("risks")
+    if risks:
+        risk_card = (
+            '<div class="ms"><b>关键跟踪变量</b>'
+            + "".join(f"<div class='legend'>· {esc(r)}</div>" for r in risks[:3])
+            + f'<a class="see" href="#sec8-risks">看风险 →</a></div>')
+
+    analysis_panel = f"""
+    <div class="mini-sum">
+      {verdict}{path}{weather_card}{lt_card}{risk_card}
+    </div>"""
+
+    return f"""
+<div class="board">
+  <div class="board-head">
+    <div class="board-title">小香葱行情 · 盘口直览</div>
+    <div class="board-meta">更新时间：{esc(data_date)} 数据（行情发布为 T-1）｜
+      单位：元/kg（另注除外）｜ 红涨 <b>↑</b> / 绿跌 ↓</div>
+  </div>
+  <div class="board-tabs">
+    <span class="bt active" onclick="bdTab(0,this)">产地行情</span>
+    <span class="bt" onclick="bdTab(1,this)">全国行情</span>
+    <span class="bt" onclick="bdTab(2,this)">行情解析</span>
+  </div>
+  <div class="board-panel active">
+    {origin_panel}
+  </div>
+  <div class="board-panel">
+    {national_panel}
+  </div>
+  <div class="board-panel">
+    {analysis_panel}
+  </div>
+</div>
+<script>
+function bdTab(i, el){{
+  var card = el.closest('.board');
+  var tabs = card.querySelectorAll('.bt');
+  var panels = card.querySelectorAll('.board-panel');
+  tabs.forEach(function(t){{ t.classList.remove('active'); }});
+  panels.forEach(function(p){{ p.classList.remove('active'); }});
+  el.classList.add('active');
+  panels[i].classList.add('active');
+}}
+</script>"""
 def build_longterm_section(lt: dict, summary: str = "", conclusion=None) -> str:
     series = lt["series"]
     conclusion = conclusion or []
@@ -258,7 +612,8 @@ def build_longterm_section(lt: dict, summary: str = "", conclusion=None) -> str:
   <h3>2.7 季节性规律（月度季节指数）</h3>
   {svg_season_chart}
   <div class="legend">季节指数 = 该月价格 / 全年均价。&gt;1.08 为旺季（红），&lt;0.92 为淡季（绿）。
-    香葱呈典型「双峰」：春峰 3—5 月、秋峰 10—11 月；夏谷 7—8 月，冬平 12—2 月。</div>
+    香葱季节规律：春峰 4—5 月最高、冬旺 11—1 月次高（春节备货 + 北方产区退市后云南单极供给），
+    夏谷 7—8 月最低。与第六章预测模型共用同一季节曲线（config.SEASONALITY）。</div>
   <h3>2.8 长周期结论</h3>
   <ul>{concl_html}</ul>
 """
@@ -286,17 +641,32 @@ def render_report(ctx: dict) -> str:
     <div class="kpi"><div class="lab">未来7天产区降水</div><div class="val">{num(win.get('w1', {}).get('precip_total'), 1)}</div><div class="chg">mm · 雨日 {win.get('w1', {}).get('rainy_days', '—')} 天</div></div>
     """
 
+    # ---- 长周期说明用到的节日与目标日（动态计算，避免写死后逐日失效）
+    _rows = red.get("rows", [])
+    tgt60 = _rows[4]["target_date"] if len(_rows) > 4 else "—"
+    tgt90 = _rows[5]["target_date"] if len(_rows) > 5 else "—"
+    # 2027 年春节（丁未羊年）= 2027-02-06，除夕 2027-02-05
+    cny_label, cny_date, cny_eve = "2027 年春节", "2 月 6 日", "2 月 5 日"
+    try:
+        days_to_cny = (date(2027, 2, 6) - date.fromisoformat(tgt90)).days
+    except (TypeError, ValueError):
+        days_to_cny = "—"
+
     # ---- 预测总表
-    # 表头 9 列：周期 | 目标日 | 红香葱区间 | 红香葱中枢 | 黑葱区间 | 黑葱中枢 | 中枢涨跌 | 区间半宽 | 方向/置信度
+    # 表头 10 列：周期 | 目标日 | 红香葱区间 | 红香葱中枢 | 黑葱区间 | 黑葱中枢 |
+    #             中枢涨跌(红葱) | 中枢涨跌(黑葱) | 区间半宽 | 方向/置信度
+    # 每一行必须输出满 10 格，否则整行会左移错位。
     rows = []
     rows.append(f'<tr><td>当前基准</td><td>{today}</td>'
                 f'<td class="num">—</td><td class="num">{num(red["current"])}</td>'
                 f'<td class="num">—</td><td class="num">{num(blk["current"])}</td>'
                 f'<td class="num">—</td><td class="num">—</td>'
+                f'<td class="num">—</td>'
                 f'<td><span class="tag t-flat">基准</span></td></tr>')
     for r, b in zip(red["rows"], blk["rows"]):
         tag_txt, tag_cls = direction_tag(r["delta_pct"])
         dcls = "up" if r["delta_pct"] > 0 else ("down" if r["delta_pct"] < 0 else "flat")
+        bcls = "up" if b["delta_pct"] > 0 else ("down" if b["delta_pct"] < 0 else "flat")
         rows.append(
             f'<tr><td><strong>{esc(r["label"])}</strong></td><td>{esc(r["target_date"])}</td>'
             f'<td class="num">{num(r["low"])} – {num(r["high"])}</td>'
@@ -304,6 +674,7 @@ def render_report(ctx: dict) -> str:
             f'<td class="num">{num(b["low"])} – {num(b["high"])}</td>'
             f'<td class="num">{num(b["center"])}</td>'
             f'<td class="num {dcls}">{r["delta_pct"]:+.1f}%</td>'
+            f'<td class="num {bcls}">{b["delta_pct"]:+.1f}%</td>'
             f'<td class="num">±{r["band_pct"]:.1f}%</td>'
             f'<td><span class="tag {tag_cls}">{tag_txt}</span>'
             f'<span class="tag">{esc(r["confidence"])}</span></td></tr>')
@@ -311,24 +682,13 @@ def render_report(ctx: dict) -> str:
     forecast_table = f"""
     <table>
       <tr><th>周期</th><th>目标日</th><th>红香葱区间(元/kg)</th><th>红香葱中枢</th>
-          <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>中枢涨跌(红葱)</th><th>区间半宽</th><th>方向/置信度</th></tr>
+          <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>红葱涨跌</th><th>黑葱涨跌</th>
+          <th>区间半宽</th><th>方向/置信度</th></tr>
       {''.join(rows)}
     </table>"""
 
-    # ---- 当日盘口报价横截面（多市场）
-    spot_rows = []
-    for q in ctx.get("spot_quotes", []):
-        spot_rows.append(
-            f'<tr><td>{esc(q["date"])}</td><td>{esc(q["market"])}</td>'
-            f'<td>{esc(q["item"])}</td>'
-            f'<td class="num">{esc(q["range"])}</td>'
-            f'<td class="num">{num(q["mid"])}</td>'
-            f'<td>{esc(q["note"])}</td></tr>')
-    spot_table = f"""
-    <table>
-      <tr><th>日期</th><th>市场/口径</th><th>品项</th><th>报价区间</th><th>中枢(元/kg)</th><th>说明</th></tr>
-      {''.join(spot_rows) or '<tr><td colspan="6">暂无数据</td></tr>'}
-    </table>"""
+    # ---- 盘口直览（小程序样式，三页签）
+    board_html = build_board(ctx)
 
     # ---- 天气逐日表
     day_rows = []
@@ -432,7 +792,7 @@ def render_report(ctx: dict) -> str:
 </header>
 
 <div class="card">
-  <h2>一、核心结论速览<span class="en">Executive Summary</span></h2>
+  <h2 id="sec1-summary">一、核心结论速览<span class="en">Executive Summary</span></h2>
   <p>{esc(ctx['summary'])}</p>
   <div class="grid">{kpi}</div>
   {forecast_table}
@@ -440,12 +800,12 @@ def render_report(ctx: dict) -> str:
 </div>
 
 <div class="card">
-  <h2>二、历史长周期行情回顾（12 / 24 / 36 / 60 / 120 个月）<span class="en">Long-term Review</span></h2>
+  <h2 id="sec2-longterm">二、历史长周期行情回顾（12 / 24 / 36 / 60 / 120 个月）<span class="en">Long-term Review</span></h2>
   {longterm_section}
 </div>
 
 <div class="card">
-  <h2>三、全国天气与自然灾害<span class="en">Weather &amp; Disaster</span></h2>
+  <h2 id="sec3-weather">三、全国天气与自然灾害<span class="en">Weather &amp; Disaster</span></h2>
   <h3>3.1 {esc(CORE_REGION['name'])}逐日预报（Open-Meteo，未来16天）</h3>
   {daily_table}
   <h3>3.2 窗口统计</h3>
@@ -494,13 +854,9 @@ def render_report(ctx: dict) -> str:
 </div>
 
 <div class="card">
-  <h2>六、全国行情分析与预测<span class="en">National Market</span></h2>
-  <h3>6.1 当日盘口报价横截面</h3>
-  {spot_table}
-  <div class="note">口径提示：表中不同市场的口径不可直接横比——
-    「云南产地综合交易价」为全省加权综合价，高于单一产区集散报价；
-    滇中产区（泸西/通海片区）报价为模型基准口径；
-    北方销区的「葱/大葱」多为大葱口径，非香葱，仅用于观察区域价差与运距溢价。</div>
+  <h2 id="sec6-market">六、全国行情分析与预测<span class="en">National Market</span></h2>
+  <h3>6.1 盘口直览（产地行情 / 全国行情 / 行情解析）</h3>
+  {board_html}
   <h3>6.2 供需逻辑</h3>
   <div class="split">
     <div><p><strong>供给端（压制项）</strong></p><ul>{''.join(f'<li>{esc(x)}</li>' for x in ctx['supply_press'])}</ul></div>
@@ -518,14 +874,14 @@ def render_report(ctx: dict) -> str:
     天气冲击按 1/(1+超出天数/45) 衰减，即近端降雨不会线性传导到远端；
     节日脉冲刻画月内临近节日的额外拉升，与月尺度季节性不重复计数。</p>
   <div class="note"><strong>长周期（2-3个月）特别说明：</strong>
-    未来 2 月目标日 2026-12-23 落在冬至与元旦备货窗口；未来 3 月目标日 2027-01-22
-    距 2027 年春节（2 月 6 日，除夕 2 月 5 日）仅 15 天，处于全年最强的节前备货窗口。
+    未来 2 月目标日 {tgt60} 落在冬至与元旦备货窗口；未来 3 月目标日 {tgt90}
+    距 {cny_label}（{cny_date}，除夕 {cny_eve}）仅 {days_to_cny} 天，处于全年最强的节前备货窗口。
     该档位属<strong>情景推演</strong>而非精确预测，实盘需以临近的一个月档滚动修正为准，
     并重点跟踪厄尔尼诺峰值（预计 11 月前后）后冬季西南降水的实际兑现程度。</div>
 </div>
 
 <div class="card">
-  <h2>七、{esc(CORE_REGION['name'])}专题<span class="en">Luxi County Focus</span></h2>
+  <h2 id="sec7-luxi">七、{esc(CORE_REGION['name'])}专题<span class="en">Luxi County Focus</span></h2>
   <h3>7.1 产业底盘</h3>
   <div class="grid">
     <div class="kpi"><div class="lab">种植基地</div><div class="val">{CORE_REGION['base_mu']/10000:.1f} 万亩</div>
@@ -538,7 +894,7 @@ def render_report(ctx: dict) -> str:
       <div class="chg">旺季可达数千吨/日</div></div>
   </div>
   <p><strong>竞争壁垒：</strong>{esc(ctx['luxi_moat'])}</p>
-  <h3>7.2 价格预测</h3>
+  <h3 id="sec7-forecast">7.2 价格预测</h3>
   {forecast_table}
   <h3>7.3 预测路径图（精品净葱口径）</h3>
   {svg_path}
@@ -552,7 +908,7 @@ def render_report(ctx: dict) -> str:
 </div>
 
 <div class="card">
-  <h2>八、风险提示与假设<span class="en">Risks &amp; Assumptions</span></h2>
+  <h2 id="sec8-risks">八、风险提示与假设<span class="en">Risks &amp; Assumptions</span></h2>
   <table>
     <tr><th>风险项</th><th>方向</th><th>触发条件</th><th>应对</th></tr>
     {''.join(f'<tr><td>{esc(r[0])}</td><td><span class="tag {r[1]}">{esc(r[2])}</span></td>'
