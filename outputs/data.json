@@ -1,23 +1,23 @@
 {
   "date": "2026-10-24",
-  "generated_at": "2026-10-24 04:51:41",
+  "generated_at": "2026-10-24 10:20:22",
   "price_source": "人工录入实测观测点（6 条）+ 模型估算（公开行情接口未接入）",
   "core_region": "泸西县",
   "weather_windows": {
     "d3": {
-      "tmax_avg": 27.0,
-      "tmin_avg": 15.9,
+      "tmax_avg": 26.5,
+      "tmin_avg": 16.1,
       "precip_total": 0,
       "rainy_days": 0,
       "heavy_rain_days": 0,
       "gale_days": 1,
-      "wind_max": 19.1,
+      "wind_max": 18.8,
       "dominant": "雾"
     },
     "w1": {
-      "tmax_avg": 25.3,
-      "tmin_avg": 15.3,
-      "precip_total": 2.9,
+      "tmax_avg": 24.9,
+      "tmin_avg": 15.4,
+      "precip_total": 4.4,
       "rainy_days": 1,
       "heavy_rain_days": 0,
       "gale_days": 3,
@@ -26,18 +26,18 @@
     },
     "h1": {
       "tmax_avg": 22.9,
-      "tmin_avg": 13.7,
-      "precip_total": 18.3,
-      "rainy_days": 5,
+      "tmin_avg": 13.8,
+      "precip_total": 16.6,
+      "rainy_days": 4,
       "heavy_rain_days": 1,
       "gale_days": 5,
       "wind_max": 22.3,
       "dominant": "毛毛雨"
     },
     "m1": {
-      "tmax_avg": 24.0,
+      "tmax_avg": 23.5,
       "tmin_avg": 14.4,
-      "precip_total": 21.2,
+      "precip_total": 26.1,
       "rainy_days": 6,
       "heavy_rain_days": 1,
       "gale_days": 8,
@@ -48,61 +48,61 @@
   "weather_daily": [
     {
       "date": "2026-10-24",
-      "tmax": 26.8,
+      "tmax": 26.4,
       "tmin": 15.6,
       "precip": 0,
       "pop": 2,
-      "wind": 19.1,
+      "wind": 18.8,
       "code": 45,
       "weather": "雾"
     },
     {
       "date": "2026-10-25",
-      "tmax": 26.8,
-      "tmin": 14.5,
+      "tmax": 26.5,
+      "tmin": 15.4,
       "precip": 0,
       "pop": 0,
-      "wind": 15.3,
+      "wind": 14.4,
       "code": 45,
       "weather": "雾"
     },
     {
       "date": "2026-10-26",
-      "tmax": 27.3,
-      "tmin": 17.5,
+      "tmax": 26.7,
+      "tmin": 17.3,
       "precip": 0,
       "pop": 28,
-      "wind": 14.7,
+      "wind": 13.6,
       "code": 45,
       "weather": "雾"
     },
     {
       "date": "2026-10-27",
-      "tmax": 23.4,
-      "tmin": 16.6,
-      "precip": 2.6,
+      "tmax": 23.1,
+      "tmin": 16.4,
+      "precip": 4.4,
       "pop": 65,
-      "wind": 10.7,
-      "code": 51,
+      "wind": 12.9,
+      "code": 53,
       "weather": "毛毛雨"
     },
     {
       "date": "2026-10-28",
-      "tmax": 23.2,
+      "tmax": 22.8,
       "tmin": 15.3,
-      "precip": 0.3,
+      "precip": 0,
       "pop": 59,
-      "wind": 18.6,
-      "code": 51,
-      "weather": "毛毛雨"
+      "wind": 19.9,
+      "code": 45,
+      "weather": "雾"
     },
     {
       "date": "2026-10-29",
-      "tmax": 24.1,
-      "tmin": 13.4,
+      "tmax": 23.5,
+      "tmin": 13.6,
       "precip": 0,
       "pop": 8,
-      "wind": 16.1,
+      "wind": 15.3,
       "code": 3,
       "weather": "阴"
     },
@@ -189,8 +189,8 @@
     {
       "date": "2026-11-07",
       "tmax": 20.4,
-      "tmin": 11.6,
-      "precip": 2.1,
+      "tmin": 12.6,
+      "precip": 0.45,
       "pop": 68,
       "wind": 11.1,
       "code": 51,
@@ -198,93 +198,69 @@
     },
     {
       "date": "2026-11-08",
-      "tmax": null,
-      "tmin": null,
-      "precip": 0,
+      "tmax": 17.8,
+      "tmin": 12.4,
+      "precip": 5.1,
       "pop": 57,
-      "wind": 0,
-      "code": null,
-      "weather": "—"
+      "wind": 9.1,
+      "code": 53,
+      "weather": "毛毛雨"
     }
   ],
   "disaster": {
     "total": 100,
     "hazard_stats": [
       [
-        "大雾",
-        51
-      ],
-      [
-        "暴雨",
-        13
-      ],
-      [
         "大风",
-        13
+        49
+      ],
+      [
+        "大雾",
+        22
       ],
       [
         "台风",
-        10
-      ],
-      [
-        "暴雪",
-        5
-      ],
-      [
-        "沙尘暴",
-        4
+        13
       ],
       [
         "道路结冰",
-        2
+        6
+      ],
+      [
+        "暴雨",
+        3
+      ],
+      [
+        "暴雪",
+        3
       ],
       [
         "寒潮",
         1
       ],
       [
+        "地质灾害",
+        1
+      ],
+      [
         "道路冰雪",
+        1
+      ],
+      [
+        "山洪灾害",
         1
       ]
     ],
     "top": [
       {
-        "region": "浙江省舟山市定海区",
+        "region": "浙江省宁波市北仑区",
         "province": "浙江",
-        "city": "省舟山",
+        "city": "省宁波",
         "hazard": "暴雨",
         "level": "橙色",
         "rank": 3,
-        "issuetime": "2026/10/24 00:40",
-        "url": "http://www.nmc.cn/publish/alarm/33090241600000_20261024004126.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 12
-      },
-      {
-        "region": "浙江省舟山市岱山县",
-        "province": "浙江",
-        "city": "省舟山",
-        "hazard": "暴雨",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/10/24 04:40",
-        "url": "http://www.nmc.cn/publish/alarm/33092141600000_20261024044435.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 12
-      },
-      {
-        "region": "浙江省舟山市普陀区",
-        "province": "浙江",
-        "city": "省舟山",
-        "hazard": "暴雨",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/10/23 23:15",
-        "url": "http://www.nmc.cn/publish/alarm/33090341600000_20261023231048.html",
+        "issuetime": "2026/10/24 10:09",
+        "url": "http://www.nmc.cn/publish/alarm/33020641600000_20261024101105.html",
         "weight": 4,
         "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
         "is_production_area": true,
@@ -295,237 +271,265 @@
         "province": "浙江",
         "city": "省宁波",
         "hazard": "暴雨",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/10/24 01:09",
-        "url": "http://www.nmc.cn/publish/alarm/33022541600000_20261024011545.html",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/24 09:03",
+        "url": "http://www.nmc.cn/publish/alarm/33022541600000_20261024090623.html",
         "weight": 4,
         "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
         "is_production_area": true,
-        "risk_score": 8
+        "risk_score": 12
       },
       {
         "region": "浙江省舟山市定海区",
         "province": "浙江",
         "city": "省舟山",
         "hazard": "台风",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/10/23 22:10",
-        "url": "http://www.nmc.cn/publish/alarm/33090241600000_20261023221123.html",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/24 09:50",
+        "url": "http://www.nmc.cn/publish/alarm/33090241600000_20261024095202.html",
         "weight": 4,
         "impact": "大风+强降水，设施受损、采收中断、物流受阻",
         "is_production_area": true,
-        "risk_score": 8
-      },
-      {
-        "region": "浙江省舟山市岱山县",
-        "province": "浙江",
-        "city": "省舟山",
-        "hazard": "台风",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/10/23 22:35",
-        "url": "http://www.nmc.cn/publish/alarm/33092141600000_20261023223728.html",
-        "weight": 4,
-        "impact": "大风+强降水，设施受损、采收中断、物流受阻",
-        "is_production_area": true,
-        "risk_score": 8
-      },
-      {
-        "region": "浙江省舟山市嵊泗县",
-        "province": "浙江",
-        "city": "省舟山",
-        "hazard": "台风",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/10/23 22:50",
-        "url": "http://www.nmc.cn/publish/alarm/33092241600000_20261023224849.html",
-        "weight": 4,
-        "impact": "大风+强降水，设施受损、采收中断、物流受阻",
-        "is_production_area": true,
-        "risk_score": 8
+        "risk_score": 12
       },
       {
         "region": "浙江省舟山市普陀区",
         "province": "浙江",
         "city": "省舟山",
         "hazard": "台风",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/10/23 22:20",
-        "url": "http://www.nmc.cn/publish/alarm/33090341600000_20261023221120.html",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/24 09:50",
+        "url": "http://www.nmc.cn/publish/alarm/33090341600000_20261024095318.html",
         "weight": 4,
         "impact": "大风+强降水，设施受损、采收中断、物流受阻",
+        "is_production_area": true,
+        "risk_score": 12
+      },
+      {
+        "region": "浙江省宁波市宁海县",
+        "province": "浙江",
+        "city": "省宁波",
+        "hazard": "暴雨",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/10/24 08:21",
+        "url": "http://www.nmc.cn/publish/alarm/33022641600000_20261024082359.html",
+        "weight": 4,
+        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
         "is_production_area": true,
         "risk_score": 8
       },
       {
-        "region": "福建省福州市连江县",
+        "region": "福建省福州市长乐区",
         "province": "福建",
         "city": "省福州",
         "hazard": "台风",
         "level": "黄色",
         "rank": 2,
-        "issuetime": "2026/10/23 22:50",
-        "url": "http://www.nmc.cn/publish/alarm/35012241600000_20261023225000.html",
+        "issuetime": "2026/10/24 07:55",
+        "url": "http://www.nmc.cn/publish/alarm/35011241600000_20261024075500.html",
         "weight": 4,
         "impact": "大风+强降水，设施受损、采收中断、物流受阻",
         "is_production_area": true,
         "risk_score": 8
       },
       {
-        "region": "内蒙古自治区锡林郭勒盟锡林浩特",
-        "province": "内蒙古",
-        "city": "自治",
+        "region": "新疆维吾尔自治区博尔塔拉蒙古自治州温泉县",
+        "province": "新疆",
+        "city": "维吾尔自治",
         "hazard": "暴雪",
         "level": "黄色",
         "rank": 2,
-        "issuetime": "2026/10/23 23:03",
-        "url": "http://www.nmc.cn/publish/alarm/15250241600000_20261023230359.html",
+        "issuetime": "2026/10/24 08:43",
+        "url": "http://www.nmc.cn/publish/alarm/65272341600000_20261024084339.html",
         "weight": 3,
         "impact": "运输中断、设施受压",
         "is_production_area": false,
         "risk_score": 6
       },
       {
-        "region": "上海市嘉定区",
-        "province": "上海",
-        "city": "市嘉定区",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/23 22:00",
-        "url": "http://www.nmc.cn/publish/alarm/31011441600000_20261023220150.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "region": "内蒙古自治区锡林郭勒盟",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/10/24 08:20",
+        "url": "http://www.nmc.cn/publish/alarm/15250041600000_20261024082010.html",
+        "weight": 2,
+        "impact": "运输受阻",
         "is_production_area": false,
         "risk_score": 4
       },
       {
-        "region": "上海市奉贤区",
-        "province": "上海",
-        "city": "市奉贤区",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/23 22:00",
-        "url": "http://www.nmc.cn/publish/alarm/31012041600000_20261023220106.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "region": "内蒙古自治区锡林郭勒盟苏尼特右旗",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/10/24 08:15",
+        "url": "http://www.nmc.cn/publish/alarm/15252441600000_20261024081531.html",
+        "weight": 2,
+        "impact": "运输受阻",
         "is_production_area": false,
         "risk_score": 4
       },
       {
-        "region": "上海市宝山区",
-        "province": "上海",
-        "city": "市宝山区",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/23 22:00",
-        "url": "http://www.nmc.cn/publish/alarm/31011341600000_20261023220501.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "region": "内蒙古自治区锡林郭勒盟苏尼特左旗",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/10/24 07:33",
+        "url": "http://www.nmc.cn/publish/alarm/15252341600000_20261024073353.html",
+        "weight": 2,
+        "impact": "运输受阻",
         "is_production_area": false,
         "risk_score": 4
       },
       {
-        "region": "上海市崇明区",
-        "province": "上海",
-        "city": "市崇明区",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/23 22:00",
-        "url": "http://www.nmc.cn/publish/alarm/31015141600000_20261023220258.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "region": "内蒙古自治区锡林郭勒盟锡林浩特市",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/10/24 08:26",
+        "url": "http://www.nmc.cn/publish/alarm/15250241600000_20261024082609.html",
+        "weight": 2,
+        "impact": "运输受阻",
         "is_production_area": false,
         "risk_score": 4
       },
       {
-        "region": "上海市松江区",
-        "province": "上海",
-        "city": "市松江区",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/23 22:00",
-        "url": "http://www.nmc.cn/publish/alarm/31011741600000_20261023220153.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "region": "内蒙古自治区锡林郭勒盟阿巴嘎旗",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/10/24 08:31",
+        "url": "http://www.nmc.cn/publish/alarm/15252241600000_20261024083108.html",
+        "weight": 2,
+        "impact": "运输受阻",
         "is_production_area": false,
         "risk_score": 4
       },
       {
-        "region": "上海市浦东新区",
-        "province": "上海",
-        "city": "市浦东新区",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/23 22:00",
-        "url": "http://www.nmc.cn/publish/alarm/31011541600000_20261023220152.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": false,
-        "risk_score": 4
-      },
-      {
-        "region": "上海市金山区",
-        "province": "上海",
-        "city": "市金山区",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/23 22:00",
-        "url": "http://www.nmc.cn/publish/alarm/31011641600000_20261023220109.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": false,
-        "risk_score": 4
-      },
-      {
-        "region": "上海市闵行区",
-        "province": "上海",
-        "city": "市闵行区",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/23 22:00",
-        "url": "http://www.nmc.cn/publish/alarm/31011241600000_20261023220107.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": false,
-        "risk_score": 4
-      },
-      {
-        "region": "上海市青浦区",
-        "province": "上海",
-        "city": "市青浦区",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/23 22:00",
-        "url": "http://www.nmc.cn/publish/alarm/31011841600000_20261023220259.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": false,
-        "risk_score": 4
-      },
-      {
-        "region": "新疆维吾尔自治区博尔塔拉蒙古自治州",
+        "region": "新疆维吾尔自治区克拉玛依市",
         "province": "新疆",
         "city": "维吾尔自治",
         "hazard": "道路结冰",
         "level": "黄色",
         "rank": 2,
-        "issuetime": "2026/10/23 23:03",
-        "url": "http://www.nmc.cn/publish/alarm/65270041600000_20261023230357.html",
+        "issuetime": "2026/10/24 08:08",
+        "url": "http://www.nmc.cn/publish/alarm/65020041600000_20261024080856.html",
         "weight": 2,
         "impact": "运输受阻",
         "is_production_area": false,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省丽水市云和县",
+        "province": "浙江",
+        "city": "省丽水",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/10/24 08:48",
+        "url": "http://www.nmc.cn/publish/alarm/33112541600000_20261024084753.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省丽水市缙云县",
+        "province": "浙江",
+        "city": "省丽水",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/10/24 08:25",
+        "url": "http://www.nmc.cn/publish/alarm/33112241600000_20261024082537.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省丽水市青田县",
+        "province": "浙江",
+        "city": "省丽水",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/10/24 08:40",
+        "url": "http://www.nmc.cn/publish/alarm/33112141600000_20261024083557.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省嘉兴市嘉善县",
+        "province": "浙江",
+        "city": "省嘉兴",
+        "hazard": "台风",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/10/24 08:40",
+        "url": "http://www.nmc.cn/publish/alarm/33042141600000_20261024084308.html",
+        "weight": 4,
+        "impact": "大风+强降水，设施受损、采收中断、物流受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省杭州市临安区",
+        "province": "浙江",
+        "city": "省杭州",
+        "hazard": "台风",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/10/24 07:07",
+        "url": "http://www.nmc.cn/publish/alarm/33011241600000_20261024071023.html",
+        "weight": 4,
+        "impact": "大风+强降水，设施受损、采收中断、物流受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省绍兴市上虞区",
+        "province": "浙江",
+        "city": "省绍兴",
+        "hazard": "台风",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/10/24 08:05",
+        "url": "http://www.nmc.cn/publish/alarm/33060441600000_20261024080210.html",
+        "weight": 4,
+        "impact": "大风+强降水，设施受损、采收中断、物流受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省绍兴市柯桥区",
+        "province": "浙江",
+        "city": "省绍兴",
+        "hazard": "台风",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/10/24 07:14",
+        "url": "http://www.nmc.cn/publish/alarm/33060341600000_20261024071245.html",
+        "weight": 4,
+        "impact": "大风+强降水，设施受损、采收中断、物流受阻",
+        "is_production_area": true,
         "risk_score": 4
       }
     ]
@@ -540,15 +544,15 @@
           "label": "未来3天",
           "days": 3,
           "target_date": "2026-10-27",
-          "low": 4.11,
-          "high": 4.59,
-          "center": 4.35,
-          "delta_pct": 0.1,
+          "low": 4.14,
+          "high": 4.62,
+          "center": 4.38,
+          "delta_pct": 0.6,
           "band_pct": 5.5,
           "confidence": "高",
           "reasons": [
             "大风(≥8级)1天",
-            "气温较常年偏高2.1℃，加速生长供给增"
+            "气温较常年偏高1.7℃，加速生长供给增"
           ]
         },
         {
@@ -556,10 +560,10 @@
           "label": "未来1周",
           "days": 7,
           "target_date": "2026-10-31",
-          "low": 4.33,
-          "high": 4.93,
-          "center": 4.63,
-          "delta_pct": 6.5,
+          "low": 4.35,
+          "high": 4.95,
+          "center": 4.65,
+          "delta_pct": 6.9,
           "band_pct": 6.5,
           "confidence": "较高",
           "reasons": [
@@ -596,6 +600,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)8天",
+            "气温较常年偏低1.4℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         },
@@ -613,6 +618,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)8天",
+            "气温较常年偏低1.4℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "元旦前 9 天，备货需求抬升"
           ]
@@ -631,6 +637,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)8天",
+            "气温较常年偏低1.4℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 15 天，备货需求抬升"
           ]
@@ -646,15 +653,15 @@
           "label": "未来3天",
           "days": 3,
           "target_date": "2026-10-27",
-          "low": 3.66,
-          "high": 4.08,
-          "center": 3.87,
-          "delta_pct": 0.3,
+          "low": 3.68,
+          "high": 4.11,
+          "center": 3.89,
+          "delta_pct": 0.8,
           "band_pct": 5.5,
           "confidence": "高",
           "reasons": [
             "大风(≥8级)1天",
-            "气温较常年偏高2.1℃，加速生长供给增"
+            "气温较常年偏高1.7℃，加速生长供给增"
           ]
         },
         {
@@ -662,10 +669,10 @@
           "label": "未来1周",
           "days": 7,
           "target_date": "2026-10-31",
-          "low": 3.86,
-          "high": 4.4,
-          "center": 4.13,
-          "delta_pct": 6.9,
+          "low": 3.88,
+          "high": 4.42,
+          "center": 4.15,
+          "delta_pct": 7.4,
           "band_pct": 6.5,
           "confidence": "较高",
           "reasons": [
@@ -702,6 +709,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)8天",
+            "气温较常年偏低1.4℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         },
@@ -719,6 +727,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)8天",
+            "气温较常年偏低1.4℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "元旦前 9 天，备货需求抬升"
           ]
@@ -737,6 +746,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)8天",
+            "气温较常年偏低1.4℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 15 天，备货需求抬升"
           ]
