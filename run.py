@@ -81,13 +81,36 @@ def build_context() -> dict:
 
     drop_pct = abs((red['current'] / 6.10 - 1) * 100)
 
+    # 环比前一日：判断是仍在下跌还是已止跌企稳
+    def _dod(var):
+        pts = sorted([p for p in history.get('series', [])
+                      if p['variety'] == var and p.get('source') == 'observed'],
+                     key=lambda p: p['date'])
+        if len(pts) < 2:
+            return None, None
+        prev, cur = pts[-2], pts[-1]
+        return (cur['price'] - prev['price']), prev['date']
+
+    dod_val, dod_date = _dod('红香葱')
+    if dod_val is None:
+        dod_txt = ''
+    elif abs(dod_val) < 0.03:
+        dod_txt = ('较上一观测日（{0}）{1:.2f} 元/公斤持平，'
+                   '连续两日横盘，深度下跌阶段已告一段落，价格进入磨底企稳期；').format(
+            dod_date, red['current'] - dod_val)
+    else:
+        dod_txt = ('较上一观测日（{0}）{1}{2:.2f} 元/公斤（{3:+.1f}%）；').format(
+            dod_date, '上涨' if dod_val > 0 else '下跌', abs(dod_val),
+            dod_val / (red['current'] - dod_val) * 100 if red['current'] != dod_val else 0)
+
     def pct(r):
         return '{0:+.1f}%'.format(r['delta_pct'])
 
     summary = (
         '当前全国香葱处于季节性供给高峰下的低位承压期。' + CORE_REGION['name'] +
         '产区红香葱产地中枢报 ' + str(red['current']) + ' 元/公斤，黑葱报 ' +
-        blk_current(fc) + ' 元/公斤；较 10 月中旬高点（红香葱 6.10 元/公斤）回落约 ' +
+        blk_current(fc) + ' 元/公斤；' + dod_txt +
+        '较 10 月中旬高点（红香葱 6.10 元/公斤）回落约 ' +
         '{0:.0f}%。'.format(drop_pct) +
         '主导逻辑是「天气利好→丰产不丰收」的反向传导：主产区温光适宜、茬口衔接顺畅，'
         '供给持续扩容，而终端仅有刚性需求，渠道按需补库、低库存周转，缺乏集中备货拉涨动力。'
@@ -266,6 +289,7 @@ def build_context() -> dict:
         'advice': advice,
         'risks': risks,
         'price_source_label': price_source_label,
+        'spot_quotes': history.get('spot_quotes', []),
     }
 
 

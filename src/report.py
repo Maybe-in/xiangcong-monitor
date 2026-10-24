@@ -304,6 +304,21 @@ def render_report(ctx: dict) -> str:
       {''.join(rows)}
     </table>"""
 
+    # ---- 当日盘口报价横截面（多市场）
+    spot_rows = []
+    for q in ctx.get("spot_quotes", []):
+        spot_rows.append(
+            f'<tr><td>{esc(q["date"])}</td><td>{esc(q["market"])}</td>'
+            f'<td>{esc(q["item"])}</td>'
+            f'<td class="num">{esc(q["range"])}</td>'
+            f'<td class="num">{num(q["mid"])}</td>'
+            f'<td>{esc(q["note"])}</td></tr>')
+    spot_table = f"""
+    <table>
+      <tr><th>日期</th><th>市场/口径</th><th>品项</th><th>报价区间</th><th>中枢(元/kg)</th><th>说明</th></tr>
+      {''.join(spot_rows) or '<tr><td colspan="6">暂无数据</td></tr>'}
+    </table>"""
+
     # ---- 天气逐日表
     day_rows = []
     for d_ in daily[:16]:
@@ -469,12 +484,18 @@ def render_report(ctx: dict) -> str:
 
 <div class="card">
   <h2>六、全国行情分析与预测<span class="en">National Market</span></h2>
-  <h3>6.1 供需逻辑</h3>
+  <h3>6.1 当日盘口报价横截面</h3>
+  {spot_table}
+  <div class="note">口径提示：表中不同市场的口径不可直接横比——
+    「云南产地综合交易价」为全省加权综合价，高于单一产区集散报价；
+    滇中产区（泸西/通海片区）报价为模型基准口径；
+    北方销区的「葱/大葱」多为大葱口径，非香葱，仅用于观察区域价差与运距溢价。</div>
+  <h3>6.2 供需逻辑</h3>
   <div class="split">
     <div><p><strong>供给端（压制项）</strong></p><ul>{''.join(f'<li>{esc(x)}</li>' for x in ctx['supply_press'])}</ul></div>
     <div><p><strong>潜在利多（触发项）</strong></p><ul>{''.join(f'<li>{esc(x)}</li>' for x in ctx['demand_trigger'])}</ul></div>
   </div>
-  <h3>6.2 六档预测依据</h3>
+  <h3>6.3 六档预测依据</h3>
   <table>
     <tr><th>周期</th><th>目标日</th><th>中枢涨跌</th><th>主要驱动因素</th><th>置信度</th></tr>
     {why_rows}
