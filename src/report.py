@@ -70,6 +70,32 @@ li{margin:4px 0;}
 footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-height:1.9;}
 .legend{font-size:12px;color:var(--sub);margin-top:6px;}
 .back{display:inline-block;margin-bottom:12px;font-size:13px;color:var(--accent);text-decoration:none;}
+/* ---- 盘口直览（小程序样式） ---- */
+.board{background:linear-gradient(180deg,#e8f2ff 0%,#ffffff 150px);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;margin:12px 0 16px;}
+.board-head{padding:14px 18px 8px;}
+.board-title{font-size:18px;font-weight:700;letter-spacing:.5px;}
+.board-meta{font-size:12px;color:var(--sub);margin-top:4px;}
+.board-meta b{color:var(--up);font-weight:600;}
+.board-tabs{display:flex;gap:4px;padding:0 14px;border-bottom:2px solid var(--accent);}
+.bt{padding:8px 18px;font-size:14px;color:var(--sub);cursor:pointer;user-select:none;
+  border-radius:8px 8px 0 0;margin-bottom:-2px;}
+.bt.active{background:var(--accent);color:#fff;font-weight:600;}
+.board-panel{display:none;padding:4px 12px 12px;}
+.board-panel.active{display:block;}
+.btab{margin:8px 0 0;}
+.btab th{background:#eaf2fc;color:#33506e;}
+.btab td{border:none;border-bottom:1px solid #eef1f5;background:transparent;}
+.btab tr:nth-child(even) td{background:#f7fafd;}
+.btab .name{font-weight:600;}
+.btab .arrow-up{color:var(--up);font-weight:700;}
+.btab .arrow-down{color:var(--down);font-weight:700;}
+.btab .arrow-flat{color:var(--flat);}
+.see{color:var(--accent);font-size:12.5px;text-decoration:none;white-space:nowrap;}
+.see:hover{text-decoration:underline;}
+.mini-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:10px 4px 4px;}
+.mini-sum .ms{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;}
+.mini-sum .ms b{display:block;font-size:15px;margin-bottom:2px;}
 </style>
 """
 
@@ -176,7 +202,174 @@ def build_svg_trend(hist_pts: Sequence[tuple], fc_pts: Sequence[tuple],
     return "\n".join(svg)
 
 
-# ------------------------------------------------------------------ 长周期章节
+# ------------------------------------------------------------------ 盘口直览（小程序样式）
+def _series_obs(hist: dict, variety: str) -> list[dict]:
+    pts = [p for p in hist.get("series", [])
+           if p["variety"] == variety and p.get("source") == "observed"]
+    pts.sort(key=lambda p: p["date"])
+    return pts
+
+
+def _quote_find(quotes: list[dict], market_kw: str, item: str) -> dict | None:
+    for q in quotes:
+        if market_kw in q.get("market", "") and item in q.get("item", ""):
+            return q
+    return None
+
+
+def _arrow(chg: float | None) -> str:
+    if chg is None:
+        return '<span class="arrow-flat">—</span>'
+    if chg > 0.001:
+        return '<span class="arrow-up">↑</span>'
+    if chg < -0.001:
+        return '<span class="arrow-down">↓</span>'
+    return '<span class="arrow-flat">→</span>'
+
+
+def build_board(ctx: dict) -> str:
+    """仿「小香葱行情」小程序的三页签盘口：产地行情 / 全国行情 / 行情解析。"""
+    hist = ctx["history"]
+    quotes = ctx.get("spot_quotes", [])
+    data_date = ctx.get("data_date", ctx["today"])
+
+    red_pts = _series_obs(hist, "红香葱")
+    blk_pts = _series_obs(hist, "黑葱")
+    xcong_pts = _series_obs(hist, "小葱")
+
+    def pair(pts):
+        if len(pts) >= 2:
+            return pts[-2]["price"], pts[-1]["price"]
+        if len(pts) == 1:
+            return None, pts[-1]["price"]
+        return None, None
+
+    red_prev, red_today = pair(red_pts)
+    blk_prev, blk_today = pair(blk_pts)
+    x_prev, x_today = pair(xcong_pts)
+
+    q_red_local = _quote_find(quotes, "滇中", "红葱") or {}
+    q_blk_local = _quote_find(quotes, "滇中", "黑葱") or {}
+    q_red_all = _quote_find(quotes, "云南产地综合", "红香葱") or {}
+    q_blk_all = _quote_find(quotes, "云南产地综合", "黑葱") or {}
+    q_wqy = _quote_find(quotes, "王旗营", "小葱") or {}
+
+    def rng(v):
+        return esc(v.get("range", "—")) if v else "—"
+
+    def up_edge(v):
+        try:
+            return float(str(v.get("range", "")).split("-")[-1])
+        except (ValueError, AttributeError):
+            return None
+
+    # 行：品名 | 区间 | 昨日 | 今日 | 涨跌 | 趋势 | 查看
+    rows = []
+
+    def add(name, rg, prev, today, tag="", link="#sec6-forecast", note=""):
+        chg = None
+        if prev is not None and today is not None:
+            chg = round(today - prev, 2)
+        chg_txt = "—" if chg is None else ("0.00" if abs(chg) < 0.005 else f"{chg:+.2f}")
+        prev_txt = "—" if prev is None else num(prev)
+        today_txt = "暂无报价" if today is None else num(today)
+        if tag == "待接入":
+            chg_txt, arrow = "—", '<span class="arrow-flat">—</span>'
+        else:
+            arrow = _arrow(chg)
+        tag_html = f'<span class="tag">{esc(tag)}</span>' if tag else ""
+        note_html = f'<div class="legend">{esc(note)}</div>' if note else ""
+        rows.append(
+            f'<tr><td class="name">{esc(name)}{tag_html}{note_html}</td>'
+            f'<td class="num">{esc(rg)}</td><td class="num">{prev_txt}</td>'
+            f'<td class="num">{today_txt}</td><td class="num">{chg_txt}</td>'
+            f'<td class="num">{arrow}</td>'
+            f'<td><a class="see" href="{link}">查看</a></td></tr>')
+
+    # 产地行情（泸西/滇中）——通货为实测，A货为区间上沿推算
+    add("红葱（通货）", rng(q_red_local), red_prev, red_today,
+        note="滇中产区集散价，模型基准口径")
+    add("红葱 A货（精品净葱）", rng(q_red_local), None, up_edge(q_red_local),
+        tag="推算", note="取当日通货区间上沿，仅供结构参考")
+    add("黑葱（通货）", rng(q_blk_local), blk_prev, blk_today)
+    add("泸西黑葱 中条 A货", None, None, up_edge(q_blk_local),
+        tag="推算", note="取当日通货区间上沿")
+    # 全省综合 + 主要销区
+    add("红香葱（云南全省综合）", rng(q_red_all), None, q_red_all.get("mid"))
+    add("黑葱（云南全省综合）", rng(q_blk_all), None, q_blk_all.get("mid"))
+    add("小葱（昆明王旗营批发）", rng(q_wqy), x_prev, x_today)
+    # 等级盘口（数据源未接入）
+    add("红葱 包地价", "—", None, None, tag="待接入", link="#sec6-spot",
+        note="地头包地一口价（元/吨），待接入「地慧数农」源")
+    add("红铁杆 期货盘", "—", None, None, tag="待接入", link="#sec6-spot",
+        note="远期期货盘报价（元/吨），待接入源")
+    add("黑葱中条 A货（2吨）", "—", None, None, tag="待接入", link="#sec6-spot",
+        note="整车吨级批发盘（元/吨），待接入源")
+
+    red = ctx["forecast"]["红香葱"]
+    r3, r90 = red["rows"][0], red["rows"][5]
+    ms = f"""
+    <div class="mini-sum">
+      <div class="ms"><b>今日判断：磨底企稳</b>
+        产区红葱 {num(red_today)} 元/kg 连续持平，深度下跌暂告段落，近端以稳为主。</div>
+      <div class="ms"><b>近端（3天-半月）</b>
+        中枢 {num(r3['center'])} → {num(red['rows'][2]['center'])} 元/kg，
+        天气平稳、后市温和回升。</div>
+      <div class="ms"><b>远端（1-3月）</b>
+        冬旺 + 春节备货支撑，3 月目标日 {esc(r90['target_date'])} 情景中枢
+        {num(r90['center'])} 元/kg（±{r90['band_pct']:.0f}%），属情景推演。</div>
+    </div>"""
+
+    s_rows = []
+    for q in quotes:
+        s_rows.append(
+            f'<tr><td>{esc(q["date"])}</td><td>{esc(q["market"])}</td>'
+            f'<td>{esc(q["item"])}</td>'
+            f'<td class="num">{esc(q["range"])}</td>'
+            f'<td class="num">{num(q["mid"])}</td>'
+            f'<td>{esc(q["note"])}</td></tr>')
+    spot_panel = f"""
+    <table id="sec6-spot">
+      <tr><th>日期</th><th>市场/口径</th><th>品项</th><th>报价区间</th><th>中枢(元/kg)</th><th>说明</th></tr>
+      {''.join(s_rows) or '<tr><td colspan="6">暂无数据</td></tr>'}
+    </table>
+    <div class="legend">口径提示：不同市场口径不可直接横比——「云南产地综合交易价」为全省加权综合价，
+      高于单一产区集散报价；滇中产区报价为预测模型基准口径；北方销区「葱/大葱」多为大葱口径，仅作参照。</div>"""
+
+    return f"""
+<div class="board">
+  <div class="board-head">
+    <div class="board-title">小香葱行情 · 盘口直览</div>
+    <div class="board-meta">更新时间：{esc(data_date)} 数据（行情发布为 T-1）｜
+      单位：元/kg（另注除外）｜ 红涨 <b>↑</b> / 绿跌 ↓</div>
+  </div>
+  <div class="board-tabs">
+    <span class="bt active" onclick="bdTab(0,this)">产地行情</span>
+    <span class="bt" onclick="bdTab(1,this)">全国行情</span>
+    <span class="bt" onclick="bdTab(2,this)">行情解析</span>
+  </div>
+  <div class="board-panel active">
+    <table class="btab">
+      <tr><th>品名</th><th>区间</th><th>昨日</th><th>今日</th><th>涨跌</th><th>趋势</th><th>查看</th></tr>
+      {''.join(rows)}
+    </table>
+    <div class="legend">「推算」档取当日通货区间上沿，非实际成交；「待接入」档为等级/包地/期货盘，
+      需接入「地慧数农」等产地小程序数据源后填充。</div>
+  </div>
+  <div class="board-panel">{spot_panel}</div>
+  <div class="board-panel">{ms}</div>
+</div>
+<script>
+function bdTab(i, el){{
+  var card = el.closest('.board');
+  var tabs = card.querySelectorAll('.bt');
+  var panels = card.querySelectorAll('.board-panel');
+  tabs.forEach(function(t){{ t.classList.remove('active'); }});
+  panels.forEach(function(p){{ p.classList.remove('active'); }});
+  el.classList.add('active');
+  panels[i].classList.add('active');
+}}
+</script>"""
 def build_longterm_section(lt: dict, summary: str = "", conclusion=None) -> str:
     series = lt["series"]
     conclusion = conclusion or []
@@ -258,7 +451,8 @@ def build_longterm_section(lt: dict, summary: str = "", conclusion=None) -> str:
   <h3>2.7 季节性规律（月度季节指数）</h3>
   {svg_season_chart}
   <div class="legend">季节指数 = 该月价格 / 全年均价。&gt;1.08 为旺季（红），&lt;0.92 为淡季（绿）。
-    香葱呈典型「双峰」：春峰 3—5 月、秋峰 10—11 月；夏谷 7—8 月，冬平 12—2 月。</div>
+    香葱季节规律：春峰 4—5 月最高、冬旺 11—1 月次高（春节备货 + 北方产区退市后云南单极供给），
+    夏谷 7—8 月最低。与第六章预测模型共用同一季节曲线（config.SEASONALITY）。</div>
   <h3>2.8 长周期结论</h3>
   <ul>{concl_html}</ul>
 """
@@ -298,15 +492,23 @@ def render_report(ctx: dict) -> str:
         days_to_cny = "—"
 
     # ---- 预测总表
+<<<<<<< HEAD
     # 表头 10 列：周期 | 目标日 | 红香葱区间 | 红香葱中枢 | 黑葱区间 | 黑葱中枢 |
     #             中枢涨跌(红葱) | 中枢涨跌(黑葱) | 区间半宽 | 方向/置信度
     # 每一行必须输出满 10 格，否则整行会左移错位。
+=======
+    # 表头 10 列：周期 | 目标日 | 红香葱区间 | 红香葱中枢 | 黑葱区间 | 黑葱中枢 | 红葱涨跌 | 黑葱涨跌 | 区间半宽 | 方向/置信度
+>>>>>>> 5207301 (feat: 盘口直览三页签模块(产地/全国/解析)+黑葱涨跌列；统一季节因子修复口径矛盾；动态化硬编码数字)
     rows = []
     rows.append(f'<tr><td>当前基准</td><td>{today}</td>'
                 f'<td class="num">—</td><td class="num">{num(red["current"])}</td>'
                 f'<td class="num">—</td><td class="num">{num(blk["current"])}</td>'
+<<<<<<< HEAD
                 f'<td class="num">—</td><td class="num">—</td>'
                 f'<td class="num">—</td>'
+=======
+                f'<td class="num">—</td><td class="num">—</td><td class="num">—</td>'
+>>>>>>> 5207301 (feat: 盘口直览三页签模块(产地/全国/解析)+黑葱涨跌列；统一季节因子修复口径矛盾；动态化硬编码数字)
                 f'<td><span class="tag t-flat">基准</span></td></tr>')
     for r, b in zip(red["rows"], blk["rows"]):
         tag_txt, tag_cls = direction_tag(r["delta_pct"])
@@ -327,25 +529,18 @@ def render_report(ctx: dict) -> str:
     forecast_table = f"""
     <table>
       <tr><th>周期</th><th>目标日</th><th>红香葱区间(元/kg)</th><th>红香葱中枢</th>
+<<<<<<< HEAD
           <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>中枢涨跌(红葱)</th>
           <th>中枢涨跌(黑葱)</th><th>区间半宽</th><th>方向/置信度</th></tr>
+=======
+          <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>红葱涨跌</th><th>黑葱涨跌</th>
+          <th>区间半宽</th><th>方向/置信度</th></tr>
+>>>>>>> 5207301 (feat: 盘口直览三页签模块(产地/全国/解析)+黑葱涨跌列；统一季节因子修复口径矛盾；动态化硬编码数字)
       {''.join(rows)}
     </table>"""
 
-    # ---- 当日盘口报价横截面（多市场）
-    spot_rows = []
-    for q in ctx.get("spot_quotes", []):
-        spot_rows.append(
-            f'<tr><td>{esc(q["date"])}</td><td>{esc(q["market"])}</td>'
-            f'<td>{esc(q["item"])}</td>'
-            f'<td class="num">{esc(q["range"])}</td>'
-            f'<td class="num">{num(q["mid"])}</td>'
-            f'<td>{esc(q["note"])}</td></tr>')
-    spot_table = f"""
-    <table>
-      <tr><th>日期</th><th>市场/口径</th><th>品项</th><th>报价区间</th><th>中枢(元/kg)</th><th>说明</th></tr>
-      {''.join(spot_rows) or '<tr><td colspan="6">暂无数据</td></tr>'}
-    </table>"""
+    # ---- 盘口直览（小程序样式，三页签）
+    board_html = build_board(ctx)
 
     # ---- 天气逐日表
     day_rows = []
@@ -512,12 +707,8 @@ def render_report(ctx: dict) -> str:
 
 <div class="card">
   <h2>六、全国行情分析与预测<span class="en">National Market</span></h2>
-  <h3>6.1 当日盘口报价横截面</h3>
-  {spot_table}
-  <div class="note">口径提示：表中不同市场的口径不可直接横比——
-    「云南产地综合交易价」为全省加权综合价，高于单一产区集散报价；
-    滇中产区（泸西/通海片区）报价为模型基准口径；
-    北方销区的「葱/大葱」多为大葱口径，非香葱，仅用于观察区域价差与运距溢价。</div>
+  <h3>6.1 盘口直览（产地行情 / 全国行情 / 行情解析）</h3>
+  {board_html}
   <h3>6.2 供需逻辑</h3>
   <div class="split">
     <div><p><strong>供给端（压制项）</strong></p><ul>{''.join(f'<li>{esc(x)}</li>' for x in ctx['supply_press'])}</ul></div>
@@ -535,8 +726,15 @@ def render_report(ctx: dict) -> str:
     天气冲击按 1/(1+超出天数/45) 衰减，即近端降雨不会线性传导到远端；
     节日脉冲刻画月内临近节日的额外拉升，与月尺度季节性不重复计数。</p>
   <div class="note"><strong>长周期（2-3个月）特别说明：</strong>
+<<<<<<< HEAD
     未来 2 月目标日 {tgt60} 落在冬至与元旦备货窗口；未来 3 月目标日 {tgt90}
     距 {cny_label}（{cny_date}，除夕 {cny_eve}）仅 {days_to_cny} 天，处于全年最强的节前备货窗口。
+=======
+    未来 2 月目标日 {esc(red['rows'][4]['target_date'])} 落在冬至与元旦备货窗口；未来 3 月目标日
+    {esc(red['rows'][5]['target_date'])} 距 2027 年春节（2 月 6 日，除夕 2 月 5 日）
+    仅 {(date(2027, 2, 6) - date.fromisoformat(red['rows'][5]['target_date'])).days} 天，
+    处于全年最强的节前备货窗口。
+>>>>>>> 5207301 (feat: 盘口直览三页签模块(产地/全国/解析)+黑葱涨跌列；统一季节因子修复口径矛盾；动态化硬编码数字)
     该档位属<strong>情景推演</strong>而非精确预测，实盘需以临近的一个月档滚动修正为准，
     并重点跟踪厄尔尼诺峰值（预计 11 月前后）后冬季西南降水的实际兑现程度。</div>
 </div>
@@ -555,7 +753,7 @@ def render_report(ctx: dict) -> str:
       <div class="chg">旺季可达数千吨/日</div></div>
   </div>
   <p><strong>竞争壁垒：</strong>{esc(ctx['luxi_moat'])}</p>
-  <h3>7.2 价格预测</h3>
+  <h3 id="sec6-forecast">7.2 价格预测</h3>
   {forecast_table}
   <h3>7.3 预测路径图（精品净葱口径）</h3>
   {svg_path}
