@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "generated_at": "2026-10-25 07:22:06",
+  "generated_at": "2026-10-25 07:24:22",
   "price_source": "人工录入实测观测点（9 条）+ 模型估算（公开行情接口未接入）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -61,7 +61,7 @@
       "tmax": 26.9,
       "tmin": 17.4,
       "precip": 0,
-      "pop": 31,
+      "pop": 26,
       "wind": 13.3,
       "code": 45,
       "weather": "雾"
@@ -71,7 +71,7 @@
       "tmax": 23.7,
       "tmin": 16.8,
       "precip": 3.4,
-      "pop": 92,
+      "pop": 88,
       "wind": 11.2,
       "code": 53,
       "weather": "毛毛雨"
@@ -81,7 +81,7 @@
       "tmax": 22.9,
       "tmin": 15.4,
       "precip": 0,
-      "pop": 45,
+      "pop": 43,
       "wind": 18.7,
       "code": 45,
       "weather": "雾"
@@ -91,7 +91,7 @@
       "tmax": 23.6,
       "tmin": 14.0,
       "precip": 0,
-      "pop": 13,
+      "pop": 20,
       "wind": 14.0,
       "code": 3,
       "weather": "阴"
@@ -101,7 +101,7 @@
       "tmax": 24.8,
       "tmin": 14.9,
       "precip": 0.3,
-      "pop": 21,
+      "pop": 10,
       "wind": 16.5,
       "code": 51,
       "weather": "毛毛雨"
@@ -111,7 +111,7 @@
       "tmax": 25.8,
       "tmin": 14.4,
       "precip": 0,
-      "pop": 4,
+      "pop": 22,
       "wind": 23.3,
       "code": 45,
       "weather": "雾"
@@ -121,7 +121,7 @@
       "tmax": 26.1,
       "tmin": 13.6,
       "precip": 2.1,
-      "pop": 48,
+      "pop": 37,
       "wind": 21.3,
       "code": 51,
       "weather": "毛毛雨"
@@ -131,7 +131,7 @@
       "tmax": 18.0,
       "tmin": 11.8,
       "precip": 2.1,
-      "pop": 38,
+      "pop": 39,
       "wind": 13.4,
       "code": 51,
       "weather": "毛毛雨"
@@ -141,7 +141,7 @@
       "tmax": 17.9,
       "tmin": 12.2,
       "precip": 0,
-      "pop": 28,
+      "pop": 42,
       "wind": 9.0,
       "code": 3,
       "weather": "阴"
@@ -151,7 +151,7 @@
       "tmax": 23.2,
       "tmin": 13.2,
       "precip": 0,
-      "pop": 29,
+      "pop": 39,
       "wind": 16.8,
       "code": 3,
       "weather": "阴"
@@ -161,7 +161,7 @@
       "tmax": 22.9,
       "tmin": 14.8,
       "precip": 3.6,
-      "pop": 36,
+      "pop": 39,
       "wind": 15.9,
       "code": 53,
       "weather": "毛毛雨"
@@ -171,7 +171,7 @@
       "tmax": 16.4,
       "tmin": 12.2,
       "precip": 26.7,
-      "pop": 45,
+      "pop": 39,
       "wind": 15.1,
       "code": 80,
       "weather": "阵雨"
@@ -181,7 +181,7 @@
       "tmax": 16.4,
       "tmin": 11.3,
       "precip": 7.5,
-      "pop": 46,
+      "pop": 56,
       "wind": 5.3,
       "code": 53,
       "weather": "毛毛雨"
@@ -191,7 +191,7 @@
       "tmax": 18.5,
       "tmin": 8.5,
       "precip": 1.65,
-      "pop": 34,
+      "pop": 49,
       "wind": 8.4,
       "code": 51,
       "weather": "毛毛雨"
