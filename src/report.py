@@ -286,17 +286,32 @@ def render_report(ctx: dict) -> str:
     <div class="kpi"><div class="lab">未来7天产区降水</div><div class="val">{num(win.get('w1', {}).get('precip_total'), 1)}</div><div class="chg">mm · 雨日 {win.get('w1', {}).get('rainy_days', '—')} 天</div></div>
     """
 
+    # ---- 长周期说明用到的节日与目标日（动态计算，避免写死后逐日失效）
+    _rows = red.get("rows", [])
+    tgt60 = _rows[4]["target_date"] if len(_rows) > 4 else "—"
+    tgt90 = _rows[5]["target_date"] if len(_rows) > 5 else "—"
+    # 2027 年春节（丁未羊年）= 2027-02-06，除夕 2027-02-05
+    cny_label, cny_date, cny_eve = "2027 年春节", "2 月 6 日", "2 月 5 日"
+    try:
+        days_to_cny = (date(2027, 2, 6) - date.fromisoformat(tgt90)).days
+    except (TypeError, ValueError):
+        days_to_cny = "—"
+
     # ---- 预测总表
-    # 表头 9 列：周期 | 目标日 | 红香葱区间 | 红香葱中枢 | 黑葱区间 | 黑葱中枢 | 中枢涨跌 | 区间半宽 | 方向/置信度
+    # 表头 10 列：周期 | 目标日 | 红香葱区间 | 红香葱中枢 | 黑葱区间 | 黑葱中枢 |
+    #             中枢涨跌(红葱) | 中枢涨跌(黑葱) | 区间半宽 | 方向/置信度
+    # 每一行必须输出满 10 格，否则整行会左移错位。
     rows = []
     rows.append(f'<tr><td>当前基准</td><td>{today}</td>'
                 f'<td class="num">—</td><td class="num">{num(red["current"])}</td>'
                 f'<td class="num">—</td><td class="num">{num(blk["current"])}</td>'
                 f'<td class="num">—</td><td class="num">—</td>'
+                f'<td class="num">—</td>'
                 f'<td><span class="tag t-flat">基准</span></td></tr>')
     for r, b in zip(red["rows"], blk["rows"]):
         tag_txt, tag_cls = direction_tag(r["delta_pct"])
         dcls = "up" if r["delta_pct"] > 0 else ("down" if r["delta_pct"] < 0 else "flat")
+        bcls = "up" if b["delta_pct"] > 0 else ("down" if b["delta_pct"] < 0 else "flat")
         rows.append(
             f'<tr><td><strong>{esc(r["label"])}</strong></td><td>{esc(r["target_date"])}</td>'
             f'<td class="num">{num(r["low"])} – {num(r["high"])}</td>'
@@ -304,6 +319,7 @@ def render_report(ctx: dict) -> str:
             f'<td class="num">{num(b["low"])} – {num(b["high"])}</td>'
             f'<td class="num">{num(b["center"])}</td>'
             f'<td class="num {dcls}">{r["delta_pct"]:+.1f}%</td>'
+            f'<td class="num {bcls}">{b["delta_pct"]:+.1f}%</td>'
             f'<td class="num">±{r["band_pct"]:.1f}%</td>'
             f'<td><span class="tag {tag_cls}">{tag_txt}</span>'
             f'<span class="tag">{esc(r["confidence"])}</span></td></tr>')
@@ -311,7 +327,8 @@ def render_report(ctx: dict) -> str:
     forecast_table = f"""
     <table>
       <tr><th>周期</th><th>目标日</th><th>红香葱区间(元/kg)</th><th>红香葱中枢</th>
-          <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>中枢涨跌(红葱)</th><th>区间半宽</th><th>方向/置信度</th></tr>
+          <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>中枢涨跌(红葱)</th>
+          <th>中枢涨跌(黑葱)</th><th>区间半宽</th><th>方向/置信度</th></tr>
       {''.join(rows)}
     </table>"""
 
@@ -518,8 +535,8 @@ def render_report(ctx: dict) -> str:
     天气冲击按 1/(1+超出天数/45) 衰减，即近端降雨不会线性传导到远端；
     节日脉冲刻画月内临近节日的额外拉升，与月尺度季节性不重复计数。</p>
   <div class="note"><strong>长周期（2-3个月）特别说明：</strong>
-    未来 2 月目标日 2026-12-23 落在冬至与元旦备货窗口；未来 3 月目标日 2027-01-22
-    距 2027 年春节（2 月 6 日，除夕 2 月 5 日）仅 15 天，处于全年最强的节前备货窗口。
+    未来 2 月目标日 {tgt60} 落在冬至与元旦备货窗口；未来 3 月目标日 {tgt90}
+    距 {cny_label}（{cny_date}，除夕 {cny_eve}）仅 {days_to_cny} 天，处于全年最强的节前备货窗口。
     该档位属<strong>情景推演</strong>而非精确预测，实盘需以临近的一个月档滚动修正为准，
     并重点跟踪厄尔尼诺峰值（预计 11 月前后）后冬季西南降水的实际兑现程度。</div>
 </div>
