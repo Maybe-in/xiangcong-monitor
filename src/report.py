@@ -216,8 +216,14 @@ def _series_obs(hist: dict, variety: str) -> list[dict]:
 
 
 def _quote_find(quotes: list[dict], market_kw: str, item: str) -> dict | None:
+    # 品名匹配做「香」字归一化：红香葱/红葱、黑香葱/黑葱 视为同一品类，
+    # 避免产区改名或加「香」字后静默匹配失败（曾导致盘口整列变 —）。
+    def norm(s: str) -> str:
+        return s.replace("香", "").replace(" ", "")
+
+    n_item = norm(item)
     for q in quotes:
-        if market_kw in q.get("market", "") and item in q.get("item", ""):
+        if market_kw in q.get("market", "") and n_item in norm(q.get("item", "")):
             return q
     return None
 
@@ -254,8 +260,8 @@ def build_board(ctx: dict) -> str:
     blk_prev, blk_today = pair(blk_pts)
     x_prev, x_today = pair(xcong_pts)
 
-    q_red_local = _quote_find(quotes, "滇中", "红葱") or {}
-    q_blk_local = _quote_find(quotes, "滇中", "黑葱") or {}
+    q_red_local = _quote_find(quotes, "泸西", "红葱") or _quote_find(quotes, "滇中", "红葱") or {}
+    q_blk_local = _quote_find(quotes, "泸西", "黑葱") or _quote_find(quotes, "滇中", "黑葱") or {}
     q_red_all = _quote_find(quotes, "云南产地综合", "红香葱") or {}
     q_blk_all = _quote_find(quotes, "云南产地综合", "黑葱") or {}
     q_wqy = _quote_find(quotes, "王旗营", "小葱") or {}
@@ -272,12 +278,29 @@ def build_board(ctx: dict) -> str:
     # 行：品名 | 区间 | 昨日 | 今日 | 涨跌 | 趋势 | 查看
     rows = []
 
-    def add(name, rg, prev, today, tag="", link="#sec6-forecast", note="", onclick=None):
+    def add(name, rg, prev, today, tag="", link="#sec6-forecast", note="", onclick=None,
+            today_val=None):
+        # today 为带单位字符串（如「2750 元/亩」）时，用 today_val 传裸数值以计算涨跌
+        tv = today_val if today_val is not None else (
+            None if isinstance(today, str) else today)
         chg = None
-        if prev is not None and today is not None and not isinstance(today, str):
-            chg = round(today - prev, 2)
-        chg_txt = "—" if chg is None else ("0.00" if abs(chg) < 0.005 else f"{chg:+.2f}")
-        prev_txt = "—" if prev is None else num(prev)
+        if prev is not None and tv is not None:
+            chg = round(tv - prev, 2)
+        # 元/亩 等大额口径不显示小数，元/kg 保留两位
+        if chg is None:
+            chg_txt = "—"
+        elif abs(chg) < 0.005:
+            chg_txt = "0.00"
+        elif abs(chg) >= 100:
+            chg_txt = f"{chg:+.0f}"
+        else:
+            chg_txt = f"{chg:+.2f}"
+        if prev is None:
+            prev_txt = "—"
+        elif abs(prev - round(prev)) < 0.005 and abs(prev) >= 100:
+            prev_txt = str(int(round(prev)))
+        else:
+            prev_txt = num(prev)
         if today is None:
             today_txt = "暂无报价"
         elif isinstance(today, str):
@@ -300,12 +323,12 @@ def build_board(ctx: dict) -> str:
             f'<td><a class="see" href="{link}"{onclick_html}>查看</a></td></tr>')
 
     # 产地行情（泸西/滇中）——集散净葱为实测，A货为区间上沿推算；毛葱地头价另列（口径不同）
-    add("红葱（滇中集散·净葱）", rng(q_red_local), red_prev, red_today,
-        note="滇中产区集散成交均价（精品净葱口径），模型基准")
+    add("红葱（泸西集散·净葱）", rng(q_red_local), red_prev, red_today,
+        note="泸西产区集散成交均价（精品净葱口径），模型基准")
     add("红葱 A货（精品净葱）", rng(q_red_local), None, up_edge(q_red_local),
         tag="推算", note="取当日集散区间上沿，仅供结构参考")
-    add("黑葱（滇中集散·净葱）", rng(q_blk_local), blk_prev, blk_today,
-        note="滇中产区集散成交均价（净葱口径）")
+    add("黑葱（泸西集散·净葱）", rng(q_blk_local), blk_prev, blk_today,
+        note="泸西产区集散成交均价（净葱口径）")
     add("黑葱 A货（中条）", None, None, up_edge(q_blk_local),
         tag="推算", note="取当日集散区间上沿")
     # 全省综合 + 主要销区
@@ -344,6 +367,32 @@ def build_board(ctx: dict) -> str:
         (f"{round(blk_up * 1000)} 元/吨" if blk_up else None),
         tag="推算", link="#sec6-spot", onclick="bdGo(1,'sec6-spot',this);return false;",
         note="整车吨级批发盘无公开接口；按滇中黑葱集散上沿×1000 推算元/吨")
+
+    # ---- 白葱（白铁杆）与包地价（元/亩）：云南产区报价单实测口径 ----
+    def _qget(lst, item):
+        hit = [q for q in lst if q.get("item") == item]
+        return hit[-1] if hit else None
+
+    wht = _qget(hist.get("white_quotes", []), "白铁杆（白葱）")
+    if wht:
+        add("白葱·白铁杆（云南产区）", rng(wht), wht.get("prev"), wht.get("mid"),
+            tag="实测", link="#sec6-spot", onclick="bdGo(1,'sec6-spot',this);return false;",
+            note=f"产区报价单 {wht['date']}：{wht['range']} 元/kg（昨日 {wht.get('prev')}）。"
+                 f"白葱与红/黑葱同季竞争，可作为香葱总供给的交叉验证")
+
+    red_jp = _qget(hist.get("white_quotes", []), "红香葱（精品好货）")
+    if red_jp:
+        add("红香葱（精品好货）", rng(red_jp), red_jp.get("prev"), red_jp.get("mid"),
+            tag="实测", link="#sec6-spot", onclick="bdGo(1,'sec6-spot',this);return false;",
+            note=f"产区报价单 {red_jp['date']}：{red_jp['range']} 元/kg（昨日 {red_jp.get('prev')}）。"
+                 f"精品好货口径，高于全省综合交易价（{rng(q_red_all)}），反映优质优价价差")
+
+    for q in hist.get("mu_quotes", []):
+        add(q["item"], rng(q), q.get("prev"), f"{int(q['mid'])} 元/亩",
+            tag="实测", link="#sec6-spot", onclick="bdGo(1,'sec6-spot',this);return false;",
+            today_val=q.get("mid"),
+            note=f"包地（整片承包）口径 {q['date']}：{q['range']} 元/亩（昨日 {int(q.get('prev') or 0)}）。"
+                 f"按亩计价，直接反映地头对后市的预期，领先于现货价变化")
 
     red = ctx["forecast"]["红香葱"]
     r3, r90 = red["rows"][0], red["rows"][5]
@@ -458,8 +507,11 @@ def build_board(ctx: dict) -> str:
       {''.join(rows)}
     </table>
     <div class="legend">「推算」档取当日集散区间上沿，非实际成交；「接口」档为惠农网公开产地报价（地头通货毛葱口径，
-      ×约1.66 折算集散净葱口径后才与上行集散价同口径）；「模型」档为价格预测中枢折算（非成交价）。
-      红葱包地价取自惠农网泸西产地接口；黑葱A货吨盘按集散上沿推算；红铁杆期货盘无公开合约，取模型2个月远期中枢。</div>
+      ×约1.66 折算集散净葱口径后才与上行集散价同口径）；「实测」档为产区报价单真实报价；
+      「模型」档为价格预测中枢折算（非成交价）。
+      红葱包地价取自惠农网泸西产地接口（元/吨），与下方「元/亩」包地价分属不同计价方式；
+      黑葱A货吨盘按集散上沿推算；红铁杆期货盘无公开合约，取模型2个月远期中枢。
+      白葱（白铁杆）与红/黑葱同季竞争，其走弱可作为香葱总供给宽松的交叉验证。</div>
   </div>
   <div class="board-panel">{api_html}{cnhnb_html}{spot_panel}</div>
   <div class="board-panel">{ms}</div>
@@ -584,8 +636,8 @@ def render_report(ctx: dict) -> str:
     red = fc["红香葱"]
     blk = fc["黑葱"]
     kpi = f"""
-    <div class="kpi"><div class="lab">红香葱·产地中枢</div><div class="val">{num(red['current'])}</div><div class="chg">元/公斤（滇中产区集散价）</div></div>
-    <div class="kpi"><div class="lab">黑葱·产地中枢</div><div class="val">{num(blk['current'])}</div><div class="chg">元/公斤（滇中产区集散价）</div></div>
+    <div class="kpi"><div class="lab">红香葱·产地中枢</div><div class="val">{num(red['current'])}</div><div class="chg">元/公斤（泸西产区集散价）</div></div>
+    <div class="kpi"><div class="lab">黑葱·产地中枢</div><div class="val">{num(blk['current'])}</div><div class="chg">元/公斤（泸西产区集散价）</div></div>
     <div class="kpi"><div class="lab">全国生效气象预警</div><div class="val">{d['total']}</div><div class="chg">条（中央气象台）</div></div>
     <div class="kpi"><div class="lab">未来7天产区降水</div><div class="val">{num(win.get('w1', {}).get('precip_total'), 1)}</div><div class="chg">mm · 雨日 {win.get('w1', {}).get('rainy_days', '—')} 天</div></div>
     """

@@ -124,17 +124,27 @@ def build_context() -> dict:
                       if p['variety'] == var and p.get('source') == 'observed'],
                      key=lambda p: p['date'])
         if len(pts) < 2:
-            return None, None
+            return None, None, 0
         prev, cur = pts[-2], pts[-1]
-        return (cur['price'] - prev['price']), prev['date']
+        # 统计「连续横盘」的观测点个数：从末尾往前，相邻价差均 <0.03 才计数
+        flat_n = 1
+        for i in range(len(pts) - 1, 0, -1):
+            if abs(pts[i]['price'] - pts[i - 1]['price']) < 0.03:
+                flat_n += 1
+            else:
+                break
+        return (cur['price'] - prev['price']), prev['date'], flat_n
 
-    dod_val, dod_date = _dod('红香葱')
+    dod_val, dod_date, dod_flat_n = _dod('红香葱')
     if dod_val is None:
         dod_txt = ''
     elif abs(dod_val) < 0.03:
+        # 连续横盘天数 = 观测点个数 - 1（两个点才算「连续两日持平」）
+        span = max(1, dod_flat_n - 1)
         dod_txt = ('较上一观测日（{0}）{1:.2f} 元/公斤持平，'
-                   '连续两日横盘，深度下跌阶段已告一段落，价格进入磨底企稳期；').format(
-            dod_date, red['current'] - dod_val)
+                   '已连续 {2} 日横盘（覆盖 {3} 个观测点），'
+                   '深度下跌阶段已告一段落，价格进入磨底企稳期；').format(
+            dod_date, red['current'] - dod_val, span, dod_flat_n)
     else:
         dod_txt = ('较上一观测日（{0}）{1}{2:.2f} 元/公斤（{3:+.1f}%）；').format(
             dod_date, '上涨' if dod_val > 0 else '下跌', abs(dod_val),
