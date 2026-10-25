@@ -336,6 +336,45 @@ def build_board(ctx: dict) -> str:
     <div class="legend">口径提示：不同市场口径不可直接横比——「云南产地综合交易价」为全省加权综合价，
       高于单一产区集散报价；滇中产区报价为预测模型基准口径；北方销区「葱/大葱」多为大葱口径，仅作参照。</div>"""
 
+    # ---- 接口自动行情（新发地）
+    mkt = ctx.get("market_api") or {}
+    api_html = ""
+    if mkt.get("ok") and mkt.get("rows"):
+        items = []
+        for it in dict.fromkeys(r["item"] for r in mkt["rows"]):
+            rows_it = sorted([r for r in mkt["rows"] if r["item"] == it],
+                             key=lambda r: r["date"])
+            cur, prev = rows_it[-1], (rows_it[-2] if len(rows_it) > 1 else None)
+            chg = None
+            if prev and cur:
+                chg = round(cur["mid"] - prev["mid"], 2)
+            chg_html = ("—" if chg is None else
+                        ("0.00" if abs(chg) < 0.005 else f"{chg:+.2f}"))
+            arrow = _arrow(chg)
+            dcls = "up" if (chg or 0) > 0 else ("down" if (chg or 0) < 0 else "flat")
+            items.append(
+                f'<tr><td class="name">{esc(it)}<span class="tag">接口自动</span></td>'
+                f'<td>{esc(cur["date"])}</td>'
+                f'<td class="num">{num(cur["low"])} – {num(cur["high"])}</td>'
+                f'<td class="num">{num(cur["mid"])}</td>'
+                f'<td class="num {dcls}">{chg_html}</td>'
+                f'<td class="num">{arrow}</td>'
+                f'<td>{esc(cur["places"] or "—")}</td>'
+                f'<td><a class="see" href="#sec6-spot">明细</a></td></tr>')
+        api_html = f"""
+    <p style="margin:10px 4px 0"><strong>接口自动行情 · {esc(mkt.get('market', '北京新发地'))}</strong>
+      <span class="tag">抓取时间 {esc(mkt.get('fetched_at', ''))}</span></p>
+    <table class="btab">
+      <tr><th>品名</th><th>最新日期</th><th>区间(元/kg)</th><th>中枢</th>
+          <th>较前日</th><th>趋势</th><th>产地</th><th>查看</th></tr>
+      {''.join(items)}
+    </table>
+    <div class="legend">数据来源：新发地批发市场公开行情接口（原始单位元/斤，×2 换算为元/公斤）；
+      每日运行自动抓取并归档至 data/market_quotes.json。</div>"""
+    else:
+        api_html = ('<div class="note">接口自动行情暂不可用（' + esc(mkt.get("error", "未知原因"))
+                    + '），本页签仅展示人工录入数据。</div>')
+
     return f"""
 <div class="board">
   <div class="board-head">
@@ -353,10 +392,11 @@ def build_board(ctx: dict) -> str:
       <tr><th>品名</th><th>区间</th><th>昨日</th><th>今日</th><th>涨跌</th><th>趋势</th><th>查看</th></tr>
       {''.join(rows)}
     </table>
-    <div class="legend">「推算」档取当日通货区间上沿，非实际成交；「待接入」档为等级/包地/期货盘，
-      需接入「地慧数农」等产地小程序数据源后填充。</div>
+    <div class="legend">「推算」档取当日通货区间上沿，非实际成交；「待接入」档为泸西产地等级/包地/期货吨盘
+      ——该类报价目前仅存在于「地慧数农」等产地小程序内、无公开接口，接入后将自动填充；
+      全国批发市场行情已通过新发地接口自动更新（见「全国行情」页签）。</div>
   </div>
-  <div class="board-panel">{spot_panel}</div>
+  <div class="board-panel">{api_html}{spot_panel}</div>
   <div class="board-panel">{ms}</div>
 </div>
 <script>
@@ -492,23 +532,15 @@ def render_report(ctx: dict) -> str:
         days_to_cny = "—"
 
     # ---- 预测总表
-<<<<<<< HEAD
     # 表头 10 列：周期 | 目标日 | 红香葱区间 | 红香葱中枢 | 黑葱区间 | 黑葱中枢 |
     #             中枢涨跌(红葱) | 中枢涨跌(黑葱) | 区间半宽 | 方向/置信度
     # 每一行必须输出满 10 格，否则整行会左移错位。
-=======
-    # 表头 10 列：周期 | 目标日 | 红香葱区间 | 红香葱中枢 | 黑葱区间 | 黑葱中枢 | 红葱涨跌 | 黑葱涨跌 | 区间半宽 | 方向/置信度
->>>>>>> 5207301 (feat: 盘口直览三页签模块(产地/全国/解析)+黑葱涨跌列；统一季节因子修复口径矛盾；动态化硬编码数字)
     rows = []
     rows.append(f'<tr><td>当前基准</td><td>{today}</td>'
                 f'<td class="num">—</td><td class="num">{num(red["current"])}</td>'
                 f'<td class="num">—</td><td class="num">{num(blk["current"])}</td>'
-<<<<<<< HEAD
                 f'<td class="num">—</td><td class="num">—</td>'
                 f'<td class="num">—</td>'
-=======
-                f'<td class="num">—</td><td class="num">—</td><td class="num">—</td>'
->>>>>>> 5207301 (feat: 盘口直览三页签模块(产地/全国/解析)+黑葱涨跌列；统一季节因子修复口径矛盾；动态化硬编码数字)
                 f'<td><span class="tag t-flat">基准</span></td></tr>')
     for r, b in zip(red["rows"], blk["rows"]):
         tag_txt, tag_cls = direction_tag(r["delta_pct"])
@@ -529,13 +561,8 @@ def render_report(ctx: dict) -> str:
     forecast_table = f"""
     <table>
       <tr><th>周期</th><th>目标日</th><th>红香葱区间(元/kg)</th><th>红香葱中枢</th>
-<<<<<<< HEAD
           <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>中枢涨跌(红葱)</th>
           <th>中枢涨跌(黑葱)</th><th>区间半宽</th><th>方向/置信度</th></tr>
-=======
-          <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>红葱涨跌</th><th>黑葱涨跌</th>
-          <th>区间半宽</th><th>方向/置信度</th></tr>
->>>>>>> 5207301 (feat: 盘口直览三页签模块(产地/全国/解析)+黑葱涨跌列；统一季节因子修复口径矛盾；动态化硬编码数字)
       {''.join(rows)}
     </table>"""
 
@@ -726,15 +753,8 @@ def render_report(ctx: dict) -> str:
     天气冲击按 1/(1+超出天数/45) 衰减，即近端降雨不会线性传导到远端；
     节日脉冲刻画月内临近节日的额外拉升，与月尺度季节性不重复计数。</p>
   <div class="note"><strong>长周期（2-3个月）特别说明：</strong>
-<<<<<<< HEAD
     未来 2 月目标日 {tgt60} 落在冬至与元旦备货窗口；未来 3 月目标日 {tgt90}
     距 {cny_label}（{cny_date}，除夕 {cny_eve}）仅 {days_to_cny} 天，处于全年最强的节前备货窗口。
-=======
-    未来 2 月目标日 {esc(red['rows'][4]['target_date'])} 落在冬至与元旦备货窗口；未来 3 月目标日
-    {esc(red['rows'][5]['target_date'])} 距 2027 年春节（2 月 6 日，除夕 2 月 5 日）
-    仅 {(date(2027, 2, 6) - date.fromisoformat(red['rows'][5]['target_date'])).days} 天，
-    处于全年最强的节前备货窗口。
->>>>>>> 5207301 (feat: 盘口直览三页签模块(产地/全国/解析)+黑葱涨跌列；统一季节因子修复口径矛盾；动态化硬编码数字)
     该档位属<strong>情景推演</strong>而非精确预测，实盘需以临近的一个月档滚动修正为准，
     并重点跟踪厄尔尼诺峰值（预计 11 月前后）后冬季西南降水的实际兑现程度。</div>
 </div>

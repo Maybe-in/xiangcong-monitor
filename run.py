@@ -18,7 +18,7 @@ from datetime import date, datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from src import disaster, longterm, price, report, weather  # noqa: E402
+from src import disaster, longterm, market, price, report, weather  # noqa: E402
 from src.config import CORE_REGION, MODEL  # noqa: E402
 
 WEEKDAY_CN = ['一', '二', '三', '四', '五', '六', '日']
@@ -52,6 +52,18 @@ def build_context() -> dict:
     print('[2/5] 抓取自然灾害预警 ...')
     dz = disaster.build_disaster_snapshot()
     print('      全国生效预警：{0} 条'.format(dz['total']))
+
+    print('[2.5/5] 抓取批发市场接口行情（新发地） ...')
+    try:
+        mkt = market.build_snapshot()
+    except Exception as exc:  # noqa: BLE001
+        mkt = {'ok': False, 'rows': [], 'error': str(exc), 'market': '北京新发地'}
+    if mkt['ok']:
+        latest = max(r['date'] for r in mkt['rows'])
+        print('      接口正常：{0} 条，最新 {1}（{2}）'.format(
+            len(mkt['rows']), latest, mkt['market']))
+    else:
+        print('      接口不可用，降级为人工数据：', mkt.get('error', ''))
 
     print('[3/5] 重建长周期历史行情（10 年） ...')
     lt = longterm.build_longterm()
@@ -148,13 +160,8 @@ def build_context() -> dict:
         '两个月（目标日 ' + r60['target_date'] + '）进入冬至—元旦备货窗口，'
         '且北方产区基本退市、全国供给转向云南单极，中枢进一步抬升至 ' +
         str(r60['center']) + '（' + pct(r60) + '）；'
-<<<<<<< HEAD
         '三个月（目标日 ' + r90['target_date'] + '）距 2027 年春节（2 月 6 日）仅 ' +
         str(cny_days) + ' 天，'
-=======
-        '三个月（目标日 ' + r90['target_date'] + '）距 2027 年春节（2 月 6 日）'
-        '仅 ' + str((date(2027, 2, 6) - date.fromisoformat(r90['target_date'])).days) + ' 天，'
->>>>>>> 5207301 (feat: 盘口直览三页签模块(产地/全国/解析)+黑葱涨跌列；统一季节因子修复口径矛盾；动态化硬编码数字)
         '落入全年最强的节前集中备货窗口，中枢情景值 ' + str(r90['center']) +
         '（' + pct(r90) + '），' + d90txt + '。'
         '整体呈「近端磨底、中段修复、远端节日支撑」的震荡上行形态，'
@@ -342,8 +349,10 @@ def build_context() -> dict:
         'risks': risks,
         'price_source_label': price_source_label,
         'spot_quotes': history.get('spot_quotes', []),
-        'data_date': max((p['date'] for p in history.get('series', [])
-                          if p.get('source') == 'observed'), default=today),
+        'market_api': mkt,
+        'data_date': max(
+            [p['date'] for p in history.get('series', []) if p.get('source') == 'observed']
+            + [r['date'] for r in mkt.get('rows', [])] or [today]),
     }
 
 
