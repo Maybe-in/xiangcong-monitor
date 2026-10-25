@@ -328,7 +328,7 @@ def build_context() -> dict:
     ]
 
     obs_count = sum(1 for p in history.get('series', []) if p.get('source') == 'observed')
-    price_source_label = '人工录入实测观测点（{0} 条）+ 模型估算（公开行情接口未接入）'.format(obs_count)
+    price_source_label = '人工录入实测观测点（{0} 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）'.format(obs_count)
 
     return {
         'today': today,
@@ -352,7 +352,8 @@ def build_context() -> dict:
         'market_api': mkt,
         'data_date': max(
             [p['date'] for p in history.get('series', []) if p.get('source') == 'observed']
-            + [r['date'] for r in mkt.get('rows', [])] or [today]),
+            + [r['date'] for r in mkt.get('rows', [])]
+            + [r['date'] for r in (mkt.get('cnhnb') or {}).get('rows', [])] or [today]),
     }
 
 

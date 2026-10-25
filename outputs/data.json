@@ -1,13 +1,13 @@
 {
   "date": "2026-10-25",
-  "generated_at": "2026-10-25 07:54:20",
-  "price_source": "人工录入实测观测点（9 条）+ 模型估算（公开行情接口未接入）",
+  "generated_at": "2026-10-25 08:45:15",
+  "price_source": "人工录入实测观测点（9 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
     "d3": {
-      "tmax_avg": 25.6,
-      "tmin_avg": 16.2,
-      "precip_total": 3.4,
+      "tmax_avg": 25.2,
+      "tmin_avg": 16.0,
+      "precip_total": 4.5,
       "rainy_days": 1,
       "heavy_rain_days": 0,
       "gale_days": 0,
@@ -15,12 +15,12 @@
       "dominant": "毛毛雨"
     },
     "w1": {
-      "tmax_avg": 24.8,
-      "tmin_avg": 15.3,
-      "precip_total": 3.7,
+      "tmax_avg": 24.3,
+      "tmin_avg": 15.2,
+      "precip_total": 4.8,
       "rainy_days": 1,
       "heavy_rain_days": 0,
-      "gale_days": 2,
+      "gale_days": 3,
       "wind_max": 23.3,
       "dominant": "毛毛雨"
     },
@@ -35,12 +35,12 @@
       "dominant": "毛毛雨"
     },
     "m1": {
-      "tmax_avg": 21.9,
+      "tmax_avg": 21.6,
       "tmin_avg": 13.8,
-      "precip_total": 52.1,
+      "precip_total": 53.2,
       "rainy_days": 8,
       "heavy_rain_days": 1,
-      "gale_days": 3,
+      "gale_days": 4,
       "wind_max": 23.3,
       "dominant": "毛毛雨"
     }
@@ -48,8 +48,8 @@
   "weather_daily": [
     {
       "date": "2026-10-25",
-      "tmax": 26.1,
-      "tmin": 14.3,
+      "tmax": 26.0,
+      "tmin": 14.4,
       "precip": 0,
       "pop": 0,
       "wind": 15.8,
@@ -59,26 +59,26 @@
     {
       "date": "2026-10-26",
       "tmax": 26.9,
-      "tmin": 17.4,
+      "tmin": 17.3,
       "precip": 0,
       "pop": 26,
-      "wind": 13.3,
+      "wind": 13.5,
       "code": 45,
       "weather": "雾"
     },
     {
       "date": "2026-10-27",
-      "tmax": 23.7,
-      "tmin": 16.8,
-      "precip": 3.4,
+      "tmax": 22.8,
+      "tmin": 16.3,
+      "precip": 4.5,
       "pop": 88,
-      "wind": 11.2,
+      "wind": 10.8,
       "code": 53,
       "weather": "毛毛雨"
     },
     {
       "date": "2026-10-28",
-      "tmax": 22.9,
+      "tmax": 22.5,
       "tmin": 15.4,
       "precip": 0,
       "pop": 43,
@@ -88,23 +88,23 @@
     },
     {
       "date": "2026-10-29",
-      "tmax": 23.6,
-      "tmin": 14.0,
-      "precip": 0,
+      "tmax": 22.8,
+      "tmin": 13.8,
+      "precip": 0.3,
       "pop": 20,
-      "wind": 14.0,
-      "code": 3,
-      "weather": "阴"
+      "wind": 13.8,
+      "code": 51,
+      "weather": "毛毛雨"
     },
     {
       "date": "2026-10-30",
-      "tmax": 24.8,
-      "tmin": 14.9,
-      "precip": 0.3,
+      "tmax": 23.6,
+      "tmin": 14.7,
+      "precip": 0,
       "pop": 10,
-      "wind": 16.5,
-      "code": 51,
-      "weather": "毛毛雨"
+      "wind": 17.2,
+      "code": 45,
+      "weather": "雾"
     },
     {
       "date": "2026-10-31",
@@ -212,11 +212,11 @@
     "hazard_stats": [
       [
         "大雾",
-        75
+        74
       ],
       [
         "大风",
-        11
+        12
       ],
       [
         "台风",
@@ -227,15 +227,29 @@
         2
       ],
       [
-        "沙尘暴",
+        "寒潮",
         1
       ],
       [
-        "雷电",
+        "沙尘暴",
         1
       ]
     ],
     "top": [
+      {
+        "region": "浙江省丽水市缙云县",
+        "province": "浙江",
+        "city": "省丽水",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/10/25 08:13",
+        "url": "http://www.nmc.cn/publish/alarm/33112241600000_20261025081356.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": true,
+        "risk_score": 4
+      },
       {
         "region": "浙江省台州市温岭市",
         "province": "浙江",
@@ -377,6 +391,20 @@
         "risk_score": 4
       },
       {
+        "region": "内蒙古自治区乌海市",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "寒潮",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/10/25 08:36",
+        "url": "http://www.nmc.cn/publish/alarm/15030041600000_20261025083619.html",
+        "weight": 3,
+        "impact": "生长停滞，但常推高菜价（双刃剑）",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
         "region": "新疆维吾尔自治区喀什地区叶城县",
         "province": "新疆",
         "city": "维吾尔自治",
@@ -433,6 +461,20 @@
         "risk_score": 3
       },
       {
+        "region": "贵州省安顺市西秀区",
+        "province": "贵州",
+        "city": "省安顺",
+        "hazard": "大雾",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/25 08:12",
+        "url": "http://www.nmc.cn/publish/alarm/52040241600000_20261025081208.html",
+        "weight": 1,
+        "impact": "高速封路，运输延迟",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
         "region": "贵州省毕节市大方县",
         "province": "贵州",
         "city": "省毕节",
@@ -461,56 +503,14 @@
         "risk_score": 3
       },
       {
-        "region": "贵州省贵阳市息烽县",
+        "region": "贵州省毕节市黔西市",
         "province": "贵州",
-        "city": "省贵阳",
+        "city": "省毕节",
         "hazard": "大雾",
         "level": "橙色",
         "rank": 3,
-        "issuetime": "2026/10/24 21:38",
-        "url": "http://www.nmc.cn/publish/alarm/52012241600000_20261024213841.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "贵州省铜仁市万山区",
-        "province": "贵州",
-        "city": "省铜仁",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/10/24 20:30",
-        "url": "http://www.nmc.cn/publish/alarm/52060341600000_20261024203037.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "贵州省黔西南布依族苗族自治州贞丰县",
-        "province": "贵州",
-        "city": "省黔西南布依族苗族自治州贞丰",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/10/24 20:43",
-        "url": "http://www.nmc.cn/publish/alarm/52232541600000_20261024204327.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "辽宁省丹东市宽甸满族自治县",
-        "province": "辽宁",
-        "city": "省丹东",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/10/24 21:28",
-        "url": "http://www.nmc.cn/publish/alarm/21062441600000_20261024212700.html",
+        "issuetime": "2026/10/25 08:04",
+        "url": "http://www.nmc.cn/publish/alarm/52058141600000_20261025080442.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": false,
@@ -528,10 +528,10 @@
           "label": "未来3天",
           "days": 3,
           "target_date": "2026-10-28",
-          "low": 4.14,
-          "high": 4.62,
-          "center": 4.38,
-          "delta_pct": 0.7,
+          "low": 4.16,
+          "high": 4.64,
+          "center": 4.4,
+          "delta_pct": 1.1,
           "band_pct": 5.5,
           "confidence": "高",
           "reasons": [
@@ -543,14 +543,14 @@
           "label": "未来1周",
           "days": 7,
           "target_date": "2026-11-01",
-          "low": 4.3,
-          "high": 4.9,
-          "center": 4.6,
-          "delta_pct": 5.8,
+          "low": 4.37,
+          "high": 4.98,
+          "center": 4.67,
+          "delta_pct": 7.4,
           "band_pct": 6.5,
           "confidence": "较高",
           "reasons": [
-            "大风(≥8级)2天"
+            "大风(≥8级)3天"
           ]
         },
         {
@@ -558,16 +558,16 @@
           "label": "未来半月",
           "days": 15,
           "target_date": "2026-11-09",
-          "low": 4.63,
-          "high": 5.49,
-          "center": 5.06,
-          "delta_pct": 16.4,
+          "low": 4.65,
+          "high": 5.51,
+          "center": 5.08,
+          "delta_pct": 16.8,
           "band_pct": 8.5,
           "confidence": "中",
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
-            "大风(≥8级)3天",
-            "气温较常年偏低2.6℃，生长放缓供给延后"
+            "大风(≥8级)4天",
+            "气温较常年偏低2.8℃，生长放缓供给延后"
           ]
         },
         {
@@ -583,8 +583,8 @@
           "confidence": "中低",
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
-            "大风(≥8级)3天",
-            "气温较常年偏低3.0℃，生长放缓供给延后",
+            "大风(≥8级)4天",
+            "气温较常年偏低3.2℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         },
@@ -601,8 +601,8 @@
           "confidence": "低",
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
-            "大风(≥8级)3天",
-            "气温较常年偏低3.0℃，生长放缓供给延后",
+            "大风(≥8级)4天",
+            "气温较常年偏低3.2℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "元旦前 8 天，备货需求抬升"
           ]
@@ -620,8 +620,8 @@
           "confidence": "低（情景推演）",
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
-            "大风(≥8级)3天",
-            "气温较常年偏低3.0℃，生长放缓供给延后",
+            "大风(≥8级)4天",
+            "气温较常年偏低3.2℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 14 天，备货需求抬升"
           ]
@@ -637,10 +637,10 @@
           "label": "未来3天",
           "days": 3,
           "target_date": "2026-10-28",
-          "low": 3.67,
-          "high": 4.1,
-          "center": 3.88,
-          "delta_pct": 0.8,
+          "low": 3.68,
+          "high": 4.11,
+          "center": 3.9,
+          "delta_pct": 1.2,
           "band_pct": 5.5,
           "confidence": "高",
           "reasons": [
@@ -652,14 +652,14 @@
           "label": "未来1周",
           "days": 7,
           "target_date": "2026-11-01",
-          "low": 3.82,
-          "high": 4.35,
-          "center": 4.09,
-          "delta_pct": 6.1,
+          "low": 3.88,
+          "high": 4.42,
+          "center": 4.15,
+          "delta_pct": 7.8,
           "band_pct": 6.5,
           "confidence": "较高",
           "reasons": [
-            "大风(≥8级)2天"
+            "大风(≥8级)3天"
           ]
         },
         {
@@ -667,16 +667,16 @@
           "label": "未来半月",
           "days": 15,
           "target_date": "2026-11-09",
-          "low": 4.13,
-          "high": 4.89,
-          "center": 4.51,
-          "delta_pct": 17.1,
+          "low": 4.14,
+          "high": 4.91,
+          "center": 4.53,
+          "delta_pct": 17.6,
           "band_pct": 8.5,
           "confidence": "中",
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
-            "大风(≥8级)3天",
-            "气温较常年偏低2.6℃，生长放缓供给延后"
+            "大风(≥8级)4天",
+            "气温较常年偏低2.8℃，生长放缓供给延后"
           ]
         },
         {
@@ -692,8 +692,8 @@
           "confidence": "中低",
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
-            "大风(≥8级)3天",
-            "气温较常年偏低3.0℃，生长放缓供给延后",
+            "大风(≥8级)4天",
+            "气温较常年偏低3.2℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         },
@@ -710,8 +710,8 @@
           "confidence": "低",
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
-            "大风(≥8级)3天",
-            "气温较常年偏低3.0℃，生长放缓供给延后",
+            "大风(≥8级)4天",
+            "气温较常年偏低3.2℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "元旦前 8 天，备货需求抬升"
           ]
@@ -729,8 +729,8 @@
           "confidence": "低（情景推演）",
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
-            "大风(≥8级)3天",
-            "气温较常年偏低3.0℃，生长放缓供给延后",
+            "大风(≥8级)4天",
+            "气温较常年偏低3.2℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 14 天，备货需求抬升"
           ]

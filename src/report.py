@@ -232,6 +232,7 @@ def build_board(ctx: dict) -> str:
     hist = ctx["history"]
     quotes = ctx.get("spot_quotes", [])
     data_date = ctx.get("data_date", ctx["today"])
+    mkt = ctx.get("market_api") or {}
 
     red_pts = _series_obs(hist, "红香葱")
     blk_pts = _series_obs(hist, "黑葱")
@@ -298,13 +299,32 @@ def build_board(ctx: dict) -> str:
     add("红香葱（云南全省综合）", rng(q_red_all), None, q_red_all.get("mid"))
     add("黑葱（云南全省综合）", rng(q_blk_all), None, q_blk_all.get("mid"))
     add("小葱（昆明王旗营批发）", rng(q_wqy), x_prev, x_today)
-    # 等级盘口（数据源未接入）
-    add("红葱 包地价", "—", None, None, tag="待接入", link="#sec6-spot",
-        note="地头包地一口价（元/吨），待接入「地慧数农」源")
-    add("红铁杆 期货盘", "—", None, None, tag="待接入", link="#sec6-spot",
-        note="远期期货盘报价（元/吨），待接入源")
-    add("黑葱中条 A货（2吨）", "—", None, None, tag="待接入", link="#sec6-spot",
-        note="整车吨级批发盘（元/吨），待接入源")
+    # ---- 惠农网产地接口（泸西香葱真实报价）----
+    cnhnb = (mkt.get("cnhnb") or {}).get("rows", [])
+    lux_xi = sorted([r for r in cnhnb if "泸西" in r.get("origin", "") and r.get("item") == "香葱"],
+                    key=lambda r: r["date"])
+    lushi = lux_xi[-1] if lux_xi else None
+
+    # 等级盘口 / 包地 / 期货盘 —— 真实数据源映射（禁止用推算冒充接口）
+    if lushi:
+        add("红葱 包地价", f"{lushi['mid']} 元/kg", None, lushi["ton"], tag="接口",
+            link="#sec6-spot",
+            note=f"惠农网产地接口·泸西香葱 {lushi['date']} 报价 {lushi['mid']}元/kg"
+                 f"（折算 {int(lushi['ton'])} 元/吨）；地慧数农包地一口价无公开接口，暂以产地价参考")
+    else:
+        add("红葱 包地价", "—", None, None, tag="待接入", link="#sec6-spot",
+            note="惠农网产地接口暂不可用，待接入")
+    # 红铁杆期货盘：全国无葱类期货合约与公开远期盘，取模型2个月远期中枢折算元/吨
+    red_fc = ctx["forecast"].get("红香葱", {}).get("rows", [])
+    red2 = red_fc[4]["center"] if len(red_fc) > 4 else None
+    add("红铁杆 期货盘", "—", None, round(red2 * 1000) if red2 else None, tag="模型",
+        link="#sec6-forecast",
+        note="全国无葱类期货合约与公开远期盘；取模型2个月远期中枢折算元/吨（情景推演，非成交价）")
+    # 黑葱中条 A货（2吨）整车吨级批发盘：无公开接口，按滇中黑葱通货上沿×1000推算元/吨
+    blk_up = up_edge(q_blk_local)
+    add("黑葱中条 A货（2吨）", "—", None, round(blk_up * 1000) if blk_up else None,
+        tag="推算", link="#sec6-spot",
+        note="整车吨级批发盘无公开接口；按滇中黑葱通货上沿×1000 推算元/吨")
 
     red = ctx["forecast"]["红香葱"]
     r3, r90 = red["rows"][0], red["rows"][5]
@@ -375,6 +395,31 @@ def build_board(ctx: dict) -> str:
         api_html = ('<div class="note">接口自动行情暂不可用（' + esc(mkt.get("error", "未知原因"))
                     + '），本页签仅展示人工录入数据。</div>')
 
+    # ---- 惠农网产地行情（cnhnb.com）
+    cnhnb = (mkt.get("cnhnb") or {})
+    cnhnb_html = ""
+    if cnhnb.get("ok") and cnhnb.get("rows"):
+        crows = sorted(cnhnb["rows"], key=lambda r: (r["origin"], r["item"], r["date"]))
+        body = "".join(
+            f'<tr><td class="name">{esc(r["item"])}<span class="tag">惠农网</span></td>'
+            f'<td>{esc(r["date"])}</td>'
+            f'<td>{esc(r["origin"])}</td>'
+            f'<td class="num">{num(r["mid"])}</td>'
+            f'<td class="num">{num(r["ton"])}</td></tr>'
+            for r in crows)
+        cnhnb_html = f"""
+    <p style="margin:10px 4px 0"><strong>接口自动行情 · 惠农网产地报价（云南产区）</strong>
+      <span class="tag">抓取时间 {esc(cnhnb.get('fetched_at', ''))}</span></p>
+    <table class="btab">
+      <tr><th>品名</th><th>日期</th><th>产地</th><th>元/公斤</th><th>元/吨</th></tr>
+      {body}
+    </table>
+    <div class="legend">数据来源：惠农网（cnhnb.com）公开产地行情页，原始单位元/斤、×2 换算元/公斤、×2000 换算元/吨；
+      覆盖云南泸西/通海/宾川/弥渡等产区，每日运行自动抓取。</div>"""
+    else:
+        cnhnb_html = ('<div class="note">惠农网产地接口暂不可用（'
+                      + esc(cnhnb.get("error", "未知原因")) + '）。</div>')
+
     return f"""
 <div class="board">
   <div class="board-head">
@@ -392,11 +437,11 @@ def build_board(ctx: dict) -> str:
       <tr><th>品名</th><th>区间</th><th>昨日</th><th>今日</th><th>涨跌</th><th>趋势</th><th>查看</th></tr>
       {''.join(rows)}
     </table>
-    <div class="legend">「推算」档取当日通货区间上沿，非实际成交；「待接入」档为泸西产地等级/包地/期货吨盘
-      ——该类报价目前仅存在于「地慧数农」等产地小程序内、无公开接口，接入后将自动填充；
-      全国批发市场行情已通过新发地接口自动更新（见「全国行情」页签）。</div>
+    <div class="legend">「推算」档取当日通货区间上沿，非实际成交；「接口」档为惠农网公开产地报价；
+      「模型」档为价格预测中枢折算（非成交价）。红葱包地价取自惠农网泸西产地接口；
+      黑葱A货吨盘按通货上沿推算；红铁杆期货盘无公开合约，取模型2个月远期中枢。</div>
   </div>
-  <div class="board-panel">{api_html}{spot_panel}</div>
+  <div class="board-panel">{api_html}{cnhnb_html}{spot_panel}</div>
   <div class="board-panel">{ms}</div>
 </div>
 <script>
