@@ -1,6 +1,6 @@
 {
   "date": "2026-10-26",
-  "generated_at": "2026-10-26 03:53（北京时间）",
+  "generated_at": "2026-10-26 03:57（北京时间）",
   "price_source": "人工录入实测观测点（12 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -212,15 +212,11 @@
     "hazard_stats": [
       [
         "大雾",
-        90
+        91
       ],
       [
         "大风",
         8
-      ],
-      [
-        "寒潮",
-        1
       ],
       [
         "海上雷雨大风",
@@ -307,6 +303,20 @@
         "rank": 3,
         "issuetime": "2026/10/26 03:21",
         "url": "http://www.nmc.cn/publish/alarm/34188141600000_20261026032128.html",
+        "weight": 1,
+        "impact": "高速封路，运输延迟",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
+        "region": "安徽省池州市",
+        "province": "安徽",
+        "city": "省池州",
+        "hazard": "大雾",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/26 03:49",
+        "url": "http://www.nmc.cn/publish/alarm/34170041600000_20261026034916.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": false,
@@ -449,20 +459,6 @@
         "url": "http://www.nmc.cn/publish/alarm/52012241600000_20261025215523.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "辽宁省盘锦市盘山县",
-        "province": "辽宁",
-        "city": "省盘锦",
-        "hazard": "寒潮",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/25 21:38",
-        "url": "http://www.nmc.cn/publish/alarm/21112241600000_20261025213700.html",
-        "weight": 3,
-        "impact": "生长停滞，但常推高菜价（双刃剑）",
         "is_production_area": false,
         "risk_score": 3
       },
