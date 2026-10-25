@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "generated_at": "2026-10-25 09:05:55",
+  "generated_at": "2026-10-25 09:12:09",
   "price_source": "人工录入实测观测点（9 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -212,7 +212,7 @@
     "hazard_stats": [
       [
         "大雾",
-        69
+        65
       ],
       [
         "大风",
@@ -220,15 +220,15 @@
       ],
       [
         "台风",
-        11
+        10
       ],
       [
         "寒潮",
-        4
+        6
       ],
       [
         "霜冻",
-        3
+        6
       ],
       [
         "沙尘暴",
@@ -273,20 +273,6 @@
         "rank": 1,
         "issuetime": "2026/10/25 06:55",
         "url": "http://www.nmc.cn/publish/alarm/33108141600000_20261025065526.html",
-        "weight": 4,
-        "impact": "大风+强降水，设施受损、采收中断、物流受阻",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
-        "region": "浙江省温州市",
-        "province": "浙江",
-        "city": "省温州",
-        "hazard": "台风",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/24 20:57",
-        "url": "http://www.nmc.cn/publish/alarm/33030041600000_20261024205930.html",
         "weight": 4,
         "impact": "大风+强降水，设施受损、采收中断、物流受阻",
         "is_production_area": true,
@@ -511,6 +497,20 @@
         "rank": 3,
         "issuetime": "2026/10/24 22:22",
         "url": "http://www.nmc.cn/publish/alarm/52052141600000_20261024222207.html",
+        "weight": 1,
+        "impact": "高速封路，运输延迟",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
+        "region": "贵州省毕节市织金县",
+        "province": "贵州",
+        "city": "省毕节",
+        "hazard": "大雾",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/24 21:34",
+        "url": "http://www.nmc.cn/publish/alarm/52052441600000_20261024213401.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": false,
