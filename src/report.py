@@ -873,9 +873,33 @@ def build_task_page(item: dict, today: str, nav: str = "") -> str:
 """
 
 
-def build_tasks_index(items: list[dict], today: str) -> str:
-    """各定时任务独立报告索引页（outputs/tasks/index.html）。"""
+def build_tasks_index(items: list[dict], today: str,
+                      daily: dict | None = None) -> str:
+    """各分析日报列表页（outputs/tasks/index.html）：本仓库日报 + 各定时任务独立报告。"""
+    daily = daily or {}
+    n_all = 1 + len(items)
+    daily_red, daily_blk = daily.get("red_current"), daily.get("black_current")
+
     cards: list[str] = []
+    # 第一份：本仓库日报
+    cards.append(
+        f'<div style="border:1px solid rgba(74,127,212,.55);border-radius:10px;'
+        f'padding:14px 16px;margin:12px 0;background:rgba(74,127,212,.06)">'
+        f'<h3 style="margin:0 0 6px">香葱行情日报（本仓库流水线）'
+        f'<span class="tag">数据日 {esc(today)}</span>'
+        f'<span class="tag">云南 / 泸西县</span></h3>'
+        f'<p style="margin:6px 0">完整日报：实测行情、天气与灾害、六档预测、'
+        f'长周期对比与各定时任务报告入口。</p>'
+        f'<div class="grid">'
+        f'<div class="kpi"><div class="lab">红香葱</div>'
+        f'<div class="val">{esc(daily_red)}</div><div class="chg">元/公斤 · 实测</div></div>'
+        f'<div class="kpi"><div class="lab">黑香葱</div>'
+        f'<div class="val">{esc(daily_blk)}</div><div class="chg">元/公斤 · 实测</div></div>'
+        f'<div class="kpi"><div class="lab">任务报告</div><div class="val">{len(items)}</div>'
+        f'<div class="chg">份 · 见下方</div></div></div>'
+        f'<p style="margin:10px 0 0"><a class="back" href="../latest.html">'
+        f'→ 查看本份日报全文</a></p></div>')
+
     for it in items:
         fcs = it.get("forecasts") or []
         centers = [f["center"] for f in fcs if f.get("center") is not None]
@@ -899,20 +923,17 @@ def build_tasks_index(items: list[dict], today: str) -> str:
             f'<p style="margin:10px 0 0"><a class="back" href="{esc(slug)}.html">'
             f'→ 查看该任务完整预测报告</a></p></div>')
 
-    return f"""{page('各定时任务独立预测报告 · ' + today)}
+    return f"""{page('各分析日报 · ' + today)}
 <header>
-  <h1>各定时任务 · 独立预测报告</h1>
-  <div class="meta">共 {len(items)} 个定时任务 ｜ 汇总日期 {esc(today)}（北京时间）｜
-    每个任务的预测与报价分别在各自独立页全量展示 ｜
-    <a class="back" href="../latest.html">← 返回当日日报</a> ·
+  <h1>各分析日报 · {esc(today)}</h1>
+  <div class="meta">共 <strong>{n_all} 份分析日报</strong>（本仓库日报 1 份 + 定时任务预测报告
+    {len(items)} 份）｜ 每份独立展示，互不合并 ｜
     <a class="back" href="../index.html">← 报告归档</a></div>
 </header>
 <div class="card">
-  <h2>任务报告列表<span class="en">Task Reports</span></h2>
-  <p>下列每个香葱行情定时任务均生成<strong>一份独立的预测报告</strong>，
-     包含该任务自己的六档预测、全部报价明细与核心结论，互不合并。</p>
-  {"".join(cards) or '<div class="note">本期无任务数据。</div>'}
-  <div class="legend">口径提示：各任务的基准价可能因「是否分级洗选」而差异较大
+  <h2>本日全部分析日报<span class="en">All Reports</span></h2>
+  {"".join(cards) or '<div class="note">本期无数据。</div>'}
+  <div class="legend">口径提示：各报告的基准价可能因「是否分级洗选」而差异较大
     （如地头通货 2.54、分级交货 4.35、云南产地红葱 4.70 元/公斤），
     横向比较前请先核对口径与单位。</div>
 </div>
@@ -1421,26 +1442,65 @@ def build_sources_page(src: dict, today: str) -> str:
 """
 
 
+_TASK_SHORT_NAMES = {
+    "gemini": "Gemini",
+    "chatgpt": "ChatGPT",
+    "national": "全国监测",
+    "grok": "grok",
+    "xiangcong": "香葱行情",
+}
+
+
+def _task_price_lines(rec: dict) -> list[str]:
+    """归档行「各分析报告价格」单元格：日报红/黑 + 各任务价格，一行一个。"""
+    lines: list[str] = []
+    red, blk = rec.get("red_current"), rec.get("black_current")
+    if red is not None or blk is not None:
+        lines.append(f'<div>日报 红{esc(red)} · 黑{esc(blk)}</div>')
+    for t in rec.get("task_prices") or []:
+        p = t.get("price")
+        p_txt = "—" if p is None else f"{p:.2f}"
+        lines.append(f'<div>{esc(t.get("name", ""))} {p_txt}</div>')
+    return lines or ['<div>—</div>']
+
+
 def build_index(reports: list[dict]) -> str:
-    items = "".join(
-        f'<tr><td><a class="back" href="{esc(r["file"])}">{esc(r["date"])}</a></td>'
-        f'<td class="num">{esc(r.get("red_current"))}</td>'
-        f'<td class="num">{esc(r.get("black_current"))}</td>'
-        f'<td>{esc(r.get("generated_at", ""))}</td></tr>'
-        for r in sorted(reports, key=lambda x: x["date"], reverse=True))
+    reports = sorted(reports, key=lambda x: x["date"], reverse=True)
+    latest = reports[0] if reports else {}
+    latest_n = 1 + len(latest.get("task_prices") or [])
+
+    rows: list[str] = []
+    for r in reports:
+        n_reports = 1 + len(r.get("task_prices") or [])
+        # 该日有多份分析日报 → 点日期进入「各分析日报」列表；否则进当日日报
+        href = "tasks/index.html" if r.get("task_prices") else esc(r["file"])
+        price_lines = "".join(_task_price_lines(r))
+        rows.append(
+            f'<tr><td><a class="back" href="{href}">{esc(r["date"])}</a>'
+            f'<div style="font-size:12px;color:#8a8f98;margin-top:2px">'
+            f'{n_reports} 份分析日报</div></td>'
+            f'<td class="num" style="text-align:left;font-size:13px;line-height:1.7">'
+            f'{price_lines}</td>'
+            f'<td style="font-size:12px">{esc(r.get("generated_at", ""))}</td></tr>')
+
+    latest_href = "tasks/index.html" if latest.get("task_prices") else "latest.html"
     return f"""{page('香葱行情日报 · 报告归档')}
 <header>
   <h1>香葱行情日报 · 报告归档</h1>
-  <div class="meta">由 GitHub Actions 每日自动生成（北京时间 03:00）</div>
+  <div class="meta">由 GitHub Actions 每日自动生成（北京时间 03:00）｜
+    最新一期（{esc(latest.get("date", "—"))}）共 <strong>{latest_n} 份分析日报</strong>
+    （本日报 + {latest_n - 1} 份定时任务预测报告）</div>
 </header>
 <div class="card">
   <table>
-    <tr><th>日期</th><th>红香葱(元/kg)</th><th>黑葱(元/kg)</th><th>生成时间</th></tr>
-    {items or '<tr><td colspan="3">暂无报告</td></tr>'}
+    <tr><th>日期</th><th>各分析报告价格(元/kg)</th><th>生成时间</th></tr>
+    {"".join(rows) or '<tr><td colspan="3">暂无报告</td></tr>'}
   </table>
-  <p><a class="back" href="latest.html">→ 查看最新一期报告</a></p>
-  <p><a class="back" href="sources.html">→ 多源行情汇总 · 全部定时任务（总览）</a></p>
-  <p><a class="back" href="tasks/index.html">→ 各定时任务 · 独立预测报告（每任务一份）</a></p>
+  <p><a class="back" href="{latest_href}">→ 查看最新一期各分析日报</a></p>
+  <div class="legend">「各分析报告价格」逐行列出每份分析日报的价格：日报行为本仓库流水线实测
+    （红香葱/黑香葱产地分级交货价），其余行为各定时任务报告的六档预测第一档中枢；
+    不同报告口径不同（地头通货 vs 分级交货），不可直接横比。
+    点击日期可查看该日全部分析日报。</div>
 </div>
 </div></body></html>
 """
@@ -1465,6 +1525,9 @@ def write_outputs(html_doc: str, ctx: dict) -> dict:
     except Exception:  # noqa: BLE001
         pass  # 汇总页失败不影响主报告
 
+    red_c = ctx["forecast"].get("红香葱", {}).get("current")
+    blk_c = ctx["forecast"].get("黑葱", {}).get("current")
+
     # tasks/*.html（每个定时任务一份独立预测报告，互不合并）
     try:
         _items = (ctx.get("sources") or {}).get("items") or []
@@ -1475,7 +1538,9 @@ def write_outputs(html_doc: str, ctx: dict) -> dict:
             with open(os.path.join(tasks_dir, f"{_slug}.html"), "w", encoding="utf-8") as f:
                 f.write(build_task_page(_it, today))
         with open(os.path.join(tasks_dir, "index.html"), "w", encoding="utf-8") as f:
-            f.write(build_tasks_index(_items, today))
+            f.write(build_tasks_index(
+                _items, today,
+                daily={"red_current": red_c, "black_current": blk_c}))
     except Exception:  # noqa: BLE001
         pass  # 任务页失败不影响主报告
 
@@ -1529,14 +1594,26 @@ def write_outputs(html_doc: str, ctx: dict) -> dict:
         else:
             by_date[d]["file"] = name
 
-    red_c = ctx["forecast"].get("红香葱", {}).get("current")
-    blk_c = ctx["forecast"].get("黑葱", {}).get("current")
+    # 当日各定时任务报告价格（六档预测第一档中枢，缺失时回退报价中枢）
+    task_prices: list[dict] = []
+    for _it in (ctx.get("sources") or {}).get("items") or []:
+        fcs = _it.get("forecasts") or []
+        price = next((f.get("center") for f in fcs if f.get("center") is not None), None)
+        if price is None:
+            price = next((q.get("mid") for q in (_it.get("quotes") or [])
+                          if q.get("mid") is not None), None)
+        task_prices.append({
+            "name": _TASK_SHORT_NAMES.get(_task_slug(_it), str(_it.get("task", ""))[:12]),
+            "price": price,
+        })
+
     by_date[today] = {
         "date": today,
         "file": fname,
         "red_current": red_c,
         "black_current": blk_c,
         "generated_at": ctx["generated_at"],
+        "task_prices": task_prices,
     }
 
     archive = sorted(by_date.values(), key=lambda x: x["date"], reverse=True)

@@ -1,6 +1,6 @@
 {
   "date": "2026-10-26",
-  "generated_at": "2026-10-26 07:05（北京时间）",
+  "generated_at": "2026-10-26 07:27（北京时间）",
   "price_source": "人工录入实测观测点（12 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -51,7 +51,7 @@
       "tmax": 26.8,
       "tmin": 14.7,
       "precip": 0,
-      "pop": 6,
+      "pop": 2,
       "wind": 13.4,
       "code": 45,
       "weather": "雾"
@@ -61,7 +61,7 @@
       "tmax": 22.8,
       "tmin": 16.7,
       "precip": 5.7,
-      "pop": 91,
+      "pop": 90,
       "wind": 11.5,
       "code": 53,
       "weather": "毛毛雨"
@@ -81,7 +81,7 @@
       "tmax": 24.0,
       "tmin": 13.6,
       "precip": 0,
-      "pop": 4,
+      "pop": 6,
       "wind": 12.4,
       "code": 3,
       "weather": "阴"
@@ -101,7 +101,7 @@
       "tmax": 26.7,
       "tmin": 15.0,
       "precip": 0,
-      "pop": 8,
+      "pop": 2,
       "wind": 25.8,
       "code": 2,
       "weather": "局部多云"
@@ -111,7 +111,7 @@
       "tmax": 26.5,
       "tmin": 15.5,
       "precip": 0.9,
-      "pop": 53,
+      "pop": 35,
       "wind": 20.9,
       "code": 51,
       "weather": "毛毛雨"
@@ -121,7 +121,7 @@
       "tmax": 18.8,
       "tmin": 13.1,
       "precip": 2.1,
-      "pop": 53,
+      "pop": 41,
       "wind": 11.4,
       "code": 51,
       "weather": "毛毛雨"
@@ -131,7 +131,7 @@
       "tmax": 22.2,
       "tmin": 13.1,
       "precip": 0.6,
-      "pop": 25,
+      "pop": 26,
       "wind": 13.6,
       "code": 51,
       "weather": "毛毛雨"
@@ -141,7 +141,7 @@
       "tmax": 23.7,
       "tmin": 15.3,
       "precip": 0.6,
-      "pop": 22,
+      "pop": 30,
       "wind": 18.6,
       "code": 51,
       "weather": "毛毛雨"
@@ -151,7 +151,7 @@
       "tmax": 23.8,
       "tmin": 15.3,
       "precip": 3.3,
-      "pop": 30,
+      "pop": 26,
       "wind": 15.8,
       "code": 51,
       "weather": "毛毛雨"
@@ -161,7 +161,7 @@
       "tmax": 23.9,
       "tmin": 15.5,
       "precip": 1.5,
-      "pop": 37,
+      "pop": 48,
       "wind": 19.2,
       "code": 51,
       "weather": "毛毛雨"
@@ -171,7 +171,7 @@
       "tmax": 23.5,
       "tmin": 14.0,
       "precip": 14.4,
-      "pop": 34,
+      "pop": 48,
       "wind": 16.0,
       "code": 80,
       "weather": "阵雨"
@@ -181,7 +181,7 @@
       "tmax": 18.7,
       "tmin": 13.2,
       "precip": 10.8,
-      "pop": 34,
+      "pop": 45,
       "wind": 9.5,
       "code": 55,
       "weather": "强毛毛雨"
@@ -191,7 +191,7 @@
       "tmax": 21.2,
       "tmin": 11.5,
       "precip": 1.95,
-      "pop": 46,
+      "pop": 39,
       "wind": 19.1,
       "code": 51,
       "weather": "毛毛雨"
@@ -379,20 +379,6 @@
         "risk_score": 3
       },
       {
-        "region": "河南省信阳市固始县",
-        "province": "河南",
-        "city": "省信阳",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/10/25 22:47",
-        "url": "http://www.nmc.cn/publish/alarm/41152541600000_20261025224702.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
         "region": "河南省信阳市淮滨县",
         "province": "河南",
         "city": "省信阳",
@@ -415,6 +401,48 @@
         "rank": 3,
         "issuetime": "2026/10/26 05:15",
         "url": "http://www.nmc.cn/publish/alarm/41152641600000_20261026051533.html",
+        "weight": 1,
+        "impact": "高速封路，运输延迟",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
+        "region": "湖南省娄底市新化县",
+        "province": "湖南",
+        "city": "省娄底",
+        "hazard": "大雾",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/26 07:15",
+        "url": "http://www.nmc.cn/publish/alarm/43132241600000_20261026071536.html",
+        "weight": 1,
+        "impact": "高速封路，运输延迟",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
+        "region": "贵州省安顺市西秀区",
+        "province": "贵州",
+        "city": "省安顺",
+        "hazard": "大雾",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/26 07:08",
+        "url": "http://www.nmc.cn/publish/alarm/52040241600000_20261026070808.html",
+        "weight": 1,
+        "impact": "高速封路，运输延迟",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
+        "region": "贵州省贵阳市开阳县",
+        "province": "贵州",
+        "city": "省贵阳",
+        "hazard": "大雾",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/26 07:10",
+        "url": "http://www.nmc.cn/publish/alarm/52012141600000_20261026071050.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": false,
@@ -471,34 +499,6 @@
         "rank": 2,
         "issuetime": "2026/10/26 05:57",
         "url": "http://www.nmc.cn/publish/alarm/34152441600000_20261026055720.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 2
-      },
-      {
-        "region": "安徽省六安市霍山县",
-        "province": "安徽",
-        "city": "省六安",
-        "hazard": "大雾",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/10/25 23:23",
-        "url": "http://www.nmc.cn/publish/alarm/34152541600000_20261025232318.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 2
-      },
-      {
-        "region": "安徽省合肥市巢湖市",
-        "province": "安徽",
-        "city": "省合肥",
-        "hazard": "大雾",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/10/25 22:43",
-        "url": "http://www.nmc.cn/publish/alarm/34018141600000_20261025224329.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": false,
