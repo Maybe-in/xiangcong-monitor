@@ -14,7 +14,12 @@ import argparse
 import json
 import os
 import sys
-from datetime import date, datetime
+from datetime import date, datetime, timezone, timedelta
+
+# 统一以北京时间（UTC+8）为准：本地机器与 GitHub Actions(CI 服务器为 UTC) 运行结果一致
+BJ_TZ = timezone(timedelta(hours=8))
+def bjnow():
+    return datetime.now(BJ_TZ)
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -39,8 +44,8 @@ def blk_current(fc: dict) -> str:
 
 
 def build_context() -> dict:
-    today = date.today().isoformat()
-    generated_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    today = bjnow().date().isoformat()
+    generated_at = bjnow().strftime('%Y-%m-%d %H:%M') + '（北京时间）'
 
     print('[1/5] 抓取天气数据 ...')
     wx = weather.build_weather_snapshot()
@@ -103,7 +108,7 @@ def build_context() -> dict:
     obs_date = (sorted(_obs, key=lambda p: p['date'])[-1]['date'] if _obs else today)
     if _obs:
         _recent = [p for p in _obs
-                   if 0 <= (date.today() - date.fromisoformat(p['date'])).days <= 45]
+                   if 0 <= (bjnow().date() - date.fromisoformat(p['date'])).days <= 45]
         _peak = max(_recent or _obs, key=lambda p: p['price'])
         peak_price, peak_date = _peak['price'], _peak['date']
     drop_pct = abs((red['current'] / peak_price - 1) * 100) if peak_price else 0.0
@@ -267,14 +272,14 @@ def build_context() -> dict:
         summer = [season[m] for m in (7, 8)]
         peak = max(season.values())
         trough = min(season.values())
-        cur_idx = season[date.today().month]
+        cur_idx = season[bjnow().date().month]
         pos = '旺季' if cur_idx > 1.08 else ('淡季' if cur_idx < 0.92 else '过渡窗口')
         return ('春峰（4-5 月）季节指数 {0:.2f}-{1:.2f}、冬旺（11-1 月）{2:.2f}-{3:.2f}，'
                 '夏谷（7-8 月）仅 {4:.2f}-{5:.2f}，峰值/谷值约 {6:.1f} 倍。'
                 '当前 {7} 月指数 {8:.2f}，处于{9}，但供给节奏压制了季节性涨幅。').format(
             min(spring), max(spring), min(winter), max(winter),
             min(summer), max(summer), peak / trough,
-            date.today().month, cur_idx, pos)
+            bjnow().date().month, cur_idx, pos)
 
     longterm_summary = (
         '把视线拉长到十年，香葱产地价整体呈「产能扩张驱动的中枢下移 + 极端天气驱动的脉冲式尖峰」'

@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "generated_at": "2026-10-25 09:12:09",
+  "generated_at": "2026-10-25 09:24（北京时间）",
   "price_source": "人工录入实测观测点（9 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -61,7 +61,7 @@
       "tmax": 26.9,
       "tmin": 17.3,
       "precip": 0,
-      "pop": 26,
+      "pop": 31,
       "wind": 13.5,
       "code": 45,
       "weather": "雾"
@@ -71,7 +71,7 @@
       "tmax": 22.8,
       "tmin": 16.3,
       "precip": 4.5,
-      "pop": 88,
+      "pop": 92,
       "wind": 10.8,
       "code": 53,
       "weather": "毛毛雨"
@@ -81,7 +81,7 @@
       "tmax": 22.5,
       "tmin": 15.4,
       "precip": 0,
-      "pop": 43,
+      "pop": 45,
       "wind": 18.7,
       "code": 45,
       "weather": "雾"
@@ -91,7 +91,7 @@
       "tmax": 22.8,
       "tmin": 13.8,
       "precip": 0.3,
-      "pop": 20,
+      "pop": 13,
       "wind": 13.8,
       "code": 51,
       "weather": "毛毛雨"
@@ -101,7 +101,7 @@
       "tmax": 23.6,
       "tmin": 14.7,
       "precip": 0,
-      "pop": 10,
+      "pop": 21,
       "wind": 17.2,
       "code": 45,
       "weather": "雾"
@@ -111,7 +111,7 @@
       "tmax": 25.8,
       "tmin": 14.4,
       "precip": 0,
-      "pop": 22,
+      "pop": 4,
       "wind": 23.3,
       "code": 45,
       "weather": "雾"
@@ -121,7 +121,7 @@
       "tmax": 26.1,
       "tmin": 13.6,
       "precip": 2.1,
-      "pop": 37,
+      "pop": 48,
       "wind": 21.3,
       "code": 51,
       "weather": "毛毛雨"
@@ -131,7 +131,7 @@
       "tmax": 18.0,
       "tmin": 11.8,
       "precip": 2.1,
-      "pop": 39,
+      "pop": 38,
       "wind": 13.4,
       "code": 51,
       "weather": "毛毛雨"
@@ -141,7 +141,7 @@
       "tmax": 17.9,
       "tmin": 12.2,
       "precip": 0,
-      "pop": 42,
+      "pop": 28,
       "wind": 9.0,
       "code": 3,
       "weather": "阴"
@@ -151,7 +151,7 @@
       "tmax": 23.2,
       "tmin": 13.2,
       "precip": 0,
-      "pop": 39,
+      "pop": 29,
       "wind": 16.8,
       "code": 3,
       "weather": "阴"
@@ -161,7 +161,7 @@
       "tmax": 22.9,
       "tmin": 14.8,
       "precip": 3.6,
-      "pop": 39,
+      "pop": 36,
       "wind": 15.9,
       "code": 53,
       "weather": "毛毛雨"
@@ -171,7 +171,7 @@
       "tmax": 16.4,
       "tmin": 12.2,
       "precip": 26.7,
-      "pop": 39,
+      "pop": 45,
       "wind": 15.1,
       "code": 80,
       "weather": "阵雨"
@@ -181,7 +181,7 @@
       "tmax": 16.4,
       "tmin": 11.3,
       "precip": 7.5,
-      "pop": 56,
+      "pop": 46,
       "wind": 5.3,
       "code": 53,
       "weather": "毛毛雨"
@@ -191,7 +191,7 @@
       "tmax": 18.5,
       "tmin": 11.3,
       "precip": 2.55,
-      "pop": 49,
+      "pop": 34,
       "wind": 8.4,
       "code": 51,
       "weather": "毛毛雨"
@@ -212,23 +212,23 @@
     "hazard_stats": [
       [
         "大雾",
-        65
+        64
       ],
       [
         "大风",
-        12
-      ],
-      [
-        "台风",
         10
       ],
       [
         "寒潮",
-        6
+        9
+      ],
+      [
+        "台风",
+        8
       ],
       [
         "霜冻",
-        6
+        8
       ],
       [
         "沙尘暴",
@@ -335,20 +335,6 @@
         "risk_score": 4
       },
       {
-        "region": "浙江省温州市瑞安市",
-        "province": "浙江",
-        "city": "省温州",
-        "hazard": "台风",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/24 21:06",
-        "url": "http://www.nmc.cn/publish/alarm/33038141600000_20261024210734.html",
-        "weight": 4,
-        "impact": "大风+强降水，设施受损、采收中断、物流受阻",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
         "region": "浙江省温州市苍南县",
         "province": "浙江",
         "city": "省温州",
@@ -357,20 +343,6 @@
         "rank": 1,
         "issuetime": "2026/10/24 21:24",
         "url": "http://www.nmc.cn/publish/alarm/33032741600000_20261024212457.html",
-        "weight": 4,
-        "impact": "大风+强降水，设施受损、采收中断、物流受阻",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
-        "region": "浙江省温州市龙港市",
-        "province": "浙江",
-        "city": "省温州",
-        "hazard": "台风",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/24 21:06",
-        "url": "http://www.nmc.cn/publish/alarm/33038341600000_20261024211219.html",
         "weight": 4,
         "impact": "大风+强降水，设施受损、采收中断、物流受阻",
         "is_production_area": true,
@@ -419,6 +391,20 @@
         "risk_score": 3
       },
       {
+        "region": "内蒙古自治区呼和浩特市赛罕区",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "寒潮",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/10/25 09:14",
+        "url": "http://www.nmc.cn/publish/alarm/15010541600000_20261025091423.html",
+        "weight": 3,
+        "impact": "生长停滞，但常推高菜价（双刃剑）",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
         "region": "新疆维吾尔自治区喀什地区叶城县",
         "province": "新疆",
         "city": "维吾尔自治",
@@ -427,20 +413,6 @@
         "rank": 1,
         "issuetime": "2026/10/24 22:50",
         "url": "http://www.nmc.cn/publish/alarm/65312641600000_20261024225042.html",
-        "weight": 3,
-        "impact": "叶片冻伤，商品率下降",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "新疆维吾尔自治区阿克苏地区柯坪县",
-        "province": "新疆",
-        "city": "维吾尔自治",
-        "hazard": "霜冻",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/24 21:02",
-        "url": "http://www.nmc.cn/publish/alarm/65292941600000_20261024210239.html",
         "weight": 3,
         "impact": "叶片冻伤，商品率下降",
         "is_production_area": false,
@@ -511,6 +483,34 @@
         "rank": 3,
         "issuetime": "2026/10/24 21:34",
         "url": "http://www.nmc.cn/publish/alarm/52052441600000_20261024213401.html",
+        "weight": 1,
+        "impact": "高速封路，运输延迟",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
+        "region": "贵州省毕节市黔西市",
+        "province": "贵州",
+        "city": "省毕节",
+        "hazard": "大雾",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/25 08:04",
+        "url": "http://www.nmc.cn/publish/alarm/52058141600000_20261025080442.html",
+        "weight": 1,
+        "impact": "高速封路，运输延迟",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
+        "region": "贵州省贵阳市息烽县",
+        "province": "贵州",
+        "city": "省贵阳",
+        "hazard": "大雾",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/10/24 21:38",
+        "url": "http://www.nmc.cn/publish/alarm/52012241600000_20261024213841.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": false,

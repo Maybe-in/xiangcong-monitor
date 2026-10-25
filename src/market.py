@@ -19,7 +19,12 @@ import os
 import re
 import urllib.parse
 import urllib.request
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
+
+# 抓取时间统一以北京时间（UTC+8）标注
+BJ_TZ = timezone(timedelta(hours=8))
+def bjnow():
+    return datetime.now(BJ_TZ)
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 
@@ -181,7 +186,7 @@ def fetch_cnhnb() -> dict:
             "unit": "元/公斤", "unit_ton": "元/吨", "source": "cnhnb",
         })
     return {"rows": std, "ok": bool(std), "error": "；".join(errors),
-            "fetched_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "fetched_at": bjnow().strftime("%Y-%m-%d %H:%M:%S"),
             "market": "惠农网（cnhnb.com）云南产地行情"}
 
 
@@ -208,7 +213,7 @@ def build_snapshot(days: int = 6, archive: bool = True) -> dict:
     惠农网限流（503）时自动回退最近一次归档缓存（保留原日期并标注 cached）。
     """
     snap = fetch_xinfadi(days=days)
-    snap["fetched_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    snap["fetched_at"] = bjnow().strftime("%Y-%m-%d %H:%M:%S")
     snap["market"] = "北京新发地农产品批发市场"
     # 惠农网产地行情（独立接口，失败不影响主流程）
     try:
@@ -238,7 +243,7 @@ def build_snapshot(days: int = 6, archive: bool = True) -> dict:
                 if cached:
                     cnhnb = {"rows": cached, "ok": True, "cached": True,
                              "error": cnhnb.get("error", ""),
-                             "fetched_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                             "fetched_at": bjnow().strftime("%Y-%m-%d %H:%M:%S"),
                              "market": "惠农网（cnhnb.com）云南产地行情（缓存 " + latest + "）"}
         except Exception:  # noqa: BLE001
             pass  # 归档/回退失败不影响报告生成

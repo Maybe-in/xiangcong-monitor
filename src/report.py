@@ -8,7 +8,12 @@ import json
 import os
 import re
 from collections.abc import Sequence
-from datetime import date, datetime
+from datetime import date, datetime, timezone, timedelta
+
+# 统一北京时间（UTC+8）：本地与 GitHub CI(UTC 服务器) 运行结果一致
+BJ_TZ = timezone(timedelta(hours=8))
+def bjnow():
+    return datetime.now(BJ_TZ)
 
 from .config import CORE_REGION, CULTIVARS, MODEL, PROVINCES, VARIETIES
 from .longterm import svg_line, svg_season
@@ -439,7 +444,7 @@ def build_board(ctx: dict) -> str:
 <div class="board">
   <div class="board-head">
     <div class="board-title">小香葱行情 · 盘口直览</div>
-    <div class="board-meta">更新时间：{esc(data_date)} 数据（行情发布为 T-1）｜
+    <div class="board-meta">更新时间：{esc(ctx['today'])}（北京时间）｜ 数据截至：{esc(data_date)}（行情发布为 T-1）｜
       单位：元/kg（另注除外）｜ 红涨 <b>↑</b> / 绿跌 ↓</div>
   </div>
   <div class="board-tabs">
@@ -730,7 +735,7 @@ def render_report(ctx: dict) -> str:
     html_doc = f"""{page('全国香葱行情日报 · ' + today)}
 <header>
   <h1>全国香葱行情日报 · 泸西专题</h1>
-  <div class="meta">数据日期：{today}（{'一二三四五六日'[date.today().weekday()]}）｜
+  <div class="meta">数据日期：{today}（{'一二三四五六日'[bjnow().date().weekday()]}）｜
     覆盖周期：未来 3天 / 1周 / 半月 / 1月 / 2月 / 3月 ｜
     重点产区：云南·红河州·泸西县 ｜ 生成时间：{ctx['generated_at']}</div>
 </header>

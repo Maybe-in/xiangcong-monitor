@@ -17,7 +17,12 @@ from __future__ import annotations
 import json
 import os
 from collections.abc import Sequence
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
+
+# 统一北京时间（UTC+8）：本地与 GitHub CI(UTC 服务器) 运行结果一致
+BJ_TZ = timezone(timedelta(hours=8))
+def bjnow():
+    return datetime.now(BJ_TZ)
 
 from .config import FESTIVALS, FORECAST_HORIZONS, MODEL
 
@@ -80,7 +85,7 @@ def moving_average(history: dict, variety: str, days: int = 20) -> float | None:
     if not pts:
         return None
     pts.sort(key=lambda p: p["date"])
-    cutoff = (date.today() - timedelta(days=days)).isoformat()
+    cutoff = (bjnow().date() - timedelta(days=days)).isoformat()
     window = [p["price"] for p in pts if p["date"] >= cutoff]
     pool = window or [p["price"] for p in pts][-5:]
     return sum(pool) / len(pool)
@@ -219,7 +224,7 @@ def build_forecast(history: dict, daily: Sequence[dict], horizons=None,
                   × (1 + FestivalPulse(target))
     """
     horizons = horizons or FORECAST_HORIZONS
-    today = date.today()
+    today = bjnow().date()
     n_forecast = len(daily)
 
     results = {}
@@ -290,7 +295,7 @@ def direction_tag(delta_pct: float) -> tuple[str, str]:
 
 def append_estimate(history: dict, variety: str, price: float, note: str = "") -> None:
     """把当日模型估算值写入历史（用于次日对比与回测）。"""
-    today = date.today().isoformat()
+    today = bjnow().date().isoformat()
     history.setdefault("series", [])
     history["series"] = [p for p in history["series"]
                          if not (p["date"] == today and p["variety"] == variety

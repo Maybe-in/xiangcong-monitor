@@ -10,7 +10,12 @@ import json
 import time
 import urllib.parse
 import urllib.request
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
+
+# 统一北京时间（UTC+8）：本地与 GitHub CI(UTC 服务器) 运行结果一致
+BJ_TZ = timezone(timedelta(hours=8))
+def bjnow():
+    return datetime.now(BJ_TZ)
 
 from .config import CORE_REGION, OBSERVATION_POINTS
 
@@ -80,7 +85,7 @@ def fetch_forecast(lat: float, lon: float, days: int = 16) -> list[dict]:
 
 def fetch_recent_climatology(lat: float, lon: float, lookback_days: int = 30) -> dict:
     """抓取近 N 天实测，作为距平基准。失败则返回 None，由调用方使用气候态兜底。"""
-    end = date.today() - timedelta(days=1)
+    end = bjnow().date() - timedelta(days=1)
     start = end - timedelta(days=lookback_days)
     params = {
         "latitude": lat,
@@ -169,7 +174,7 @@ def build_weather_snapshot() -> dict:
         points.append({**p, "w7": s})
 
     return {
-        "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "generated_at": bjnow().strftime("%Y-%m-%d %H:%M:%S"),
         "core": {
             "name": CORE_REGION["name"],
             "daily": core,

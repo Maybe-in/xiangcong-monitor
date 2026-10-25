@@ -12,7 +12,12 @@ import json
 import re
 import urllib.request
 from collections import Counter
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
+
+# 统一北京时间（UTC+8）：本地与 GitHub CI(UTC 服务器) 运行结果一致
+BJ_TZ = timezone(timedelta(hours=8))
+def bjnow():
+    return datetime.now(BJ_TZ)
 
 ALARM_URL = ("http://www.nmc.cn/rest/findAlarm"
              "?pageNo=1&pageSize=100&signaltype=&signallevel=&province=")
@@ -107,7 +112,7 @@ def build_disaster_snapshot() -> dict:
     sale_items = [i for i in items if not i["is_production_area"]]
 
     return {
-        "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "generated_at": bjnow().strftime("%Y-%m-%d %H:%M:%S"),
         "total": len(items),
         "top": items[:20],
         "production_area": prod_items[:10],

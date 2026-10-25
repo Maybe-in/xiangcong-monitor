@@ -19,7 +19,12 @@
 from __future__ import annotations
 
 import math
-from datetime import date
+from datetime import date, datetime, timezone, timedelta
+
+# 统一北京时间（UTC+8）：本地与 GitHub CI(UTC 服务器) 运行结果一致
+BJ_TZ = timezone(timedelta(hours=8))
+def bjnow():
+    return datetime.now(BJ_TZ)
 
 from .config import SEASONALITY
 
@@ -62,7 +67,7 @@ def _mi(y: int, m: int) -> int:
 
 def build_series(end: date | None = None, start_year: int = 2016, start_month: int = 10) -> list[dict]:
     """生成月频序列 [{ym, year, month, price, premium}]。"""
-    end = end or date.today()
+    end = end or bjnow().date()
     a = sorted(ANCHORS, key=lambda x: _mi(x[0], x[1]))
     # 去季节化后的锚点
     pts = [(_mi(y, m), p / SEASON[m]) for y, m, p, _, _ in a]
