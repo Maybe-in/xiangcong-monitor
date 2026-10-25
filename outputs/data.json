@@ -1,6 +1,6 @@
 {
   "date": "2026-10-26",
-  "generated_at": "2026-10-26 07:05（北京时间）",
+  "generated_at": "2026-10-26 07:13（北京时间）",
   "price_source": "人工录入实测观测点（12 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -491,14 +491,14 @@
         "risk_score": 2
       },
       {
-        "region": "安徽省合肥市巢湖市",
+        "region": "安徽省合肥市肥东县",
         "province": "安徽",
         "city": "省合肥",
         "hazard": "大雾",
         "level": "黄色",
         "rank": 2,
-        "issuetime": "2026/10/25 22:43",
-        "url": "http://www.nmc.cn/publish/alarm/34018141600000_20261025224329.html",
+        "issuetime": "2026/10/25 22:56",
+        "url": "http://www.nmc.cn/publish/alarm/34012241600000_20261025225652.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": false,
@@ -2591,6 +2591,6 @@
     "task_count": 5,
     "window_days": 3,
     "files_scanned": 5,
-    "dir": "C:\\Users\\不言不语\\WorkBuddy\\automation-2026-10-24-02-17-56\\xiangcong-monitor\\data\\sources"
+    "dir": "/home/runner/work/xiangcong-monitor/xiangcong-monitor/data/sources"
   }
 }
