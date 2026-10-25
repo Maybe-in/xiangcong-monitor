@@ -9,6 +9,10 @@ on:
     - cron: '5 19 * * *'       # 北京 03:05（避开整点拥堵）
     - cron: '35 19 * * *'      # 北京 03:35（冗余补跑）
   workflow_dispatch:      # 允许在 Actions 页面手动触发
+  push:
+    branches: [main]
+    # 推送即重新生成并部署 Pages：报告/数据页改动无需等到次日定时。
+    # CI 生成的结果若与本地一致则「无内容变更，跳过提交」，不会形成推送循环。
 
 permissions:
   contents: write
