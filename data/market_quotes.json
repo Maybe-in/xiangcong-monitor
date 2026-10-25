@@ -2,6 +2,226 @@
   "unit": "元/公斤（新发地接口，元/斤 ×2 换算）",
   "history": [
     {
+      "item": "香葱",
+      "date": "2026-10-09",
+      "low": 7.0,
+      "high": 8.0,
+      "mid": 7.5,
+      "places": "",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-10-11",
+      "low": 2.0,
+      "high": 2.4,
+      "mid": 2.2,
+      "places": "鲁",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-10-11",
+      "low": 3.0,
+      "high": 6.0,
+      "mid": 4.5,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-10-12",
+      "low": 2.0,
+      "high": 2.4,
+      "mid": 2.2,
+      "places": "鲁",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-10-12",
+      "low": 3.0,
+      "high": 6.0,
+      "mid": 4.5,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-10-12",
+      "low": 6.4,
+      "high": 8.6,
+      "mid": 7.5,
+      "places": "",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-10-13",
+      "low": 2.0,
+      "high": 2.4,
+      "mid": 2.2,
+      "places": "冀蒙",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-10-13",
+      "low": 3.0,
+      "high": 5.6,
+      "mid": 4.3,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-10-13",
+      "low": 6.4,
+      "high": 8.6,
+      "mid": 7.5,
+      "places": "",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-10-14",
+      "low": 1.8,
+      "high": 2.2,
+      "mid": 2.0,
+      "places": "冀蒙",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-10-14",
+      "low": 3.0,
+      "high": 5.6,
+      "mid": 4.3,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-10-14",
+      "low": 6.4,
+      "high": 9.0,
+      "mid": 7.7,
+      "places": "",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-10-15",
+      "low": 1.8,
+      "high": 2.2,
+      "mid": 2.0,
+      "places": "冀蒙",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-10-15",
+      "low": 3.0,
+      "high": 5.6,
+      "mid": 4.3,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-10-15",
+      "low": 6.4,
+      "high": 9.0,
+      "mid": 7.7,
+      "places": "",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-10-16",
+      "low": 1.8,
+      "high": 2.2,
+      "mid": 2.0,
+      "places": "冀蒙",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-10-16",
+      "low": 3.0,
+      "high": 5.6,
+      "mid": 4.3,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-10-16",
+      "low": 6.4,
+      "high": 9.0,
+      "mid": 7.7,
+      "places": "",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-10-17",
+      "low": 1.8,
+      "high": 2.2,
+      "mid": 2.0,
+      "places": "冀蒙",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-10-17",
+      "low": 3.0,
+      "high": 5.6,
+      "mid": 4.3,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-10-18",
+      "low": 1.8,
+      "high": 2.2,
+      "mid": 2.0,
+      "places": "冀蒙",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-10-18",
+      "low": 3.0,
+      "high": 5.6,
+      "mid": 4.3,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
       "item": "大葱",
       "date": "2026-10-19",
       "low": 1.8,

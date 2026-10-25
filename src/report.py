@@ -18,6 +18,7 @@ def bjnow():
 from .config import CORE_REGION, CULTIVARS, MODEL, PROVINCES, VARIETIES
 from .longterm import svg_line, svg_season
 from .price import direction_tag
+from . import sources
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_DIR = os.path.join(ROOT, "outputs")
@@ -611,6 +612,23 @@ def build_board(ctx: dict) -> str:
     </table>
     <div class="legend">数据来源：新发地批发市场公开行情接口（原始单位元/斤，×2 换算为元/公斤）；
       每日运行自动抓取并归档至 data/market_quotes.json。</div>"""
+        # 全量明细：抓取到的每一行都展示（不再只取每个品项的最新一条）
+        det = sorted(mkt["rows"], key=lambda r: (r["date"], r["item"]), reverse=True)
+        det_rows = "".join(
+            f'<tr><td>{esc(r["date"])}</td><td class="name">{esc(r["item"])}</td>'
+            f'<td class="num">{num(r["low"])} – {num(r["high"])}</td>'
+            f'<td class="num">{num(r["mid"])}</td>'
+            f'<td>{esc(r.get("places") or "—")}</td></tr>'
+            for r in det)
+        api_html += f"""
+    <p style="margin:14px 4px 0"><strong>接口全部明细 · 共 {len(det)} 条</strong>
+      <span class="tag">全量不截断</span></p>
+    <table class="btab">
+      <tr><th>日期</th><th>品名</th><th>区间(元/kg)</th><th>中枢</th><th>产地</th></tr>
+      {det_rows}
+    </table>
+    <div class="legend">上表为本次抓取到的全部行情行（{len(det)} 条，按日期倒序），未做任何截断；
+      上方汇总表仅取各品项最新一条用于看盘对比。</div>"""
     else:
         api_html = ('<div class="note">接口自动行情暂不可用（' + esc(mkt.get("error", "未知原因"))
                     + '），本页签仅展示人工录入数据。</div>')
@@ -685,6 +703,75 @@ function bdGo(i, anchor, el){{
   if(a){{ a.scrollIntoView({{behavior:'smooth', block:'start'}}); }}
 }}
 </script>"""
+def build_sources_section(src: dict) -> str:
+    """多源行情汇总：各定时任务落盘到 data/sources/ 的行情数据，全量展示不截断。"""
+    src = src or {}
+    items = list(src.get("items") or [])
+    if not items:
+        return ('<div class="note">本期 data/sources/ 下暂无其他定时任务落盘的行情数据'
+                '（目录为空，或文件日期超出汇总窗口）。各生成任务按统一 schema 写入'
+                ' 任务名_YYYY-MM-DD.json 后，将在推送任务中全量汇总展示。</div>')
+
+    head = (
+        f'<div class="grid">'
+        f'<div class="kpi"><div class="lab">接入任务</div>'
+        f'<div class="val">{src.get("task_count", 0)}</div>'
+        f'<div class="chg">个定时任务落盘</div></div>'
+        f'<div class="kpi"><div class="lab">行情报价</div>'
+        f'<div class="val">{src.get("total_quotes", 0)}</div>'
+        f'<div class="chg">条 · 全量展示不截断</div></div>'
+        f'<div class="kpi"><div class="lab">预测档位</div>'
+        f'<div class="val">{src.get("total_forecasts", 0)}</div>'
+        f'<div class="chg">条 · 各任务六档预测</div></div>'
+        f'<div class="kpi"><div class="lab">汇总窗口</div>'
+        f'<div class="val">{src.get("window_days", 3)} 天</div>'
+        f'<div class="chg">扫描 {src.get("files_scanned", 0)} 个文件</div></div>'
+        f'</div>')
+
+    blocks: list[str] = []
+    for it in items:
+        qs = sorted(it["quotes"], key=lambda q: (q["date"], q["item"]), reverse=True)
+        q_rows = "".join(
+            f'<tr><td>{esc(q["date"])}</td><td class="name">{esc(q["item"])}</td>'
+            f'<td>{esc(q["market"])}</td><td>{esc(q["province"])}</td>'
+            f'<td>{esc(q["price_type"])}</td>'
+            f'<td class="num">{num(q["low"])} – {num(q["high"])}</td>'
+            f'<td class="num">{num(q["mid"])}</td><td>{esc(q["unit"])}</td>'
+            f'<td>{esc(q["source"])}</td><td>{esc(q["note"])}</td></tr>'
+            for q in qs)
+        q_table = (
+            '<table><tr><th>日期</th><th>品项</th><th>市场</th><th>省份</th>'
+            '<th>口径</th><th>区间</th><th>中枢</th><th>单位</th>'
+            '<th>来源</th><th>备注</th></tr>'
+            + (q_rows or '<tr><td colspan="10">无报价明细</td></tr>') + '</table>')
+
+        f_html = ""
+        if it["forecasts"]:
+            f_rows: list[str] = []
+            for f in it["forecasts"]:
+                dp = f["delta_pct"]
+                d_txt = f"{dp:+.1f}%" if dp is not None else "—"
+                f_rows.append(
+                    f'<tr><td>{esc(f["horizon"])}</td><td>{esc(f["target_date"])}</td>'
+                    f'<td>{esc(f["item"])}</td><td class="num">{num(f["center"])}</td>'
+                    f'<td class="num">{num(f["low"])} – {num(f["high"])}</td>'
+                    f'<td class="num">{d_txt}</td>'
+                    f'<td>{esc(f["confidence"])}</td></tr>')
+            f_html = (
+                '<table><tr><th>周期</th><th>目标日</th><th>品项</th>'
+                '<th>中枢(元/kg)</th><th>区间</th><th>涨跌</th><th>置信度</th></tr>'
+                + "".join(f_rows) + '</table>')
+
+        blocks.append(
+            f'<h3>{esc(it["task"])}'
+            f'<span class="tag">数据日 {esc(it["date"])}</span>'
+            f'<span class="tag">{esc(it["market_scope"])}</span>'
+            f'<span class="tag">报价 {len(it["quotes"])} 条</span></h3>'
+            + (f'<p>{esc(it["summary"])}</p>' if it["summary"] else "")
+            + q_table + f_html)
+    return head + "".join(blocks)
+
+
 def build_longterm_section(lt: dict, summary: str = "", conclusion=None) -> str:
     series = lt["series"]
     conclusion = conclusion or []
@@ -843,6 +930,9 @@ def render_report(ctx: dict) -> str:
 
     # ---- 盘口直览（小程序样式，三页签）
     board_html = build_board(ctx)
+
+    # ---- 多任务行情汇总（其余定时任务落盘到 data/sources/ 的全量数据）
+    sources_section = build_sources_section(ctx.get("sources"))
 
     # ---- 天气逐日表
     day_rows = []
@@ -1076,6 +1166,15 @@ def render_report(ctx: dict) -> str:
     本报告仅供产业参考，不构成采销、囤货或投资建议。</div>
 </div>
 
+<div class="card">
+  <h2 id="sec9-sources">九、多源行情汇总 · 全部定时任务<span class="en">All Sources</span></h2>
+  <p>本节汇总其余香葱行情定时任务落盘到 <code>data/sources/</code> 的全部数据，按任务分组、
+     <strong>全量展示、不做截断</strong>，与本仓库流水线数据一并推送到 GitHub。</p>
+  {sources_section}
+  <div class="legend">口径提示：各任务的报价口径（地头价 / 收购价 / 销地批发价 / 零售价）与单位可能不同，
+    跨任务横向比较前请先核对「口径」与「单位」两列；不同口径不可直接横比。</div>
+</div>
+
 <footer>
   数据来源：Open-Meteo 预报与历史归档 API、中央气象台（nmc.cn）预警接口、国家气候中心、
   农业农村部信息中心、昆明市农业农村局（王旗营批发市场）、新发地市场行情、
@@ -1139,6 +1238,10 @@ def write_outputs(html_doc: str, ctx: dict) -> dict:
             "top": ctx["disaster"]["top"],
         },
         "forecast": ctx["forecast"],
+        # 全量行情：新发地抓取到的每一行明细（不截断）
+        "market_rows": (ctx.get("market_api") or {}).get("rows") or [],
+        # 其余定时任务落盘的行情汇总
+        "sources": ctx.get("sources") or {},
     }
     with open(os.path.join(OUTPUT_DIR, "data.json"), "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)

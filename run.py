@@ -23,7 +23,7 @@ def bjnow():
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from src import disaster, longterm, market, price, report, weather  # noqa: E402
+from src import disaster, longterm, market, price, report, sources, weather  # noqa: E402
 from src.config import CORE_REGION, MODEL  # noqa: E402
 
 WEEKDAY_CN = ['一', '二', '三', '四', '五', '六', '日']
@@ -60,7 +60,8 @@ def build_context() -> dict:
 
     print('[2.5/5] 抓取批发市场接口行情（新发地） ...')
     try:
-        mkt = market.build_snapshot()
+        # days=15：拉满近半个月逐日明细，报告「接口全部明细」表全量展示不截断
+        mkt = market.build_snapshot(days=15)
     except Exception as exc:  # noqa: BLE001
         mkt = {'ok': False, 'rows': [], 'error': str(exc), 'market': '北京新发地'}
     if mkt['ok']:
@@ -88,6 +89,16 @@ def build_context() -> dict:
     price.save_history(history)
     print('      红香葱中枢：{0} → {1}'.format(
         red['current'], ' / '.join(str(r['center']) for r in red['rows'])))
+
+    print('[4.5/5] 汇总其余定时任务落盘行情（data/sources） ...')
+    try:
+        srcs = sources.load_sources()
+    except Exception as exc:  # noqa: BLE001
+        srcs = {'ok': False, 'items': [], 'total_quotes': 0,
+                'total_forecasts': 0, 'task_count': 0, 'window_days': 3}
+    print('      接入任务 {0} 个，报价 {1} 条，预测 {2} 条（扫描 {3} 个文件）'.format(
+        srcs.get('task_count', 0), srcs.get('total_quotes', 0),
+        srcs.get('total_forecasts', 0), srcs.get('files_scanned', 0)))
 
     print('[5/5] 渲染报告 ...')
 
@@ -365,6 +376,7 @@ def build_context() -> dict:
         'price_source_label': price_source_label,
         'spot_quotes': history.get('spot_quotes', []),
         'market_api': mkt,
+        'sources': srcs,
         'data_date': max(
             [p['date'] for p in history.get('series', []) if p.get('source') == 'observed']
             + [r['date'] for r in mkt.get('rows', [])]

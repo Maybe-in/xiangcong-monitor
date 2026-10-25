@@ -23,7 +23,9 @@ xiangcong-yuce/
 │   ├── longterm.py                      # 10 年长周期序列重建 + 窗口统计
 │   └── report.py                        # HTML 报告渲染（含 SVG 走势图）
 ├── data/
-│   └── price_history.json               # 价格历史（observed 实测 / model 估算）
+│   ├── price_history.json               # 价格历史（observed 实测 / model 估算）
+│   └── sources/                         # 其余定时任务按统一 schema 落盘的行情数据
+│       └── <任务slug>_YYYY-MM-DD.json   # 由推送任务汇总进日报第九章「多源行情汇总」
 ├── outputs/                             # 报告产出（提交入库，用于 Pages）
 │   ├── 香葱行情日报_YYYY-MM-DD.html
 │   ├── latest.html                      # 最新一期
@@ -130,7 +132,30 @@ git push -u origin main
 进入 **Settings → Pages → Build and deployment → Source**，选择 **GitHub Actions**。
 此后每次运行会自动发布，`outputs/index.html` 为归档首页。
 
-## 六、维护要点
+## 六、多任务行情汇总（data/sources/）
+
+除本仓库流水线外，其余香葱行情定时任务（Gemini / ChatGPT / 全国监测 / grok / 香葱行情）
+每日 00:00 采集后，按统一 schema 把**全部**报价写入
+`data/sources/<slug>_YYYY-MM-DD.json`，由推送任务在 03:00 汇总进日报第九章
+「多源行情汇总 · 全部定时任务」，全量展示、不截断。
+
+```json
+{
+  "task": "任务名", "task_id": "自动化ID",
+  "date": "YYYY-MM-DD", "generated_at": "YYYY-MM-DD HH:MM",
+  "market_scope": "全国 / 云南 / 泸西县",
+  "quotes": [{"date","item","variety","market","province","price_type",
+              "unit","low","high","mid","source","source_url","note"}],
+  "forecasts": [{"horizon","target_date","item","center","low","high","delta_pct","confidence"}],
+  "summary": "本期核心结论"
+}
+```
+
+口径约定：价格统一换算为 **元/公斤**；`price_type` 必须标注
+（产地地头价 / 产地收购价 / 产地批发价 / 销地批发价 / 零售价）；估算值在 `note` 注明。
+汇总窗口默认 3 天（防止单任务漏跑），损坏文件自动跳过、不影响主流程。
+
+## 七、维护要点
 
 - **更新实测价格**：编辑 `data/price_history.json`，新增
   `{"date": "YYYY-MM-DD", "variety": "红香葱", "market": "云南产地", "price": x.xx,
