@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>各定时任务独立预测报告 · 2026-10-26</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#ffffff; --ink:#1c2024; --sub:#5b6470; --line:#e4e8ee;
+  --up:#d93025; --down:#0f9960; --flat:#8a93a0;
+  --accent:#0f6fd6; --accent-soft:#eaf2fd; --warn:#fff5e6; --warn-line:#f0a500;
+}
+*{box-sizing:border-box;}
+body{margin:0;padding:32px 20px 64px;background:var(--bg);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+  font-size:15px;line-height:1.75;}
+.wrap{max-width:1040px;margin:0 auto;}
+header{margin-bottom:28px;}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:.5px;}
+.meta{color:var(--sub);font-size:13px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:22px 24px;margin-bottom:20px;}
+h2{font-size:19px;margin:0 0 4px;padding-left:11px;border-left:4px solid var(--accent);}
+h2 .en{font-size:12px;color:var(--sub);font-weight:400;margin-left:8px;}
+h3{font-size:15.5px;margin:20px 0 8px;color:#2b3440;}
+p{margin:8px 0;}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+th{background:#f2f5f9;font-weight:600;color:#3a4453;white-space:nowrap;}
+td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.up{color:var(--up);font-weight:600;}
+.down{color:var(--down);font-weight:600;}
+.flat{color:var(--flat);}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0;}
+.kpi{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+.kpi .lab{font-size:12px;color:var(--sub);}
+.kpi .val{font-size:22px;font-weight:700;margin:2px 0;font-variant-numeric:tabular-nums;}
+.kpi .chg{font-size:12px;}
+.tag{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:20px;margin-right:6px;
+  border:1px solid var(--line);background:#f4f6f9;color:var(--sub);}
+.t-up{background:#fdecea;border-color:#f5c6c0;color:var(--up);}
+.t-down{background:#e9f7f0;border-color:#bfe5d1;color:var(--down);}
+.t-flat{background:#f0f2f5;border-color:#dde1e7;color:#5b6470;}
+.t-key{background:var(--accent-soft);border-color:#bcd9f7;color:var(--accent);}
+.note{background:var(--warn);border-left:3px solid var(--warn-line);padding:10px 14px;
+  border-radius:0 8px 8px 0;font-size:13.5px;margin:12px 0;color:#6b4a00;}
+ul{margin:8px 0;padding-left:22px;}
+li{margin:4px 0;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:760px){.split{grid-template-columns:1fr;}}
+footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-height:1.9;}
+.legend{font-size:12px;color:var(--sub);margin-top:6px;}
+.back{display:inline-block;margin-bottom:12px;font-size:13px;color:var(--accent);text-decoration:none;}
+/* ---- 盘口直览（小程序样式） ---- */
+.board{background:linear-gradient(180deg,#e8f2ff 0%,#ffffff 150px);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;margin:12px 0 16px;}
+.board-head{padding:14px 18px 8px;}
+.board-title{font-size:18px;font-weight:700;letter-spacing:.5px;}
+.board-meta{font-size:12px;color:var(--sub);margin-top:4px;}
+.board-meta b{color:var(--up);font-weight:600;}
+.board-tabs{display:flex;gap:4px;padding:0 14px;border-bottom:2px solid var(--accent);}
+.bt{padding:8px 18px;font-size:14px;color:var(--sub);cursor:pointer;user-select:none;
+  border-radius:8px 8px 0 0;margin-bottom:-2px;}
+.bt.active{background:var(--accent);color:#fff;font-weight:600;}
+.board-panel{display:none;padding:4px 12px 12px;}
+.board-panel.active{display:block;}
+.btab{margin:8px 0 0;}
+.btab th{background:#eaf2fc;color:#33506e;}
+.btab td{border:none;border-bottom:1px solid #eef1f5;background:transparent;}
+.btab tr:nth-child(even) td{background:#f7fafd;}
+.btab .name{font-weight:600;}
+.btab .arrow-up{color:var(--up);font-weight:700;}
+.btab .arrow-down{color:var(--down);font-weight:700;}
+.btab .arrow-flat{color:var(--flat);}
+.see{color:var(--accent);font-size:12.5px;text-decoration:none;white-space:nowrap;}
+.see:hover{text-decoration:underline;}
+.mini-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:10px 4px 4px;}
+.mini-sum .ms{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;}
+.mini-sum .ms b{display:block;font-size:15px;margin-bottom:2px;}
+/* ---- 盘口统计条 ---- */
+.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px;margin:10px 4px 2px;}
+.bar{background:#f4f8fd;border:1px solid var(--line);border-radius:10px;padding:8px 14px;
+  font-size:12.5px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;}
+.bar .bt2{font-weight:700;font-size:13px;color:var(--accent);}
+.bar i{font-style:normal;color:var(--sub);}
+.bar i b{color:var(--ink,#1a2733);font-size:14px;}
+.bar i.up b{color:var(--up);}
+.bar i.down b{color:var(--down);}
+.bar i.k b{color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>各定时任务 · 独立预测报告</h1>
+  <div class="meta">共 5 个定时任务 ｜ 汇总日期 2026-10-26（北京时间）｜
+    每个任务的预测与报价分别在各自独立页全量展示 ｜
+    <a class="back" href="../latest.html">← 返回当日日报</a> ·
+    <a class="back" href="../index.html">← 报告归档</a></div>
+</header>
+<div class="card">
+  <h2>任务报告列表<span class="en">Task Reports</span></h2>
+  <p>下列每个香葱行情定时任务均生成<strong>一份独立的预测报告</strong>，
+     包含该任务自己的六档预测、全部报价明细与核心结论，互不合并。</p>
+  <div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;padding:14px 16px;margin:12px 0"><h3 style="margin:0 0 6px">香葱行情监测chat gpt<span class="tag">数据日 2026-10-26</span><span class="tag">全国 / 云南 / 泸西县</span></h3><p style="margin:6px 0">泸西产地通货基准 1.27 元/斤（2.54 元/公斤）。全国蔬菜供给宽松（28种蔬菜同比 −12.3%）压制涨幅；11/4—11/8 低温连阴雨（最低 8—10℃）边际抑制采收但不造成实质减产。六档温和上行，12 月形成阶段高点，1 月下旬节后回落。</p><div class="grid"><div class="kpi"><div class="lab">报价</div><div class="val">36</div><div class="chg">条明细</div></div><div class="kpi"><div class="lab">预测</div><div class="val">6</div><div class="chg">档</div></div><div class="kpi"><div class="lab">六档中枢序列</div><div class="val" style="font-size:17px">4.70 / 4.85 / 5.10 / 5.50 / 6.00 / 5.85</div><div class="chg">元/公斤</div></div></div><p style="margin:10px 0 0"><a class="back" href="chatgpt.html">→ 查看该任务完整预测报告</a></p></div><div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;padding:14px 16px;margin:12px 0"><h3 style="margin:0 0 6px">香葱行情<span class="tag">数据日 2026-10-26</span><span class="tag">全国 / 云南 / 泸西县</span></h3><p style="margin:6px 0">泸西地头毛葱基准 3.40 元/公斤，处于秋葱集中上市阶段性低位。受 11 月上旬关键降温（最低 8℃）+ 持续阴雨寡照 + 超强厄尔尼诺下降水偏多驱动，叠加元旦—春节需求爬坡，将进入约 3 个月的连续上行通道，2027/1 下旬春节前备货高峰触及年内高点 5.90（区间 4.80—8.00）。尾部风险：12—1 月断崖式强寒潮可冲击 7—8 元/公斤。</p><div class="grid"><div class="kpi"><div class="lab">报价</div><div class="val">9</div><div class="chg">条明细</div></div><div class="kpi"><div class="lab">预测</div><div class="val">6</div><div class="chg">档</div></div><div class="kpi"><div class="lab">六档中枢序列</div><div class="val" style="font-size:17px">3.60 / 3.95 / 4.40 / 4.75 / 5.40 / 5.90</div><div class="chg">元/公斤</div></div></div><p style="margin:10px 0 0"><a class="back" href="xiangcong.html">→ 查看该任务完整预测报告</a></p></div><div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;padding:14px 16px;margin:12px 0"><h3 style="margin:0 0 6px">全国香葱行情监测与泸西县价格预测（每日）<span class="tag">数据日 2026-10-26</span><span class="tag">全国 / 云南 / 泸西县</span></h3><p style="margin:6px 0">基准 1.27 元/斤（2.54 元/公斤）。六档预测仅小幅震荡：3天—1个月基本走平（+1.6%→0.0%），2—3 个月偏强（+3.9%/+7.1%）。关键假设为泸西周年的轮作供应稳定、全省性降雨不形成灾害、无区域性寒潮。失败项：泸西当日官方报价、10年连续序列、到货量、成本亩产均无。</p><div class="grid"><div class="kpi"><div class="lab">报价</div><div class="val">22</div><div class="chg">条明细</div></div><div class="kpi"><div class="lab">预测</div><div class="val">6</div><div class="chg">档</div></div><div class="kpi"><div class="lab">六档中枢序列</div><div class="val" style="font-size:17px">2.58 / 2.58 / 2.56 / 2.54 / 2.64 / 2.72</div><div class="chg">元/公斤</div></div></div><p style="margin:10px 0 0"><a class="back" href="national.html">→ 查看该任务完整预测报告</a></p></div><div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;padding:14px 16px;margin:12px 0"><h3 style="margin:0 0 6px">grok香葱<span class="tag">数据日 2026-10-26</span><span class="tag">全国 / 云南 / 泸西县</span></h3><p style="margin:6px 0">泸西红香葱产地分级交货 4.35 元/公斤（黑香葱 3.85），高于全国批发均价 3.81 约 14.2%，体现分级与品牌溢价。11/2—11/8 连续阴雨+降温至 8—10℃ 压缩采收窗口但非总量短缺，核心矛盾是「品质分化」。全国供给宽松（在田面积同比+100万亩）限制涨幅，综合风险等级中。</p><div class="grid"><div class="kpi"><div class="lab">报价</div><div class="val">7</div><div class="chg">条明细</div></div><div class="kpi"><div class="lab">预测</div><div class="val">6</div><div class="chg">档</div></div><div class="kpi"><div class="lab">六档中枢序列</div><div class="val" style="font-size:17px">4.40 / 4.50 / 4.60 / 4.55 / 5.15 / 5.80</div><div class="chg">元/公斤</div></div></div><p style="margin:10px 0 0"><a class="back" href="grok.html">→ 查看该任务完整预测报告</a></p></div><div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;padding:14px 16px;margin:12px 0"><h3 style="margin:0 0 6px">Gemini 每日香葱行情分析与预测报告<span class="tag">数据日 2026-10-26</span><span class="tag">全国 / 云南 / 泸西县</span></h3><p style="margin:6px 0">泸西红香葱基准 6.0—6.3 元/公斤。秋茬集中上市压制短期价格，11 月上旬强降温阴雨（最高26℃→13℃、最低8℃）推升生长放缓与损耗成本；北方产区退市+南菜北运启动，1—2 个月转上涨，2027 春节（2/6）前备货为年内高点窗口。</p><div class="grid"><div class="kpi"><div class="lab">报价</div><div class="val">9</div><div class="chg">条明细</div></div><div class="kpi"><div class="lab">预测</div><div class="val">6</div><div class="chg">档</div></div><div class="kpi"><div class="lab">六档中枢序列</div><div class="val" style="font-size:17px">6.10 / 6.20 / 6.40 / 7.00 / 7.80 / 8.30</div><div class="chg">元/公斤</div></div></div><p style="margin:10px 0 0"><a class="back" href="gemini.html">→ 查看该任务完整预测报告</a></p></div>
+  <div class="legend">口径提示：各任务的基准价可能因「是否分级洗选」而差异较大
+    （如地头通货 2.54、分级交货 4.35、云南产地红葱 4.70 元/公斤），
+    横向比较前请先核对口径与单位。</div>
+</div>
+<footer>自动化生成 · 各定时任务落盘 data/sources/ → 日报流水线分别渲染 → 推送 GitHub</footer>
+</div>
+</body>
+</html>

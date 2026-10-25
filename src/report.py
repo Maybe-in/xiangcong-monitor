@@ -703,8 +703,228 @@ function bdGo(i, anchor, el){{
   if(a){{ a.scrollIntoView({{behavior:'smooth', block:'start'}}); }}
 }}
 </script>"""
+def _slug_safe(s: str) -> str:
+    """文件名安全化：保留中英文、数字、下划线与连字符。"""
+    s = re.sub(r"[^\w\u4e00-\u9fff-]", "-", str(s or "")).strip("-")
+    return s or "task"
+
+
+def _task_slug(item: dict) -> str:
+    """从落盘文件名取任务 slug：gemini_2026-10-26.json -> gemini。"""
+    base = (item.get("file") or "").rsplit(".", 1)[0]
+    head, _, tail = base.rpartition("_")
+    if head and len(tail) == 10 and tail[4] == "-":
+        return _slug_safe(head)
+    return _slug_safe(base)
+
+
+def build_forecast_bars(fcs: list[dict], width=880, height=250) -> str:
+    """六档预测中枢柱状图（含区间误差线），内联 SVG，不依赖外部库。"""
+    fcs = [f for f in (fcs or []) if f.get("center") is not None]
+    if not fcs:
+        return ""
+
+    vals = [f["center"] for f in fcs]
+    los = [f["low"] for f in fcs if f.get("low") is not None]
+    his = [f["high"] for f in fcs if f.get("high") is not None]
+    lo = min(los + vals) if los else min(vals)
+    hi = max(his + vals) if his else max(vals)
+    if hi - lo < 0.5:
+        hi = lo + 0.5
+    pad = (hi - lo) * 0.20
+    y0, y1 = max(0.0, lo - pad), hi + pad
+
+    ml, mr, mt, mb = 56, 20, 26, 56
+    pw, ph = width - ml - mr, height - mt - mb
+    n = len(fcs)
+    slot = pw / n
+    bw = min(58, slot * 0.46)
+
+    def Y(v):
+        return mt + ph - (v - y0) / (y1 - y0) * ph
+
+    p = [f'<svg viewBox="0 0 {width} {height}" width="100%" '
+         f'style="max-width:{width}px;display:block;margin:6px auto" role="img" '
+         f'aria-label="六档预测中枢柱状图">']
+
+    for i in range(5):  # 横向网格 + 刻度
+        v = y0 + (y1 - y0) * i / 4
+        y = Y(v)
+        p.append(f'<line x1="{ml}" y1="{y:.1f}" x2="{ml+pw:.1f}" y2="{y:.1f}" '
+                 f'stroke="rgba(128,128,128,.25)" stroke-width="1"/>')
+        p.append(f'<text x="{ml-8}" y="{y+4:.1f}" text-anchor="end" '
+                 f'font-size="11" fill="#8a8f98">{v:.2f}</text>')
+
+    for i, f in enumerate(fcs):
+        cx = ml + slot * (i + 0.5)
+        x = cx - bw / 2
+        ytop = Y(f["center"])
+        p.append(f'<rect x="{x:.1f}" y="{ytop:.1f}" width="{bw:.1f}" '
+                 f'height="{mt+ph-ytop:.1f}" rx="4" fill="#4a7fd4" opacity="0.85"/>')
+        if f.get("low") is not None and f.get("high") is not None:  # 区间误差线
+            yl, yh = Y(f["low"]), Y(f["high"])
+            p.append(f'<line x1="{cx:.1f}" y1="{yl:.1f}" x2="{cx:.1f}" y2="{yh:.1f}" '
+                     f'stroke="#d1495b" stroke-width="2"/>')
+            for yy in (yl, yh):
+                p.append(f'<line x1="{cx-bw/4:.1f}" y1="{yy:.1f}" '
+                         f'x2="{cx+bw/4:.1f}" y2="{yy:.1f}" stroke="#d1495b" stroke-width="2"/>')
+        p.append(f'<text x="{cx:.1f}" y="{ytop-7:.1f}" text-anchor="middle" '
+                 f'font-size="12" font-weight="600" fill="#4a7fd4">{f["center"]:.2f}</text>')
+        lbl = str(f.get("horizon") or "")
+        if lbl.startswith("未来"):
+            lbl = lbl[2:]
+        p.append(f'<text x="{cx:.1f}" y="{mt+ph+20:.1f}" text-anchor="middle" '
+                 f'font-size="11" fill="#6b7280">{esc(lbl)}</text>')
+        td = str(f.get("target_date") or "")
+        if td:
+            p.append(f'<text x="{cx:.1f}" y="{mt+ph+36:.1f}" text-anchor="middle" '
+                     f'font-size="10" fill="#9aa0a6">{esc(td[5:])}</text>')
+
+    p.append(f'<text x="{ml}" y="{mt-10}" font-size="11" fill="#8a8f98">'
+             f'元/公斤 · 柱=中枢，红线=预测区间</text>')
+    p.append("</svg>")
+    return "".join(p)
+
+
+def build_task_page(item: dict, today: str, nav: str = "") -> str:
+    """单个定时任务的独立预测报告页（outputs/tasks/<slug>.html）。"""
+    qs = sorted(item.get("quotes") or [], key=lambda q: (q["date"], q["item"]), reverse=True)
+    fcs = item.get("forecasts") or []
+    slug = _task_slug(item)
+    title = f'{item["task"]} · 预测报告 {item["date"]}'
+
+    # 报价明细表
+    q_rows = "".join(
+        f'<tr><td>{esc(q["date"])}</td><td class="name">{esc(q["item"])}</td>'
+        f'<td>{esc(q["market"])}</td><td>{esc(q["province"])}</td>'
+        f'<td>{esc(q["price_type"])}</td>'
+        f'<td class="num">{num(q["low"])} – {num(q["high"])}</td>'
+        f'<td class="num">{num(q["mid"])}</td><td>{esc(q["unit"])}</td>'
+        f'<td>{esc(q["source"])}</td><td>{esc(q["note"])}</td></tr>'
+        for q in qs)
+    q_table = ('<table><tr><th>日期</th><th>品项</th><th>市场</th><th>省份</th>'
+               '<th>口径</th><th>区间</th><th>中枢</th><th>单位</th>'
+               '<th>来源</th><th>备注</th></tr>'
+               + (q_rows or '<tr><td colspan="10">无报价明细</td></tr>') + '</table>')
+
+    # 六档预测表
+    f_html = ""
+    if fcs:
+        rows: list[str] = []
+        for f in fcs:
+            dp = f.get("delta_pct")
+            d_txt = f"{dp:+.1f}%" if dp is not None else "—"
+            rows.append(
+                f'<tr><td>{esc(f["horizon"])}</td><td>{esc(f["target_date"])}</td>'
+                f'<td>{esc(f["item"])}</td><td class="num">{num(f["center"])}</td>'
+                f'<td class="num">{num(f["low"])} – {num(f["high"])}</td>'
+                f'<td class="num">{d_txt}</td><td>{esc(f["confidence"])}</td></tr>')
+        f_html = ('<table><tr><th>周期</th><th>目标日</th><th>品项</th>'
+                  '<th>中枢(元/kg)</th><th>区间</th><th>涨跌</th><th>置信度</th></tr>'
+                  + "".join(rows) + '</table>')
+
+    centers = [f["center"] for f in fcs if f.get("center") is not None]
+    seq = " / ".join(f"{c:.2f}" for c in centers) if centers else "—"
+
+    return f"""{page(title)}
+<header>
+  <h1>{esc(item["task"])}</h1>
+  <div class="meta">数据日 {esc(item["date"])} ｜ 生成于 {esc(item["generated_at"])} ｜
+    覆盖范围 {esc(item["market_scope"])} ｜ 任务 ID <code>{esc(item["task_id"])}</code> ｜
+    <a class="back" href="index.html">← 全部任务报告</a> ·
+    <a class="back" href="../latest.html">← 当日日报</a></div>
+</header>
+<div class="card">
+  <h2>本期核心结论<span class="en">Summary</span></h2>
+  <p>{esc(item["summary"]) or '（该任务未提供结论）'}</p>
+  <div class="grid">
+    <div class="kpi"><div class="lab">行情报价</div><div class="val">{len(qs)}</div>
+      <div class="chg">条 · 全量不截断</div></div>
+    <div class="kpi"><div class="lab">预测档位</div><div class="val">{len(fcs)}</div>
+      <div class="chg">档 · 六周期</div></div>
+    <div class="kpi"><div class="lab">六档中枢序列</div>
+      <div class="val" style="font-size:18px">{esc(seq)}</div>
+      <div class="chg">元/公斤</div></div>
+    <div class="kpi"><div class="lab">数据文件</div>
+      <div class="val" style="font-size:15px">{esc(item["file"])}</div>
+      <div class="chg">data/sources/</div></div>
+  </div>
+</div>
+<div class="card">
+  <h2>六档价格预测<span class="en">Forecast</span></h2>
+  {build_forecast_bars(fcs)}
+  {f_html or '<div class="note">该任务本期未落盘预测数据。</div>'}
+  <div class="legend">预测区间为情景假设区间，非统计置信区间；不同任务的基准口径不同，
+    横向比较前请先核对「品项／口径」列。</div>
+</div>
+<div class="card">
+  <h2>全部行情报价明细 · {len(qs)} 条<span class="en">All Quotes</span></h2>
+  <p>下列为该任务本期采集到的<strong>全部</strong>报价行，按日期倒序，不做截断。</p>
+  {q_table}
+  <div class="legend">口径提示：产地地头价 / 产地收购价 / 产地批发价 / 销地批发价 / 零售价
+    属不同交易环节，不可直接横比。</div>
+</div>
+<footer>自动化生成 · 任务 {esc(item["task"])} 落盘 → 日报流水线汇总 → 推送 GitHub
+  ｜ 汇总日期 {esc(today)}</footer>
+{nav}
+</div>
+</body>
+</html>
+"""
+
+
+def build_tasks_index(items: list[dict], today: str) -> str:
+    """各定时任务独立报告索引页（outputs/tasks/index.html）。"""
+    cards: list[str] = []
+    for it in items:
+        fcs = it.get("forecasts") or []
+        centers = [f["center"] for f in fcs if f.get("center") is not None]
+        seq = " / ".join(f"{c:.2f}" for c in centers) if centers else "—"
+        slug = _task_slug(it)
+        cards.append(
+            f'<div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;'
+            f'padding:14px 16px;margin:12px 0">'
+            f'<h3 style="margin:0 0 6px">{esc(it["task"])}'
+            f'<span class="tag">数据日 {esc(it["date"])}</span>'
+            f'<span class="tag">{esc(it["market_scope"])}</span></h3>'
+            f'<p style="margin:6px 0">{esc(it["summary"])}</p>'
+            f'<div class="grid">'
+            f'<div class="kpi"><div class="lab">报价</div><div class="val">{len(it.get("quotes") or [])}</div>'
+            f'<div class="chg">条明细</div></div>'
+            f'<div class="kpi"><div class="lab">预测</div><div class="val">{len(fcs)}</div>'
+            f'<div class="chg">档</div></div>'
+            f'<div class="kpi"><div class="lab">六档中枢序列</div>'
+            f'<div class="val" style="font-size:17px">{esc(seq)}</div>'
+            f'<div class="chg">元/公斤</div></div></div>'
+            f'<p style="margin:10px 0 0"><a class="back" href="{esc(slug)}.html">'
+            f'→ 查看该任务完整预测报告</a></p></div>')
+
+    return f"""{page('各定时任务独立预测报告 · ' + today)}
+<header>
+  <h1>各定时任务 · 独立预测报告</h1>
+  <div class="meta">共 {len(items)} 个定时任务 ｜ 汇总日期 {esc(today)}（北京时间）｜
+    每个任务的预测与报价分别在各自独立页全量展示 ｜
+    <a class="back" href="../latest.html">← 返回当日日报</a> ·
+    <a class="back" href="../index.html">← 报告归档</a></div>
+</header>
+<div class="card">
+  <h2>任务报告列表<span class="en">Task Reports</span></h2>
+  <p>下列每个香葱行情定时任务均生成<strong>一份独立的预测报告</strong>，
+     包含该任务自己的六档预测、全部报价明细与核心结论，互不合并。</p>
+  {"".join(cards) or '<div class="note">本期无任务数据。</div>'}
+  <div class="legend">口径提示：各任务的基准价可能因「是否分级洗选」而差异较大
+    （如地头通货 2.54、分级交货 4.35、云南产地红葱 4.70 元/公斤），
+    横向比较前请先核对口径与单位。</div>
+</div>
+<footer>自动化生成 · 各定时任务落盘 data/sources/ → 日报流水线分别渲染 → 推送 GitHub</footer>
+</div>
+</body>
+</html>
+"""
+
+
 def build_sources_section(src: dict) -> str:
-    """多源行情汇总：各定时任务落盘到 data/sources/ 的行情数据，全量展示不截断。"""
+    """多源行情汇总：各定时任务入口卡片墙；完整明细在各任务独立页。"""
     src = src or {}
     items = list(src.get("items") or [])
     if not items:
@@ -728,48 +948,32 @@ def build_sources_section(src: dict) -> str:
         f'<div class="chg">扫描 {src.get("files_scanned", 0)} 个文件</div></div>'
         f'</div>')
 
-    blocks: list[str] = []
+    cards: list[str] = []
     for it in items:
-        qs = sorted(it["quotes"], key=lambda q: (q["date"], q["item"]), reverse=True)
-        q_rows = "".join(
-            f'<tr><td>{esc(q["date"])}</td><td class="name">{esc(q["item"])}</td>'
-            f'<td>{esc(q["market"])}</td><td>{esc(q["province"])}</td>'
-            f'<td>{esc(q["price_type"])}</td>'
-            f'<td class="num">{num(q["low"])} – {num(q["high"])}</td>'
-            f'<td class="num">{num(q["mid"])}</td><td>{esc(q["unit"])}</td>'
-            f'<td>{esc(q["source"])}</td><td>{esc(q["note"])}</td></tr>'
-            for q in qs)
-        q_table = (
-            '<table><tr><th>日期</th><th>品项</th><th>市场</th><th>省份</th>'
-            '<th>口径</th><th>区间</th><th>中枢</th><th>单位</th>'
-            '<th>来源</th><th>备注</th></tr>'
-            + (q_rows or '<tr><td colspan="10">无报价明细</td></tr>') + '</table>')
-
-        f_html = ""
-        if it["forecasts"]:
-            f_rows: list[str] = []
-            for f in it["forecasts"]:
-                dp = f["delta_pct"]
-                d_txt = f"{dp:+.1f}%" if dp is not None else "—"
-                f_rows.append(
-                    f'<tr><td>{esc(f["horizon"])}</td><td>{esc(f["target_date"])}</td>'
-                    f'<td>{esc(f["item"])}</td><td class="num">{num(f["center"])}</td>'
-                    f'<td class="num">{num(f["low"])} – {num(f["high"])}</td>'
-                    f'<td class="num">{d_txt}</td>'
-                    f'<td>{esc(f["confidence"])}</td></tr>')
-            f_html = (
-                '<table><tr><th>周期</th><th>目标日</th><th>品项</th>'
-                '<th>中枢(元/kg)</th><th>区间</th><th>涨跌</th><th>置信度</th></tr>'
-                + "".join(f_rows) + '</table>')
-
-        blocks.append(
-            f'<h3>{esc(it["task"])}'
+        fcs = it["forecasts"]
+        qs = it["quotes"]
+        centers = [f["center"] for f in fcs if f.get("center") is not None]
+        seq = " / ".join(f"{c:.2f}" for c in centers) if centers else "—"
+        slug = _task_slug(it)
+        cards.append(
+            f'<div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;'
+            f'padding:14px 16px;margin:12px 0">'
+            f'<h3 style="margin:0 0 6px">{esc(it["task"])}'
             f'<span class="tag">数据日 {esc(it["date"])}</span>'
-            f'<span class="tag">{esc(it["market_scope"])}</span>'
-            f'<span class="tag">报价 {len(it["quotes"])} 条</span></h3>'
-            + (f'<p>{esc(it["summary"])}</p>' if it["summary"] else "")
-            + q_table + f_html)
-    return head + "".join(blocks)
+            f'<span class="tag">{esc(it["market_scope"])}</span></h3>'
+            + (f'<p style="margin:6px 0">{esc(it["summary"])}</p>' if it["summary"] else "")
+            + f'<div class="grid">'
+            f'<div class="kpi"><div class="lab">行情报价</div><div class="val">{len(qs)}</div>'
+            f'<div class="chg">条明细</div></div>'
+            f'<div class="kpi"><div class="lab">预测档位</div><div class="val">{len(fcs)}</div>'
+            f'<div class="chg">档 · 六周期</div></div>'
+            f'<div class="kpi"><div class="lab">六档中枢序列</div>'
+            f'<div class="val" style="font-size:17px">{esc(seq)}</div>'
+            f'<div class="chg">元/公斤</div></div></div>'
+            f'<p style="margin:10px 0 0"><a class="back" href="tasks/{esc(slug)}.html">'
+            f'→ 查看该任务完整预测报告（{len(qs)} 条报价 · {len(fcs)} 档预测）</a></p>'
+            f'</div>')
+    return head + "".join(cards)
 
 
 def build_longterm_section(lt: dict, summary: str = "", conclusion=None) -> str:
@@ -1167,9 +1371,11 @@ def render_report(ctx: dict) -> str:
 </div>
 
 <div class="card">
-  <h2 id="sec9-sources">九、多源行情汇总 · 全部定时任务<span class="en">All Sources</span></h2>
-  <p>本节汇总其余香葱行情定时任务落盘到 <code>data/sources/</code> 的全部数据，按任务分组、
-     <strong>全量展示、不做截断</strong>，与本仓库流水线数据一并推送到 GitHub。</p>
+  <h2 id="sec9-sources">九、各定时任务独立预测报告<span class="en">Task Reports</span></h2>
+  <p>其余香葱行情定时任务落盘到 <code>data/sources/</code> 的数据，
+     <strong>按任务分别生成独立预测报告</strong>——每个任务一份，含该任务自己的六档预测走势、
+     全部报价明细与核心结论，<strong>互不合并、全量不截断</strong>。下方为入口总览，点击进入各任务独立页。</p>
+  <p><a class="back" href="tasks/index.html">→ 各定时任务 · 独立预测报告（列表页）</a></p>
   {sources_section}
   <div class="legend">口径提示：各任务的报价口径（地头价 / 收购价 / 销地批发价 / 零售价）与单位可能不同，
     跨任务横向比较前请先核对「口径」与「单位」两列；不同口径不可直接横比。</div>
@@ -1200,8 +1406,10 @@ def build_sources_page(src: dict, today: str) -> str:
 </header>
 <div class="card">
   <h2>全部定时任务行情明细<span class="en">All Sources</span></h2>
-  <p>本节汇总其余香葱行情定时任务落盘到 <code>data/sources/</code> 的全部数据，按任务分组、
-     <strong>全量展示、不做截断</strong>。</p>
+  <p>本节列出其余香葱行情定时任务落盘到 <code>data/sources/</code> 的数据。
+     <strong>每个任务各自生成一份独立的预测报告页</strong>（含该任务自己的六档预测走势图、
+     全部报价明细与核心结论），点击卡片下方链接进入；此处只做总览，不把各任务数据合并成一张表。</p>
+  <p><a class="back" href="tasks/index.html">→ 各定时任务 · 独立预测报告（列表页）</a></p>
   {body}
   <div class="legend">口径提示：不同任务的报价口径与单位可能不同，横向比较前请先核对
     「口径」与「单位」两列；不同口径不可直接横比。</div>
@@ -1231,7 +1439,8 @@ def build_index(reports: list[dict]) -> str:
     {items or '<tr><td colspan="3">暂无报告</td></tr>'}
   </table>
   <p><a class="back" href="latest.html">→ 查看最新一期报告</a></p>
-  <p><a class="back" href="sources.html">→ 多源行情汇总 · 全部定时任务（全量明细）</a></p>
+  <p><a class="back" href="sources.html">→ 多源行情汇总 · 全部定时任务（总览）</a></p>
+  <p><a class="back" href="tasks/index.html">→ 各定时任务 · 独立预测报告（每任务一份）</a></p>
 </div>
 </div></body></html>
 """
@@ -1249,12 +1458,26 @@ def write_outputs(html_doc: str, ctx: dict) -> dict:
     with open(os.path.join(OUTPUT_DIR, "latest.html"), "w", encoding="utf-8") as f:
         f.write(html_doc)
 
-    # sources.html（多源行情汇总独立页，Pages 上可直接访问全量明细）
+    # sources.html（多源行情汇总总览页，Pages 上可直接访问）
     try:
         with open(os.path.join(OUTPUT_DIR, "sources.html"), "w", encoding="utf-8") as f:
             f.write(build_sources_page(ctx.get("sources") or {}, today))
     except Exception:  # noqa: BLE001
         pass  # 汇总页失败不影响主报告
+
+    # tasks/*.html（每个定时任务一份独立预测报告，互不合并）
+    try:
+        _items = (ctx.get("sources") or {}).get("items") or []
+        tasks_dir = os.path.join(OUTPUT_DIR, "tasks")
+        os.makedirs(tasks_dir, exist_ok=True)
+        for _it in _items:
+            _slug = _task_slug(_it)
+            with open(os.path.join(tasks_dir, f"{_slug}.html"), "w", encoding="utf-8") as f:
+                f.write(build_task_page(_it, today))
+        with open(os.path.join(tasks_dir, "index.html"), "w", encoding="utf-8") as f:
+            f.write(build_tasks_index(_items, today))
+    except Exception:  # noqa: BLE001
+        pass  # 任务页失败不影响主报告
 
     # data.json（机器可读）
     payload = {

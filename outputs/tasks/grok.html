@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>grok香葱 · 预测报告 2026-10-26</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#ffffff; --ink:#1c2024; --sub:#5b6470; --line:#e4e8ee;
+  --up:#d93025; --down:#0f9960; --flat:#8a93a0;
+  --accent:#0f6fd6; --accent-soft:#eaf2fd; --warn:#fff5e6; --warn-line:#f0a500;
+}
+*{box-sizing:border-box;}
+body{margin:0;padding:32px 20px 64px;background:var(--bg);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+  font-size:15px;line-height:1.75;}
+.wrap{max-width:1040px;margin:0 auto;}
+header{margin-bottom:28px;}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:.5px;}
+.meta{color:var(--sub);font-size:13px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:22px 24px;margin-bottom:20px;}
+h2{font-size:19px;margin:0 0 4px;padding-left:11px;border-left:4px solid var(--accent);}
+h2 .en{font-size:12px;color:var(--sub);font-weight:400;margin-left:8px;}
+h3{font-size:15.5px;margin:20px 0 8px;color:#2b3440;}
+p{margin:8px 0;}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+th{background:#f2f5f9;font-weight:600;color:#3a4453;white-space:nowrap;}
+td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.up{color:var(--up);font-weight:600;}
+.down{color:var(--down);font-weight:600;}
+.flat{color:var(--flat);}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0;}
+.kpi{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+.kpi .lab{font-size:12px;color:var(--sub);}
+.kpi .val{font-size:22px;font-weight:700;margin:2px 0;font-variant-numeric:tabular-nums;}
+.kpi .chg{font-size:12px;}
+.tag{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:20px;margin-right:6px;
+  border:1px solid var(--line);background:#f4f6f9;color:var(--sub);}
+.t-up{background:#fdecea;border-color:#f5c6c0;color:var(--up);}
+.t-down{background:#e9f7f0;border-color:#bfe5d1;color:var(--down);}
+.t-flat{background:#f0f2f5;border-color:#dde1e7;color:#5b6470;}
+.t-key{background:var(--accent-soft);border-color:#bcd9f7;color:var(--accent);}
+.note{background:var(--warn);border-left:3px solid var(--warn-line);padding:10px 14px;
+  border-radius:0 8px 8px 0;font-size:13.5px;margin:12px 0;color:#6b4a00;}
+ul{margin:8px 0;padding-left:22px;}
+li{margin:4px 0;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:760px){.split{grid-template-columns:1fr;}}
+footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-height:1.9;}
+.legend{font-size:12px;color:var(--sub);margin-top:6px;}
+.back{display:inline-block;margin-bottom:12px;font-size:13px;color:var(--accent);text-decoration:none;}
+/* ---- 盘口直览（小程序样式） ---- */
+.board{background:linear-gradient(180deg,#e8f2ff 0%,#ffffff 150px);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;margin:12px 0 16px;}
+.board-head{padding:14px 18px 8px;}
+.board-title{font-size:18px;font-weight:700;letter-spacing:.5px;}
+.board-meta{font-size:12px;color:var(--sub);margin-top:4px;}
+.board-meta b{color:var(--up);font-weight:600;}
+.board-tabs{display:flex;gap:4px;padding:0 14px;border-bottom:2px solid var(--accent);}
+.bt{padding:8px 18px;font-size:14px;color:var(--sub);cursor:pointer;user-select:none;
+  border-radius:8px 8px 0 0;margin-bottom:-2px;}
+.bt.active{background:var(--accent);color:#fff;font-weight:600;}
+.board-panel{display:none;padding:4px 12px 12px;}
+.board-panel.active{display:block;}
+.btab{margin:8px 0 0;}
+.btab th{background:#eaf2fc;color:#33506e;}
+.btab td{border:none;border-bottom:1px solid #eef1f5;background:transparent;}
+.btab tr:nth-child(even) td{background:#f7fafd;}
+.btab .name{font-weight:600;}
+.btab .arrow-up{color:var(--up);font-weight:700;}
+.btab .arrow-down{color:var(--down);font-weight:700;}
+.btab .arrow-flat{color:var(--flat);}
+.see{color:var(--accent);font-size:12.5px;text-decoration:none;white-space:nowrap;}
+.see:hover{text-decoration:underline;}
+.mini-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:10px 4px 4px;}
+.mini-sum .ms{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;}
+.mini-sum .ms b{display:block;font-size:15px;margin-bottom:2px;}
+/* ---- 盘口统计条 ---- */
+.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px;margin:10px 4px 2px;}
+.bar{background:#f4f8fd;border:1px solid var(--line);border-radius:10px;padding:8px 14px;
+  font-size:12.5px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;}
+.bar .bt2{font-weight:700;font-size:13px;color:var(--accent);}
+.bar i{font-style:normal;color:var(--sub);}
+.bar i b{color:var(--ink,#1a2733);font-size:14px;}
+.bar i.up b{color:var(--up);}
+.bar i.down b{color:var(--down);}
+.bar i.k b{color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>grok香葱</h1>
+  <div class="meta">数据日 2026-10-26 ｜ 生成于 2026-10-26 03:59 ｜
+    覆盖范围 全国 / 云南 / 泸西县 ｜ 任务 ID <code>bc2b2b8d-46a3-467e-a403-177edbac6841</code> ｜
+    <a class="back" href="index.html">← 全部任务报告</a> ·
+    <a class="back" href="../latest.html">← 当日日报</a></div>
+</header>
+<div class="card">
+  <h2>本期核心结论<span class="en">Summary</span></h2>
+  <p>泸西红香葱产地分级交货 4.35 元/公斤（黑香葱 3.85），高于全国批发均价 3.81 约 14.2%，体现分级与品牌溢价。11/2—11/8 连续阴雨+降温至 8—10℃ 压缩采收窗口但非总量短缺，核心矛盾是「品质分化」。全国供给宽松（在田面积同比+100万亩）限制涨幅，综合风险等级中。</p>
+  <div class="grid">
+    <div class="kpi"><div class="lab">行情报价</div><div class="val">7</div>
+      <div class="chg">条 · 全量不截断</div></div>
+    <div class="kpi"><div class="lab">预测档位</div><div class="val">6</div>
+      <div class="chg">档 · 六周期</div></div>
+    <div class="kpi"><div class="lab">六档中枢序列</div>
+      <div class="val" style="font-size:18px">4.40 / 4.50 / 4.60 / 4.55 / 5.15 / 5.80</div>
+      <div class="chg">元/公斤</div></div>
+    <div class="kpi"><div class="lab">数据文件</div>
+      <div class="val" style="font-size:15px">grok_2026-10-26.json</div>
+      <div class="chg">data/sources/</div></div>
+  </div>
+</div>
+<div class="card">
+  <h2>六档价格预测<span class="en">Forecast</span></h2>
+  <svg viewBox="0 0 880 250" width="100%" style="max-width:880px;display:block;margin:6px auto" role="img" aria-label="六档预测中枢柱状图"><line x1="56" y1="194.0" x2="860.0" y2="194.0" stroke="rgba(128,128,128,.25)" stroke-width="1"/><text x="48" y="198.0" text-anchor="end" font-size="11" fill="#8a8f98">3.64</text><line x1="56" y1="152.0" x2="860.0" y2="152.0" stroke="rgba(128,128,128,.25)" stroke-width="1"/><text x="48" y="156.0" text-anchor="end" font-size="11" fill="#8a8f98">4.62</text><line x1="56" y1="110.0" x2="860.0" y2="110.0" stroke="rgba(128,128,128,.25)" stroke-width="1"/><text x="48" y="114.0" text-anchor="end" font-size="11" fill="#8a8f98">5.60</text><line x1="56" y1="68.0" x2="860.0" y2="68.0" stroke="rgba(128,128,128,.25)" stroke-width="1"/><text x="48" y="72.0" text-anchor="end" font-size="11" fill="#8a8f98">6.58</text><line x1="56" y1="26.0" x2="860.0" y2="26.0" stroke="rgba(128,128,128,.25)" stroke-width="1"/><text x="48" y="30.0" text-anchor="end" font-size="11" fill="#8a8f98">7.56</text><rect x="94.0" y="161.4" width="58.0" height="32.6" rx="4" fill="#4a7fd4" opacity="0.85"/><line x1="123.0" y1="170.0" x2="123.0" y2="152.9" stroke="#d1495b" stroke-width="2"/><line x1="108.5" y1="170.0" x2="137.5" y2="170.0" stroke="#d1495b" stroke-width="2"/><line x1="108.5" y1="152.9" x2="137.5" y2="152.9" stroke="#d1495b" stroke-width="2"/><text x="123.0" y="154.4" text-anchor="middle" font-size="12" font-weight="600" fill="#4a7fd4">4.40</text><text x="123.0" y="214.0" text-anchor="middle" font-size="11" fill="#6b7280">3天</text><text x="123.0" y="230.0" text-anchor="middle" font-size="10" fill="#9aa0a6">10-28</text><rect x="228.0" y="157.1" width="58.0" height="36.9" rx="4" fill="#4a7fd4" opacity="0.85"/><line x1="257.0" y1="167.9" x2="257.0" y2="146.4" stroke="#d1495b" stroke-width="2"/><line x1="242.5" y1="167.9" x2="271.5" y2="167.9" stroke="#d1495b" stroke-width="2"/><line x1="242.5" y1="146.4" x2="271.5" y2="146.4" stroke="#d1495b" stroke-width="2"/><text x="257.0" y="150.1" text-anchor="middle" font-size="12" font-weight="600" fill="#4a7fd4">4.50</text><text x="257.0" y="214.0" text-anchor="middle" font-size="11" fill="#6b7280">7天</text><text x="257.0" y="230.0" text-anchor="middle" font-size="10" fill="#9aa0a6">11-01</text><rect x="362.0" y="152.9" width="58.0" height="41.1" rx="4" fill="#4a7fd4" opacity="0.85"/><line x1="391.0" y1="165.7" x2="391.0" y2="137.9" stroke="#d1495b" stroke-width="2"/><line x1="376.5" y1="165.7" x2="405.5" y2="165.7" stroke="#d1495b" stroke-width="2"/><line x1="376.5" y1="137.9" x2="405.5" y2="137.9" stroke="#d1495b" stroke-width="2"/><text x="391.0" y="145.9" text-anchor="middle" font-size="12" font-weight="600" fill="#4a7fd4">4.60</text><text x="391.0" y="214.0" text-anchor="middle" font-size="11" fill="#6b7280">15天</text><text x="391.0" y="230.0" text-anchor="middle" font-size="10" fill="#9aa0a6">11-09</text><rect x="496.0" y="155.0" width="58.0" height="39.0" rx="4" fill="#4a7fd4" opacity="0.85"/><line x1="525.0" y1="170.0" x2="525.0" y2="135.7" stroke="#d1495b" stroke-width="2"/><line x1="510.5" y1="170.0" x2="539.5" y2="170.0" stroke="#d1495b" stroke-width="2"/><line x1="510.5" y1="135.7" x2="539.5" y2="135.7" stroke="#d1495b" stroke-width="2"/><text x="525.0" y="148.0" text-anchor="middle" font-size="12" font-weight="600" fill="#4a7fd4">4.55</text><text x="525.0" y="214.0" text-anchor="middle" font-size="11" fill="#6b7280">1个月</text><text x="525.0" y="230.0" text-anchor="middle" font-size="10" fill="#9aa0a6">11-25</text><rect x="630.0" y="129.3" width="58.0" height="64.7" rx="4" fill="#4a7fd4" opacity="0.85"/><line x1="659.0" y1="157.1" x2="659.0" y2="97.1" stroke="#d1495b" stroke-width="2"/><line x1="644.5" y1="157.1" x2="673.5" y2="157.1" stroke="#d1495b" stroke-width="2"/><line x1="644.5" y1="97.1" x2="673.5" y2="97.1" stroke="#d1495b" stroke-width="2"/><text x="659.0" y="122.3" text-anchor="middle" font-size="12" font-weight="600" fill="#4a7fd4">5.15</text><text x="659.0" y="214.0" text-anchor="middle" font-size="11" fill="#6b7280">2个月</text><text x="659.0" y="230.0" text-anchor="middle" font-size="10" fill="#9aa0a6">12-25</text><rect x="764.0" y="101.4" width="58.0" height="92.6" rx="4" fill="#4a7fd4" opacity="0.85"/><line x1="793.0" y1="144.3" x2="793.0" y2="50.0" stroke="#d1495b" stroke-width="2"/><line x1="778.5" y1="144.3" x2="807.5" y2="144.3" stroke="#d1495b" stroke-width="2"/><line x1="778.5" y1="50.0" x2="807.5" y2="50.0" stroke="#d1495b" stroke-width="2"/><text x="793.0" y="94.4" text-anchor="middle" font-size="12" font-weight="600" fill="#4a7fd4">5.80</text><text x="793.0" y="214.0" text-anchor="middle" font-size="11" fill="#6b7280">3个月</text><text x="793.0" y="230.0" text-anchor="middle" font-size="10" fill="#9aa0a6">01-25</text><text x="56" y="16" font-size="11" fill="#8a8f98">元/公斤 · 柱=中枢，红线=预测区间</text></svg>
+  <table><tr><th>周期</th><th>目标日</th><th>品项</th><th>中枢(元/kg)</th><th>区间</th><th>涨跌</th><th>置信度</th></tr><tr><td>未来3天</td><td>2026-10-28</td><td>泸西红香葱分级交货价</td><td class="num">4.40</td><td class="num">4.20 – 4.60</td><td class="num">+1.1%</td><td>高</td></tr><tr><td>未来7天</td><td>2026-11-01</td><td>泸西红香葱分级交货价</td><td class="num">4.50</td><td class="num">4.25 – 4.75</td><td class="num">+3.4%</td><td>高</td></tr><tr><td>未来15天</td><td>2026-11-09</td><td>泸西红香葱分级交货价</td><td class="num">4.60</td><td class="num">4.30 – 4.95</td><td class="num">+5.7%</td><td>中高</td></tr><tr><td>未来1个月</td><td>2026-11-25</td><td>泸西红香葱分级交货价</td><td class="num">4.55</td><td class="num">4.20 – 5.00</td><td class="num">+4.6%</td><td>中</td></tr><tr><td>未来2个月</td><td>2026-12-25</td><td>泸西红香葱分级交货价</td><td class="num">5.15</td><td class="num">4.50 – 5.90</td><td class="num">+18.4%</td><td>中低</td></tr><tr><td>未来3个月</td><td>2027-01-25</td><td>泸西红香葱分级交货价</td><td class="num">5.80</td><td class="num">4.80 – 7.00</td><td class="num">+33.3%</td><td>低</td></tr></table>
+  <div class="legend">预测区间为情景假设区间，非统计置信区间；不同任务的基准口径不同，
+    横向比较前请先核对「品项／口径」列。</div>
+</div>
+<div class="card">
+  <h2>全部行情报价明细 · 7 条<span class="en">All Quotes</span></h2>
+  <p>下列为该任务本期采集到的<strong>全部</strong>报价行，按日期倒序，不做截断。</p>
+  <table><tr><th>日期</th><th>品项</th><th>市场</th><th>省份</th><th>口径</th><th>区间</th><th>中枢</th><th>单位</th><th>来源</th><th>备注</th></tr><tr><td>2026-10-24</td><td class="name">黑香葱</td><td>泸西县</td><td>云南</td><td>产地批发价</td><td class="num">3.60 – 4.10</td><td class="num">3.85</td><td>元/公斤</td><td>泸西产地菜价</td><td>产地分级交货价，较红葱低约 12%</td></tr><tr><td>2026-10-24</td><td class="name">红香葱</td><td>泸西县</td><td>云南</td><td>产地批发价</td><td class="num">4.10 – 4.60</td><td class="num">4.35</td><td>元/公斤</td><td>泸西产地菜价</td><td>产地分级交货价，洗选分级后出货价，主力商超/餐饮渠道</td></tr><tr><td>2026-10-24</td><td class="name">红香葱</td><td>云南产地综合</td><td>云南</td><td>产地收购价</td><td class="num">4.40 – 5.00</td><td class="num">4.70</td><td>元/公斤</td><td>云南产地蔬菜综合交易价格</td><td>含通海、呈贡等</td></tr><tr><td>2026-10-24</td><td class="name">小葱</td><td>昆明王旗营</td><td>云南</td><td>销地批发价</td><td class="num">— – —</td><td class="num">3.50</td><td>元/公斤</td><td>昆明王旗营蔬菜批发市场</td><td>成交量 35 吨</td></tr><tr><td>2026-10-23</td><td class="name">香葱（通货毛菜）</td><td>泸西县</td><td>云南</td><td>产地地头价</td><td class="num">— – —</td><td class="num">2.62</td><td>元/公斤</td><td>惠农网</td><td>1.31 元/斤，15000 斤起批，未分级毛菜；与 4.35 差异来自是否分级洗选</td></tr><tr><td>2026-10-20</td><td class="name">葱类</td><td>全国15家重点批发市场</td><td>全国</td><td>销地批发价</td><td class="num">1.60 – 9.00</td><td class="num">3.81</td><td>元/公斤</td><td>农业农村部信息中心</td><td>区间 1.60（辽朝阳）—9.00（重庆龙门）</td></tr><tr><td>2026-10-20</td><td class="name">28种蔬菜</td><td>全国周均价</td><td>全国</td><td>销地批发价</td><td class="num">— – —</td><td class="num">4.36</td><td>元/公斤</td><td>农业农村部第40周</td><td>环比 −3.3%，同比 −12.3%</td></tr></table>
+  <div class="legend">口径提示：产地地头价 / 产地收购价 / 产地批发价 / 销地批发价 / 零售价
+    属不同交易环节，不可直接横比。</div>
+</div>
+<footer>自动化生成 · 任务 grok香葱 落盘 → 日报流水线汇总 → 推送 GitHub
+  ｜ 汇总日期 2026-10-26</footer>
+
+</div>
+</body>
+</html>
