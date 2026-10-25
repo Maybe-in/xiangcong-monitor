@@ -77,6 +77,16 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
 .mini-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:10px 4px 4px;}
 .mini-sum .ms{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;}
 .mini-sum .ms b{display:block;font-size:15px;margin-bottom:2px;}
+/* ---- 盘口统计条 ---- */
+.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px;margin:10px 4px 2px;}
+.bar{background:#f4f8fd;border:1px solid var(--line);border-radius:10px;padding:8px 14px;
+  font-size:12.5px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;}
+.bar .bt2{font-weight:700;font-size:13px;color:var(--accent);}
+.bar i{font-style:normal;color:var(--sub);}
+.bar i b{color:var(--ink,#1a2733);font-size:14px;}
+.bar i.up b{color:var(--up);}
+.bar i.down b{color:var(--down);}
+.bar i.k b{color:var(--accent);}
 </style>
 </head>
 <body>
@@ -86,7 +96,7 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
   <h1>全国香葱行情日报 · 泸西专题</h1>
   <div class="meta">数据日期：2026-10-25（日）｜
     覆盖周期：未来 3天 / 1周 / 半月 / 1月 / 2月 / 3月 ｜
-    重点产区：云南·红河州·泸西县 ｜ 生成时间：2026-10-25 09:30（北京时间）</div>
+    重点产区：云南·红河州·泸西县 ｜ 生成时间：2026-10-25 10:08（北京时间）</div>
 </header>
 
 <div class="card">
@@ -109,7 +119,7 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
 </div>
 
 <div class="card">
-  <h2>二、历史长周期行情回顾（12 / 24 / 36 / 60 / 120 个月）<span class="en">Long-term Review</span></h2>
+  <h2 id="sec2-longterm">二、历史长周期行情回顾（12 / 24 / 36 / 60 / 120 个月）<span class="en">Long-term Review</span></h2>
   
   <p>把视线拉长到十年，香葱产地价整体呈「产能扩张驱动的中枢下移 + 极端天气驱动的脉冲式尖峰」双重特征。120个月（2016-11 → 2026-10）：4.56 → 2.62 元/公斤，下行 -42.5%，年化 -5.4%，区间高 11.00（2024-08）、低 1.26（2020-07）。分窗口看：12个月（2025-11 → 2026-10）：3.26 → 2.62 元/公斤，下行 -19.6%，年化 -21.2%，区间高 3.26（2025-11）、低 1.51（2026-07）；24个月（2024-11 → 2026-10）：2.62 → 2.62 元/公斤，基本走平 +0.0%，年化 +0.0%，区间高 3.68（2025-04）、低 1.51（2026-07）；36个月（2023-11 → 2026-10）：3.28 → 2.62 元/公斤，下行 -20.1%，年化 -7.4%，区间高 11.00（2024-08）、低 1.51（2026-07）；60个月（2021-11 → 2026-10）：3.20 → 2.62 元/公斤，下行 -18.1%，年化 -4.0%，区间高 11.00（2024-08）、低 1.51（2026-07）。十年间的最高峰出现在 2024-08 的 11.00 元/公斤（泸西小香葱产地价一度报 6 元/斤），最低谷出现在 2020-07 的 1.26 元/公斤（疫情冲击叠加季节性夏谷）。峰谷倍数约 8.7 倍，是典型的「高波动小宗调味菜」。中枢下移的主因是产能扩张：泸西自 2013 年引种，至 2024 年底已形成年产 118 万吨、产值 35-36 亿元的全国最大蔬菜单品基地（占云南香葱总产 60% 以上），叠加水肥一体化（单人管理面积从 5-6 亩提升到 30 亩）带来的成本下降，使长期价格重心系统性下移。但每年 4-5 月（春峰）、11-1 月（冬旺/春节备货）两个旺季，以及台风、寒潮、雪灾等极端天气，仍会制造 2-5 倍的短期脉冲。</p>
   <h3>2.1 口径与数据质量说明</h3>
@@ -293,13 +303,13 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
 </div>
 
 <div class="card">
-  <h2>三、全国天气与自然灾害<span class="en">Weather &amp; Disaster</span></h2>
+  <h2 id="sec3-weather">三、全国天气与自然灾害<span class="en">Weather &amp; Disaster</span></h2>
   <h3>3.1 泸西县逐日预报（Open-Meteo，未来16天）</h3>
   
     <table>
       <tr><th>日期</th><th>天气</th><th>最低/最高(℃)</th><th>降水(mm)</th>
           <th>最大风速(m/s)</th><th>降水概率(%)</th></tr>
-      <tr><td>2026-10-25</td><td>雾</td><td class="num">14.4 / 26.0</td><td class="num">0.0</td><td class="num">15.8</td><td class="num">0</td></tr><tr><td>2026-10-26</td><td>雾</td><td class="num">17.3 / 26.9</td><td class="num">0.0</td><td class="num">13.5</td><td class="num">31</td></tr><tr><td>2026-10-27</td><td>毛毛雨</td><td class="num">16.3 / 22.8</td><td class="num">4.5</td><td class="num">10.8</td><td class="num">92</td></tr><tr><td>2026-10-28</td><td>雾</td><td class="num">15.4 / 22.5</td><td class="num">0.0</td><td class="num">18.7</td><td class="num">45</td></tr><tr><td>2026-10-29</td><td>毛毛雨</td><td class="num">13.8 / 22.8</td><td class="num">0.3</td><td class="num">13.8</td><td class="num">13</td></tr><tr><td>2026-10-30</td><td>雾</td><td class="num">14.7 / 23.6</td><td class="num">0.0</td><td class="num">17.2</td><td class="num">21</td></tr><tr><td>2026-10-31</td><td>雾</td><td class="num">14.4 / 25.8</td><td class="num">0.0</td><td class="num">23.3</td><td class="num">4</td></tr><tr><td>2026-11-01</td><td>毛毛雨</td><td class="num">13.6 / 26.1</td><td class="num">2.1</td><td class="num">21.3</td><td class="num">48</td></tr><tr><td>2026-11-02</td><td>毛毛雨</td><td class="num">11.8 / 18.0</td><td class="num">2.1</td><td class="num">13.4</td><td class="num">38</td></tr><tr><td>2026-11-03</td><td>阴</td><td class="num">12.2 / 17.9</td><td class="num">0.0</td><td class="num">9.0</td><td class="num">28</td></tr><tr><td>2026-11-04</td><td>阴</td><td class="num">13.2 / 23.2</td><td class="num">0.0</td><td class="num">16.8</td><td class="num">29</td></tr><tr><td>2026-11-05</td><td>毛毛雨</td><td class="num">14.8 / 22.9</td><td class="num">3.6</td><td class="num">15.9</td><td class="num">36</td></tr><tr><td>2026-11-06</td><td>阵雨</td><td class="num">12.2 / 16.4</td><td class="num">26.7</td><td class="num">15.1</td><td class="num">45</td></tr><tr><td>2026-11-07</td><td>毛毛雨</td><td class="num">11.3 / 16.4</td><td class="num">7.5</td><td class="num">5.3</td><td class="num">46</td></tr><tr><td>2026-11-08</td><td>毛毛雨</td><td class="num">11.3 / 18.5</td><td class="num">2.5</td><td class="num">8.4</td><td class="num">34</td></tr><tr><td>2026-11-09</td><td>毛毛雨</td><td class="num">13.3 / 16.6</td><td class="num">3.9</td><td class="num">10.3</td><td class="num">37</td></tr>
+      <tr><td>2026-10-25</td><td>雾</td><td class="num">14.4 / 26.0</td><td class="num">0.0</td><td class="num">15.8</td><td class="num">0</td></tr><tr><td>2026-10-26</td><td>雾</td><td class="num">17.3 / 26.9</td><td class="num">0.0</td><td class="num">13.5</td><td class="num">31</td></tr><tr><td>2026-10-27</td><td>毛毛雨</td><td class="num">16.3 / 22.8</td><td class="num">4.5</td><td class="num">10.8</td><td class="num">92</td></tr><tr><td>2026-10-28</td><td>雾</td><td class="num">15.4 / 22.5</td><td class="num">0.0</td><td class="num">18.7</td><td class="num">45</td></tr><tr><td>2026-10-29</td><td>毛毛雨</td><td class="num">13.8 / 22.8</td><td class="num">0.3</td><td class="num">13.8</td><td class="num">13</td></tr><tr><td>2026-10-30</td><td>雾</td><td class="num">14.7 / 23.6</td><td class="num">0.0</td><td class="num">17.2</td><td class="num">21</td></tr><tr><td>2026-10-31</td><td>雾</td><td class="num">14.4 / 25.8</td><td class="num">0.0</td><td class="num">23.3</td><td class="num">4</td></tr><tr><td>2026-11-01</td><td>毛毛雨</td><td class="num">13.6 / 26.1</td><td class="num">2.1</td><td class="num">21.3</td><td class="num">48</td></tr><tr><td>2026-11-02</td><td>毛毛雨</td><td class="num">11.8 / 18.0</td><td class="num">2.1</td><td class="num">13.4</td><td class="num">38</td></tr><tr><td>2026-11-03</td><td>阴</td><td class="num">12.2 / 17.9</td><td class="num">0.0</td><td class="num">9.0</td><td class="num">28</td></tr><tr><td>2026-11-04</td><td>阴</td><td class="num">13.2 / 23.2</td><td class="num">0.0</td><td class="num">16.8</td><td class="num">29</td></tr><tr><td>2026-11-05</td><td>毛毛雨</td><td class="num">14.8 / 22.9</td><td class="num">3.6</td><td class="num">15.9</td><td class="num">36</td></tr><tr><td>2026-11-06</td><td>阵雨</td><td class="num">12.2 / 16.4</td><td class="num">26.7</td><td class="num">15.1</td><td class="num">45</td></tr><tr><td>2026-11-07</td><td>毛毛雨</td><td class="num">11.3 / 16.4</td><td class="num">7.5</td><td class="num">5.3</td><td class="num">46</td></tr><tr><td>2026-11-08</td><td>毛毛雨</td><td class="num">11.3 / 18.5</td><td class="num">2.5</td><td class="num">8.4</td><td class="num">49</td></tr><tr><td>2026-11-09</td><td>毛毛雨</td><td class="num">13.3 / 16.6</td><td class="num">3.9</td><td class="num">10.3</td><td class="num">53</td></tr>
     </table>
   <h3>3.2 窗口统计</h3>
   
@@ -315,11 +325,11 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
     <tr><td>泸西</td><td>云南</td><td>核心产区</td><td class="num">24.3</td><td class="num">4.8</td><td class="num">1</td><td>毛毛雨</td></tr><tr><td>昆明</td><td>云南</td><td>产区/销区</td><td class="num">24.0</td><td class="num">8.6</td><td class="num">3</td><td>毛毛雨</td></tr><tr><td>师宗</td><td>云南</td><td>产区</td><td class="num">24.5</td><td class="num">3.4</td><td class="num">1</td><td>毛毛雨</td></tr><tr><td>南宁</td><td>广西</td><td>产区</td><td class="num">31.6</td><td class="num">1.2</td><td class="num">0</td><td>阴</td></tr><tr><td>玉林</td><td>广西</td><td>产区</td><td class="num">31.8</td><td class="num">0.0</td><td class="num">0</td><td>晴间多云</td></tr><tr><td>湛江</td><td>广东</td><td>产区</td><td class="num">30.7</td><td class="num">2.4</td><td class="num">1</td><td>毛毛雨</td></tr><tr><td>寿光</td><td>山东</td><td>产区</td><td class="num">18.4</td><td class="num">2.7</td><td class="num">1</td><td>阴</td></tr><tr><td>兴化</td><td>江苏</td><td>加工带</td><td class="num">21.3</td><td class="num">5.4</td><td class="num">2</td><td>毛毛雨</td></tr><tr><td>北京</td><td>北京</td><td>销区</td><td class="num">14.3</td><td class="num">7.7</td><td class="num">1</td><td>毛毛雨</td></tr><tr><td>上海</td><td>上海</td><td>销区</td><td class="num">21.8</td><td class="num">2.2</td><td class="num">1</td><td>阴</td></tr><tr><td>广州</td><td>广东</td><td>销区</td><td class="num">32.1</td><td class="num">0.0</td><td class="num">0</td><td>阴</td></tr><tr><td>杭州</td><td>浙江</td><td>销区</td><td class="num">23.2</td><td class="num">1.9</td><td class="num">1</td><td>毛毛雨</td></tr><tr><td>武汉</td><td>湖北</td><td>销区</td><td class="num">22.3</td><td class="num">4.3</td><td class="num">2</td><td>阴</td></tr><tr><td>成都</td><td>四川</td><td>销区</td><td class="num">21.1</td><td class="num">0.2</td><td class="num">0</td><td>阴</td></tr><tr><td>西安</td><td>陕西</td><td>销区</td><td class="num">16.5</td><td class="num">16.7</td><td class="num">3</td><td>毛毛雨</td></tr>
   </table>
   <h3>3.4 生效气象预警（中央气象台，共 100 条）</h3>
-  <p><span class="tag">大雾 × 63</span> <span class="tag">大风 × 10</span> <span class="tag">寒潮 × 10</span> <span class="tag">台风 × 8</span> <span class="tag">霜冻 × 8</span> <span class="tag">沙尘暴 × 1</span></p>
+  <p><span class="tag">大雾 × 58</span> <span class="tag">大风 × 14</span> <span class="tag">寒潮 × 10</span> <span class="tag">霜冻 × 10</span> <span class="tag">台风 × 7</span> <span class="tag">沙尘暴 × 1</span></p>
   
     <table>
       <tr><th>区域</th><th>预警</th><th>属性</th><th>产业链影响</th><th>发布时间</th></tr>
-      <tr><td>浙江省丽水市缙云县</td><td><span class="tag t-flat">大风黄色</span></td><td>产区</td><td>设施受损、蒸腾加剧</td><td>2026/10/25 08:13</td></tr><tr><td>浙江省台州市椒江区</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/25 08:41</td></tr><tr><td>浙江省台州市温岭市</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/25 06:55</td></tr><tr><td>浙江省温州市乐清市</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/24 21:37</td></tr><tr><td>浙江省温州市平阳县</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/24 21:30</td></tr><tr><td>浙江省温州市永嘉县</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/24 21:49</td></tr><tr><td>浙江省温州市洞头区</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/24 21:26</td></tr><tr><td>浙江省温州市苍南县</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/24 21:24</td></tr><tr><td>浙江省绍兴市嵊州市</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/24 22:25</td></tr><tr><td>内蒙古自治区乌海市</td><td><span class="tag t-down">寒潮蓝色</span></td><td>销区</td><td>生长停滞，但常推高菜价（双刃剑）</td><td>2026/10/25 08:36</td></tr><tr><td>内蒙古自治区呼和浩特市和林格尔县</td><td><span class="tag t-down">寒潮蓝色</span></td><td>销区</td><td>生长停滞，但常推高菜价（双刃剑）</td><td>2026/10/25 08:46</td></tr><tr><td>内蒙古自治区呼和浩特市土默特左旗</td><td><span class="tag t-down">寒潮蓝色</span></td><td>销区</td><td>生长停滞，但常推高菜价（双刃剑）</td><td>2026/10/25 09:18</td></tr>
+      <tr><td>浙江省丽水市缙云县</td><td><span class="tag t-flat">大风黄色</span></td><td>产区</td><td>设施受损、蒸腾加剧</td><td>2026/10/25 08:13</td></tr><tr><td>浙江省台州市椒江区</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/25 08:41</td></tr><tr><td>浙江省台州市温岭市</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/25 06:55</td></tr><tr><td>浙江省温州市乐清市</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/24 21:37</td></tr><tr><td>浙江省温州市平阳县</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/24 21:30</td></tr><tr><td>浙江省温州市永嘉县</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/24 21:49</td></tr><tr><td>浙江省绍兴市嵊州市</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/24 22:25</td></tr><tr><td>浙江省舟山市定海区</td><td><span class="tag t-down">台风蓝色</span></td><td>产区</td><td>大风+强降水，设施受损、采收中断、物流受阻</td><td>2026/10/25 09:30</td></tr><tr><td>内蒙古自治区乌海市</td><td><span class="tag t-down">寒潮蓝色</span></td><td>销区</td><td>生长停滞，但常推高菜价（双刃剑）</td><td>2026/10/25 08:36</td></tr><tr><td>内蒙古自治区呼和浩特市和林格尔县</td><td><span class="tag t-down">寒潮蓝色</span></td><td>销区</td><td>生长停滞，但常推高菜价（双刃剑）</td><td>2026/10/25 08:46</td></tr><tr><td>内蒙古自治区呼和浩特市土默特左旗</td><td><span class="tag t-down">寒潮蓝色</span></td><td>销区</td><td>生长停滞，但常推高菜价（双刃剑）</td><td>2026/10/25 09:18</td></tr><tr><td>内蒙古自治区呼和浩特市赛罕区</td><td><span class="tag t-down">寒潮蓝色</span></td><td>销区</td><td>生长停滞，但常推高菜价（双刃剑）</td><td>2026/10/25 09:14</td></tr>
     </table>
 </div>
 
@@ -370,13 +380,19 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
       <tr><th>品名</th><th>区间</th><th>昨日</th><th>今日</th><th>涨跌</th><th>趋势</th><th>查看</th></tr>
       <tr><td class="name">红葱（滇中集散·净葱）<div class="legend">滇中产区集散成交均价（精品净葱口径），模型基准</div></td><td class="num">4.1-4.6</td><td class="num">4.35</td><td class="num">4.35</td><td class="num">0.00</td><td class="num"><span class="arrow-flat">→</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">红葱 A货（精品净葱）<span class="tag">推算</span><div class="legend">取当日集散区间上沿，仅供结构参考</div></td><td class="num">4.1-4.6</td><td class="num">—</td><td class="num">4.60</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">黑葱（滇中集散·净葱）<div class="legend">滇中产区集散成交均价（净葱口径）</div></td><td class="num">3.6-4.1</td><td class="num">3.86</td><td class="num">3.85</td><td class="num">-0.01</td><td class="num"><span class="arrow-down">↓</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">黑葱 A货（中条）<span class="tag">推算</span><div class="legend">取当日集散区间上沿</div></td><td class="num">—</td><td class="num">—</td><td class="num">4.10</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">红香葱（云南全省综合）</td><td class="num">4.4-5.0</td><td class="num">—</td><td class="num">4.70</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">黑葱（云南全省综合）</td><td class="num">3.9-4.4</td><td class="num">—</td><td class="num">4.15</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">小葱（昆明王旗营批发）</td><td class="num">3.5</td><td class="num">3.50</td><td class="num">3.50</td><td class="num">0.00</td><td class="num"><span class="arrow-flat">→</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">红葱 包地价（泸西·毛葱）<span class="tag">接口</span><div class="legend">惠农网产地接口·泸西香葱 2026-10-24 报价 2.62元/kg——地头通货毛葱口径；毛葱经加工去损折算集散净葱口径（×约1.66）≈ 4.35 元/kg，与上行「滇中集散」衔接，两口径不可直接对比</div></td><td class="num">2.62 元/kg</td><td class="num">—</td><td class="num">2620 元/吨</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-spot" onclick="bdGo(1,'sec6-spot',this);return false;">查看</a></td></tr><tr><td class="name">红铁杆 期货盘<span class="tag">模型</span><div class="legend">全国无葱类期货合约与公开远期盘；取模型2个月远期中枢折算元/吨（情景推演，非成交价）</div></td><td class="num">—</td><td class="num">—</td><td class="num">5440 元/吨</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">黑葱中条 A货（2吨）<span class="tag">推算</span><div class="legend">整车吨级批发盘无公开接口；按滇中黑葱集散上沿×1000 推算元/吨</div></td><td class="num">—</td><td class="num">—</td><td class="num">4100 元/吨</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-spot" onclick="bdGo(1,'sec6-spot',this);return false;">查看</a></td></tr>
     </table>
+    
+    <div class="bars">
+      <div class="bar"><span class="bt2">产地涨跌家数</span><i class="k">同口径可比 <b>3</b> 项</i><i class="up">涨 <b>0</b></i><i class="down">跌 <b>1</b></i><i>平 <b>2</b></i><i>平均变动 <b class="down">0.00</b> 元/kg</i></div>
+      <div class="bar"><span class="bt2">分口径中枢（今日，元/kg）</span><i>滇中集散·净葱：红葱 <b>4.35</b> / 黑葱 <b>3.85</b></i><i>云南全省综合：红香葱 <b>4.70</b> / 黑葱 <b>4.15</b></i><i>销区批发（王旗营）：小葱 <b>3.50</b></i>
+        <i class="k">不同口径不可横比</i></div>
+    </div>
     <div class="legend">「推算」档取当日集散区间上沿，非实际成交；「接口」档为惠农网公开产地报价（地头通货毛葱口径，
       ×约1.66 折算集散净葱口径后才与上行集散价同口径）；「模型」档为价格预测中枢折算（非成交价）。
       红葱包地价取自惠农网泸西产地接口；黑葱A货吨盘按集散上沿推算；红铁杆期货盘无公开合约，取模型2个月远期中枢。</div>
   </div>
   <div class="board-panel">
     <p style="margin:10px 4px 0"><strong>接口自动行情 · 北京新发地农产品批发市场</strong>
-      <span class="tag">抓取时间 2026-10-25 09:30:56</span></p>
+      <span class="tag">抓取时间 2026-10-25 10:08:52</span></p>
     <table class="btab">
       <tr><th>品名</th><th>最新日期</th><th>区间(元/kg)</th><th>中枢</th>
           <th>较前日</th><th>趋势</th><th>产地</th><th>查看</th></tr>
@@ -385,7 +401,7 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
     <div class="legend">数据来源：新发地批发市场公开行情接口（原始单位元/斤，×2 换算为元/公斤）；
       每日运行自动抓取并归档至 data/market_quotes.json。</div>
     <p style="margin:10px 4px 0"><strong>接口自动行情 · 惠农网产地报价（云南产区）</strong>
-      <span class="tag">抓取时间 2026-10-25 09:30:57</span></p>
+      <span class="tag">抓取时间 2026-10-25 10:08:55</span></p>
     <table class="btab">
       <tr><th>品名</th><th>日期</th><th>产地</th><th>元/公斤</th><th>元/吨</th></tr>
       <tr><td class="name">四季葱<span class="tag">惠农网</span></td><td>2026-10-24</td><td>云南大理白族自治州宾川县</td><td class="num">3.40</td><td class="num">3400.00</td></tr><tr><td class="name">火葱<span class="tag">惠农网</span></td><td>2026-10-24</td><td>云南大理白族自治州弥渡县</td><td class="num">7.02</td><td class="num">7020.00</td></tr><tr><td class="name">香葱<span class="tag">惠农网</span></td><td>2026-10-24</td><td>云南红河哈尼族彝族自治州泸西县</td><td class="num">2.62</td><td class="num">2620.00</td></tr>
@@ -393,6 +409,11 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
     <div class="legend">数据来源：惠农网（cnhnb.com）公开产地行情页，原始单位元/斤、×2 换算元/公斤、×2000 换算元/吨；
       覆盖云南泸西/宾川/弥渡等产区，每日运行自动抓取（接口限流时自动回退最近一次缓存，并保留原报价日期）。
       注意：产地挂牌为地头通货毛葱口径，与滇中集散净葱口径（×约1.66）不可直接对比。</div>
+    <div class="bars">
+      <div class="bar"><span class="bt2">接口行情涨跌家数</span><i class="k">同口径可比 <b>3</b> 项</i><i class="up">涨 <b>0</b></i><i class="down">跌 <b>0</b></i><i>平 <b>3</b></i><i>平均变动 <b class="">0.00</b> 元/kg</i></div>
+      <div class="bar"><span class="bt2">分口径中枢（今日，元/kg）</span><i>销区批发（新发地）：香葱 <b>8.00</b> / 小葱 <b>4.00</b> / 大葱 <b>2.00</b></i><i>产地毛葱（惠农网）：四季葱（宾川县） <b>3.40</b> / 火葱（弥渡县） <b>7.02</b> / 香葱（泸西县） <b>2.62</b></i>
+        <i class="k">不同口径不可横比</i></div>
+    </div>
     <table id="sec6-spot">
       <tr><th>日期</th><th>市场/口径</th><th>品项</th><th>报价区间</th><th>中枢(元/kg)</th><th>说明</th></tr>
       <tr><td>2026-10-24</td><td>云南产地综合交易价</td><td>红香葱</td><td class="num">4.4-5.0</td><td class="num">4.70</td><td>全省综合报价，含精品与通货加权</td></tr><tr><td>2026-10-24</td><td>云南产地综合交易价</td><td>黑葱</td><td class="num">3.9-4.4</td><td class="num">4.15</td><td>全省综合报价</td></tr><tr><td>2026-10-24</td><td>滇中产区（泸西/通海片区）</td><td>红葱</td><td class="num">4.1-4.6</td><td class="num">4.35</td><td>产地地头/集散报价，模型基准口径</td></tr><tr><td>2026-10-24</td><td>滇中产区（泸西/通海片区）</td><td>黑葱</td><td class="num">3.6-4.1</td><td class="num">3.85</td><td>产地地头/集散报价</td></tr><tr><td>2026-10-24</td><td>昆明景臻·王旗营</td><td>小葱</td><td class="num">3.5</td><td class="num">3.50</td><td>批发均价，成交 35 吨，市场综合均价 4.11</td></tr><tr><td>2026-10-24</td><td>黄淮农产品（河南周口）</td><td>葱</td><td class="num">1.80</td><td class="num">1.80</td><td>北方销区，本地秋葱上市压制</td></tr><tr><td>2026-10-24</td><td>四川成都农产品中心批发市场</td><td>大葱</td><td class="num">4.00</td><td class="num">4.00</td><td>西南销区，非香葱口径，仅作对比</td></tr><tr><td>2026-10-24</td><td>太原河西农产品</td><td>大葱</td><td class="num">3.00-3.40</td><td class="num">3.20</td><td>华北销区，非香葱口径，仅作对比</td></tr><tr><td>2026-10-21</td><td>云南云菜集团（农业农村部信息中心）</td><td>葱</td><td class="num">5.00</td><td class="num">5.00</td><td>企业出货报价，高于产地综合价</td></tr><tr><td>2026-10-20</td><td>西藏领峰农副产品</td><td>小葱</td><td class="num">13.00</td><td class="num">13.00</td><td>高原远端销区，运距决定溢价</td></tr>
@@ -402,13 +423,31 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
   <div class="board-panel">
     <div class="mini-sum">
       <div class="ms"><b>今日判断：磨底企稳</b>
-        产区红葱（集散·净葱）4.35 元/kg 连续持平，深度下跌暂告段落，近端以稳为主。</div>
+        产区红葱（集散·净葱）4.35 元/kg 较上一采集日持平（前次下跌 1.75 元/kg 后止跌），近端以稳为主。</div>
       <div class="ms"><b>近端（3天-半月）</b>
         中枢 4.40 → 5.08 元/kg，
         天气平稳、后市温和回升。</div>
       <div class="ms"><b>远端（1-3月）</b>
         冬旺 + 春节备货支撑，3 月目标日 2027-01-23 情景中枢
         5.25 元/kg（±16%），属情景推演。</div>
+      <div class="ms"><b>模型路径（红香葱中枢）</b>
+        基准 <b>4.35</b> → 未来3天 <b>4.40</b>（+1.1%）→
+        未来1月 <b>5.30</b>（+21.9%）→
+        未来3月 <b>5.25</b>（+20.7%）。
+        远端区间 4.38–6.12 元/kg，置信度 低（情景推演）。
+        <a class="see" href="#sec6-forecast">看预测表 →</a></div>
+      <div class="ms"><b>天气驱动（未来 1 周 / 半月）</b>
+        一周累计降水 <b>4.8</b> mm、雨日
+        <b>1</b> 天、大风 <b>3</b> 天；
+        半月累计降水 <b>44.5</b> mm、雨日
+        <b>6</b> 天。
+        <a class="see" href="#sec3-weather">看天气 →</a></div>
+      <div class="ms"><b>长周期与季节性</b>
+        近 12 个月 2025-11→2026-10：
+        中枢 3.26 → 2.62 元/kg
+        （-19.6%），年化波动 58%；
+        当前 10 月季节指数 1.03，处于<b>过渡窗口</b>。
+        <a class="see" href="#sec2-longterm">看长周期 →</a></div><div class="ms"><b>关键跟踪变量</b><div class='legend'>· 11 月江南、西南降水偏多 5-8 成未兑现，产区持续晴好</div><div class='legend'>· 厄尔尼诺峰值叠加，江南、西南降水偏多 5-8 成</div><div class='legend'>· 西北太平洋预计再生成 1 个台风，影响华南/华东沿海</div><a class="see" href="#sec8-risks">看风险 →</a></div>
     </div></div>
 </div>
 <script>
@@ -560,7 +599,7 @@ function bdGo(i, anchor, el){
 </div>
 
 <div class="card">
-  <h2>八、风险提示与假设<span class="en">Risks &amp; Assumptions</span></h2>
+  <h2 id="sec8-risks">八、风险提示与假设<span class="en">Risks &amp; Assumptions</span></h2>
   <table>
     <tr><th>风险项</th><th>方向</th><th>触发条件</th><th>应对</th></tr>
     <tr><td>极端天气缺位（最大下行风险）</td><td><span class="tag t-down">利空</span></td><td>11 月江南、西南降水偏多 5-8 成未兑现，产区持续晴好</td><td>下修半月/一月预测 3-8 个百分点，低位周期延长</td></tr><tr><td>强降雨/渍涝超预期</td><td><span class="tag t-up">利多</span></td><td>厄尔尼诺峰值叠加，江南、西南降水偏多 5-8 成</td><td>上调涨幅，同时关注采收与运输中断风险</td></tr><tr><td>新增台风</td><td><span class="tag t-flat">中性偏空</span></td><td>西北太平洋预计再生成 1 个台风，影响华南/华东沿海</td><td>销区物流受阻、短期需求受抑，随后补库反弹</td></tr><tr><td>销区本地菜持续替代</td><td><span class="tag t-down">利空</span></td><td>中东部及南方城市本地秋菜上市规模扩大</td><td>压缩云南外调菜份额，压制产区价格弹性</td></tr><tr><td>冬季阶段性强寒潮/雨雪冰冻</td><td><span class="tag t-up">波动加剧</span></td><td>12 月-次年 2 月寒潮频次略偏多、冷暖起伏大</td><td>或阶段性跳涨 15%-30%，但同时阻断运输，持续时间短</td></tr><tr><td>终端消费恢复不及预期</td><td><span class="tag t-down">利空</span></td><td>渠道去库存周期拉长</td><td>压制行情弹性，延长低迷期</td></tr><tr><td>节前备货行情提前透支/延后</td><td><span class="tag t-flat">波动加剧</span></td><td>2027 年春节较晚（2 月 6 日），备货节奏易被分散到 1 月全月</td><td>3 月档位峰值可能被摊平，建议在 1 月上中旬分批兑现而非押注单点</td></tr><tr><td>云南单极供给下的集中上市踩踏</td><td><span class="tag t-down">利空</span></td><td>冬季全国供给高度依赖云南，若产区天气持续利好、茬口集中</td><td>12-1 月出现阶段性供给洪峰，压制节前涨幅</td></tr>
