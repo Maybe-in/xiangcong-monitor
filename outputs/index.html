@@ -77,6 +77,16 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
 .mini-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:10px 4px 4px;}
 .mini-sum .ms{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;}
 .mini-sum .ms b{display:block;font-size:15px;margin-bottom:2px;}
+/* ---- 盘口统计条 ---- */
+.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px;margin:10px 4px 2px;}
+.bar{background:#f4f8fd;border:1px solid var(--line);border-radius:10px;padding:8px 14px;
+  font-size:12.5px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;}
+.bar .bt2{font-weight:700;font-size:13px;color:var(--accent);}
+.bar i{font-style:normal;color:var(--sub);}
+.bar i b{color:var(--ink,#1a2733);font-size:14px;}
+.bar i.up b{color:var(--up);}
+.bar i.down b{color:var(--down);}
+.bar i.k b{color:var(--accent);}
 </style>
 </head>
 <body>
@@ -89,7 +99,7 @@ footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-
 <div class="card">
   <table>
     <tr><th>日期</th><th>红香葱(元/kg)</th><th>黑葱(元/kg)</th><th>生成时间</th></tr>
-    <tr><td><a class="back" href="香葱行情日报_2026-10-25.html">2026-10-25</a></td><td class="num">4.35</td><td class="num">3.85</td><td>2026-10-25 09:30（北京时间）</td></tr><tr><td><a class="back" href="香葱行情日报_2026-10-24.html">2026-10-24</a></td><td class="num">4.35</td><td class="num">3.86</td><td>2026-10-24 10:20:22</td></tr>
+    <tr><td><a class="back" href="香葱行情日报_2026-10-25.html">2026-10-25</a></td><td class="num">4.35</td><td class="num">3.85</td><td>2026-10-25 10:03（北京时间）</td></tr><tr><td><a class="back" href="香葱行情日报_2026-10-24.html">2026-10-24</a></td><td class="num">4.35</td><td class="num">3.86</td><td>2026-10-24 10:20:22</td></tr>
   </table>
   <p><a class="back" href="latest.html">→ 查看最新一期报告</a></p>
 </div>
