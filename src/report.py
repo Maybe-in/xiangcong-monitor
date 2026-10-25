@@ -267,25 +267,32 @@ def build_board(ctx: dict) -> str:
     # 行：品名 | 区间 | 昨日 | 今日 | 涨跌 | 趋势 | 查看
     rows = []
 
-    def add(name, rg, prev, today, tag="", link="#sec6-forecast", note=""):
+    def add(name, rg, prev, today, tag="", link="#sec6-forecast", note="", onclick=None):
         chg = None
-        if prev is not None and today is not None:
+        if prev is not None and today is not None and not isinstance(today, str):
             chg = round(today - prev, 2)
         chg_txt = "—" if chg is None else ("0.00" if abs(chg) < 0.005 else f"{chg:+.2f}")
         prev_txt = "—" if prev is None else num(prev)
-        today_txt = "暂无报价" if today is None else num(today)
+        if today is None:
+            today_txt = "暂无报价"
+        elif isinstance(today, str):
+            today_txt = esc(today)  # 已含单位（如「2620 元/吨」）
+        else:
+            today_txt = num(today)
         if tag == "待接入":
             chg_txt, arrow = "—", '<span class="arrow-flat">—</span>'
         else:
             arrow = _arrow(chg)
         tag_html = f'<span class="tag">{esc(tag)}</span>' if tag else ""
         note_html = f'<div class="legend">{esc(note)}</div>' if note else ""
+        # onclick 为受信任的内部 JS，不经 esc 转义
+        onclick_html = f' onclick="{onclick}"' if onclick else ""
         rows.append(
             f'<tr><td class="name">{esc(name)}{tag_html}{note_html}</td>'
             f'<td class="num">{esc(rg)}</td><td class="num">{prev_txt}</td>'
             f'<td class="num">{today_txt}</td><td class="num">{chg_txt}</td>'
             f'<td class="num">{arrow}</td>'
-            f'<td><a class="see" href="{link}">查看</a></td></tr>')
+            f'<td><a class="see" href="{link}"{onclick_html}>查看</a></td></tr>')
 
     # 产地行情（泸西/滇中）——通货为实测，A货为区间上沿推算
     add("红葱（通货）", rng(q_red_local), red_prev, red_today,
@@ -307,8 +314,8 @@ def build_board(ctx: dict) -> str:
 
     # 等级盘口 / 包地 / 期货盘 —— 真实数据源映射（禁止用推算冒充接口）
     if lushi:
-        add("红葱 包地价", f"{lushi['mid']} 元/kg", None, lushi["ton"], tag="接口",
-            link="#sec6-spot",
+        add("红葱 包地价", f"{lushi['mid']} 元/kg", None, f"{int(lushi['ton'])} 元/吨",
+            tag="接口", link="#sec6-spot", onclick="bdGo(1,'sec6-spot',this);return false;",
             note=f"惠农网产地接口·泸西香葱 {lushi['date']} 报价 {lushi['mid']}元/kg"
                  f"（折算 {int(lushi['ton'])} 元/吨）；地慧数农包地一口价无公开接口，暂以产地价参考")
     else:
@@ -317,13 +324,15 @@ def build_board(ctx: dict) -> str:
     # 红铁杆期货盘：全国无葱类期货合约与公开远期盘，取模型2个月远期中枢折算元/吨
     red_fc = ctx["forecast"].get("红香葱", {}).get("rows", [])
     red2 = red_fc[4]["center"] if len(red_fc) > 4 else None
-    add("红铁杆 期货盘", "—", None, round(red2 * 1000) if red2 else None, tag="模型",
+    add("红铁杆 期货盘", "—", None,
+        (f"{round(red2 * 1000)} 元/吨" if red2 else None), tag="模型",
         link="#sec6-forecast",
         note="全国无葱类期货合约与公开远期盘；取模型2个月远期中枢折算元/吨（情景推演，非成交价）")
     # 黑葱中条 A货（2吨）整车吨级批发盘：无公开接口，按滇中黑葱通货上沿×1000推算元/吨
     blk_up = up_edge(q_blk_local)
-    add("黑葱中条 A货（2吨）", "—", None, round(blk_up * 1000) if blk_up else None,
-        tag="推算", link="#sec6-spot",
+    add("黑葱中条 A货（2吨）", "—", None,
+        (f"{round(blk_up * 1000)} 元/吨" if blk_up else None),
+        tag="推算", link="#sec6-spot", onclick="bdGo(1,'sec6-spot',this);return false;",
         note="整车吨级批发盘无公开接口；按滇中黑葱通货上沿×1000 推算元/吨")
 
     red = ctx["forecast"]["红香葱"]
@@ -453,6 +462,11 @@ function bdTab(i, el){{
   panels.forEach(function(p){{ p.classList.remove('active'); }});
   el.classList.add('active');
   panels[i].classList.add('active');
+}}
+function bdGo(i, anchor, el){{
+  bdTab(i, el);
+  var a = document.getElementById(anchor);
+  if(a){{ a.scrollIntoView({{behavior:'smooth', block:'start'}}); }}
 }}
 </script>"""
 def build_longterm_section(lt: dict, summary: str = "", conclusion=None) -> str:
