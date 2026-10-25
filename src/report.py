@@ -1189,6 +1189,30 @@ def render_report(ctx: dict) -> str:
     return html_doc
 
 
+def build_sources_page(src: dict, today: str) -> str:
+    """独立页：多源行情汇总全量总览（供 GitHub Pages 直接访问）。"""
+    body = build_sources_section(src)
+    return f"""{page('多源行情汇总 · 全部定时任务 · ' + today)}
+<header>
+  <h1>多源行情汇总 · 全部定时任务</h1>
+  <div class="meta">数据日期：{esc(today)}（北京时间）｜ 数据源：data/sources/*.json ｜
+    全量展示、不截断 ｜ <a class="back" href="index.html">← 返回报告归档</a></div>
+</header>
+<div class="card">
+  <h2>全部定时任务行情明细<span class="en">All Sources</span></h2>
+  <p>本节汇总其余香葱行情定时任务落盘到 <code>data/sources/</code> 的全部数据，按任务分组、
+     <strong>全量展示、不做截断</strong>。</p>
+  {body}
+  <div class="legend">口径提示：不同任务的报价口径与单位可能不同，横向比较前请先核对
+    「口径」与「单位」两列；不同口径不可直接横比。</div>
+</div>
+<footer>自动化生成 · 由多个香葱行情定时任务落盘、日报流水线汇总并推送到 GitHub</footer>
+</div>
+</body>
+</html>
+"""
+
+
 def build_index(reports: list[dict]) -> str:
     items = "".join(
         f'<tr><td><a class="back" href="{esc(r["file"])}">{esc(r["date"])}</a></td>'
@@ -1207,6 +1231,7 @@ def build_index(reports: list[dict]) -> str:
     {items or '<tr><td colspan="3">暂无报告</td></tr>'}
   </table>
   <p><a class="back" href="latest.html">→ 查看最新一期报告</a></p>
+  <p><a class="back" href="sources.html">→ 多源行情汇总 · 全部定时任务（全量明细）</a></p>
 </div>
 </div></body></html>
 """
@@ -1223,6 +1248,13 @@ def write_outputs(html_doc: str, ctx: dict) -> dict:
     # latest.html
     with open(os.path.join(OUTPUT_DIR, "latest.html"), "w", encoding="utf-8") as f:
         f.write(html_doc)
+
+    # sources.html（多源行情汇总独立页，Pages 上可直接访问全量明细）
+    try:
+        with open(os.path.join(OUTPUT_DIR, "sources.html"), "w", encoding="utf-8") as f:
+            f.write(build_sources_page(ctx.get("sources") or {}, today))
+    except Exception:  # noqa: BLE001
+        pass  # 汇总页失败不影响主报告
 
     # data.json（机器可读）
     payload = {

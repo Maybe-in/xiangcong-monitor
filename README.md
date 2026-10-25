@@ -22,6 +22,8 @@ xiangcong-yuce/
 │   ├── price.py                         # 价格历史 + 六档预测模型
 │   ├── longterm.py                      # 10 年长周期序列重建 + 窗口统计
 │   └── report.py                        # HTML 报告渲染（含 SVG 走势图）
+├── automations/                         # 定时任务配置库（6 个任务的完整提示词快照）
+│   └── README.md                        # 任务索引 / 协作链路 / 恢复指南
 ├── data/
 │   ├── price_history.json               # 价格历史（observed 实测 / model 估算）
 │   └── sources/                         # 其余定时任务按统一 schema 落盘的行情数据
