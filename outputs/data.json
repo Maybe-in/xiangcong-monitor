@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "generated_at": "2026-10-25 09:24（北京时间）",
+  "generated_at": "2026-10-25 09:30（北京时间）",
   "price_source": "人工录入实测观测点（9 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -212,7 +212,7 @@
     "hazard_stats": [
       [
         "大雾",
-        64
+        63
       ],
       [
         "大风",
@@ -220,7 +220,7 @@
       ],
       [
         "寒潮",
-        9
+        10
       ],
       [
         "台风",
@@ -391,6 +391,20 @@
         "risk_score": 3
       },
       {
+        "region": "内蒙古自治区呼和浩特市土默特左旗",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "寒潮",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/10/25 09:18",
+        "url": "http://www.nmc.cn/publish/alarm/15012141600000_20261025091834.html",
+        "weight": 3,
+        "impact": "生长停滞，但常推高菜价（双刃剑）",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
         "region": "内蒙古自治区呼和浩特市赛罕区",
         "province": "内蒙古",
         "city": "自治",
@@ -497,20 +511,6 @@
         "rank": 3,
         "issuetime": "2026/10/25 08:04",
         "url": "http://www.nmc.cn/publish/alarm/52058141600000_20261025080442.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "贵州省贵阳市息烽县",
-        "province": "贵州",
-        "city": "省贵阳",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/10/24 21:38",
-        "url": "http://www.nmc.cn/publish/alarm/52012241600000_20261024213841.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": false,
