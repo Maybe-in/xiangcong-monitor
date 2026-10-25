@@ -205,6 +205,7 @@ def build_snapshot(days: int = 6, archive: bool = True) -> dict:
     """抓取 + 归档。返回 snapshot 供 run.py 使用。
 
     返回结构新增 cnhnb 字段：惠农网云南产地行情（泸西等产区葱类报价）。
+    惠农网限流（503）时自动回退最近一次归档缓存（保留原日期并标注 cached）。
     """
     snap = fetch_xinfadi(days=days)
     snap["fetched_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -214,6 +215,33 @@ def build_snapshot(days: int = 6, archive: bool = True) -> dict:
         cnhnb = fetch_cnhnb()
     except Exception as exc:  # noqa: BLE001
         cnhnb = {"rows": [], "ok": False, "error": str(exc)}
+    if archive:
+        try:
+            arch = load_archive()
+            if cnhnb.get("ok") and cnhnb.get("rows"):
+                seen = {(r["item"], r["origin"], r["date"])
+                        for r in arch.get("cnhnb_history", [])}
+                for r in cnhnb["rows"]:
+                    key = (r["item"], r["origin"], r["date"])
+                    if key not in seen:
+                        arch.setdefault("cnhnb_history", []).append(r)
+                        seen.add(key)
+                arch["cnhnb_history"] = sorted(
+                    arch["cnhnb_history"],
+                    key=lambda r: (r["date"], r["origin"], r["item"]))[-2000:]
+                save_archive(arch)
+            elif arch.get("cnhnb_history"):
+                # 抓取失败（如 503 限流）：回退最近一次归档，保留原日期，诚实标注缓存
+                latest = max(r["date"] for r in arch["cnhnb_history"])
+                cached = [dict(r, cached=True)
+                          for r in arch["cnhnb_history"] if r["date"] == latest]
+                if cached:
+                    cnhnb = {"rows": cached, "ok": True, "cached": True,
+                             "error": cnhnb.get("error", ""),
+                             "fetched_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                             "market": "惠农网（cnhnb.com）云南产地行情（缓存 " + latest + "）"}
+        except Exception:  # noqa: BLE001
+            pass  # 归档/回退失败不影响报告生成
     snap["cnhnb"] = cnhnb
     if archive and snap["ok"]:
         try:

@@ -171,5 +171,43 @@
       "unit": "元/公斤",
       "source": "xinfadi"
     }
+  ],
+  "cnhnb_history": [
+    {
+      "item": "四季葱",
+      "date": "2026-10-24",
+      "origin": "云南大理白族自治州宾川县",
+      "low": null,
+      "high": null,
+      "mid": 3.4,
+      "ton": 3400.0,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    },
+    {
+      "item": "火葱",
+      "date": "2026-10-24",
+      "origin": "云南大理白族自治州弥渡县",
+      "low": null,
+      "high": null,
+      "mid": 7.02,
+      "ton": 7020.0,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-10-24",
+      "origin": "云南红河哈尼族彝族自治州泸西县",
+      "low": null,
+      "high": null,
+      "mid": 2.62,
+      "ton": 2620.0,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    }
   ]
 }
