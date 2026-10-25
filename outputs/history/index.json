@@ -1,0 +1,16 @@
+{
+  "series": "luxi-brief",
+  "repo": "Maybe-in/xiangcong-monitor",
+  "rule": "只追加 outputs/history/YYYY-MM-DD.json。已有日期禁止覆盖或删除。同日重跑若文件已在，则跳过。",
+  "entries": [
+    {
+      "date": "2026-10-26",
+      "json": "outputs/history/2026-10-26.json",
+      "html": "outputs/luxi/2026-10-26.html",
+      "wholesaleMedian": 6.5,
+      "luxiRealization": 3.05,
+      "risk": "低",
+      "compiledAt": "2026-10-26 04:10"
+    }
+  ]
+}

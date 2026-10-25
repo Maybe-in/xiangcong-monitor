@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-26",
+  "series": "luxi-brief",
+  "compiledAt": "2026-10-26 04:10",
+  "timezone": "Asia/Shanghai",
+  "focus": "云南省红河州泸西县",
+  "headline": "产区天气温和，批发价高于春末，泸西综合实现价仍在每公斤 3 元附近",
+  "overallRisk": "低",
+  "summary": [
+    "泸西近 30 天再分析平均最高气温 24.6°C、最低 14.8°C，降水约 59 毫米，无霜冻、无高温日。未来 10 天仅 10 月 27 日、11 月 1 日有小雨。",
+    "农业农村部 2026-10-04 共 41 个批发市场小葱报价，中位数 6.50 元/公斤，均价 7.07。昆明王旗营 7.00，北京新发地 5.80。",
+    "可比市场 5 月 29 日中位数约 4.98，到 10 月 4 日约 6.35，升约 27.5%。10 月 1 日到 4 日多数持平，昆明由 6.00 升至 7.00。",
+    "泸西基地 13–13.5 万亩，复种约 45 万亩次，产量约 118 万吨，产值约 36 亿元，综合实现价约 3.05 元/公斤。日发运超过 2000 吨。",
+    "综合风险低。结构性风险是连作病害。春节备货窗口在 2027-02-06 前后，三个月预测置信度偏低。"
+  ],
+  "prices": {
+    "wholesaleAsOf": "2026-10-04",
+    "source": "农业农村部信息中心",
+    "n": 41,
+    "min": 2.0,
+    "max": 14.5,
+    "mean": 7.07,
+    "median": 6.5,
+    "p25": 5.5,
+    "p75": 8.8,
+    "kunmingWangqiying": 7.0,
+    "kunmingOct1": 6.0,
+    "beijingXinfadi": 5.8,
+    "pairedMayMedian": 4.98,
+    "pairedOctMedian": 6.35,
+    "luxiRealizationYuanPerKg": 3.05,
+    "luxiRealizationMethod": "产值36亿元 / 产量118万吨，不是当日地头牌价"
+  },
+  "regionAvg": [
+    {"region": "东北", "avg": 3.0, "n": 2},
+    {"region": "华北", "avg": 4.72, "n": 6},
+    {"region": "西北", "avg": 6.75, "n": 8},
+    {"region": "华南", "avg": 6.8, "n": 2},
+    {"region": "西南", "avg": 7.27, "n": 3},
+    {"region": "华东", "avg": 7.53, "n": 13},
+    {"region": "华中", "avg": 8.98, "n": 6}
+  ],
+  "forecastYuanPerKg": [
+    {"horizon": "3天", "wholesale": [6.1, 6.5, 7.0], "luxi": [2.7, 3.0, 3.3], "confidence": "较高"},
+    {"horizon": "1周", "wholesale": [6.0, 6.6, 7.3], "luxi": [2.6, 3.0, 3.4], "confidence": "中高"},
+    {"horizon": "半月", "wholesale": [5.9, 6.7, 7.6], "luxi": [2.6, 3.1, 3.5], "confidence": "中等"},
+    {"horizon": "1个月", "wholesale": [6.0, 7.0, 8.2], "luxi": [2.7, 3.2, 3.7], "confidence": "中等"},
+    {"horizon": "2个月", "wholesale": [6.2, 7.4, 8.8], "luxi": [2.8, 3.3, 4.0], "confidence": "偏低"},
+    {"horizon": "3个月", "wholesale": [6.4, 8.0, 9.6], "luxi": [2.9, 3.5, 4.3], "confidence": "偏低"}
+  ],
+  "risks": [
+    {"name": "短时降水", "level": "低"},
+    {"name": "霜冻", "level": "低"},
+    {"name": "连作病害", "level": "中"},
+    {"name": "价格急跌", "level": "低"},
+    {"name": "台风与干旱", "level": "低"}
+  ],
+  "luxi": {
+    "areaMuWan": "13-13.5",
+    "replantMuWan": 45,
+    "outputWanTon": 118,
+    "valueYiYuan": 36,
+    "dailyShipTon": 2000
+  },
+  "immutable": true,
+  "note": "本文件按日期归档。已存在的日期不得覆盖。旧版香葱行情日报 HTML 另册保存。"
+}
