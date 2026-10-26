@@ -34,6 +34,7 @@ from __future__ import annotations
 import glob
 import json
 import os
+import re
 from datetime import date, timedelta
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -97,6 +98,19 @@ def _norm_forecast(f: dict) -> dict | None:
     }
 
 
+def _slug_from_filename(fname: str) -> str:
+    """从落盘文件名取任务 slug，与 report._task_slug 口径一致。
+
+    gemini_2026-10-26.json -> gemini；无日期后缀时整体作为 slug。
+    """
+    base = (fname or "").rsplit(".", 1)[0]
+    head, _, tail = base.rpartition("_")
+    if head and len(tail) == 10 and tail[4] == "-":
+        base = head
+    base = re.sub(r"[^\w\u4e00-\u9fff-]", "-", base).strip("-")
+    return base or "task"
+
+
 def _read_one(path: str) -> dict | None:
     """读取单个源文件并规范化；损坏文件返回 None（不影响其他文件）。"""
     try:
@@ -148,6 +162,20 @@ def load_sources(window_days: int = DEFAULT_WINDOW_DAYS) -> dict:
         items.append(one)
 
     items.sort(key=lambda x: (x["date"], x["task"]), reverse=True)
+
+    # 每个任务只保留窗口内最新一期：数据 dated D+N 的生成任务每天落一个新文件，
+    # 若不去重，同一任务会按天重复出现在卡片墙、任务页与归档统计里（份数虚高）。
+    # 保留「当天漏跑可回退到窗口内前几天」的设计初衷，但每个任务仅计一份。
+    seen: set[str] = set()
+    latest: list[dict] = []
+    for it in items:
+        slug = _slug_from_filename(it["file"])
+        if slug in seen:
+            continue
+        seen.add(slug)
+        latest.append(it)
+    items = latest
+
     return {
         "ok": bool(items),
         "items": items,
