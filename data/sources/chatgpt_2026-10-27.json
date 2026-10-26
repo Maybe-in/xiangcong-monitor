@@ -1,0 +1,63 @@
+{
+  "task": "香葱行情监测chat gpt",
+  "task_id": "0a26a286-95dc-4caf-b14a-c4344b691c9b",
+  "date": "2026-10-27",
+  "generated_at": "2026-10-27 06:40",
+  "market_scope": "全国 / 云南 / 红河州 / 泸西县",
+  "quotes": [
+    {"date":"2026-10-27","item":"小葱（通货）","variety":"","market":"泸西县","province":"云南","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.54,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"基准序列，原价1.27元/斤，较昨日0.00（平稳）；平台标注大量上市"},
+    {"date":"2026-10-27","item":"四季小葱","variety":"","market":"泸西县","province":"云南","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.20,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"原价1.10元/斤"},
+    {"date":"2026-10-27","item":"小葱","variety":"","market":"云南大理宾川县","province":"云南","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.68,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"原价1.34元/斤"},
+    {"date":"2026-10-27","item":"小葱","variety":"","market":"广东湛江徐闻县","province":"广东","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.92,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"原价1.46元/斤"},
+    {"date":"2026-10-27","item":"小葱","variety":"","market":"河北唐山滦南县","province":"河北","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.80,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"原价1.40元/斤"},
+    {"date":"2026-10-27","item":"小葱","variety":"","market":"河北邯郸永年区","province":"河北","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.78,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"原价1.39元/斤，大量上市"},
+    {"date":"2026-10-27","item":"小葱","variety":"","market":"江苏盐城大丰区","province":"江苏","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.66,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"原价1.33元/斤"},
+    {"date":"2026-10-27","item":"小葱","variety":"","market":"河南焦作武陟县","province":"河南","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.54,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"原价1.27元/斤，与泸西同价"},
+    {"date":"2026-10-27","item":"小葱","variety":"","market":"河南平顶山汝州市","province":"河南","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.34,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"原价1.17元/斤，大量上市"},
+    {"date":"2026-10-27","item":"小葱","variety":"","market":"广西柳州柳江区","province":"广西","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":3.14,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"原价1.57元/斤，较昨日+0.02"},
+    {"date":"2026-10-27","item":"小葱","variety":"","market":"山东临沂郯城县","province":"山东","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":3.22,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"原价1.61元/斤"},
+    {"date":"2026-10-27","item":"小葱（全国汇总）","variety":"","market":"全国产地均价","province":"全国","price_type":"产地批发价","unit":"元/公斤","low":null,"high":null,"mid":3.08,"source":"一亩田产地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"全国产地货源均价，原价1.54元/斤，较昨日持平"},
+
+    {"date":"2026-10-27","item":"小葱","variety":"北京产","market":"北京京丰岳各庄农副批发市场","province":"北京","price_type":"销地批发价","unit":"元/公斤","low":8.0,"high":10.0,"mid":9.0,"source":"一亩田销地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"本周均价，原价4.0-5.0元/斤"},
+    {"date":"2026-10-27","item":"小葱","variety":"湖北产","market":"湖北武汉白沙洲果蔬市场","province":"湖北","price_type":"销地批发价","unit":"元/公斤","low":7.0,"high":8.0,"mid":7.5,"source":"一亩田销地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"本周均价，原价3.5-4.0元/斤"},
+    {"date":"2026-10-27","item":"小葱","variety":"云南产","market":"河南郑州万邦国际市场","province":"河南","price_type":"销地批发价","unit":"元/公斤","low":6.6,"high":7.6,"mid":7.1,"source":"一亩田销地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"本周均价，原价3.3-3.8元/斤；云南香葱外销对口市场"},
+    {"date":"2026-10-27","item":"小葱","variety":"新疆产","market":"新疆乌鲁木齐北园春","province":"新疆","price_type":"销地批发价","unit":"元/公斤","low":6.0,"high":8.0,"mid":7.0,"source":"一亩田销地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"本周均价，原价3.0-4.0元/斤"},
+    {"date":"2026-10-27","item":"小葱","variety":"冀产","market":"北京新发地农产品批发市场","province":"北京","price_type":"销地批发价","unit":"元/公斤","low":3.0,"high":5.0,"mid":4.0,"source":"一亩田销地行情","source_url":"https://www.ymt.com/hangqing/juhe-7300","note":"本周均价，原价1.5-2.5元/斤"},
+
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"河南开封通许县","province":"河南","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":1.20,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价0.60元/斤，全国最低区间"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"江苏南通海安市","province":"江苏","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":1.70,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价0.85元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"安徽阜阳临泉县","province":"安徽","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":1.76,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价0.88元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"山东潍坊坊子区","province":"山东","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":1.70,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价0.85元/斤，北菜南运低价核心压制源"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"山东潍坊安丘市","province":"山东","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":1.70,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价0.85元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"山东潍坊诸城市","province":"山东","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":1.70,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价0.85元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"河南焦作博爱县","province":"河南","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":1.70,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价0.85元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"湖北宜昌当阳市","province":"湖北","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.30,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价1.15元/斤，较前值-20.59%"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"河北邯郸丛台区","province":"河北","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.56,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价1.28元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"广西柳州柳江区","province":"广西","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":2.98,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价1.49元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"广西柳州柳南区","province":"广西","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":3.40,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价1.70元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"辽宁锦州太和区","province":"辽宁","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":3.40,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价1.70元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"河北邯郸永年区","province":"河北","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":3.74,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价1.87元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"广东湛江徐闻县","province":"广东","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":5.44,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价2.72元/斤"},
+    {"date":"2026-10-26","item":"香葱","variety":"","market":"广东韶关翁源县","province":"广东","price_type":"产地收购价","unit":"元/公斤","low":null,"high":null,"mid":9.86,"source":"惠农网产地行情","source_url":"https://www.cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1/","note":"原价4.93元/斤；疑为精品小包装口径，显著偏离通货区间，不纳入产区均价计算"},
+
+    {"date":"2026-10-26","item":"红香葱","variety":"","market":"云南省产地综合交易价","province":"云南","price_type":"产地批发价","unit":"元/公斤","low":4.4,"high":5.0,"mid":4.70,"source":"云南产地蔬菜综合报价","source_url":"","note":"与10-24持平；mid为区间中值（估算）"},
+    {"date":"2026-10-26","item":"黑葱","variety":"","market":"云南省产地综合交易价","province":"云南","price_type":"产地批发价","unit":"元/公斤","low":3.9,"high":4.4,"mid":4.15,"source":"云南产地蔬菜综合报价","source_url":"","note":"与10-24持平；mid为区间中值（估算）"},
+    {"date":"2026-10-26","item":"红葱","variety":"","market":"通海","province":"云南","price_type":"产地批发价","unit":"元/公斤","low":3.6,"high":4.0,"mid":3.80,"source":"云南产区蔬菜行情（通海菜价）","source_url":"","note":"mid为区间中值（估算）"},
+    {"date":"2026-10-26","item":"黑葱","variety":"","market":"通海","province":"云南","price_type":"产地批发价","unit":"元/公斤","low":3.1,"high":3.6,"mid":3.35,"source":"云南产区蔬菜行情（通海菜价）","source_url":"","note":"mid为区间中值（估算）"},
+    {"date":"2026-10-26","item":"红香葱","variety":"","market":"泸西县","province":"云南","price_type":"产地收购价","unit":"元/公斤","low":3.6,"high":4.0,"mid":3.80,"source":"云南产区蔬菜行情（泸西菜价表）","source_url":"","note":"本期新增独立来源，首次取得泸西本地分品种报价；mid为公布均价"},
+    {"date":"2026-10-26","item":"黑香葱","variety":"","market":"泸西县","province":"云南","price_type":"产地收购价","unit":"元/公斤","low":3.1,"high":3.6,"mid":3.30,"source":"云南产区蔬菜行情（泸西菜价表）","source_url":"","note":"本期新增独立来源；mid为公布均价"},
+    {"date":"2026-10-26","item":"白铁杆","variety":"","market":"云南省产地综合交易价","province":"云南","price_type":"产地批发价","unit":"元/公斤","low":3.4,"high":3.6,"mid":3.50,"source":"华磷肥料菜价行情专报","source_url":"","note":"另报亩价3200-3600元/亩"},
+    {"date":"2026-10-26","item":"小葱","variety":"","market":"昆明景臻·王旗营蔬菜批发市场","province":"云南","price_type":"销地批发价","unit":"元/公斤","low":null,"high":null,"mid":3.50,"source":"农业农村部信息中心（公众号转载）","source_url":"","note":"前一日成交量35吨；同日另一转载来源报3.0元/公斤，存在源间冲突，本期取多数值"},
+
+    {"date":"2026-10-26","item":"蔬菜（28种重点监测）","variety":"","market":"全国农产品批发市场","province":"全国","price_type":"销地批发价","unit":"元/公斤","low":null,"high":null,"mid":4.12,"source":"农业农村部市场与信息化司","source_url":"","note":"环比上周五-1.2%；蔬菜价格指数108.32（-0.26）。葱头-4.0%领跌，韭菜+0.5%、大蒜+0.6%"}
+  ],
+  "forecasts": [
+    {"horizon":"未来3天","target_date":"2026-10-30","item":"香葱","center":2.54,"low":2.44,"high":2.64,"delta_pct":0.0,"confidence":"中高"},
+    {"horizon":"未来7天","target_date":"2026-11-03","item":"香葱","center":2.60,"low":2.44,"high":2.76,"delta_pct":2.4,"confidence":"中"},
+    {"horizon":"未来15天","target_date":"2026-11-11","item":"香葱","center":2.68,"low":2.40,"high":2.96,"delta_pct":5.5,"confidence":"中"},
+    {"horizon":"未来1个月","target_date":"2026-11-27","item":"香葱","center":2.80,"low":2.36,"high":3.24,"delta_pct":10.2,"confidence":"中低"},
+    {"horizon":"未来2个月","target_date":"2026-12-27","item":"香葱","center":2.96,"low":2.36,"high":3.70,"delta_pct":16.5,"confidence":"低"},
+    {"horizon":"未来3个月","target_date":"2027-01-27","item":"香葱","center":3.04,"low":2.30,"high":3.84,"delta_pct":19.7,"confidence":"低"}
+  ],
+  "summary": "泸西县香葱产地通货价1.27元/斤（2.54元/公斤）连续两日持平，平台标注大量上市；本期新增泸西本地菜价独立来源，红香葱3.80元/公斤、黑香葱3.30元/公斤，与一亩田口径存在约50%系统性价差，真实成交中枢或位于1.27-1.90元/斤，基于一亩田口径的预测偏保守。全国蔬菜供给宽松（28种均价4.12元/公斤，环比-1.2%）叠加山东0.85元/斤低价货源压制短期反弹；11/01-11/09连阴雨（降水概率50-80%）叠加11/09降温至12℃为最可能的价格拐点窗口，六阶段预测自3天2.54元/公斤温和上行至3个月3.04元/公斤，2个月以上置信程度为低。"
+}
