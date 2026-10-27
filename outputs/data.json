@@ -1,6 +1,6 @@
 {
   "date": "2026-10-28",
-  "generated_at": "2026-10-28 06:55（北京时间）",
+  "generated_at": "2026-10-28 07:04（北京时间）",
   "price_source": "人工录入实测观测点（15 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -51,7 +51,7 @@
       "tmax": 23.1,
       "tmin": 14.5,
       "precip": 0,
-      "pop": 37,
+      "pop": 12,
       "wind": 19.5,
       "code": 45,
       "weather": "雾"
@@ -71,7 +71,7 @@
       "tmax": 24.1,
       "tmin": 14.9,
       "precip": 0,
-      "pop": 2,
+      "pop": 0,
       "wind": 18.3,
       "code": 45,
       "weather": "雾"
@@ -91,7 +91,7 @@
       "tmax": 26.0,
       "tmin": 16.5,
       "precip": 0.9,
-      "pop": 39,
+      "pop": 31,
       "wind": 21.7,
       "code": 51,
       "weather": "毛毛雨"
@@ -101,7 +101,7 @@
       "tmax": 21.1,
       "tmin": 15.4,
       "precip": 0.3,
-      "pop": 45,
+      "pop": 52,
       "wind": 11.5,
       "code": 51,
       "weather": "毛毛雨"
@@ -111,7 +111,7 @@
       "tmax": 24.1,
       "tmin": 15.4,
       "precip": 0.6,
-      "pop": 53,
+      "pop": 50,
       "wind": 18.5,
       "code": 51,
       "weather": "毛毛雨"
@@ -121,7 +121,7 @@
       "tmax": 24.3,
       "tmin": 15.5,
       "precip": 0.6,
-      "pop": 40,
+      "pop": 28,
       "wind": 16.8,
       "code": 51,
       "weather": "毛毛雨"
@@ -131,7 +131,7 @@
       "tmax": 24.9,
       "tmin": 15.6,
       "precip": 0.6,
-      "pop": 55,
+      "pop": 40,
       "wind": 17.9,
       "code": 51,
       "weather": "毛毛雨"
@@ -151,7 +151,7 @@
       "tmax": 25.1,
       "tmin": 15.7,
       "precip": 0,
-      "pop": 37,
+      "pop": 64,
       "wind": 15.8,
       "code": 45,
       "weather": "雾"
@@ -171,7 +171,7 @@
       "tmax": 20.9,
       "tmin": 14.8,
       "precip": 9.3,
-      "pop": 54,
+      "pop": 57,
       "wind": 17.9,
       "code": 55,
       "weather": "强毛毛雨"
@@ -181,7 +181,7 @@
       "tmax": 22.9,
       "tmin": 14.1,
       "precip": 0.6,
-      "pop": 52,
+      "pop": 46,
       "wind": 19.7,
       "code": 51,
       "weather": "毛毛雨"
@@ -191,7 +191,7 @@
       "tmax": 17.0,
       "tmin": 10.3,
       "precip": 11.1,
-      "pop": 61,
+      "pop": 58,
       "wind": 12.7,
       "code": 80,
       "weather": "阵雨"
@@ -212,11 +212,11 @@
     "hazard_stats": [
       [
         "大风",
-        45
+        44
       ],
       [
         "大雾",
-        38
+        39
       ],
       [
         "暴雨",
