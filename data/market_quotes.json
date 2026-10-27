@@ -440,6 +440,36 @@
       "places": "",
       "unit": "元/公斤",
       "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-10-27",
+      "low": 1.8,
+      "high": 2.2,
+      "mid": 2.0,
+      "places": "冀蒙",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-10-27",
+      "low": 2.6,
+      "high": 5.0,
+      "mid": 3.8,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-10-27",
+      "low": 6.6,
+      "high": 9.0,
+      "mid": 7.8,
+      "places": "",
+      "unit": "元/公斤",
+      "source": "xinfadi"
     }
   ],
   "cnhnb_history": [
@@ -542,6 +572,42 @@
     {
       "item": "香葱",
       "date": "2026-10-26",
+      "origin": "云南红河哈尼族彝族自治州泸西县",
+      "low": 2.62,
+      "high": 2.62,
+      "mid": 2.62,
+      "ton": 2620,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    },
+    {
+      "item": "四季葱",
+      "date": "2026-10-27",
+      "origin": "云南大理白族自治州宾川县",
+      "low": 3.4,
+      "high": 3.4,
+      "mid": 3.4,
+      "ton": 3400,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    },
+    {
+      "item": "火葱",
+      "date": "2026-10-27",
+      "origin": "云南大理白族自治州弥渡县",
+      "low": 7.02,
+      "high": 7.02,
+      "mid": 7.02,
+      "ton": 7020,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-10-27",
       "origin": "云南红河哈尼族彝族自治州泸西县",
       "low": 2.62,
       "high": 2.62,

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全国香葱行情日报 · 2026-10-28</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#ffffff; --ink:#1c2024; --sub:#5b6470; --line:#e4e8ee;
+  --up:#d93025; --down:#0f9960; --flat:#8a93a0;
+  --accent:#0f6fd6; --accent-soft:#eaf2fd; --warn:#fff5e6; --warn-line:#f0a500;
+}
+*{box-sizing:border-box;}
+body{margin:0;padding:32px 20px 64px;background:var(--bg);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+  font-size:15px;line-height:1.75;}
+.wrap{max-width:1040px;margin:0 auto;}
+header{margin-bottom:28px;}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:.5px;}
+.meta{color:var(--sub);font-size:13px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:22px 24px;margin-bottom:20px;}
+h2{font-size:19px;margin:0 0 4px;padding-left:11px;border-left:4px solid var(--accent);}
+h2 .en{font-size:12px;color:var(--sub);font-weight:400;margin-left:8px;}
+h3{font-size:15.5px;margin:20px 0 8px;color:#2b3440;}
+p{margin:8px 0;}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+th{background:#f2f5f9;font-weight:600;color:#3a4453;white-space:nowrap;}
+td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.up{color:var(--up);font-weight:600;}
+.down{color:var(--down);font-weight:600;}
+.flat{color:var(--flat);}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0;}
+.kpi{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+.kpi .lab{font-size:12px;color:var(--sub);}
+.kpi .val{font-size:22px;font-weight:700;margin:2px 0;font-variant-numeric:tabular-nums;}
+.kpi .chg{font-size:12px;}
+.tag{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:20px;margin-right:6px;
+  border:1px solid var(--line);background:#f4f6f9;color:var(--sub);}
+.t-up{background:#fdecea;border-color:#f5c6c0;color:var(--up);}
+.t-down{background:#e9f7f0;border-color:#bfe5d1;color:var(--down);}
+.t-flat{background:#f0f2f5;border-color:#dde1e7;color:#5b6470;}
+.t-key{background:var(--accent-soft);border-color:#bcd9f7;color:var(--accent);}
+.note{background:var(--warn);border-left:3px solid var(--warn-line);padding:10px 14px;
+  border-radius:0 8px 8px 0;font-size:13.5px;margin:12px 0;color:#6b4a00;}
+ul{margin:8px 0;padding-left:22px;}
+li{margin:4px 0;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:760px){.split{grid-template-columns:1fr;}}
+footer{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-height:1.9;}
+.legend{font-size:12px;color:var(--sub);margin-top:6px;}
+.back{display:inline-block;margin-bottom:12px;font-size:13px;color:var(--accent);text-decoration:none;}
+/* ---- 盘口直览（小程序样式） ---- */
+.board{background:linear-gradient(180deg,#e8f2ff 0%,#ffffff 150px);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;margin:12px 0 16px;}
+.board-head{padding:14px 18px 8px;}
+.board-title{font-size:18px;font-weight:700;letter-spacing:.5px;}
+.board-meta{font-size:12px;color:var(--sub);margin-top:4px;}
+.board-meta b{color:var(--up);font-weight:600;}
+.board-tabs{display:flex;gap:4px;padding:0 14px;border-bottom:2px solid var(--accent);}
+.bt{padding:8px 18px;font-size:14px;color:var(--sub);cursor:pointer;user-select:none;
+  border-radius:8px 8px 0 0;margin-bottom:-2px;}
+.bt.active{background:var(--accent);color:#fff;font-weight:600;}
+.board-panel{display:none;padding:4px 12px 12px;}
+.board-panel.active{display:block;}
+.btab{margin:8px 0 0;}
+.btab th{background:#eaf2fc;color:#33506e;}
+.btab td{border:none;border-bottom:1px solid #eef1f5;background:transparent;}
+.btab tr:nth-child(even) td{background:#f7fafd;}
+.btab .name{font-weight:600;}
+.btab .arrow-up{color:var(--up);font-weight:700;}
+.btab .arrow-down{color:var(--down);font-weight:700;}
+.btab .arrow-flat{color:var(--flat);}
+.see{color:var(--accent);font-size:12.5px;text-decoration:none;white-space:nowrap;}
+.see:hover{text-decoration:underline;}
+.mini-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:10px 4px 4px;}
+.mini-sum .ms{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;}
+.mini-sum .ms b{display:block;font-size:15px;margin-bottom:2px;}
+/* ---- 盘口统计条 ---- */
+.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px;margin:10px 4px 2px;}
+.bar{background:#f4f8fd;border:1px solid var(--line);border-radius:10px;padding:8px 14px;
+  font-size:12.5px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;}
+.bar .bt2{font-weight:700;font-size:13px;color:var(--accent);}
+.bar i{font-style:normal;color:var(--sub);}
+.bar i b{color:var(--ink,#1a2733);font-size:14px;}
+.bar i.up b{color:var(--up);}
+.bar i.down b{color:var(--down);}
+.bar i.k b{color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>全国香葱行情日报 · 泸西专题</h1>
+  <div class="meta">数据日期：2026-10-28（三）｜
+    覆盖周期：未来 3天 / 1周 / 半月 / 1月 / 2月 / 3月 ｜
+    重点产区：云南·红河州·泸西县 ｜ 生成时间：2026-10-28 06:55（北京时间）</div>
+</header>
+
+<div class="card">
+  <h2>一、核心结论速览<span class="en">Executive Summary</span></h2>
+  <p>当前全国香葱处于季节性供给高峰下的低位承压期。泸西县产区红香葱产地中枢报 3.85 元/公斤，黑葱报 3.36 元/公斤（2026-10-26 实测）；较上一观测日（2026-10-25）下跌0.50 元/公斤（-11.5%）；较 2026-10-14 高点（红香葱 6.10 元/公斤）回落约 37%；主导逻辑是「天气利好→丰产不丰收」的反向传导：主产区温光适宜、茬口衔接顺畅，供给持续扩容，而终端仅有刚性需求，渠道按需补库、低库存周转，缺乏集中备货拉涨动力。分周期看：未来 3 天产区以雾为主、累计降水 0 mm，采收顺畅、出货集中，价格偏强上行（中枢 4.04，+5.0%）；未来一周累计降水 1.8 mm、雨日 0 天、大风 5 天，采收与运输存在扰动，跌势有望止住并转为回升（4.25，+10.3%）；半月窗口（第 8-15 天）累计降水 27.3 mm，叠加北方秋菜退市、供给切换为「南菜北运」，中枢回升至 4.56（+18.5%）；一个月后随冬季餐饮消费启动，中枢上看 4.75（+23.5%），偏强上行；两个月（目标日 2026-12-27）进入冬至—元旦备货窗口，且北方产区基本退市、全国供给转向云南单极，中枢进一步抬升至 4.9（+27.3%）；三个月（目标日 2027-01-26）距 2027 年春节（2 月 6 日）仅 11 天，落入全年最强的节前集中备货窗口，中枢情景值 4.96（+28.8%），偏强上行。整体呈「近端磨底、中段修复、远端节日支撑」的震荡上行形态，但 2-3 月档位属情景推演，置信度低于近端档位，需按月滚动修正。口径提示：本报告预测与「当前中枢」采用精品净葱/产地集散价口径，与第二章长周期主序列的通货毛葱口径相差约 1.66 倍（通货 2.62 vs 净葱 4.35），两者不可直接横比。</p>
+  <div class="grid">
+    <div class="kpi"><div class="lab">红香葱·产地中枢</div><div class="val">3.85</div><div class="chg">元/公斤（泸西产区集散价）</div></div>
+    <div class="kpi"><div class="lab">黑葱·产地中枢</div><div class="val">3.36</div><div class="chg">元/公斤（泸西产区集散价）</div></div>
+    <div class="kpi"><div class="lab">全国生效气象预警</div><div class="val">100</div><div class="chg">条（中央气象台）</div></div>
+    <div class="kpi"><div class="lab">未来7天产区降水</div><div class="val">1.8</div><div class="chg">mm · 雨日 0 天</div></div>
+    </div>
+  
+    <table>
+      <tr><th>周期</th><th>目标日</th><th>红香葱区间(元/kg)</th><th>红香葱中枢</th>
+          <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>中枢涨跌(红葱)</th>
+          <th>中枢涨跌(黑葱)</th><th>区间半宽</th><th>方向/置信度</th></tr>
+      <tr><td>当前基准</td><td>2026-10-28</td><td class="num">—</td><td class="num">3.85</td><td class="num">—</td><td class="num">3.36</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="tag t-flat">基准</span></td></tr><tr><td><strong>未来3天</strong></td><td>2026-10-31</td><td class="num">3.82 – 4.26</td><td class="num">4.04</td><td class="num">3.34 – 3.73</td><td class="num">3.53</td><td class="num up">+5.0%</td><td class="num up">+5.2%</td><td class="num">±5.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">高</span></td></tr><tr><td><strong>未来1周</strong></td><td>2026-11-04</td><td class="num">3.97 – 4.52</td><td class="num">4.25</td><td class="num">3.48 – 3.96</td><td class="num">3.72</td><td class="num up">+10.3%</td><td class="num up">+10.8%</td><td class="num">±6.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">较高</span></td></tr><tr><td><strong>未来半月</strong></td><td>2026-11-12</td><td class="num">4.18 – 4.95</td><td class="num">4.56</td><td class="num">3.67 – 4.36</td><td class="num">4.02</td><td class="num up">+18.5%</td><td class="num up">+19.5%</td><td class="num">±8.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">中</span></td></tr><tr><td><strong>未来1月</strong></td><td>2026-11-27</td><td class="num">4.25 – 5.25</td><td class="num">4.75</td><td class="num">3.75 – 4.63</td><td class="num">4.19</td><td class="num up">+23.5%</td><td class="num up">+24.8%</td><td class="num">±10.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">中低</span></td></tr><tr><td><strong>未来2月</strong></td><td>2026-12-27</td><td class="num">4.24 – 5.56</td><td class="num">4.90</td><td class="num">3.74 – 4.91</td><td class="num">4.32</td><td class="num up">+27.3%</td><td class="num up">+28.6%</td><td class="num">±13.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">低</span></td></tr><tr><td><strong>未来3月</strong></td><td>2027-01-26</td><td class="num">4.14 – 5.78</td><td class="num">4.96</td><td class="num">3.65 – 5.10</td><td class="num">4.37</td><td class="num up">+28.8%</td><td class="num up">+30.2%</td><td class="num">±16.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">低（情景推演）</span></td></tr>
+    </table>
+  <div class="note"><strong>关键变量：</strong>超强厄尔尼诺（有监测记录以来最强，海温指数峰值预计 11 月前后达 3.2-3.5℃）背景下，11 月江南、西南降水偏多 5-8 成，是打破供大于求格局、触发行情反转的最主要潜在推手。若降雨不及预期、产区持续晴好，半月与一月预测需下修 3-8 个百分点；对 2-3 月档位而言，更关键的是冬季冷空气与雨雪冰冻的实际强度——它既决定云南外调菜的供给弹性，也决定节前备货行情的兑现幅度。</div>
+</div>
+
+<div class="card">
+  <h2 id="sec2-longterm">二、历史长周期行情回顾（12 / 24 / 36 / 60 / 120 个月）<span class="en">Long-term Review</span></h2>
+  
+  <p>把视线拉长到十年，香葱产地价整体呈「产能扩张驱动的中枢下移 + 极端天气驱动的脉冲式尖峰」双重特征。120个月（2016-11 → 2026-10）：4.56 → 2.62 元/公斤，下行 -42.5%，年化 -5.4%，区间高 11.00（2024-08）、低 1.26（2020-07）。分窗口看：12个月（2025-11 → 2026-10）：3.26 → 2.62 元/公斤，下行 -19.6%，年化 -21.2%，区间高 3.26（2025-11）、低 1.51（2026-07）；24个月（2024-11 → 2026-10）：2.62 → 2.62 元/公斤，基本走平 +0.0%，年化 +0.0%，区间高 3.68（2025-04）、低 1.51（2026-07）；36个月（2023-11 → 2026-10）：3.28 → 2.62 元/公斤，下行 -20.1%，年化 -7.4%，区间高 11.00（2024-08）、低 1.51（2026-07）；60个月（2021-11 → 2026-10）：3.20 → 2.62 元/公斤，下行 -18.1%，年化 -4.0%，区间高 11.00（2024-08）、低 1.51（2026-07）。十年间的最高峰出现在 2024-08 的 11.00 元/公斤（泸西小香葱产地价一度报 6 元/斤），最低谷出现在 2020-07 的 1.26 元/公斤（疫情冲击叠加季节性夏谷）。峰谷倍数约 8.7 倍，是典型的「高波动小宗调味菜」。中枢下移的主因是产能扩张：泸西自 2013 年引种，至 2024 年底已形成年产 118 万吨、产值 35-36 亿元的全国最大蔬菜单品基地（占云南香葱总产 60% 以上），叠加水肥一体化（单人管理面积从 5-6 亩提升到 30 亩）带来的成本下降，使长期价格重心系统性下移。但每年 4-5 月（春峰）、11-1 月（冬旺/春节备货）两个旺季，以及台风、寒潮、雪灾等极端天气，仍会制造 2-5 倍的短期脉冲。</p>
+  <h3>2.1 口径与数据质量说明</h3>
+  <div class="note">
+    <strong>口径：</strong>主序列为「云南泸西 / 滇中南产地香葱综合交易价」，单位元/公斤，
+    通货（毛葱）口径。另给出「精品净葱」折算序列 = 主序列 × 1.66
+    （折算系数据 2026-10 同期两组报价测算：通货 2.62 元/kg vs 精品红香葱 4.35 元/kg）。<br>
+    <strong>样本量：</strong>月频 121 个数据点（2016-10 — 2026-10），
+    其中实测锚点 10 个、区间推断锚点 8 个。<br>
+    <strong>重建方法（可复算）：</strong>先用季节因子对锚点去季节化 → 去季节化水平做对数线性插值 → 再乘回季节因子。
+    序列在锚点月份精确等于锚点值。<br>
+    <strong>保留意见：</strong>推断锚点仅用于连接形态，不单独支撑趋势结论；
+    2016—2019 年缺少产地直报数据，系由销区均价按 0.55 折算，置信度低；
+    波动率为季节形态主导的重建值，实际现货波动略低于该数值。
+  </div>
+  <h3>2.2 锚点清单</h3>
+  <table>
+    <tr><th>年月</th><th>价格(元/kg)</th><th>类型</th><th>依据 / 来源</th></tr>
+    <tr><td>2016-06</td><td class="num">3.96</td><td><span class="tag t-flat">推断</span></td><td>2016 年香葱销区年均 7.2 元/kg（南方农村报《2016 年度蔬菜大盘查》，7 月峰值 14 元/kg），按产地/销区 0.55 折算</td></tr><tr><td>2017-06</td><td class="num">3.30</td><td><span class="tag t-flat">推断</span></td><td>自 2016 高光年回落；西昌冬春小香葱地头均价 2.5 元/kg（2016 冬春为 1.5）</td></tr><tr><td>2018-06</td><td class="num">3.00</td><td><span class="tag t-flat">推断</span></td><td>西昌 2018-11-20 开市 2.4 元/kg、12-20 升至 3.4 元/kg</td></tr><tr><td>2019-06</td><td class="num">3.20</td><td><span class="tag t-flat">推断</span></td><td>西昌 2019-02-01 维持 3.4 元/kg，春节后回落至 1.3 元/kg</td></tr><tr><td>2020-03</td><td class="num">1.30</td><td><span class="tag t-key">实测</span></td><td>云南网 / 新京报：泸西香葱约 1.3 元/kg，不到往年一半（疫情冲击）；红葱 0.8 元/斤、黑葱 0.6 元/斤</td></tr><tr><td>2020-11</td><td class="num">3.00</td><td><span class="tag t-flat">推断</span></td><td>2020 下半年「向钱葱」行情启动，全国葱类价格普遍翻倍</td></tr><tr><td>2021-01</td><td class="num">5.00</td><td><span class="tag t-key">实测</span></td><td>广西玉林香葱收购价 4.8 元/斤（净葱，约 9.6 元/kg）；全国葱价处高位</td></tr><tr><td>2021-11</td><td class="num">3.20</td><td><span class="tag t-flat">推断</span></td><td>2021 年高位后震荡回落，种植面积恢复</td></tr><tr><td>2022-02</td><td class="num">5.50</td><td><span class="tag t-key">实测</span></td><td>2022-02-22 泸西罕见大雪、受灾约 4 万亩；南京众彩云南小葱 2/23 均价 6.2 → 2/24 14.5 元/kg</td></tr><tr><td>2022-11</td><td class="num">4.00</td><td><span class="tag t-key">实测</span></td><td>云南产地蔬菜综合交易价：红香葱 3.8-4.2、黑葱 3.8-4.0 元/kg</td></tr><tr><td>2023-06</td><td class="num">4.20</td><td><span class="tag t-key">实测</span></td><td>中国蔬菜流通协会：2023 年全国小葱地头均价 4.2 元/kg（春峰 5.8、夏谷 3.1、秋峰 5.3）</td></tr><tr><td>2024-01</td><td class="num">2.66</td><td><span class="tag t-key">实测</span></td><td>泸西香葱 1.33 元/斤（中国报告大厅 2024-01-04）</td></tr><tr><td>2024-08</td><td class="num">11.00</td><td><span class="tag t-key">实测</span></td><td>泸西小香葱产地价 8/19 峰值 6 元/斤，随后回落至 5.0-5.5 元/斤</td></tr><tr><td>2024-11</td><td class="num">2.62</td><td><span class="tag t-key">实测</span></td><td>泸西香葱 1.31 元/斤（中国报告大厅 2024-11-22）</td></tr><tr><td>2025-06</td><td class="num">2.90</td><td><span class="tag t-flat">推断</span></td><td>2025 年上半年产地低位运行，季节性夏谷</td></tr><tr><td>2025-11</td><td class="num">3.26</td><td><span class="tag t-key">实测</span></td><td>泸西香葱 1.63 元/斤（中国报告大厅 2025-11-06 / 12-30）</td></tr><tr><td>2026-04</td><td class="num">2.40</td><td><span class="tag t-flat">推断</span></td><td>2026 年春季供给高峰，产地延续低位</td></tr><tr><td>2026-10</td><td class="num">2.62</td><td><span class="tag t-key">实测</span></td><td>泸西香葱 1.31 元/斤（惠农网 2026-10-21）；同期精品净葱红香葱 4.35、黑葱 3.85 元/kg（10-24 滇中产区集散价）</td></tr>
+  </table>
+  <h3>2.3 十年长周期走势（2016-10 — 2026-10）</h3>
+  <svg viewBox="0 0 960 330" width="100%" height="330" role="img" aria-label="近十年香葱产地价走势">
+<rect x="0" y="0" width="960" height="330" fill="#ffffff"/>
+<line x1="58" y1="286.0" x2="864" y2="286.0" stroke="#c9d1da" stroke-width="1"/>
+<text x="50" y="290.0" font-size="11" fill="#7b8595" text-anchor="end">0.0</text>
+<line x1="58" y1="221.0" x2="864" y2="221.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="225.0" font-size="11" fill="#7b8595" text-anchor="end">5.1</text>
+<line x1="58" y1="156.0" x2="864" y2="156.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="160.0" font-size="11" fill="#7b8595" text-anchor="end">10.2</text>
+<line x1="58" y1="91.0" x2="864" y2="91.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="95.0" font-size="11" fill="#7b8595" text-anchor="end">15.2</text>
+<line x1="58" y1="26.0" x2="864" y2="26.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="30.0" font-size="11" fill="#7b8595" text-anchor="end">20.3</text>
+<polygon points="58.0,196.0 64.7,189.2 71.4,188.9 78.2,194.4 84.9,206.0 91.6,202.6 98.3,185.6 105.0,194.6 111.7,215.8 118.5,233.2 125.2,230.8 131.9,217.5 138.6,208.8 145.3,202.2 152.0,201.6 158.8,205.7 165.5,215.3 172.2,211.8 178.9,196.0 185.6,203.5 192.3,222.2 199.1,237.5 205.8,234.5 212.5,221.2 219.2,212.0 225.9,204.7 232.6,202.9 239.3,205.8 246.1,214.5 252.8,209.9 259.5,192.5 266.2,199.2 272.9,218.0 279.6,240.0 286.4,242.7 293.1,237.7 299.8,237.1 306.5,238.4 313.2,242.7 319.9,249.0 326.7,256.8 333.4,258.3 340.1,248.9 346.8,248.3 353.5,253.9 360.2,259.2 367.0,255.0 373.7,243.3 380.4,232.8 387.1,222.2 393.8,201.2 400.6,179.7 407.3,196.1 414.0,195.2 420.7,180.1 427.4,192.6 434.1,216.6 440.9,235.9 447.6,235.5 454.3,225.8 461.0,220.7 467.7,218.0 474.4,199.0 481.1,181.1 487.9,169.1 494.6,168.4 501.3,149.5 508.0,166.2 514.7,197.4 521.5,222.2 528.2,222.1 534.9,210.0 541.6,204.0 548.3,201.0 555.0,196.2 561.8,196.6 568.5,203.6 575.2,195.4 581.9,171.0 588.6,175.6 595.3,196.7 602.0,224.4 608.8,226.7 615.5,218.4 622.2,215.9 628.9,216.2 635.6,221.3 642.4,229.4 649.1,220.8 655.8,196.3 662.5,143.6 669.2,114.9 675.9,112.8 682.6,115.5 689.4,52.1 696.1,129.4 702.8,190.7 709.5,230.3 716.2,226.7 723.0,226.6 729.7,230.8 736.4,224.9 743.1,207.9 749.8,210.4 756.5,224.4 763.2,240.3 770.0,238.6 776.7,227.9 783.4,221.3 790.1,216.7 796.8,221.2 803.5,228.9 810.3,239.4 817.0,240.7 823.7,235.0 830.4,236.6 837.1,245.5 843.9,253.9 850.6,250.4 857.3,239.3 864.0,230.3 864.0,252.4 857.3,257.8 850.6,264.6 843.9,266.7 837.1,261.7 830.4,256.2 823.7,255.3 817.0,258.6 810.3,258.0 803.5,251.5 796.8,246.9 790.1,244.2 783.4,247.1 776.7,251.0 770.0,257.4 763.2,258.5 756.5,248.9 749.8,240.4 743.1,238.9 736.4,249.1 729.7,252.7 723.0,250.1 716.2,250.3 709.5,252.4 702.8,228.6 696.1,191.7 689.4,145.1 682.6,183.3 675.9,181.6 669.2,182.9 662.5,200.2 655.8,232.0 649.1,246.8 642.4,251.9 635.6,247.1 628.9,244.0 622.2,243.7 615.5,245.3 608.8,250.3 602.0,248.9 595.3,232.2 588.6,219.5 581.9,216.7 575.2,231.4 568.5,236.4 561.8,232.1 555.0,232.0 548.3,234.8 541.6,236.7 534.9,240.3 528.2,247.4 521.5,247.6 514.7,232.6 508.0,213.8 501.3,203.8 494.6,215.2 487.9,215.6 481.1,222.9 474.4,233.6 467.7,245.0 461.0,246.7 454.3,249.8 447.6,255.6 440.9,255.8 434.1,244.2 427.4,229.8 420.7,222.2 414.0,231.3 407.3,231.8 400.6,222.0 393.8,234.9 387.1,247.6 380.4,254.0 373.7,260.4 367.0,267.3 360.2,269.9 353.5,266.7 346.8,263.3 340.1,263.7 333.4,269.3 326.7,268.3 319.9,263.7 313.2,259.9 306.5,257.3 299.8,256.5 293.1,256.9 286.4,259.9 279.6,258.3 272.9,245.0 266.2,233.6 259.5,229.6 252.8,240.1 246.1,243.0 239.3,237.7 232.6,235.9 225.9,236.9 219.2,241.4 212.5,246.9 205.8,255.0 199.1,256.8 192.3,247.6 185.6,236.3 178.9,231.8 172.2,241.3 165.5,243.5 158.8,237.6 152.0,235.2 145.3,235.5 138.6,239.5 131.9,244.8 125.2,252.7 118.5,254.2 111.7,243.7 105.0,230.9 98.3,225.5 91.6,235.8 84.9,237.8 78.2,230.8 71.4,227.6 64.7,227.6 58.0,231.8" fill="#0f6fd6" opacity="0.07"/>
+<polyline points="58.0,196.0 64.7,189.2 71.4,188.9 78.2,194.4 84.9,206.0 91.6,202.6 98.3,185.6 105.0,194.6 111.7,215.8 118.5,233.2 125.2,230.8 131.9,217.5 138.6,208.8 145.3,202.2 152.0,201.6 158.8,205.7 165.5,215.3 172.2,211.8 178.9,196.0 185.6,203.5 192.3,222.2 199.1,237.5 205.8,234.5 212.5,221.2 219.2,212.0 225.9,204.7 232.6,202.9 239.3,205.8 246.1,214.5 252.8,209.9 259.5,192.5 266.2,199.2 272.9,218.0 279.6,240.0 286.4,242.7 293.1,237.7 299.8,237.1 306.5,238.4 313.2,242.7 319.9,249.0 326.7,256.8 333.4,258.3 340.1,248.9 346.8,248.3 353.5,253.9 360.2,259.2 367.0,255.0 373.7,243.3 380.4,232.8 387.1,222.2 393.8,201.2 400.6,179.7 407.3,196.1 414.0,195.2 420.7,180.1 427.4,192.6 434.1,216.6 440.9,235.9 447.6,235.5 454.3,225.8 461.0,220.7 467.7,218.0 474.4,199.0 481.1,181.1 487.9,169.1 494.6,168.4 501.3,149.5 508.0,166.2 514.7,197.4 521.5,222.2 528.2,222.1 534.9,210.0 541.6,204.0 548.3,201.0 555.0,196.2 561.8,196.6 568.5,203.6 575.2,195.4 581.9,171.0 588.6,175.6 595.3,196.7 602.0,224.4 608.8,226.7 615.5,218.4 622.2,215.9 628.9,216.2 635.6,221.3 642.4,229.4 649.1,220.8 655.8,196.3 662.5,143.6 669.2,114.9 675.9,112.8 682.6,115.5 689.4,52.1 696.1,129.4 702.8,190.7 709.5,230.3 716.2,226.7 723.0,226.6 729.7,230.8 736.4,224.9 743.1,207.9 749.8,210.4 756.5,224.4 763.2,240.3 770.0,238.6 776.7,227.9 783.4,221.3 790.1,216.7 796.8,221.2 803.5,228.9 810.3,239.4 817.0,240.7 823.7,235.0 830.4,236.6 837.1,245.5 843.9,253.9 850.6,250.4 857.3,239.3 864.0,230.3" fill="none" stroke="#f0a500" stroke-width="2.2" stroke-dasharray="5 4"/>
+<polyline points="58.0,231.8 64.7,227.6 71.4,227.6 78.2,230.8 84.9,237.8 91.6,235.8 98.3,225.5 105.0,230.9 111.7,243.7 118.5,254.2 125.2,252.7 131.9,244.8 138.6,239.5 145.3,235.5 152.0,235.2 158.8,237.6 165.5,243.5 172.2,241.3 178.9,231.8 185.6,236.3 192.3,247.6 199.1,256.8 205.8,255.0 212.5,246.9 219.2,241.4 225.9,236.9 232.6,235.9 239.3,237.7 246.1,243.0 252.8,240.1 259.5,229.6 266.2,233.6 272.9,245.0 279.6,258.3 286.4,259.9 293.1,256.9 299.8,256.5 306.5,257.3 313.2,259.9 319.9,263.7 326.7,268.3 333.4,269.3 340.1,263.7 346.8,263.3 353.5,266.7 360.2,269.9 367.0,267.3 373.7,260.4 380.4,254.0 387.1,247.6 393.8,234.9 400.6,222.0 407.3,231.8 414.0,231.3 420.7,222.2 427.4,229.8 434.1,244.2 440.9,255.8 447.6,255.6 454.3,249.8 461.0,246.7 467.7,245.0 474.4,233.6 481.1,222.9 487.9,215.6 494.6,215.2 501.3,203.8 508.0,213.8 514.7,232.6 521.5,247.6 528.2,247.4 534.9,240.3 541.6,236.7 548.3,234.8 555.0,232.0 561.8,232.1 568.5,236.4 575.2,231.4 581.9,216.7 588.6,219.5 595.3,232.2 602.0,248.9 608.8,250.3 615.5,245.3 622.2,243.7 628.9,244.0 635.6,247.1 642.4,251.9 649.1,246.8 655.8,232.0 662.5,200.2 669.2,182.9 675.9,181.6 682.6,183.3 689.4,145.1 696.1,191.7 702.8,228.6 709.5,252.4 716.2,250.3 723.0,250.1 729.7,252.7 736.4,249.1 743.1,238.9 749.8,240.4 756.5,248.9 763.2,258.5 770.0,257.4 776.7,251.0 783.4,247.1 790.1,244.2 796.8,246.9 803.5,251.5 810.3,258.0 817.0,258.6 823.7,255.3 830.4,256.2 837.1,261.7 843.9,266.7 850.6,264.6 857.3,257.8 864.0,252.4" fill="none" stroke="#0f6fd6" stroke-width="2.2"/>
+<text x="58.0" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2016</text>
+<line x1="58.0" y1="26" x2="58.0" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="78.2" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2017</text>
+<line x1="78.2" y1="26" x2="78.2" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="158.8" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2018</text>
+<line x1="158.8" y1="26" x2="158.8" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="239.3" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2019</text>
+<line x1="239.3" y1="26" x2="239.3" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="319.9" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2020</text>
+<line x1="319.9" y1="26" x2="319.9" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="400.6" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2021</text>
+<line x1="400.6" y1="26" x2="400.6" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="481.1" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2022</text>
+<line x1="481.1" y1="26" x2="481.1" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="561.8" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2023</text>
+<line x1="561.8" y1="26" x2="561.8" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="642.4" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2024</text>
+<line x1="642.4" y1="26" x2="642.4" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="723.0" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2025</text>
+<line x1="723.0" y1="26" x2="723.0" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="803.5" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2026</text>
+<line x1="803.5" y1="26" x2="803.5" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<circle cx="111.7" cy="243.7" r="3.0" fill="#c9ced6" stroke="#ffffff" stroke-width="1"/>
+<circle cx="192.3" cy="247.6" r="3.0" fill="#c9ced6" stroke="#ffffff" stroke-width="1"/>
+<circle cx="272.9" cy="245.0" r="3.0" fill="#c9ced6" stroke="#ffffff" stroke-width="1"/>
+<circle cx="333.4" cy="269.3" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="387.1" cy="247.6" r="3.0" fill="#c9ced6" stroke="#ffffff" stroke-width="1"/>
+<circle cx="400.6" cy="222.0" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="467.7" cy="245.0" r="3.0" fill="#c9ced6" stroke="#ffffff" stroke-width="1"/>
+<circle cx="487.9" cy="215.6" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="548.3" cy="234.8" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="595.3" cy="232.2" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="642.4" cy="251.9" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="689.4" cy="145.1" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="709.5" cy="252.4" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="756.5" cy="248.9" r="3.0" fill="#c9ced6" stroke="#ffffff" stroke-width="1"/>
+<circle cx="790.1" cy="244.2" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="823.7" cy="255.3" r="3.0" fill="#c9ced6" stroke="#ffffff" stroke-width="1"/>
+<circle cx="864.0" cy="252.4" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="874" cy="42" r="4" fill="#0f6fd6"/><text x="884" y="46" font-size="11.5" fill="#1c2024">通货毛葱</text><circle cx="874" cy="64" r="4" fill="#f0a500"/><text x="884" y="68" font-size="11.5" fill="#1c2024">精品净葱(×1.66)</text><circle cx="874" cy="86" r="4" fill="#d93025"/><text x="884" y="90" font-size="11.5" fill="#1c2024">实测锚点</text><circle cx="874" cy="108" r="3" fill="#c9ced6"/><text x="884" y="112" font-size="11.5" fill="#1c2024">推断锚点</text>
+</svg>
+  <div class="legend">蓝色实线=通货毛葱；黄色虚线=精品净葱折算；红点=实测锚点；灰点=推断锚点。</div>
+  <h3>2.4 近 36 个月走势</h3>
+  <svg viewBox="0 0 960 330" width="100%" height="330" role="img" aria-label="近 36 个月香葱产地价走势">
+<rect x="0" y="0" width="960" height="330" fill="#ffffff"/>
+<line x1="58" y1="286.0" x2="864" y2="286.0" stroke="#c9d1da" stroke-width="1"/>
+<text x="50" y="290.0" font-size="11" fill="#7b8595" text-anchor="end">0.0</text>
+<line x1="58" y1="221.0" x2="864" y2="221.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="225.0" font-size="11" fill="#7b8595" text-anchor="end">5.1</text>
+<line x1="58" y1="156.0" x2="864" y2="156.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="160.0" font-size="11" fill="#7b8595" text-anchor="end">10.1</text>
+<line x1="58" y1="91.0" x2="864" y2="91.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="95.0" font-size="11" fill="#7b8595" text-anchor="end">15.2</text>
+<line x1="58" y1="26.0" x2="864" y2="26.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="30.0" font-size="11" fill="#7b8595" text-anchor="end">20.3</text>
+<polygon points="58.0,216.1 81.0,221.2 104.1,229.3 127.1,220.7 150.1,196.2 173.1,143.4 196.2,114.6 219.2,112.6 242.2,115.3 265.3,51.8 288.3,129.1 311.3,190.6 334.3,230.2 357.4,226.6 380.4,226.5 403.4,230.7 426.5,224.8 449.5,207.8 472.5,210.3 495.5,224.3 518.6,240.2 541.6,238.5 564.6,227.8 587.7,221.2 610.7,216.6 633.7,221.1 656.7,228.8 679.8,239.3 702.8,240.6 725.8,234.9 748.9,236.5 771.9,245.5 794.9,253.8 817.9,250.3 841.0,239.2 864.0,230.2 864.0,252.4 841.0,257.8 817.9,264.6 794.9,266.6 771.9,261.6 748.9,256.1 725.8,255.2 702.8,258.6 679.8,257.9 656.7,251.5 633.7,246.9 610.7,244.2 587.7,247.0 564.6,251.0 541.6,257.4 518.6,258.4 495.5,248.8 472.5,240.3 449.5,238.8 426.5,249.1 403.4,252.7 380.4,250.1 357.4,250.2 334.3,252.4 311.3,228.5 288.3,191.6 265.3,144.9 242.2,183.1 219.2,181.5 196.2,182.7 173.1,200.1 150.1,231.9 127.1,246.7 104.1,251.9 81.0,247.0 58.0,243.9" fill="#0f6fd6" opacity="0.07"/>
+<polyline points="58.0,216.1 81.0,221.2 104.1,229.3 127.1,220.7 150.1,196.2 173.1,143.4 196.2,114.6 219.2,112.6 242.2,115.3 265.3,51.8 288.3,129.1 311.3,190.6 334.3,230.2 357.4,226.6 380.4,226.5 403.4,230.7 426.5,224.8 449.5,207.8 472.5,210.3 495.5,224.3 518.6,240.2 541.6,238.5 564.6,227.8 587.7,221.2 610.7,216.6 633.7,221.1 656.7,228.8 679.8,239.3 702.8,240.6 725.8,234.9 748.9,236.5 771.9,245.5 794.9,253.8 817.9,250.3 841.0,239.2 864.0,230.2" fill="none" stroke="#f0a500" stroke-width="2.2" stroke-dasharray="5 4"/>
+<polyline points="58.0,243.9 81.0,247.0 104.1,251.9 127.1,246.7 150.1,231.9 173.1,200.1 196.2,182.7 219.2,181.5 242.2,183.1 265.3,144.9 288.3,191.6 311.3,228.5 334.3,252.4 357.4,250.2 380.4,250.1 403.4,252.7 426.5,249.1 449.5,238.8 472.5,240.3 495.5,248.8 518.6,258.4 541.6,257.4 564.6,251.0 587.7,247.0 610.7,244.2 633.7,246.9 656.7,251.5 679.8,257.9 702.8,258.6 725.8,255.2 748.9,256.1 771.9,261.6 794.9,266.6 817.9,264.6 841.0,257.8 864.0,252.4" fill="none" stroke="#0f6fd6" stroke-width="2.2"/>
+<text x="58.0" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2023</text>
+<line x1="58.0" y1="26" x2="58.0" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="104.1" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2024</text>
+<line x1="104.1" y1="26" x2="104.1" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="380.4" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2025</text>
+<line x1="380.4" y1="26" x2="380.4" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<text x="656.7" y="304.0" font-size="10.5" fill="#5b6470" text-anchor="middle">2026</text>
+<line x1="656.7" y1="26" x2="656.7" y2="286" stroke="#eef1f5" stroke-width="1"/>
+<circle cx="104.1" cy="251.9" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="265.3" cy="144.9" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="334.3" cy="252.4" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="495.5" cy="248.8" r="3.0" fill="#c9ced6" stroke="#ffffff" stroke-width="1"/>
+<circle cx="610.7" cy="244.2" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="725.8" cy="255.2" r="3.0" fill="#c9ced6" stroke="#ffffff" stroke-width="1"/>
+<circle cx="864.0" cy="252.4" r="4.0" fill="#d93025" stroke="#ffffff" stroke-width="1"/>
+<circle cx="874" cy="42" r="4" fill="#0f6fd6"/><text x="884" y="46" font-size="11.5" fill="#1c2024">通货毛葱</text><circle cx="874" cy="64" r="4" fill="#f0a500"/><text x="884" y="68" font-size="11.5" fill="#1c2024">精品净葱(×1.66)</text><circle cx="874" cy="86" r="4" fill="#d93025"/><text x="884" y="90" font-size="11.5" fill="#1c2024">实测锚点</text><circle cx="874" cy="108" r="3" fill="#c9ced6"/><text x="884" y="112" font-size="11.5" fill="#1c2024">推断锚点</text>
+</svg>
+  <h3>2.5 多周期窗口统计（12 / 24 / 36 / 60 / 120 个月）</h3>
+  <table>
+    <tr><th>窗口</th><th>起止</th><th>期初</th><th>期末</th><th>区间涨跌</th>
+        <th>年化(CAGR)</th><th>均值</th><th>最高</th><th>最低</th><th>振幅</th><th>年化波动</th></tr>
+    <tr><td><strong>近 12 个月</strong></td><td>2025-11 → 2026-10</td><td class="num">3.26</td><td class="num">2.62</td><td class="num down">-19.6%</td><td class="num down">-21.2%</td><td class="num">2.33</td><td class="num">3.26<br><span style="color:#8a93a0">2025-11</span></td><td class="num">1.51<br><span style="color:#8a93a0">2026-07</span></td><td class="num">116%</td><td class="num">58%</td></tr><tr><td><strong>近 24 个月</strong></td><td>2024-11 → 2026-10</td><td class="num">2.62</td><td class="num">2.62</td><td class="num flat">+0.0%</td><td class="num flat">+0.0%</td><td class="num">2.58</td><td class="num">3.68<br><span style="color:#8a93a0">2025-04</span></td><td class="num">1.51<br><span style="color:#8a93a0">2026-07</span></td><td class="num">144%</td><td class="num">55%</td></tr><tr><td><strong>近 36 个月</strong></td><td>2023-11 → 2026-10</td><td class="num">3.28</td><td class="num">2.62</td><td class="num down">-20.1%</td><td class="num down">-7.4%</td><td class="num">3.67</td><td class="num">11.00<br><span style="color:#8a93a0">2024-08</span></td><td class="num">1.51<br><span style="color:#8a93a0">2026-07</span></td><td class="num">628%</td><td class="num">79%</td></tr><tr><td><strong>近 60 个月</strong></td><td>2021-11 → 2026-10</td><td class="num">3.20</td><td class="num">2.62</td><td class="num down">-18.1%</td><td class="num down">-4.0%</td><td class="num">3.87</td><td class="num">11.00<br><span style="color:#8a93a0">2024-08</span></td><td class="num">1.51<br><span style="color:#8a93a0">2026-07</span></td><td class="num">628%</td><td class="num">71%</td></tr><tr><td><strong>近 120 个月（10 年）</strong></td><td>2016-11 → 2026-10</td><td class="num">4.56</td><td class="num">2.62</td><td class="num down">-42.5%</td><td class="num down">-5.4%</td><td class="num">3.52</td><td class="num">11.00<br><span style="color:#8a93a0">2024-08</span></td><td class="num">1.26<br><span style="color:#8a93a0">2020-07</span></td><td class="num">773%</td><td class="num">65%</td></tr>
+  </table>
+  <div class="legend">年化波动率 = 月度对数收益率标准差 × √12。振幅 = 区间最高 / 最低 − 1。</div>
+  <h3>2.6 近 12 个月逐月同比</h3>
+  <table>
+    <tr><th>年月</th><th>本期(元/kg)</th><th>上年同期(元/kg)</th><th>同比</th></tr>
+    <tr><td>2025-11</td><td class="num">3.26</td><td class="num">2.62</td><td class="num up">+24.4%</td></tr><tr><td>2025-12</td><td class="num">3.05</td><td class="num">2.79</td><td class="num up">+9.3%</td></tr><tr><td>2026-01</td><td class="num">2.69</td><td class="num">2.80</td><td class="num down">-3.9%</td></tr><tr><td>2026-02</td><td class="num">2.19</td><td class="num">2.60</td><td class="num down">-15.8%</td></tr><tr><td>2026-03</td><td class="num">2.14</td><td class="num">2.88</td><td class="num down">-25.7%</td></tr><tr><td>2026-04</td><td class="num">2.40</td><td class="num">3.68</td><td class="num down">-34.8%</td></tr><tr><td>2026-05</td><td class="num">2.33</td><td class="num">3.56</td><td class="num down">-34.6%</td></tr><tr><td>2026-06</td><td class="num">1.90</td><td class="num">2.90</td><td class="num down">-34.5%</td></tr><tr><td>2026-07</td><td class="num">1.51</td><td class="num">2.15</td><td class="num down">-29.8%</td></tr><tr><td>2026-08</td><td class="num">1.67</td><td class="num">2.23</td><td class="num down">-25.1%</td></tr><tr><td>2026-09</td><td class="num">2.20</td><td class="num">2.73</td><td class="num down">-19.4%</td></tr><tr><td>2026-10</td><td class="num">2.62</td><td class="num">3.04</td><td class="num down">-13.8%</td></tr>
+  </table>
+  <h3>2.7 季节性规律（月度季节指数）</h3>
+  <svg viewBox="0 0 960 250" width="100%" height="250" role="img" aria-label="香葱月度季节指数">
+<rect x="0" y="0" width="960" height="250" fill="#ffffff"/>
+<line x1="58" y1="206.0" x2="940" y2="206.0" stroke="#c9d1da" stroke-width="1"/>
+<text x="50" y="210.0" font-size="11" fill="#7b8595" text-anchor="end">0.00</text>
+<line x1="58" y1="160.0" x2="940" y2="160.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="164.0" font-size="11" fill="#7b8595" text-anchor="end">0.40</text>
+<line x1="58" y1="114.0" x2="940" y2="114.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="118.0" font-size="11" fill="#7b8595" text-anchor="end">0.80</text>
+<line x1="58" y1="68.0" x2="940" y2="68.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="72.0" font-size="11" fill="#7b8595" text-anchor="end">1.20</text>
+<line x1="58" y1="22.0" x2="940" y2="22.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="26.0" font-size="11" fill="#7b8595" text-anchor="end">1.60</text>
+<line x1="58" y1="91.0" x2="940" y2="91.0" stroke="#0f9960" stroke-width="1.5" stroke-dasharray="6 4"/>
+<rect x="71.2" y="80.3" width="47.0" height="125.7" fill="#d93025" opacity="0.82" rx="3"/>
+<text x="94.8" y="75.3" font-size="11" fill="#1c2024" text-anchor="middle">1.09</text>
+<text x="94.8" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">1月</text>
+<rect x="144.7" y="94.6" width="47.0" height="111.4" fill="#8a93a0" opacity="0.82" rx="3"/>
+<text x="168.2" y="89.6" font-size="11" fill="#1c2024" text-anchor="middle">0.97</text>
+<text x="168.2" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">2月</text>
+<rect x="218.2" y="88.0" width="47.0" height="118.0" fill="#8a93a0" opacity="0.82" rx="3"/>
+<text x="241.8" y="83.0" font-size="11" fill="#1c2024" text-anchor="middle">1.03</text>
+<text x="241.8" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">3月</text>
+<rect x="291.7" y="61.8" width="47.0" height="144.2" fill="#d93025" opacity="0.82" rx="3"/>
+<text x="315.2" y="56.8" font-size="11" fill="#1c2024" text-anchor="middle">1.25</text>
+<text x="315.2" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">4月</text>
+<rect x="365.2" y="72.7" width="47.0" height="133.3" fill="#d93025" opacity="0.82" rx="3"/>
+<text x="388.8" y="67.7" font-size="11" fill="#1c2024" text-anchor="middle">1.16</text>
+<text x="388.8" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">5月</text>
+<rect x="438.7" y="102.2" width="47.0" height="103.8" fill="#0f9960" opacity="0.82" rx="3"/>
+<text x="462.2" y="97.2" font-size="11" fill="#1c2024" text-anchor="middle">0.90</text>
+<text x="462.2" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">6月</text>
+<rect x="512.2" y="127.3" width="47.0" height="78.7" fill="#0f9960" opacity="0.82" rx="3"/>
+<text x="535.8" y="122.3" font-size="11" fill="#1c2024" text-anchor="middle">0.68</text>
+<text x="535.8" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">7月</text>
+<rect x="585.7" y="123.0" width="47.0" height="83.0" fill="#0f9960" opacity="0.82" rx="3"/>
+<text x="609.2" y="118.0" font-size="11" fill="#1c2024" text-anchor="middle">0.72</text>
+<text x="609.2" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">8月</text>
+<rect x="659.2" y="102.2" width="47.0" height="103.8" fill="#0f9960" opacity="0.82" rx="3"/>
+<text x="682.8" y="97.2" font-size="11" fill="#1c2024" text-anchor="middle">0.90</text>
+<text x="682.8" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">9月</text>
+<rect x="732.7" y="88.0" width="47.0" height="118.0" fill="#8a93a0" opacity="0.82" rx="3"/>
+<text x="756.2" y="83.0" font-size="11" fill="#1c2024" text-anchor="middle">1.03</text>
+<text x="756.2" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">10月</text>
+<rect x="806.2" y="77.1" width="47.0" height="128.9" fill="#d93025" opacity="0.82" rx="3"/>
+<text x="829.8" y="72.1" font-size="11" fill="#1c2024" text-anchor="middle">1.12</text>
+<text x="829.8" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">11月</text>
+<rect x="879.7" y="74.9" width="47.0" height="131.1" fill="#d93025" opacity="0.82" rx="3"/>
+<text x="903.2" y="69.9" font-size="11" fill="#1c2024" text-anchor="middle">1.14</text>
+<text x="903.2" y="224.0" font-size="11" fill="#5b6470" text-anchor="middle">12月</text>
+</svg>
+  <div class="legend">季节指数 = 该月价格 / 全年均价。&gt;1.08 为旺季（红），&lt;0.92 为淡季（绿）。
+    香葱季节规律：春峰 4—5 月最高、冬旺 11—1 月次高（春节备货 + 北方产区退市后云南单极供给），
+    夏谷 7—8 月最低。与第六章预测模型共用同一季节曲线（config.SEASONALITY）。</div>
+  <h3>2.8 长周期结论</h3>
+  <ul><li><strong>十年中枢下移，产能是主导变量</strong>——120 个月窗口年化 -5.4%，期末较期初 -42.5%。泸西全县香葱种植面积从 2013 年引种时的零星规模扩至 2024 年的 13.5 万亩基地 / 46.7 万亩次，供给弹性显著放大，长期价格重心难以回到 2016 年水平。</li><li><strong>近三年是十年里最剧烈的「过山车」</strong>——36 个月窗口 -20.1%，振幅高达 628%（最高 11.00 元/公斤 @ 2024-08，最低 1.51 元/公斤 @ 2026-07）。2024 年夏秋极端高价 → 2024 年 11 月快速回落至 2.62 → 2026 年持续低位，反映高价刺激扩种、扩种反过来压价的经典蛛网周期。</li><li><strong>近 24 个月已回到起点，处在周期底部区间</strong>——24 个月窗口 +0.0%（2.62 → 2.62），均值 2.58 元/公斤。当前 2.62 元/公斤（通货）贴近近三年低位区间，下行空间有限，具备季节性修复基础。</li><li><strong>季节性是最可靠的短线规律</strong>——春峰（4-5 月）季节指数 1.16-1.25、冬旺（11-1 月）1.09-1.14，夏谷（7-8 月）仅 0.68-0.72，峰值/谷值约 1.8 倍。当前 10 月指数 1.03，处于过渡窗口，但供给节奏压制了季节性涨幅。</li><li><strong>波动率极高，不宜做单边上车的久期押注</strong>——各窗口年化波动率 55%-79%，远超大宗蔬菜。建议以「淡季建仓、旺季分批兑现」的滚动操作替代单点押注。</li></ul>
+
+</div>
+
+<div class="card">
+  <h2 id="sec3-weather">三、全国天气与自然灾害<span class="en">Weather &amp; Disaster</span></h2>
+  <h3>3.1 泸西县逐日预报（Open-Meteo，未来16天）</h3>
+  
+    <table>
+      <tr><th>日期</th><th>天气</th><th>最低/最高(℃)</th><th>降水(mm)</th>
+          <th>最大风速(m/s)</th><th>降水概率(%)</th></tr>
+      <tr><td>2026-10-28</td><td>雾</td><td class="num">14.5 / 23.1</td><td class="num">0.0</td><td class="num">19.5</td><td class="num">37</td></tr><tr><td>2026-10-29</td><td>雾</td><td class="num">14.0 / 24.2</td><td class="num">0.0</td><td class="num">14.4</td><td class="num">2</td></tr><tr><td>2026-10-30</td><td>雾</td><td class="num">14.9 / 24.1</td><td class="num">0.0</td><td class="num">18.3</td><td class="num">2</td></tr><tr><td>2026-10-31</td><td>晴间多云</td><td class="num">14.9 / 26.5</td><td class="num">0.0</td><td class="num">24.4</td><td class="num">0</td></tr><tr><td>2026-11-01</td><td>毛毛雨</td><td class="num">16.5 / 26.0</td><td class="num">0.9</td><td class="num">21.7</td><td class="num">39</td></tr><tr><td>2026-11-02</td><td>毛毛雨</td><td class="num">15.4 / 21.1</td><td class="num">0.3</td><td class="num">11.5</td><td class="num">45</td></tr><tr><td>2026-11-03</td><td>毛毛雨</td><td class="num">15.4 / 24.1</td><td class="num">0.6</td><td class="num">18.5</td><td class="num">53</td></tr><tr><td>2026-11-04</td><td>毛毛雨</td><td class="num">15.5 / 24.3</td><td class="num">0.6</td><td class="num">16.8</td><td class="num">40</td></tr><tr><td>2026-11-05</td><td>毛毛雨</td><td class="num">15.6 / 24.9</td><td class="num">0.6</td><td class="num">17.9</td><td class="num">55</td></tr><tr><td>2026-11-06</td><td>阴</td><td class="num">16.1 / 24.9</td><td class="num">0.0</td><td class="num">17.3</td><td class="num">54</td></tr><tr><td>2026-11-07</td><td>雾</td><td class="num">15.7 / 25.1</td><td class="num">0.0</td><td class="num">15.8</td><td class="num">37</td></tr><tr><td>2026-11-08</td><td>毛毛雨</td><td class="num">15.5 / 24.5</td><td class="num">5.1</td><td class="num">13.7</td><td class="num">55</td></tr><tr><td>2026-11-09</td><td>强毛毛雨</td><td class="num">14.8 / 20.9</td><td class="num">9.3</td><td class="num">17.9</td><td class="num">54</td></tr><tr><td>2026-11-10</td><td>毛毛雨</td><td class="num">14.1 / 22.9</td><td class="num">0.6</td><td class="num">19.7</td><td class="num">52</td></tr><tr><td>2026-11-11</td><td>阵雨</td><td class="num">10.3 / 17.0</td><td class="num">11.1</td><td class="num">12.7</td><td class="num">61</td></tr><tr><td>2026-11-12</td><td>—</td><td class="num">— / —</td><td class="num">0.0</td><td class="num">0.0</td><td class="num">57</td></tr>
+    </table>
+  <h3>3.2 窗口统计</h3>
+  
+    <table>
+      <tr><th>窗口</th><th>平均最高(℃)</th><th>平均最低(℃)</th><th>累计降水(mm)</th>
+          <th>雨日</th><th>强降水日</th><th>大风日</th><th>主导天气</th></tr>
+      <tr><td>未来3天</td><td class="num">23.8</td><td class="num">14.5</td><td class="num">0.0</td><td class="num">0</td><td class="num">0</td><td class="num">2</td><td>雾</td></tr><tr><td>未来1周</td><td class="num">24.2</td><td class="num">15.1</td><td class="num">1.8</td><td class="num">0</td><td class="num">0</td><td class="num">5</td><td>毛毛雨</td></tr><tr><td>未来半月(第8-15天)</td><td class="num">23.1</td><td class="num">14.7</td><td class="num">27.3</td><td class="num">3</td><td class="num">1</td><td class="num">4</td><td>毛毛雨</td></tr><tr><td>预报期全程</td><td class="num">23.6</td><td class="num">14.9</td><td class="num">29.1</td><td class="num">3</td><td class="num">1</td><td class="num">9</td><td>毛毛雨</td></tr>
+    </table>
+  <h3>3.3 全国主要观测点（未来7天）</h3>
+  <table>
+    <tr><th>城市</th><th>省份</th><th>属性</th><th>平均最高(℃)</th>
+        <th>累计降水(mm)</th><th>雨日</th><th>主导天气</th></tr>
+    <tr><td>泸西</td><td>云南</td><td>核心产区</td><td class="num">24.2</td><td class="num">1.8</td><td class="num">0</td><td>毛毛雨</td></tr><tr><td>昆明</td><td>云南</td><td>产区/销区</td><td class="num">23.5</td><td class="num">22.5</td><td class="num">2</td><td>毛毛雨</td></tr><tr><td>师宗</td><td>云南</td><td>产区</td><td class="num">24.0</td><td class="num">1.2</td><td class="num">1</td><td>阴</td></tr><tr><td>南宁</td><td>广西</td><td>产区</td><td class="num">30.7</td><td class="num">6.5</td><td class="num">3</td><td>毛毛雨</td></tr><tr><td>玉林</td><td>广西</td><td>产区</td><td class="num">31.8</td><td class="num">5.1</td><td class="num">2</td><td>毛毛雨</td></tr><tr><td>湛江</td><td>广东</td><td>产区</td><td class="num">30.0</td><td class="num">10.6</td><td class="num">3</td><td>毛毛雨</td></tr><tr><td>寿光</td><td>山东</td><td>产区</td><td class="num">19.2</td><td class="num">10.3</td><td class="num">3</td><td>阴</td></tr><tr><td>兴化</td><td>江苏</td><td>加工带</td><td class="num">20.0</td><td class="num">17.8</td><td class="num">2</td><td>毛毛雨</td></tr><tr><td>北京</td><td>北京</td><td>销区</td><td class="num">15.1</td><td class="num">0.0</td><td class="num">0</td><td>晴</td></tr><tr><td>上海</td><td>上海</td><td>销区</td><td class="num">22.0</td><td class="num">7.4</td><td class="num">1</td><td>毛毛雨</td></tr><tr><td>广州</td><td>广东</td><td>销区</td><td class="num">31.9</td><td class="num">4.8</td><td class="num">2</td><td>阴</td></tr><tr><td>杭州</td><td>浙江</td><td>销区</td><td class="num">22.9</td><td class="num">14.4</td><td class="num">3</td><td>阴</td></tr><tr><td>武汉</td><td>湖北</td><td>销区</td><td class="num">21.3</td><td class="num">28.1</td><td class="num">3</td><td>毛毛雨</td></tr><tr><td>成都</td><td>四川</td><td>销区</td><td class="num">21.0</td><td class="num">0.2</td><td class="num">0</td><td>阴</td></tr><tr><td>西安</td><td>陕西</td><td>销区</td><td class="num">16.7</td><td class="num">16.3</td><td class="num">3</td><td>阴</td></tr>
+  </table>
+  <h3>3.4 生效气象预警（中央气象台，共 100 条）</h3>
+  <p><span class="tag">大风 × 45</span> <span class="tag">大雾 × 38</span> <span class="tag">暴雨 × 5</span> <span class="tag">雷电 × 3</span> <span class="tag">道路冰雪 × 3</span> <span class="tag">地质灾害 × 2</span> <span class="tag">雷雨大风 × 2</span> <span class="tag">强季风 × 1</span> <span class="tag">海上雷雨大风 × 1</span></p>
+  
+    <table>
+      <tr><th>区域</th><th>预警</th><th>属性</th><th>产业链影响</th><th>发布时间</th></tr>
+      <tr><td>云南省临沧市凤庆县</td><td><span class="tag t-up">暴雨橙色</span></td><td>产区</td><td>田间渍涝、采收受阻、损耗与病害风险上升</td><td>2026/10/28 05:42</td></tr><tr><td>云南省临沧市沧源佤族自治县</td><td><span class="tag t-flat">暴雨黄色</span></td><td>产区</td><td>田间渍涝、采收受阻、损耗与病害风险上升</td><td>2026/10/28 04:23</td></tr><tr><td>云南省临沧市耿马傣族佤族自治县</td><td><span class="tag t-flat">暴雨黄色</span></td><td>产区</td><td>田间渍涝、采收受阻、损耗与病害风险上升</td><td>2026/10/28 06:30</td></tr><tr><td>云南省临沧市云县</td><td><span class="tag t-down">暴雨蓝色</span></td><td>产区</td><td>田间渍涝、采收受阻、损耗与病害风险上升</td><td>2026/10/28 03:12</td></tr><tr><td>云南省临沧市永德县</td><td><span class="tag t-down">暴雨蓝色</span></td><td>产区</td><td>田间渍涝、采收受阻、损耗与病害风险上升</td><td>2026/10/28 05:39</td></tr><tr><td>浙江省温州市乐清市</td><td><span class="tag t-flat">大风黄色</span></td><td>产区</td><td>设施受损、蒸腾加剧</td><td>2026/10/27 19:52</td></tr><tr><td>浙江省温州市洞头区</td><td><span class="tag t-flat">大风黄色</span></td><td>产区</td><td>设施受损、蒸腾加剧</td><td>2026/10/27 19:08</td></tr><tr><td>浙江省温州市瑞安市</td><td><span class="tag t-flat">大风黄色</span></td><td>产区</td><td>设施受损、蒸腾加剧</td><td>2026/10/27 18:43</td></tr><tr><td>浙江省温州市苍南县</td><td><span class="tag t-flat">大风黄色</span></td><td>产区</td><td>设施受损、蒸腾加剧</td><td>2026/10/27 20:46</td></tr><tr><td>浙江省温州市龙港市</td><td><span class="tag t-flat">大风黄色</span></td><td>产区</td><td>设施受损、蒸腾加剧</td><td>2026/10/27 18:59</td></tr><tr><td>福建省厦门市</td><td><span class="tag t-flat">大风黄色</span></td><td>产区</td><td>设施受损、蒸腾加剧</td><td>2026/10/27 20:43</td></tr><tr><td>福建省厦门市同安区</td><td><span class="tag t-flat">大风黄色</span></td><td>产区</td><td>设施受损、蒸腾加剧</td><td>2026/10/27 20:55</td></tr>
+    </table>
+</div>
+
+<div class="card">
+  <h2>四、市面常见香葱种类<span class="en">Varieties</span></h2>
+  <p>市售"香葱"在植物学上属百合科葱属，主要涵盖<strong>分葱、细香葱、胡葱（火葱/红葱）</strong>三类；
+     在批发流通端则主要按<strong>根茎颜色 + 商品规格</strong>分成红香葱、黑葱、白葱（钢葱/铁杆葱）。</p>
+  <h3>4.1 流通端商品分类（决定报价）</h3>
+  <table>
+    <tr><th>类型</th><th>特征</th><th>主要用途/流向</th></tr>
+    <tr><td><strong>红香葱</strong></td><td>鳞衣红褐/紫红色，香味浓郁，叶细</td><td>商超精品小包装、餐饮、沪粤主销</td></tr><tr><td><strong>黑葱</strong></td><td>根部色深、假茎粗壮，耐储运、损耗低</td><td>长距离外运、北方及批发市场大宗</td></tr><tr><td><strong>白葱/钢葱</strong></td><td>假茎白色、质地硬挺，纤维略多</td><td>加工脱水、葱花净菜、食堂配餐</td></tr>
+  </table>
+  <h3>4.2 常见栽培品种</h3>
+  <table>
+    <tr><th>品种</th><th>特性</th><th>适种/主产区</th><th>参考亩产</th></tr>
+    <tr><td><strong>四季小香葱</strong></td><td>耐热耐寒、分蘖强、丛生直立，株高30-50cm</td><td>全国通用，云南主栽</td><td class="num">较高</td></tr><tr><td><strong>德国米葱（小米葱）</strong></td><td>分蘖性强，耐热不耐寒、不耐旱</td><td>云南近年大面积推广，夏秋种植</td><td class="num">—</td></tr><tr><td><strong>兴葱21</strong></td><td>兴化香葱变异系，长势旺、抗逆强、加工成品率高</td><td>江苏兴化及长江流域，春秋主栽</td><td class="num">4000-5000kg（春秋）</td></tr><tr><td><strong>浙江四季香葱</strong></td><td>株高30-40cm，四季青绿，味辣而甜</td><td>浙江及南方，分株繁殖</td><td class="num">1000-2000kg</td></tr><tr><td><strong>细香葱</strong></td><td>株高47.4cm，单株分蘖11.6个，耐寒不耐热，50-60天生长期</td><td>上海及长江下游，春秋栽培</td><td class="num">1660-2000kg</td></tr><tr><td><strong>蒜瓣葱（果儿葱/胡葱）</strong></td><td>株高46cm，初夏形成蒜瓣状小鳞茎，不开花</td><td>南方地区，分株繁殖，40天可收</td><td class="num">—</td></tr><tr><td><strong>水葱（硬尾/软尾）</strong></td><td>株高45-50cm，耐热耐雨水，香味淡</td><td>广东，1-2月播种</td><td class="num">—</td></tr><tr><td><strong>红葱系列</strong></td><td>水沥红葱、泰国红葱、疏轮香葱、密轮香葱</td><td>广东、广西为主（南宁三联村红葱占比97.6%）</td><td class="num">3750kg（单季）</td></tr><tr><td><strong>分葱/寒兴葱（红头葱）/白米葱</strong></td><td>地方品种，抗寒或高产取向</td><td>青岛、上海等</td><td class="num">—</td></tr><tr><td><strong>灵香1号</strong></td><td>白色葱头变异株，根系发达，移栽50天封行</td><td>福建等地</td><td class="num">—</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>五、全国香葱种植省份分布<span class="en">Production Map</span></h2>
+  <p>全国已形成<strong>"云南为核心、两广为南翼、华东为加工带、川湘豫多点补充"</strong>的格局。</p>
+  <table>
+    <tr><th>省区</th><th>主产市县</th><th>规模（公开数据）</th><th>上市季节/定位</th></tr>
+    <tr><td><strong>云南</strong></td><td>红河州泸西县、曲靖师宗县、陆良、通海、弥渡、宾川、嵩明、晋宁</td><td>泸西：基地13.5万亩/复种46.7万亩次，年产118万吨，产值35-36亿元，全国最大单品基地；师宗：18万亩以上，年产27万吨，产值11亿元</td><td>全年轮作，秋冬春为外销旺季</td></tr><tr><td><strong>广西</strong></td><td>南宁江南区江西镇1.53万亩、邕宁区蒲庙镇1500亩、西乡塘区金陵镇三联村4100亩（红葱占97.6%）、玉林</td><td>单镇/村千亩至万亩级，亩产4000-5000斤，收购价约3元/斤</td><td>秋冬春，就近供华南及北运</td></tr><tr><td><strong>广东</strong></td><td>湛江徐闻、广州（水沥红葱）、惠州</td><td>红葱头主产区，徐闻香葱头报价约2.72元/斤</td><td>冬春，本地及大湾区</td></tr><tr><td><strong>福建</strong></td><td>漳州、泉州、福州（灵香1号）</td><td>零星规模化，外销与加工为主</td><td>秋冬，兼出口</td></tr><tr><td><strong>江苏</strong></td><td>泰州兴化（兴葱21）、宿迁</td><td>脱水香葱加工核心带</td><td>春秋为主，加工专用</td></tr><tr><td><strong>四川</strong></td><td>成都彭州、金堂、青白江</td><td>红葱头为主，报价1.89-3.82元/斤</td><td>秋冬，西南本地</td></tr><tr><td><strong>山东</strong></td><td>临沂、济南章丘（以大葱为主）</td><td>大葱主产区，香葱为辅</td><td>秋冬，北方供给主力</td></tr><tr><td><strong>浙江</strong></td><td>四季香葱传统产区</td><td>规模中等</td><td>周年，分株繁殖</td></tr><tr><td><strong>河南/湖南/贵州/海南</strong></td><td>周口淮阳、衡阳祁东、郴州安仁等</td><td>红葱头、香葱头2.43-3.19元/斤</td><td>区域自给与外调</td></tr>
+  </table>
+  <div class="note">口径提示：不同机构对小香葱的统计口径差异较大（有按"在田基地面积"、有按"复种面积/亩次"），
+    上表以各地官方发布的基地面积与产量为准，不宜直接横向加总。</div>
+</div>
+
+<div class="card">
+  <h2>六、全国行情分析与预测<span class="en">National Market</span></h2>
+  <h3>6.1 盘口直览（产地行情 / 全国行情 / 行情解析）</h3>
+  
+<div class="board">
+  <div class="board-head">
+    <div class="board-title">小香葱行情 · 盘口直览</div>
+    <div class="board-meta">更新时间：2026-10-28（北京时间）｜ 数据截至：2026-10-27（行情发布为 T-1）｜
+      单位：元/kg（另注除外）｜ 红涨 <b>↑</b> / 绿跌 ↓</div>
+  </div>
+  <div class="board-tabs">
+    <span class="bt active" onclick="bdTab(0,this)">产地行情</span>
+    <span class="bt" onclick="bdTab(1,this)">全国行情</span>
+    <span class="bt" onclick="bdTab(2,this)">行情解析</span>
+  </div>
+  <div class="board-panel active">
+    <table class="btab">
+      <tr><th>品名</th><th>区间</th><th>昨日</th><th>今日</th><th>涨跌</th><th>趋势</th><th>查看</th></tr>
+      <tr><td class="name">红葱（泸西集散·净葱）<div class="legend">泸西产区集散成交均价（精品净葱口径），模型基准</div></td><td class="num">3.6-4.0</td><td class="num">4.35</td><td class="num">3.85</td><td class="num">-0.50</td><td class="num"><span class="arrow-down">↓</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">红葱 A货（精品净葱）<span class="tag">推算</span><div class="legend">取当日集散区间上沿，仅供结构参考</div></td><td class="num">3.6-4.0</td><td class="num">—</td><td class="num">4.00</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">黑葱（泸西集散·净葱）<div class="legend">泸西产区集散成交均价（净葱口径）</div></td><td class="num">3.1-3.6</td><td class="num">3.86</td><td class="num">3.36</td><td class="num">-0.50</td><td class="num"><span class="arrow-down">↓</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">黑葱 A货（中条）<span class="tag">推算</span><div class="legend">取当日集散区间上沿</div></td><td class="num">—</td><td class="num">—</td><td class="num">3.60</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">红香葱（云南全省综合）</td><td class="num">4.4-5.0</td><td class="num">—</td><td class="num">4.70</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">黑葱（云南全省综合）</td><td class="num">3.9-4.4</td><td class="num">—</td><td class="num">4.15</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">小葱（昆明王旗营批发）</td><td class="num">3.5</td><td class="num">3.50</td><td class="num">3.50</td><td class="num">0.00</td><td class="num"><span class="arrow-flat">→</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">红葱 包地价（泸西·毛葱）<span class="tag">接口</span><div class="legend">惠农网产地接口·泸西香葱 2026-10-27 报价 2.62元/kg——地头通货毛葱口径；毛葱经加工去损折算集散净葱口径（×约1.66）≈ 4.35 元/kg，与上行「滇中集散」衔接，两口径不可直接对比</div></td><td class="num">2.62 元/kg</td><td class="num">—</td><td class="num">2620 元/吨</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-spot" onclick="bdGo(1,'sec6-spot',this);return false;">查看</a></td></tr><tr><td class="name">红铁杆 期货盘<span class="tag">模型</span><div class="legend">全国无葱类期货合约与公开远期盘；取模型2个月远期中枢折算元/吨（情景推演，非成交价）</div></td><td class="num">—</td><td class="num">—</td><td class="num">4900 元/吨</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-forecast">查看</a></td></tr><tr><td class="name">黑葱中条 A货（2吨）<span class="tag">推算</span><div class="legend">整车吨级批发盘无公开接口；按泸西黑葱集散上沿×1000 推算元/吨</div></td><td class="num">—</td><td class="num">—</td><td class="num">3600 元/吨</td><td class="num">—</td><td class="num"><span class="arrow-flat">—</span></td><td><a class="see" href="#sec6-spot" onclick="bdGo(1,'sec6-spot',this);return false;">查看</a></td></tr><tr><td class="name">白葱·白铁杆（云南产区）<span class="tag">实测</span><div class="legend">产区报价单 2026-10-26：3.4-3.6 元/kg（昨日 3.6）。白葱与红/黑葱同季竞争，可作为香葱总供给的交叉验证</div></td><td class="num">3.4-3.6</td><td class="num">3.60</td><td class="num">3.50</td><td class="num">-0.10</td><td class="num"><span class="arrow-down">↓</span></td><td><a class="see" href="#sec6-spot" onclick="bdGo(1,'sec6-spot',this);return false;">查看</a></td></tr><tr><td class="name">红香葱（精品好货）<span class="tag">实测</span><div class="legend">产区报价单 2026-10-26：5.1-5.3 元/kg（昨日 5.3）。精品好货口径，高于全省综合交易价（4.4-5.0），反映优质优价价差</div></td><td class="num">5.1-5.3</td><td class="num">5.30</td><td class="num">5.20</td><td class="num">-0.10</td><td class="num"><span class="arrow-down">↓</span></td><td><a class="see" href="#sec6-spot" onclick="bdGo(1,'sec6-spot',this);return false;">查看</a></td></tr><tr><td class="name">黑葱 包地价<span class="tag">实测</span><div class="legend">包地（整片承包）口径 2026-10-26：2700-2900 元/亩（昨日 2900）。按亩计价，直接反映地头对后市的预期，领先于现货价变化</div></td><td class="num">2700-2900</td><td class="num">2900</td><td class="num">2800 元/亩</td><td class="num">-100</td><td class="num"><span class="arrow-down">↓</span></td><td><a class="see" href="#sec6-spot" onclick="bdGo(1,'sec6-spot',this);return false;">查看</a></td></tr><tr><td class="name">白铁杆 包地价<span class="tag">实测</span><div class="legend">包地（整片承包）口径 2026-10-26：3200-3600 元/亩（昨日 3600）。按亩计价，直接反映地头对后市的预期，领先于现货价变化</div></td><td class="num">3200-3600</td><td class="num">3600</td><td class="num">3400 元/亩</td><td class="num">-200</td><td class="num"><span class="arrow-down">↓</span></td><td><a class="see" href="#sec6-spot" onclick="bdGo(1,'sec6-spot',this);return false;">查看</a></td></tr>
+    </table>
+    
+    <div class="bars">
+      <div class="bar"><span class="bt2">产地涨跌家数</span><i class="k">同口径可比 <b>5</b> 项</i><i class="up">涨 <b>0</b></i><i class="down">跌 <b>4</b></i><i>平 <b>1</b></i><i>平均变动 <b class="down">-0.24</b> 元/kg</i></div>
+      <div class="bar"><span class="bt2">分口径中枢（今日，元/kg）</span><i>泸西集散·净葱：红葱 <b>3.85</b> / 黑葱 <b>3.36</b></i><i>云南全省综合：红香葱 <b>4.70</b> / 黑葱 <b>4.15</b></i><i>销区批发（王旗营）：小葱 <b>3.50</b></i><i>云南产区·白葱：白葱 <b>3.50</b></i><i>云南产区·精品好货：红香葱 <b>5.20</b></i>
+        <i class="k">不同口径不可横比</i></div>
+    </div>
+    <div class="legend">「推算」档取当日集散区间上沿，非实际成交；「接口」档为惠农网公开产地报价（地头通货毛葱口径，
+      ×约1.66 折算集散净葱口径后才与上行集散价同口径）；「模型」档为价格预测中枢折算（非成交价）。
+      红葱包地价取自惠农网泸西产地接口（元/吨），与下方「元/亩」包地价分属不同计价方式；
+      黑葱A货吨盘按集散上沿推算；红铁杆期货盘无公开合约，取模型2个月远期中枢。
+      白葱（白铁杆）与红/黑葱同季竞争，其走弱可作为香葱总供给宽松的交叉验证；
+      「元/亩」包地价不并入上方元/kg 分口径横截面。</div>
+  </div>
+  <div class="board-panel">
+    <p style="margin:10px 4px 0"><strong>接口自动行情 · 北京新发地农产品批发市场</strong>
+      <span class="tag">抓取时间 2026-10-28 06:55:21</span></p>
+    <table class="btab">
+      <tr><th>品名</th><th>最新日期</th><th>区间(元/kg)</th><th>中枢</th>
+          <th>较前日</th><th>趋势</th><th>产地</th><th>查看</th></tr>
+      <tr><td class="name">香葱<span class="tag">接口自动</span></td><td>2026-10-27</td><td class="num">6.60 – 9.00</td><td class="num">7.80</td><td class="num down">-0.40</td><td class="num"><span class="arrow-down">↓</span></td><td>—</td><td><a class="see" href="#sec6-spot">明细</a></td></tr><tr><td class="name">小葱<span class="tag">接口自动</span></td><td>2026-10-27</td><td class="num">2.60 – 5.00</td><td class="num">3.80</td><td class="num flat">0.00</td><td class="num"><span class="arrow-flat">→</span></td><td>冀辽</td><td><a class="see" href="#sec6-spot">明细</a></td></tr><tr><td class="name">大葱<span class="tag">接口自动</span></td><td>2026-10-27</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td class="num flat">0.00</td><td class="num"><span class="arrow-flat">→</span></td><td>冀蒙</td><td><a class="see" href="#sec6-spot">明细</a></td></tr>
+    </table>
+    <div class="legend">数据来源：新发地批发市场公开行情接口（原始单位元/斤，×2 换算为元/公斤）；
+      每日运行自动抓取并归档至 data/market_quotes.json。</div>
+    <p style="margin:14px 4px 0"><strong>接口全部明细 · 共 41 条</strong>
+      <span class="tag">全量不截断</span></p>
+    <table class="btab">
+      <tr><th>日期</th><th>品名</th><th>区间(元/kg)</th><th>中枢</th><th>产地</th></tr>
+      <tr><td>2026-10-27</td><td class="name">香葱</td><td class="num">6.60 – 9.00</td><td class="num">7.80</td><td>—</td></tr><tr><td>2026-10-27</td><td class="name">小葱</td><td class="num">2.60 – 5.00</td><td class="num">3.80</td><td>冀辽</td></tr><tr><td>2026-10-27</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-26</td><td class="name">香葱</td><td class="num">7.20 – 9.20</td><td class="num">8.20</td><td>—</td></tr><tr><td>2026-10-26</td><td class="name">小葱</td><td class="num">2.60 – 5.00</td><td class="num">3.80</td><td>冀辽</td></tr><tr><td>2026-10-26</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-25</td><td class="name">小葱</td><td class="num">3.00 – 5.00</td><td class="num">4.00</td><td>冀辽</td></tr><tr><td>2026-10-25</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-24</td><td class="name">小葱</td><td class="num">3.00 – 5.00</td><td class="num">4.00</td><td>冀辽</td></tr><tr><td>2026-10-24</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-23</td><td class="name">香葱</td><td class="num">7.00 – 9.00</td><td class="num">8.00</td><td>—</td></tr><tr><td>2026-10-23</td><td class="name">小葱</td><td class="num">3.00 – 5.00</td><td class="num">4.00</td><td>冀辽</td></tr><tr><td>2026-10-23</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-22</td><td class="name">香葱</td><td class="num">7.00 – 9.00</td><td class="num">8.00</td><td>—</td></tr><tr><td>2026-10-22</td><td class="name">小葱</td><td class="num">3.00 – 5.00</td><td class="num">4.00</td><td>冀辽</td></tr><tr><td>2026-10-22</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-21</td><td class="name">香葱</td><td class="num">7.00 – 9.00</td><td class="num">8.00</td><td>—</td></tr><tr><td>2026-10-21</td><td class="name">小葱</td><td class="num">3.00 – 5.00</td><td class="num">4.00</td><td>冀辽</td></tr><tr><td>2026-10-21</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-20</td><td class="name">香葱</td><td class="num">7.00 – 9.00</td><td class="num">8.00</td><td>—</td></tr><tr><td>2026-10-20</td><td class="name">小葱</td><td class="num">3.00 – 5.60</td><td class="num">4.30</td><td>冀辽</td></tr><tr><td>2026-10-20</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-19</td><td class="name">香葱</td><td class="num">7.00 – 9.00</td><td class="num">8.00</td><td>—</td></tr><tr><td>2026-10-19</td><td class="name">小葱</td><td class="num">3.00 – 5.60</td><td class="num">4.30</td><td>冀辽</td></tr><tr><td>2026-10-19</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-18</td><td class="name">小葱</td><td class="num">3.00 – 5.60</td><td class="num">4.30</td><td>冀辽</td></tr><tr><td>2026-10-18</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-17</td><td class="name">小葱</td><td class="num">3.00 – 5.60</td><td class="num">4.30</td><td>冀辽</td></tr><tr><td>2026-10-17</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-16</td><td class="name">香葱</td><td class="num">6.40 – 9.00</td><td class="num">7.70</td><td>—</td></tr><tr><td>2026-10-16</td><td class="name">小葱</td><td class="num">3.00 – 5.60</td><td class="num">4.30</td><td>冀辽</td></tr><tr><td>2026-10-16</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-15</td><td class="name">香葱</td><td class="num">6.40 – 9.00</td><td class="num">7.70</td><td>—</td></tr><tr><td>2026-10-15</td><td class="name">小葱</td><td class="num">3.00 – 5.60</td><td class="num">4.30</td><td>冀辽</td></tr><tr><td>2026-10-15</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-14</td><td class="name">香葱</td><td class="num">6.40 – 9.00</td><td class="num">7.70</td><td>—</td></tr><tr><td>2026-10-14</td><td class="name">小葱</td><td class="num">3.00 – 5.60</td><td class="num">4.30</td><td>冀辽</td></tr><tr><td>2026-10-14</td><td class="name">大葱</td><td class="num">1.80 – 2.20</td><td class="num">2.00</td><td>冀蒙</td></tr><tr><td>2026-10-13</td><td class="name">香葱</td><td class="num">6.40 – 8.60</td><td class="num">7.50</td><td>—</td></tr><tr><td>2026-10-13</td><td class="name">小葱</td><td class="num">3.00 – 5.60</td><td class="num">4.30</td><td>冀辽</td></tr><tr><td>2026-10-13</td><td class="name">大葱</td><td class="num">2.00 – 2.40</td><td class="num">2.20</td><td>冀蒙</td></tr>
+    </table>
+    <div class="legend">上表为本次抓取到的全部行情行（41 条，按日期倒序），未做任何截断；
+      上方汇总表仅取各品项最新一条用于看盘对比。</div>
+    <p style="margin:10px 4px 0"><strong>接口自动行情 · 惠农网产地报价（云南产区）</strong>
+      <span class="tag">抓取时间 2026-10-28 06:55:24</span></p>
+    <table class="btab">
+      <tr><th>品名</th><th>日期</th><th>产地</th><th>元/公斤</th><th>元/吨</th></tr>
+      <tr><td class="name">四季葱<span class="tag">惠农网</span></td><td>2026-10-27</td><td>云南大理白族自治州宾川县</td><td class="num">3.40</td><td class="num">3400.00</td></tr><tr><td class="name">火葱<span class="tag">惠农网</span></td><td>2026-10-27</td><td>云南大理白族自治州弥渡县</td><td class="num">7.02</td><td class="num">7020.00</td></tr><tr><td class="name">香葱<span class="tag">惠农网</span></td><td>2026-10-27</td><td>云南红河哈尼族彝族自治州泸西县</td><td class="num">2.62</td><td class="num">2620.00</td></tr>
+    </table>
+    <div class="legend">数据来源：惠农网（cnhnb.com）公开产地行情页，原始单位元/斤、×2 换算元/公斤、×2000 换算元/吨；
+      覆盖云南泸西/宾川/弥渡等产区，每日运行自动抓取（接口限流时自动回退最近一次缓存，并保留原报价日期）。
+      注意：产地挂牌为地头通货毛葱口径，与滇中集散净葱口径（×约1.66）不可直接对比。</div>
+    <div class="bars">
+      <div class="bar"><span class="bt2">接口行情涨跌家数</span><i class="k">同口径可比 <b>3</b> 项</i><i class="up">涨 <b>0</b></i><i class="down">跌 <b>1</b></i><i>平 <b>2</b></i><i>平均变动 <b class="down">-0.13</b> 元/kg</i></div>
+      <div class="bar"><span class="bt2">分口径中枢（今日，元/kg）</span><i>销区批发（新发地）：香葱 <b>7.80</b> / 小葱 <b>3.80</b> / 大葱 <b>2.00</b></i><i>产地毛葱（惠农网）：四季葱（宾川县） <b>3.40</b> / 火葱（弥渡县） <b>7.02</b> / 香葱（泸西县） <b>2.62</b></i>
+        <i class="k">不同口径不可横比</i></div>
+    </div>
+    <table id="sec6-spot">
+      <tr><th>日期</th><th>市场/口径</th><th>品项</th><th>报价区间</th><th>中枢(元/kg)</th><th>说明</th></tr>
+      <tr><td>2026-10-26</td><td>云南产地综合交易价</td><td>红香葱</td><td class="num">4.4-5.0</td><td class="num">4.70</td><td>全省综合报价（含精品与通货加权），与 10-25 持平</td></tr><tr><td>2026-10-26</td><td>云南产地综合交易价</td><td>黑葱</td><td class="num">3.9-4.4</td><td class="num">4.15</td><td>全省综合报价，与 10-25 持平</td></tr><tr><td>2026-10-26</td><td>泸西产区</td><td>红香葱</td><td class="num">3.6-4.0</td><td class="num">3.85</td><td>产地地头/集散报价，模型基准口径，较 10-25 跌 0.50</td></tr><tr><td>2026-10-26</td><td>泸西产区</td><td>黑香葱</td><td class="num">3.1-3.6</td><td class="num">3.36</td><td>产地地头/集散报价，较 10-25 跌 0.50</td></tr><tr><td>2026-10-26</td><td>通海产区</td><td>红葱</td><td class="num">3.6-4.0</td><td class="num">3.85</td><td>与泸西同价，滇中片区价格趋同</td></tr><tr><td>2026-10-26</td><td>通海产区</td><td>黑葱</td><td class="num">3.1-3.6</td><td class="num">3.36</td><td>与泸西同价</td></tr><tr><td>2026-10-26</td><td>昆明景臻·王旗营</td><td>小葱</td><td class="num">3.5</td><td class="num">3.50</td><td>批发均价，成交 35 吨，连续四日持平</td></tr><tr><td>2026-10-26</td><td>青岛城阳蔬菜水产品批发市场</td><td>香葱</td><td class="num">7.00-9.00</td><td class="num">8.00</td><td>华东销区，高低 7.00/9.00，均价 8.00，运距+分级溢价</td></tr><tr><td>2026-10-26</td><td>黄淮农产品（河南周口）</td><td>葱</td><td class="num">1.80</td><td class="num">1.80</td><td>北方销区，本地秋葱上市压制</td></tr><tr><td>2026-10-26</td><td>太原河西农产品</td><td>大葱</td><td class="num">3.00-3.40</td><td class="num">3.20</td><td>华北销区，非香葱口径，仅作对比</td></tr><tr><td>2026-10-26</td><td>西藏领峰农副产品</td><td>小葱</td><td class="num">12.00</td><td class="num">12.00</td><td>高原远端销区，运距决定溢价</td></tr><tr><td>2026-10-26</td><td>浙江金华农产品批发市场</td><td>大葱</td><td class="num">3.20</td><td class="num">3.20</td><td>华东销区，非香葱口径（农业农村部信息中心）</td></tr><tr><td>2026-10-26</td><td>吴忠鑫鲜农产品批发市场</td><td>大葱</td><td class="num">1.60-2.00</td><td class="num">1.80</td><td>西北地产菜，0.90 元/斤折算，非香葱口径</td></tr>
+    </table>
+    <div class="legend">口径提示：不同市场口径不可直接横比——「云南产地综合交易价」为全省加权综合价，
+      高于单一产区集散报价；滇中产区报价为预测模型基准口径；北方销区「葱/大葱」多为大葱口径，仅作参照。</div></div>
+  <div class="board-panel">
+    <div class="mini-sum">
+      <div class="ms"><b>今日判断：延续下行</b>
+        产区红葱（集散·净葱）3.85 元/kg 较上一采集日（10-25）-0.50 元/kg。</div>
+      <div class="ms"><b>近端（3天-半月）</b>
+        中枢 4.04 → 4.56 元/kg，
+        天气平稳、后市温和回升。</div>
+      <div class="ms"><b>远端（1-3月）</b>
+        冬旺 + 春节备货支撑，3 月目标日 2027-01-26 情景中枢
+        4.96 元/kg（±16%），属情景推演。</div>
+      <div class="ms"><b>模型路径（红香葱中枢）</b>
+        基准 <b>3.85</b> → 未来3天 <b>4.04</b>（+5.0%）→
+        未来1月 <b>4.75</b>（+23.5%）→
+        未来3月 <b>4.96</b>（+28.8%）。
+        远端区间 4.14–5.78 元/kg，置信度 低（情景推演）。
+        <a class="see" href="#sec6-forecast">看预测表 →</a></div>
+      <div class="ms"><b>天气驱动（未来 1 周 / 半月）</b>
+        一周累计降水 <b>1.8</b> mm、雨日
+        <b>0</b> 天、大风 <b>5</b> 天；
+        半月累计降水 <b>27.3</b> mm、雨日
+        <b>3</b> 天。
+        <a class="see" href="#sec3-weather">看天气 →</a></div>
+      <div class="ms"><b>长周期与季节性</b>
+        近 12 个月 2025-11→2026-10：
+        中枢 3.26 → 2.62 元/kg
+        （-19.6%），年化波动 58%；
+        当前 10 月季节指数 1.03，处于<b>过渡窗口</b>。
+        <a class="see" href="#sec2-longterm">看长周期 →</a></div><div class="ms"><b>关键跟踪变量</b><div class='legend'>· 11 月江南、西南降水偏多 5-8 成未兑现，产区持续晴好</div><div class='legend'>· 厄尔尼诺峰值叠加，江南、西南降水偏多 5-8 成</div><div class='legend'>· 西北太平洋预计再生成 1 个台风，影响华南/华东沿海</div><a class="see" href="#sec8-risks">看风险 →</a></div>
+    </div></div>
+</div>
+<script>
+function bdTab(i, el){
+  var card = el.closest('.board');
+  var tabs = card.querySelectorAll('.bt');
+  var panels = card.querySelectorAll('.board-panel');
+  tabs.forEach(function(t){ t.classList.remove('active'); });
+  panels.forEach(function(p){ p.classList.remove('active'); });
+  el.classList.add('active');
+  panels[i].classList.add('active');
+}
+function bdGo(i, anchor, el){
+  bdTab(i, el);
+  var a = document.getElementById(anchor);
+  if(a){ a.scrollIntoView({behavior:'smooth', block:'start'}); }
+}
+</script>
+  <h3>6.2 供需逻辑</h3>
+  <div class="split">
+    <div><p><strong>供给端（压制项）</strong></p><ul><li>北方露地秋菜处于产量爬坡期，北菜南运规模维持高位</li><li>销区本地秋菜陆续上市，形成「北方菜 + 本地菜 + 云南菜」三重供给叠加</li><li>云南产区茬口衔接顺畅，气候适宜、病害少、商品率高</li><li>全国蔬菜在田面积同比增加约 100 多万亩</li></ul></div>
+    <div><p><strong>潜在利多（触发项）</strong></p><ul><li>超强厄尔尼诺下 11 月江南、西南降水偏多 5-8 成</li><li>11 月上中旬云南两次明显降雨过程，采收与运输受扰</li><li>北方秋菜退市，供给由「北菜南运」切换为「南菜北运」，云南单极供给格局形成</li><li>冬季餐饮（火锅/面食）消费季节性回升</li><li>12 月冬至—元旦、1 月春节前两轮集中备货（2027 年春节 2 月 6 日）</li><li>价格贴近成本线后农户惜售心理增强</li></ul></div>
+  </div>
+  <h3>6.3 六档预测依据</h3>
+  <table>
+    <tr><th>周期</th><th>目标日</th><th>中枢涨跌</th><th>主要驱动因素</th><th>置信度</th></tr>
+    <tr><td><strong>未来3天</strong></td><td>2026-10-31</td><td class="num">+5.0%</td><td>大风(≥8级)2天</td><td><span class="tag">高</span></td></tr><tr><td><strong>未来1周</strong></td><td>2026-11-04</td><td class="num">+10.3%</td><td>大风(≥8级)5天</td><td><span class="tag">较高</span></td></tr><tr><td><strong>未来半月</strong></td><td>2026-11-12</td><td class="num">+18.5%</td><td>强降水(≥10mm)1天，采收受阻；大风(≥8级)9天；气温较常年偏低1.1℃，生长放缓供给延后</td><td><span class="tag">中</span></td></tr><tr><td><strong>未来1月</strong></td><td>2026-11-27</td><td class="num">+23.5%</td><td>强降水(≥10mm)1天，采收受阻；大风(≥8级)9天；气温较常年偏低1.1℃，生长放缓供给延后；超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大</td><td><span class="tag">中低</span></td></tr><tr><td><strong>未来2月</strong></td><td>2026-12-27</td><td class="num">+27.3%</td><td>强降水(≥10mm)1天，采收受阻；大风(≥8级)9天；气温较常年偏低1.1℃，生长放缓供给延后；超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大；元旦前 5 天，备货需求抬升</td><td><span class="tag">低</span></td></tr><tr><td><strong>未来3月</strong></td><td>2027-01-26</td><td class="num">+28.8%</td><td>强降水(≥10mm)1天，采收受阻；大风(≥8级)9天；气温较常年偏低1.1℃，生长放缓供给延后；超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大；春节（丁未羊年）前 11 天，备货需求抬升</td><td><span class="tag">低（情景推演）</span></td></tr>
+  </table>
+  <p class="legend">价格模型：
+    P(h) = P₀ × 季节性比 × (1 + 天气冲击 × 衰减系数) × (1 + 动量回归)
+    × (1 + 超预报期气候态修正) × (1 + 节日备货脉冲)。<br>
+    区间半宽随周期递增（3天 ±5.5% → 3月 ±16.5%），反映不确定性的时间累积；
+    天气冲击按 1/(1+超出天数/45) 衰减，即近端降雨不会线性传导到远端；
+    节日脉冲刻画月内临近节日的额外拉升，与月尺度季节性不重复计数。</p>
+  <div class="note"><strong>长周期（2-3个月）特别说明：</strong>
+    未来 2 月目标日 2026-12-27 落在冬至与元旦备货窗口；未来 3 月目标日 2027-01-26
+    距 2027 年春节（2 月 6 日，除夕 2 月 5 日）仅 11 天，处于全年最强的节前备货窗口。
+    该档位属<strong>情景推演</strong>而非精确预测，实盘需以临近的一个月档滚动修正为准，
+    并重点跟踪厄尔尼诺峰值（预计 11 月前后）后冬季西南降水的实际兑现程度。</div>
+</div>
+
+<div class="card">
+  <h2>七、泸西县专题<span class="en">Luxi County Focus</span></h2>
+  <h3>7.1 产业底盘</h3>
+  <div class="grid">
+    <div class="kpi"><div class="lab">种植基地</div><div class="val">13.5 万亩</div>
+      <div class="chg">复种 46.7 万亩次</div></div>
+    <div class="kpi"><div class="lab">年产量</div><div class="val">118 万吨</div>
+      <div class="chg">占云南香葱总产 60%+</div></div>
+    <div class="kpi"><div class="lab">年产值</div><div class="val">36 亿元</div>
+      <div class="chg">占全县农业总产值七成以上</div></div>
+    <div class="kpi"><div class="lab">日外运量</div><div class="val">2000+ 吨</div>
+      <div class="chg">旺季可达数千吨/日</div></div>
+  </div>
+  <p><strong>竞争壁垒：</strong>低纬度高原气候（北亚热带季风区，光照充足、雨量充沛）实现全年轮番种植；水肥一体化普及使单人管理面积由 5-6 亩提升至 30 亩，人工成本大幅下降；建成制冰—清洗—冷藏—分拣—包装—运输完整加工链，附加值提升约 3 倍；《泸西小香葱生产规程》经省市场监管局发布，为国内该品类产品标准；曾为 G20 杭州峰会、杭州亚运会蔬菜直供基地；销售覆盖 20 省市 100 余城并出口马来西亚、新加坡、泰国。</p>
+  <h3 id="sec6-forecast">7.2 价格预测</h3>
+  
+    <table>
+      <tr><th>周期</th><th>目标日</th><th>红香葱区间(元/kg)</th><th>红香葱中枢</th>
+          <th>黑葱区间(元/kg)</th><th>黑葱中枢</th><th>中枢涨跌(红葱)</th>
+          <th>中枢涨跌(黑葱)</th><th>区间半宽</th><th>方向/置信度</th></tr>
+      <tr><td>当前基准</td><td>2026-10-28</td><td class="num">—</td><td class="num">3.85</td><td class="num">—</td><td class="num">3.36</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="tag t-flat">基准</span></td></tr><tr><td><strong>未来3天</strong></td><td>2026-10-31</td><td class="num">3.82 – 4.26</td><td class="num">4.04</td><td class="num">3.34 – 3.73</td><td class="num">3.53</td><td class="num up">+5.0%</td><td class="num up">+5.2%</td><td class="num">±5.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">高</span></td></tr><tr><td><strong>未来1周</strong></td><td>2026-11-04</td><td class="num">3.97 – 4.52</td><td class="num">4.25</td><td class="num">3.48 – 3.96</td><td class="num">3.72</td><td class="num up">+10.3%</td><td class="num up">+10.8%</td><td class="num">±6.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">较高</span></td></tr><tr><td><strong>未来半月</strong></td><td>2026-11-12</td><td class="num">4.18 – 4.95</td><td class="num">4.56</td><td class="num">3.67 – 4.36</td><td class="num">4.02</td><td class="num up">+18.5%</td><td class="num up">+19.5%</td><td class="num">±8.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">中</span></td></tr><tr><td><strong>未来1月</strong></td><td>2026-11-27</td><td class="num">4.25 – 5.25</td><td class="num">4.75</td><td class="num">3.75 – 4.63</td><td class="num">4.19</td><td class="num up">+23.5%</td><td class="num up">+24.8%</td><td class="num">±10.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">中低</span></td></tr><tr><td><strong>未来2月</strong></td><td>2026-12-27</td><td class="num">4.24 – 5.56</td><td class="num">4.90</td><td class="num">3.74 – 4.91</td><td class="num">4.32</td><td class="num up">+27.3%</td><td class="num up">+28.6%</td><td class="num">±13.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">低</span></td></tr><tr><td><strong>未来3月</strong></td><td>2027-01-26</td><td class="num">4.14 – 5.78</td><td class="num">4.96</td><td class="num">3.65 – 5.10</td><td class="num">4.37</td><td class="num up">+28.8%</td><td class="num up">+30.2%</td><td class="num">±16.5%</td><td><span class="tag t-up">偏强上行</span><span class="tag">低（情景推演）</span></td></tr>
+    </table>
+  <h3>7.3 预测路径图（精品净葱口径）</h3>
+  <svg viewBox="0 0 960 300" width="100%" height="300" role="img" aria-label="红香葱（精品净葱口径）预测路径">
+<rect x="0" y="0" width="960" height="300" fill="#ffffff"/>
+<line x1="58" y1="254.0" x2="850" y2="254.0" stroke="#c9d1da" stroke-width="1"/>
+<text x="50" y="258.0" font-size="11" fill="#7b8595" text-anchor="end">3.3</text>
+<line x1="58" y1="197.5" x2="850" y2="197.5" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="201.5" font-size="11" fill="#7b8595" text-anchor="end">4.1</text>
+<line x1="58" y1="141.0" x2="850" y2="141.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="145.0" font-size="11" fill="#7b8595" text-anchor="end">4.8</text>
+<line x1="58" y1="84.5" x2="850" y2="84.5" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="88.5" font-size="11" fill="#7b8595" text-anchor="end">5.5</text>
+<line x1="58" y1="28.0" x2="850" y2="28.0" stroke="#e6eaf0" stroke-width="1"/>
+<text x="50" y="32.0" font-size="11" fill="#7b8595" text-anchor="end">6.3</text>
+<polygon points="58.0,214.0 84.4,182.5 119.6,162.5 190.0,129.5 322.0,106.4 586.0,82.6 850.0,65.7 850.0,191.7 586.0,184.0 322.0,183.3 190.0,188.7 119.6,204.8 84.4,216.3 58.0,214.0" fill="#0f9960" opacity="0.12"/>
+<polyline points="58.0,214.0 84.4,199.4 119.6,183.3 190.0,159.4 322.0,144.8 586.0,133.3 850.0,128.7" fill="none" stroke="#0f9960" stroke-width="2.5" stroke-dasharray="7 5"/>
+<circle cx="58.0" cy="214.0" r="4.2" fill="#0f9960"/>
+<text x="58.0" y="204.0" font-size="11.5" fill="#1c2024" text-anchor="middle">3.85</text>
+<circle cx="84.4" cy="199.4" r="4.2" fill="#0f9960"/>
+<text x="84.4" y="189.4" font-size="11.5" fill="#1c2024" text-anchor="middle">4.04</text>
+<circle cx="119.6" cy="183.3" r="4.2" fill="#0f9960"/>
+<text x="119.6" y="173.3" font-size="11.5" fill="#1c2024" text-anchor="middle">4.25</text>
+<circle cx="190.0" cy="159.4" r="4.2" fill="#0f9960"/>
+<text x="190.0" y="149.4" font-size="11.5" fill="#1c2024" text-anchor="middle">4.56</text>
+<circle cx="322.0" cy="144.8" r="4.2" fill="#0f9960"/>
+<text x="322.0" y="134.8" font-size="11.5" fill="#1c2024" text-anchor="middle">4.75</text>
+<circle cx="586.0" cy="133.3" r="4.2" fill="#0f9960"/>
+<text x="586.0" y="123.3" font-size="11.5" fill="#1c2024" text-anchor="middle">4.90</text>
+<circle cx="850.0" cy="128.7" r="4.2" fill="#0f9960"/>
+<text x="850.0" y="118.7" font-size="11.5" fill="#1c2024" text-anchor="middle">4.96</text>
+<text x="58.0" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">当前</text>
+<text x="84.4" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">未来3天</text>
+<text x="119.6" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">未来1周</text>
+<text x="190.0" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">未来半月</text>
+<text x="322.0" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">未来1月</text>
+<text x="586.0" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">未来2月</text>
+<text x="850.0" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">未来3月</text>
+</svg>
+  <div class="legend">横轴按目标天数等距（0 / 3 / 7 / 15 / 30 / 60 / 90 天），
+    绿虚线为中枢路径，浅绿带为各档区间上下限。</div>
+  <h3>7.4 近期走势与预测示意</h3>
+  <svg viewBox="0 0 900 300" width="100%" height="300" role="img" aria-label="红香葱产地价走势与预测">
+<rect x="0" y="0" width="900" height="300" fill="#ffffff"/>
+<line x1="62" y1="254.0" x2="870" y2="254.0" stroke="#c9d1da" stroke-width="1"/>
+<text x="54" y="258.0" font-size="11" fill="#7b8595" text-anchor="end">3.3</text>
+<line x1="62" y1="199.0" x2="870" y2="199.0" stroke="#e6eaf0" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="54" y="203.0" font-size="11" fill="#7b8595" text-anchor="end">4.1</text>
+<line x1="62" y1="144.0" x2="870" y2="144.0" stroke="#e6eaf0" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="54" y="148.0" font-size="11" fill="#7b8595" text-anchor="end">5.0</text>
+<line x1="62" y1="89.0" x2="870" y2="89.0" stroke="#e6eaf0" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="54" y="93.0" font-size="11" fill="#7b8595" text-anchor="end">5.8</text>
+<line x1="62" y1="34.0" x2="870" y2="34.0" stroke="#e6eaf0" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="54" y="38.0" font-size="11" fill="#7b8595" text-anchor="end">6.7</text>
+<polyline points="62.0,70.7 142.8,184.7 223.6,184.7 304.4,184.7 385.2,217.3 466.0,204.9" fill="none" stroke="#0f6fd6" stroke-width="2.5"/>
+<polyline points="466.0,204.9 546.8,191.3 627.6,171.1 708.4,158.7 789.2,148.9 870.0,145.0" fill="none" stroke="#0f9960" stroke-width="2.5" stroke-dasharray="7 5"/>
+<circle cx="62.0" cy="70.7" r="4.2" fill="#0f6fd6"/>
+<circle cx="142.8" cy="184.7" r="4.2" fill="#0f6fd6"/>
+<circle cx="223.6" cy="184.7" r="4.2" fill="#0f6fd6"/>
+<circle cx="304.4" cy="184.7" r="4.2" fill="#0f6fd6"/>
+<circle cx="385.2" cy="217.3" r="4.2" fill="#0f6fd6"/>
+<circle cx="466.0" cy="204.9" r="4.2" fill="#0f9960"/>
+<circle cx="546.8" cy="191.3" r="4.2" fill="#0f9960"/>
+<circle cx="627.6" cy="171.1" r="4.2" fill="#0f9960"/>
+<circle cx="708.4" cy="158.7" r="4.2" fill="#0f9960"/>
+<circle cx="789.2" cy="148.9" r="4.2" fill="#0f9960"/>
+<circle cx="870.0" cy="145.0" r="4.2" fill="#0f9960"/>
+<text x="62.0" y="60.7" font-size="11.5" fill="#1c2024" text-anchor="middle">6.10</text>
+<text x="62.0" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">10/14</text>
+<text x="142.8" y="174.7" font-size="11.5" fill="#1c2024" text-anchor="middle">4.35</text>
+<text x="142.8" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">10/23</text>
+<text x="223.6" y="174.7" font-size="11.5" fill="#1c2024" text-anchor="middle">4.35</text>
+<text x="223.6" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">10/24</text>
+<text x="304.4" y="174.7" font-size="11.5" fill="#1c2024" text-anchor="middle">4.35</text>
+<text x="304.4" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">10/25</text>
+<text x="385.2" y="207.3" font-size="11.5" fill="#1c2024" text-anchor="middle">3.85</text>
+<text x="385.2" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">10/26</text>
+<text x="466.0" y="194.9" font-size="11.5" fill="#1c2024" text-anchor="middle">4.04</text>
+<text x="466.0" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">10/31</text>
+<text x="546.8" y="181.3" font-size="11.5" fill="#1c2024" text-anchor="middle">4.25</text>
+<text x="546.8" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">11/04</text>
+<text x="627.6" y="161.1" font-size="11.5" fill="#1c2024" text-anchor="middle">4.56</text>
+<text x="627.6" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">11/12</text>
+<text x="708.4" y="148.7" font-size="11.5" fill="#1c2024" text-anchor="middle">4.75</text>
+<text x="708.4" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">11/27</text>
+<text x="789.2" y="138.9" font-size="11.5" fill="#1c2024" text-anchor="middle">4.90</text>
+<text x="789.2" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">12/27</text>
+<text x="870.0" y="135.0" font-size="11.5" fill="#1c2024" text-anchor="middle">4.96</text>
+<text x="870.0" y="272.0" font-size="10.5" fill="#5b6470" text-anchor="middle">01/26</text>
+</svg>
+  <div class="legend">蓝线为实测成交中枢（产地综合交易价），绿虚线为模型预测中枢。</div>
+  <h3>7.5 专项建议</h3>
+  <ul><li>种植端：本周前期晴好为最佳采收窗口，建议抢晴采收、及时入库预冷</li><li>种植端：提前清沟防渍涝，预防霜霉病、灰霉病；合理安排茬口、错峰上市，避免在低位集中踩踏出货</li><li>流通/收购端：坚持按需采购、快进快出，控制库存水平，规避下行风险</li><li>流通端：当前价位已近成本线、下行空间有限，可在本周低价区间适度建立 11 月中旬前的原料库存</li><li>加工端：11 月上中旬为全年较优原料锁价窗口，建议提前锁定冻干/脱水/香葱酱产线原料</li><li>关注节点：11 月初与 11 月中旬两次降雨过程的实际强度，是回升幅度能否兑现的核心观察点</li><li>中长期（2-3月档位）：当前价位处于年内低位区间，元旦与春节前备货是确定性较高的季节性利多，建议流通端在 11 月低位分批建立节前头寸、加工端提前锁价，但需为厄尔尼诺下天气不兑现预留 15%-20% 的下修空间</li><li>中长期跟踪：厄尔尼诺峰值（11 月前后）之后的冬季冷空气与雨雪冰冻强度，是 12 月—次年 1 月行情能否超预期的决定性变量</li></ul>
+</div>
+
+<div class="card">
+  <h2 id="sec8-risks">八、风险提示与假设<span class="en">Risks &amp; Assumptions</span></h2>
+  <table>
+    <tr><th>风险项</th><th>方向</th><th>触发条件</th><th>应对</th></tr>
+    <tr><td>极端天气缺位（最大下行风险）</td><td><span class="tag t-down">利空</span></td><td>11 月江南、西南降水偏多 5-8 成未兑现，产区持续晴好</td><td>下修半月/一月预测 3-8 个百分点，低位周期延长</td></tr><tr><td>强降雨/渍涝超预期</td><td><span class="tag t-up">利多</span></td><td>厄尔尼诺峰值叠加，江南、西南降水偏多 5-8 成</td><td>上调涨幅，同时关注采收与运输中断风险</td></tr><tr><td>新增台风</td><td><span class="tag t-flat">中性偏空</span></td><td>西北太平洋预计再生成 1 个台风，影响华南/华东沿海</td><td>销区物流受阻、短期需求受抑，随后补库反弹</td></tr><tr><td>销区本地菜持续替代</td><td><span class="tag t-down">利空</span></td><td>中东部及南方城市本地秋菜上市规模扩大</td><td>压缩云南外调菜份额，压制产区价格弹性</td></tr><tr><td>冬季阶段性强寒潮/雨雪冰冻</td><td><span class="tag t-up">波动加剧</span></td><td>12 月-次年 2 月寒潮频次略偏多、冷暖起伏大</td><td>或阶段性跳涨 15%-30%，但同时阻断运输，持续时间短</td></tr><tr><td>终端消费恢复不及预期</td><td><span class="tag t-down">利空</span></td><td>渠道去库存周期拉长</td><td>压制行情弹性，延长低迷期</td></tr><tr><td>节前备货行情提前透支/延后</td><td><span class="tag t-flat">波动加剧</span></td><td>2027 年春节较晚（2 月 6 日），备货节奏易被分散到 1 月全月</td><td>3 月档位峰值可能被摊平，建议在 1 月上中旬分批兑现而非押注单点</td></tr><tr><td>云南单极供给下的集中上市踩踏</td><td><span class="tag t-down">利空</span></td><td>冬季全国供给高度依赖云南，若产区天气持续利好、茬口集中</td><td>12-1 月出现阶段性供给洪峰，压制节前涨幅</td></tr>
+  </table>
+  <div class="note"><strong>数据说明：</strong>天气数据来自 Open-Meteo 公共 API（ECMWF/ICON 等多模式融合）；
+    灾害预警来自中央气象台公开接口；价格数据当前使用
+    <strong>人工录入实测观测点（15 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）</strong>。
+    预测基于公开气象预报、国家气候中心月尺度展望、产区供需结构与历史季节性规律推演，
+    未接入任何专有交易数据。价格区间为概率意义上的中枢±合理波动带，非成交承诺；
+    本报告仅供产业参考，不构成采销、囤货或投资建议。</div>
+</div>
+
+<div class="card">
+  <h2 id="sec9-sources">九、各定时任务独立预测报告<span class="en">Task Reports</span></h2>
+  <p>其余香葱行情定时任务落盘到 <code>data/sources/</code> 的数据，
+     <strong>按任务分别生成独立预测报告</strong>——每个任务一份，含该任务自己的六档预测走势、
+     全部报价明细与核心结论，<strong>互不合并、全量不截断</strong>。下方为入口总览，点击进入各任务独立页。</p>
+  <p><a class="back" href="tasks/index.html">→ 各定时任务 · 独立预测报告（列表页）</a></p>
+  <div class="grid"><div class="kpi"><div class="lab">接入任务</div><div class="val">5</div><div class="chg">个定时任务落盘</div></div><div class="kpi"><div class="lab">行情报价</div><div class="val">200</div><div class="chg">条 · 全量展示不截断</div></div><div class="kpi"><div class="lab">预测档位</div><div class="val">42</div><div class="chg">条 · 各任务六档预测</div></div><div class="kpi"><div class="lab">汇总窗口</div><div class="val">3 天</div><div class="chg">扫描 10 个文件</div></div></div><div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;padding:14px 16px;margin:12px 0"><h3 style="margin:0 0 6px">香葱行情监测chat gpt<span class="tag">数据日 2026-10-27</span><span class="tag">全国 / 云南 / 红河州 / 泸西县</span></h3><p style="margin:6px 0">泸西县香葱产地通货价1.27元/斤（2.54元/公斤）连续两日持平，平台标注大量上市；本期新增泸西本地菜价独立来源，红香葱3.80元/公斤、黑香葱3.30元/公斤，与一亩田口径存在约50%系统性价差，真实成交中枢或位于1.27-1.90元/斤，基于一亩田口径的预测偏保守。全国蔬菜供给宽松（28种均价4.12元/公斤，环比-1.2%）叠加山东0.85元/斤低价货源压制短期反弹；11/01-11/09连阴雨（降水概率50-80%）叠加11/09降温至12℃为最可能的价格拐点窗口，六阶段预测自3天2.54元/公斤温和上行至3个月3.04元/公斤，2个月以上置信程度为低。</p><div class="grid"><div class="kpi"><div class="lab">行情报价</div><div class="val">41</div><div class="chg">条明细</div></div><div class="kpi"><div class="lab">预测档位</div><div class="val">6</div><div class="chg">档 · 六周期</div></div><div class="kpi"><div class="lab">六档中枢序列</div><div class="val" style="font-size:17px">2.54 / 2.60 / 2.68 / 2.80 / 2.96 / 3.04</div><div class="chg">元/公斤</div></div></div><p style="margin:10px 0 0"><a class="back" href="tasks/chatgpt.html">→ 查看该任务完整预测报告（41 条报价 · 6 档预测）</a></p></div><div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;padding:14px 16px;margin:12px 0"><h3 style="margin:0 0 6px">香葱行情<span class="tag">数据日 2026-10-27</span><span class="tag">全国 / 云南 / 泸西县</span></h3><p style="margin:6px 0">泸西产区红香葱 10-26 破位下跌至 3.85 元/公斤（-11.5%），黑香葱 3.36（-13.0%），结束连续三日横盘；全省综合报价 4.4-5.0 尚未同步反映，销区（王旗营 3.5、青岛城阳 8.0）暂未传导。较 10-14 的 6.10 累计下跌 36.9%，已逼近成本线。天气端：未来一周泸西累计降水 12.8mm、雨日 3 天、大风 4 天，第 8-15 天累计 51.8mm、雨日 6 天且含 2 天大雨——采收与运输扰动显著上升，是止跌回升的核心触发；全国生效气象预警 100 条，主产区云南河口暴雨黄色、海南琼中暴雨橙色，北方山东/河南大雾橙红预警影响外运。模型六档中枢（红葱）：3.85 → 4.03 / 4.22 / 4.56 / 4.76 / 4.90 / 4.98，呈「近端止跌、中段修复、远端节日支撑」的震荡上行；黑葱 3.36 → 3.52 / 3.70 / 4.02 / 4.20 / 4.33 / 4.39。2-3 月档属情景推演，置信度低，需按月滚动修正。</p><div class="grid"><div class="kpi"><div class="lab">行情报价</div><div class="val">22</div><div class="chg">条明细</div></div><div class="kpi"><div class="lab">预测档位</div><div class="val">12</div><div class="chg">档 · 六周期</div></div><div class="kpi"><div class="lab">六档中枢序列</div><div class="val" style="font-size:17px">4.03 / 4.22 / 4.56 / 4.76 / 4.90 / 4.98 / 3.52 / 3.70 / 4.02 / 4.20 / 4.33 / 4.39</div><div class="chg">元/公斤</div></div></div><p style="margin:10px 0 0"><a class="back" href="tasks/xiangcong.html">→ 查看该任务完整预测报告（22 条报价 · 12 档预测）</a></p></div><div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;padding:14px 16px;margin:12px 0"><h3 style="margin:0 0 6px">全国香葱行情监测与泸西县价格预测（每日）<span class="tag">数据日 2026-10-27</span><span class="tag">全国 / 云南 / 红河州泸西县</span></h3><p style="margin:6px 0">泸西县小葱产地货源价1.27元/斤（2.54元/公斤，②产地收购价），连续第2日平稳；惠农网泸西香葱1.31元/斤近7日零波动，市场黏性极强。全国产地均价1.54元/斤持平，销地批发均价3.20元/斤（较上期+0.02）。天气为最大变量：泸西11月3-10日预报调整为连续8个雨日（较上期延长3天），但同时温度显著上修（11/4-11/7最高温由19-21℃上调至23-26℃），低温冷害风险下降、连阴雨采收风险上升，两股力量方向相反。据此短期（3-7天）维持平稳略偏强，中长期（1-3个月）中枢较上期下修0.01-0.03元/斤。历史价格序列（12个月至10年）仍全部缺失，为最大数据缺口；预测区间为情景区间，非统计置信区间；回测样本数仍为0，不计算准确度指标。</p><div class="grid"><div class="kpi"><div class="lab">行情报价</div><div class="val">73</div><div class="chg">条明细</div></div><div class="kpi"><div class="lab">预测档位</div><div class="val">6</div><div class="chg">档 · 六周期</div></div><div class="kpi"><div class="lab">六档中枢序列</div><div class="val" style="font-size:17px">1.27 / 1.28 / 1.29 / 1.30 / 1.34 / 1.39</div><div class="chg">元/公斤</div></div></div><p style="margin:10px 0 0"><a class="back" href="tasks/national.html">→ 查看该任务完整预测报告（73 条报价 · 6 档预测）</a></p></div><div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;padding:14px 16px;margin:12px 0"><h3 style="margin:0 0 6px">grok香葱<span class="tag">数据日 2026-10-27</span><span class="tag">全国 / 云南 / 红河州泸西县</span></h3><p style="margin:6px 0">泸西产区红香葱 10-26 报 3.85 元/公斤（-11.5%，黑香葱 3.36），同比去年同日 6.20 暴跌 37.9%、较 9-28 的 7.05 下跌 45.4%，已跌破多数种植户成本线；通海与泸西完全同价，区域价差消失，佐证是全国性供给过剩而非局部问题，同期菠菜/香菜同比跌 84%-89%。天气端：10/27-10/28 冷空气致中东部降温 2-4℃、11/1 冷空气加强东部再降 2-6℃，泸西 11/1-11/9 预报连续 9 个雨日（低温 12-15℃不构成霜冻），连阴雨压缩采收窗口是唯一利多；红河州河口暴雨黄色预警位于州南端，对泸西无直接影响。宏观：超强厄尔尼诺峰值预计 11 月前后达 3.2-3.5℃（有监测记录以来最强），今冬气温偏高但寒潮频次偏多、冷暖起伏大。模型六档中枢（红葱，元/公斤）：3.85 → 3.95 / 4.05 / 4.35 / 4.30 / 4.65 / 5.10，呈「近端企稳、中段连阴雨修复、远端节日支撑」；2-3 月档属情景推演，置信度低。综合风险等级：高（价格风险主导）。</p><div class="grid"><div class="kpi"><div class="lab">行情报价</div><div class="val">53</div><div class="chg">条明细</div></div><div class="kpi"><div class="lab">预测档位</div><div class="val">12</div><div class="chg">档 · 六周期</div></div><div class="kpi"><div class="lab">六档中枢序列</div><div class="val" style="font-size:17px">3.95 / 4.05 / 4.35 / 4.30 / 4.65 / 5.10 / 3.44 / 3.52 / 3.78 / 3.74 / 4.05 / 4.45</div><div class="chg">元/公斤</div></div></div><p style="margin:10px 0 0"><a class="back" href="tasks/grok.html">→ 查看该任务完整预测报告（53 条报价 · 12 档预测）</a></p></div><div style="border:1px solid rgba(128,128,128,.28);border-radius:10px;padding:14px 16px;margin:12px 0"><h3 style="margin:0 0 6px">Gemini 每日香葱行情分析与预测报告<span class="tag">数据日 2026-10-27</span><span class="tag">全国 / 云南 / 泸西县</span></h3><p style="margin:6px 0">泸西红香葱基准价约 6.1 元/公斤，与去年同期（6.2）持平；秋茬集中上市压制短期价格，未来一周泸西间歇小雨转多云（13-25℃），较前期预报的强降温明显缓和、灾害风险下调。中期看北方产区退市与南菜北运启动，1-3 个月季节性上行，2027 年春节（2/6）前备货为年内高点窗口（7.3-9.5 元/公斤）。</p><div class="grid"><div class="kpi"><div class="lab">行情报价</div><div class="val">11</div><div class="chg">条明细</div></div><div class="kpi"><div class="lab">预测档位</div><div class="val">6</div><div class="chg">档 · 六周期</div></div><div class="kpi"><div class="lab">六档中枢序列</div><div class="val" style="font-size:17px">6.10 / 6.20 / 6.40 / 7.00 / 7.80 / 8.30</div><div class="chg">元/公斤</div></div></div><p style="margin:10px 0 0"><a class="back" href="tasks/gemini.html">→ 查看该任务完整预测报告（11 条报价 · 6 档预测）</a></p></div>
+  <div class="legend">口径提示：各任务的报价口径（地头价 / 收购价 / 销地批发价 / 零售价）与单位可能不同，
+    跨任务横向比较前请先核对「口径」与「单位」两列；不同口径不可直接横比。</div>
+</div>
+
+<footer>
+  数据来源：Open-Meteo 预报与历史归档 API、中央气象台（nmc.cn）预警接口、国家气候中心、
+  农业农村部信息中心、昆明市农业农村局（王旗营批发市场）、新发地市场行情、
+  泸西县政府及红河州媒体公开报道、百度百科·泸西小香葱产业。<br>
+  自动化生成 · GitHub Actions 定时执行（每日 19:00 UTC = 北京时间 03:00）
+</footer>
+
+</div>
+</body>
+</html>
