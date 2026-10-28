@@ -1,6 +1,6 @@
 {
   "date": "2026-10-29",
-  "generated_at": "2026-10-29 03:57（北京时间）",
+  "generated_at": "2026-10-29 03:59（北京时间）",
   "price_source": "人工录入实测观测点（15 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -5727,6 +5727,6 @@
     "task_count": 5,
     "window_days": 3,
     "files_scanned": 20,
-    "dir": "C:\\Users\\不言不语\\WorkBuddy\\automation-2026-10-24-02-17-56\\xiangcong-monitor\\data\\sources"
+    "dir": "/home/runner/work/xiangcong-monitor/xiangcong-monitor/data/sources"
   }
 }
