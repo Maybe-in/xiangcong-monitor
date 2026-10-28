@@ -1,10 +1,39 @@
 [
   {
+    "date": "2026-10-29",
+    "file": "香葱行情日报_2026-10-29.html",
+    "red_current": 3.85,
+    "black_current": 3.36,
+    "generated_at": "2026-10-29 03:57（北京时间）",
+    "task_prices": [
+      {
+        "name": "ChatGPT",
+        "price": 2.5
+      },
+      {
+        "name": "香葱行情",
+        "price": 3.99
+      },
+      {
+        "name": "全国监测",
+        "price": 2.54
+      },
+      {
+        "name": "grok",
+        "price": 3.95
+      },
+      {
+        "name": "Gemini",
+        "price": 6.3
+      }
+    ]
+  },
+  {
     "date": "2026-10-28",
     "file": "香葱行情日报_2026-10-28.html",
     "red_current": 3.85,
     "black_current": 3.36,
-    "generated_at": "2026-10-28 09:43（北京时间）",
+    "generated_at": "2026-10-28 09:40（北京时间）",
     "task_prices": [
       {
         "name": "ChatGPT",

@@ -10,3 +10,8 @@
 - 流水线 `python run.py` 成功，生成 `outputs/香葱行情日报_2026-10-27.html`。
 - 数据：天气(泸西县16天预报/15观测点)、灾害预警100条、新发地接口41条(最新2026-10-26)、红香葱六档中枢 3.85→4.03/4.22/4.56/4.76/4.90/4.98；data/sources 接入5任务/283报价/72预测(扫描10文件)。
 - 提交 `f916e7e`；`git pull` 因分支分叉失败→改用 `git fetch && git rebase origin/main`；冲突涉及 outputs/*.html、outputs/*.json、data/market_quotes.json，按策略用 `git checkout --theirs`(rebase 中即本地新生成版本)解决，rebase 完成后 `git push origin main` 成功（2fbbf5a..f916e7e）。
+
+## 2026-10-28 09:39（北京时间）执行
+- 流水线 `python run.py` 成功，生成 `outputs/香葱行情日报_2026-10-28.html`。
+- 数据：天气(泸西县16天预报/15观测点)、灾害预警100条、新发地接口41条(最新2026-10-27)、红香葱六档中枢 3.85→4.04/4.26/4.56/4.75/4.90/4.96；data/sources 接入5任务/235报价/42预测(扫描15文件)。
+- 提交 `234c00b`；`git pull -X ours` 因分支分叉报错→改用 `git fetch && git rebase origin/main`；冲突涉及 outputs/tasks/*.html、outputs/香葱行情日报_2026-10-28.html、outputs/*.json、data/market_quotes.json、data/price_history.json，按策略用 `git checkout --theirs`(rebase 中即本地新生成版本)解决，rebase 完成后 `git push origin main` 成功（c9b9959..234c00b）。
