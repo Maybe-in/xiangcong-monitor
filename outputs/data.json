@@ -1,6 +1,6 @@
 {
   "date": "2026-11-01",
-  "generated_at": "2026-11-01 01:29（北京时间）",
+  "generated_at": "2026-11-01 01:36（北京时间）",
   "price_source": "人工录入实测观测点（24 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -27,18 +27,18 @@
     "h1": {
       "tmax_avg": 16.6,
       "tmin_avg": 10.8,
-      "precip_total": 59.2,
-      "rainy_days": 7,
+      "precip_total": 55.2,
+      "rainy_days": 6,
       "heavy_rain_days": 3,
       "gale_days": 1,
       "wind_max": 17.4,
-      "dominant": "毛毛雨"
+      "dominant": "阵雨"
     },
     "m1": {
       "tmax_avg": 20.2,
       "tmin_avg": 12.8,
-      "precip_total": 84.0,
-      "rainy_days": 12,
+      "precip_total": 79.9,
+      "rainy_days": 11,
       "heavy_rain_days": 4,
       "gale_days": 4,
       "wind_max": 22.9,
@@ -190,11 +190,11 @@
       "date": "2026-11-15",
       "tmax": 16.5,
       "tmin": 9.0,
-      "precip": 4.05,
+      "precip": 0,
       "pop": 52,
-      "wind": 10.0,
-      "code": 53,
-      "weather": "毛毛雨"
+      "wind": 10.7,
+      "code": 45,
+      "weather": "雾"
     },
     {
       "date": "2026-11-16",
@@ -212,7 +212,7 @@
     "hazard_stats": [
       [
         "大风",
-        78
+        77
       ],
       [
         "大雾",
@@ -224,7 +224,7 @@
       ],
       [
         "雷电",
-        1
+        2
       ],
       [
         "海上雷雨大风",
@@ -395,6 +395,20 @@
         "risk_score": 2
       },
       {
+        "region": "四川省阿坝藏族羌族自治州红原县",
+        "province": "四川",
+        "city": "省阿坝藏族羌族自治州红原",
+        "hazard": "雷电",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/01 01:17",
+        "url": "http://www.nmc.cn/publish/alarm/51323341600000_20261101011732.html",
+        "weight": 1,
+        "impact": "作业安全，短时影响采收",
+        "is_production_area": true,
+        "risk_score": 2
+      },
+      {
         "region": "安徽省六安市金寨县",
         "province": "安徽",
         "city": "省六安",
@@ -503,20 +517,6 @@
         "url": "http://www.nmc.cn/publish/alarm/13020941600000_20261031214223.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 2
-      },
-      {
-        "region": "河南省三门峡市",
-        "province": "河南",
-        "city": "省三门峡",
-        "hazard": "大风",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/10/31 23:20",
-        "url": "http://www.nmc.cn/publish/alarm/41120041600000_20261031232115.html",
-        "weight": 2,
-        "impact": "设施受损、蒸腾加剧",
         "is_production_area": false,
         "risk_score": 2
       }
