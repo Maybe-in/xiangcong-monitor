@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全国香葱行情监测报告 · 2026-11-01 · 第008期 v1.7</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+:root{--bg:#f7f9fc;--card:#ffffff;--bd:#e3e8ef;--tx:#1f2937;--tx2:#5b6779;--ac:#2563eb;--ac2:#0ea5e9;
+--up:#d92626;--dn:#0f9d58;--warn:#f59e0b;--bad:#dc2626;--ok:#059669;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Microsoft YaHei","PingFang SC",-apple-system,Segoe UI,sans-serif;font-size:14px;line-height:1.75}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 60px}
+header{background:linear-gradient(135deg,#1e40af,#0891b2);color:#fff;border-radius:14px;padding:26px 28px;margin-bottom:22px}
+header h1{margin:0 0 8px;font-size:25px;letter-spacing:.5px}
+header .meta{font-size:13px;opacity:.95;line-height:1.9}
+header .tag{display:inline-block;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);
+border-radius:20px;padding:2px 12px;margin:4px 8px 0 0;font-size:12px}
+section{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:22px 24px;margin-bottom:20px}
+h2{font-size:19px;margin:0 0 14px;padding-left:12px;border-left:5px solid var(--ac);color:#0f172a}
+h3{font-size:15px;margin:18px 0 10px;color:#1e3a8a}
+h4{font-size:14px;margin:14px 0 8px;color:#334155}
+p{margin:8px 0}
+.tbl{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:13px}
+.tbl th{background:#eef2f7;color:#334155;font-weight:600;text-align:left;padding:8px 10px;border:1px solid var(--bd);white-space:nowrap}
+.tbl td{padding:7px 10px;border:1px solid var(--bd);vertical-align:top}
+.tbl tbody tr:nth-child(even){background:#fafbfd}
+.up{color:var(--up);font-weight:600} .dn{color:var(--dn);font-weight:600} .flat{color:var(--tx2)}
+.chart{width:100%;height:420px;margin:8px 0 4px}
+.chart.tall{height:480px}
+.cap{font-size:12px;color:var(--tx2);margin:0 0 16px;padding-left:4px;border-left:3px solid #cbd5e1}
+.note{background:#fffbeb;border:1px solid #fde68a;border-left:4px solid var(--warn);border-radius:8px;padding:12px 14px;margin:12px 0;font-size:13px}
+.danger{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid var(--bad)}
+.ok{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid var(--ok)}
+.info{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:12px;margin:12px 0}
+.kpi{background:#f8fafc;border:1px solid var(--bd);border-radius:10px;padding:14px 16px}
+.kpi .lab{font-size:12px;color:var(--tx2)} .kpi .val{font-size:23px;font-weight:700;color:#0f172a;margin:2px 0}
+.kpi .sub{font-size:12px;color:var(--tx2)}
+ul,ol{margin:8px 0 8px 22px;padding:0} li{margin:4px 0}
+.badge{display:inline-block;border-radius:4px;padding:1px 7px;font-size:12px;margin-right:4px}
+.b-h{background:#fee2e2;color:#991b1b} .b-m{background:#fef3c7;color:#92400e} .b-l{background:#dcfce7;color:#166534}
+.b-meas{background:#dbeafe;color:#1e40af} .b-est{background:#fef3c7;color:#92400e}
+.b-pred{background:#ede9fe;color:#5b21b6} .b-judge{background:#f1f5f9;color:#475569}
+.b-quote{background:#d1fae5;color:#065f46}
+footer{text-align:center;color:var(--tx2);font-size:12px;padding:20px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:12px}
+</style>
+</head>
+<body><div class="wrap">
+
+<header>
+  <h1>全国香葱产业每日监测报告 · 泸西县专项</h1>
+  <div class="meta">
+    报告日期：2026-11-01（周日） ｜ 第008期 ｜ 版本 v1.7 ｜ 数据截止时间：价格 2026-10-31（一亩田 09:00 快照 / 惠农网 10-31）· 气象 2026-10-31 18:00 发布<br>
+    核心研究对象：云南省红河哈尼族彝族自治州泸西县 ｜ 基准口径：小葱·通货·②产地收购价·元/斤（CNY）
+  </div>
+  <div>
+    <span class="tag">实测值</span><span class="tag">公开报价</span><span class="tag">估算值（单独标记）</span>
+    <span class="tag">模型预测值</span><span class="tag">分析判断</span>
+  </div>
+</header>
+
+<!-- ============ 一、今日行情摘要 ============ -->
+<section id="s1">
+<h2>一、今日行情摘要</h2>
+<div class="grid">
+  <div class="kpi"><div class="lab">泸西县 小葱 ②产地收购价</div><div class="val">1.27 <span style="font-size:14px">元/斤</span></div>
+    <div class="sub">数据日 2026-10-31 ｜ 环比 <span class="flat">0.00（平稳）</span> ｜ 连续 ≥11 个交易日零变动</div></div>
+  <div class="kpi"><div class="lab">泸西县 四季小葱 ②产地收购价</div><div class="val">1.10 <span style="font-size:14px">元/斤</span></div>
+    <div class="sub">红河州级 1.09 ｜ 云南省级 1.13 ｜ 环比均持平</div></div>
+  <div class="kpi"><div class="lab">全国小葱产地均价（一亩田）</div><div class="val">1.54 <span style="font-size:14px">元/斤</span></div>
+    <div class="sub">较上期记录 1.53 <span class="up">+0.01</span>；页面自身标注"平稳"</div></div>
+  <div class="kpi"><div class="lab">全国四季小葱产地均价</div><div class="val">1.33 <span style="font-size:14px">元/斤</span></div>
+    <div class="sub">较上期 1.35 <span class="dn">−0.02（−1.5%）</span></div></div>
+  <div class="kpi"><div class="lab">销地批发（页面均价 / 5市场中值）</div><div class="val">2.85 / 3.23</div>
+    <div class="sub">口径不稳定，<b>禁止跨期比较</b>（历期 3.18/3.20/4.64/2.91/2.85）</div></div>
+  <div class="kpi"><div class="lab">回测累计样本</div><div class="val">n = 8</div>
+    <div class="sub">MAE 0.0075 元/斤 ｜ MAPE 0.59% ｜ 方向 50% ｜ 区间覆盖 100%（&lt;30，不宣称准确度）</div></div>
+</div>
+
+<h3>1.1 三条核心结论</h3>
+<ol>
+<li><b>【基准价】泸西小葱 1.27 元/斤零波动延续至第 11 个交易日</b>（2026-10-31，一亩田县级产地页与聚合页两处一致，涨跌标注 0.0）。惠农网泸西香葱本期<b>未刷新</b>，最近有效报价 1.31 元/斤（2026-10-29），已标注为"当日公开数据缺失"。</li>
+<li><b>【气象·本期最重要变化】连雨由 7 日大幅延长至 11 日，但降温幅度同期收窄 3–4℃</b>。40 天页（10-31 18:00）显示 11/01–11/12 的 12 天中有 <b>11 个雨日</b>（仅 11/13 间歇），为本系列监测以来最长连续降水过程；同时 11/09 最低温由第007期的 6℃ 上修至 <b>10℃</b>、11/10 最高温由 9℃ 上修至 <b>12℃</b>。最低温 8–10℃ <b>仍高于 0℃ 霜冻阈值 → 低温寡照型生长延缓，非冻害</b>。</li>
+<li><b>【全国·北方产区首次显著走弱】山东菏泽牡丹区四季小葱 0.62 元/斤（−0.13，−17.3%，全国最低）</b>、江苏省级小葱 1.29（−0.01）。一亩田县级 20 组同产地配对环比<b>全部持平</b>，涨跌仅出现在新纳入样本与省级汇总口径。</li>
+</ol>
+
+<div class="note"><b>本期预测修订说明：</b>六阶段中枢价维持 1.27 / 1.27 / 1.28 / 1.30 / 1.33 / 1.36，与第007期<b>完全一致</b>（中枢修订量 0/0/0/0/0/0）；仅 15 天及以上四档的<b>区间上限各上拓 0.01 元/斤</b>（连雨延长至 11 日 → 采收中断风险上升）。这是本系列首次出现"中枢全档零修订"——因连雨延长（向上）与降温收窄＋北方走弱（向下）两股力量量级相当、方向相反。按第007期固化原则，单档上修幅度不超过 0.01 元/斤。</div>
+
+<h3>1.2 关键数据一览</h3>
+<table class="tbl"><thead><tr><th>项目</th><th>本期数值</th><th>上期数值</th><th>变化</th><th>口径与说明</th></tr></thead><tbody><tr><td>泸西小葱 ②产地收购价</td><td>1.27 元/斤（2026-10-31）</td><td>1.27 元/斤（10-30）</td><td><span class='flat'>0</span></td><td>一亩田县级产地页 + 聚合页双源一致；通货</td></tr><tr><td>泸西四季小葱 ②产地收购价</td><td>1.10 元/斤</td><td>1.10 元/斤</td><td><span class='flat'>0</span></td><td>一亩田县级；与“小葱”非同一品种，禁止混用</td></tr><tr><td>红河州级四季小葱</td><td>1.09 元/斤</td><td>1.09 元/斤</td><td><span class='flat'>0</span></td><td>一亩田州市级口径</td></tr><tr><td>云南省级四季小葱</td><td>1.13 元/斤</td><td>—</td><td>新增对照</td><td>一亩田省级口径</td></tr><tr><td>全国小葱产地均价</td><td>1.54 元/斤</td><td>1.53 元/斤</td><td><span class='up'>+0.01</span></td><td>一亩田聚合页“今日均价”；页面自身标注“平稳”，差异或源于取数路径</td></tr><tr><td>全国四季小葱产地均价</td><td>1.33 元/斤</td><td>1.35 元/斤</td><td><span class='dn'>−0.02</span></td><td>一亩田四季小葱品类页</td></tr><tr><td>销地批发页面均价</td><td>2.85 元/斤</td><td>2.91 元/斤</td><td><span class='dn'>−0.06</span></td><td>④销地批发价；<b>口径不稳定，禁跨期比较</b></td></tr><tr><td>5 市场今日价中值均价</td><td>3.23 元/斤</td><td>3.23 元/斤</td><td><span class='flat'>0</span></td><td>京丰岳各庄4.5/白沙洲3.5/北园春3.25/万邦3.0/新发地1.9（中值）</td></tr><tr><td>惠农网泸西香葱</td><td><b>当日公开数据缺失</b></td><td>1.31（10-29）</td><td>—</td><td>香葱列表第1–2页共18条均无泸西条目，已标注缺失</td></tr><tr><td>菏泽牡丹区四季小葱</td><td>0.62 元/斤</td><td>—</td><td><span class='dn'>−0.13（−17.3%）</span></td><td>★本期全国最大跌幅，全国最低价</td></tr><tr><td>当阳香葱（惠农网）</td><td>1.74 元/斤</td><td>1.44（10-30）</td><td><span class='up'>+0.30（+20.8%）</span></td><td>★连续两期大涨，累计 1.15→1.74（+51%）</td></tr><tr><td>通许县香葱（惠农网）</td><td>0.77 元/斤</td><td>—</td><td><span class='up'>+28.57%</span></td><td>惠农网标注涨幅</td></tr><tr><td>河北沧州小葱</td><td>1.80 元/斤</td><td>1.80 元/斤</td><td><span class='flat'>0</span></td><td>仍为全国最高值（市级口径）</td></tr></tbody></table>
+</section>
+
+<!-- ============ 二、全国市场价格监测 ============ -->
+<section id="s2">
+<h2>二、全国市场价格监测</h2>
+<p class="cap">价格类型严格区分：①产地地头价 ②产地收购价 ③产地批发价 ④销地批发价 ⑤零售价。本期采集到的公开报价主要为 <b>②产地收购价</b>（一亩田产地行情、惠农网产地行情）与 <b>④销地批发价</b>（一亩田销地批发市场价格板块）。跨地区比较已统一为"元/斤·通货·同一交易环节"。</p>
+
+<h3>2.1 泸西县及周边（云南·红河州）</h3>
+<table class="tbl"><thead><tr><th>地区</th><th>县市</th><th>产品/品种</th><th>价格类型</th><th>价格(元/斤)</th><th>折元/公斤</th><th>环比</th><th>数据日</th><th>来源</th></tr></thead><tbody><tr><td>云南省</td><td>红河州泸西县</td><td>小葱</td><td>②产地收购价</td><td><b>1.27</b></td><td>2.54</td><td><span class='flat'>0.0</span></td><td>2026-10-31</td><td>一亩田（县级页+聚合页双源）</td></tr><tr><td>云南省</td><td>红河州泸西县</td><td>四季小葱</td><td>②产地收购价</td><td>1.10</td><td>2.20</td><td><span class='flat'>0.0</span></td><td>2026-10-31</td><td>一亩田</td></tr><tr><td>云南省</td><td>红河州（州级）</td><td>四季小葱</td><td>②产地收购价</td><td>1.09</td><td>2.18</td><td><span class='flat'>0.0</span></td><td>2026-10-31</td><td>一亩田</td></tr><tr><td>云南省</td><td>省级</td><td>四季小葱</td><td>②产地收购价</td><td>1.13</td><td>2.26</td><td><span class='flat'>0.0</span></td><td>2026-10-31</td><td>一亩田</td></tr><tr><td>云南省</td><td>大理州宾川县</td><td>小葱</td><td>②产地收购价</td><td>1.34</td><td>2.68</td><td><span class='flat'>0.0</span></td><td>2026-10-31</td><td>一亩田</td></tr><tr><td>云南省</td><td>大理州宾川县</td><td>四季小葱</td><td>②产地收购价</td><td>1.42</td><td>2.84</td><td><span class='flat'>0.0</span></td><td>2026-10-31</td><td>一亩田</td></tr><tr><td>云南省</td><td>大理州宾川县</td><td>香葱</td><td>②产地收购价</td><td>2.98</td><td>5.96</td><td><span class='flat'>0.0</span></td><td>2026-10-31</td><td>惠农网</td></tr><tr><td>云南省</td><td>大理州弥渡县</td><td>火葱</td><td>②产地收购价</td><td>3.51</td><td>7.02</td><td><span class='flat'>0.0</span></td><td>2026-10-31</td><td>惠农网</td></tr><tr><td>云南省</td><td>红河州泸西县</td><td>香葱</td><td>②产地收购价</td><td><b>当日公开数据缺失</b></td><td>—</td><td>—</td><td>最近有效 10-29</td><td>惠农网（最近有效价 1.31 元/斤）</td></tr><tr><td>贵州省</td><td>毕节市威宁县</td><td>香葱</td><td>②产地收购价</td><td>2.25</td><td>4.50</td><td><span class='flat'>0</span></td><td>2026-10-31</td><td>惠农网（西南邻近高海拔产区，较泸西高 0.94）</td></tr></tbody></table>
+<div class="note"><b>缺失与估算声明：</b>泸西县 2026-10-31 香葱（惠农网口径）无当日可核实公开报价，已标注"当日公开数据缺失"，并提供最近有效报价 1.31 元/斤（2026-10-29）。<b>本期未使用任何估算值替代泸西县真实成交价</b>；小葱口径 1.27 元/斤为一亩田实测公开报价，非估算。</div>
+
+<h3>2.2 全国主要产区（一亩田县级产地行情，2026-10-31 09:00 快照）</h3>
+<table class="tbl"><thead><tr><th>地区</th><th>品种</th><th>价格(元/斤)</th><th>折元/公斤</th><th>环比(元/斤)</th><th>上市状态</th><th>来源</th></tr></thead><tbody><tr><td>云南红河泸西县</td><td>小葱</td><td>1.27</td><td>2.54</td><td><span class='flat'>0.00</span></td><td>大量上市</td><td>一亩田</td></tr><tr><td>云南红河泸西县</td><td>四季小葱</td><td>1.10</td><td>2.20</td><td><span class='flat'>0.00</span></td><td>大量上市</td><td>一亩田</td></tr><tr><td>云南大理宾川县</td><td>小葱</td><td>1.34</td><td>2.68</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>云南大理宾川县</td><td>四季小葱</td><td>1.42</td><td>2.84</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>河南平顶山汝州市</td><td>小葱</td><td>1.14</td><td>2.28</td><td><span class='flat'>0.00</span></td><td>大量上市</td><td>一亩田</td></tr><tr><td>河南平顶山汝州市</td><td>四季小葱</td><td>0.95</td><td>1.90</td><td><span class='flat'>0.00</span></td><td>大量上市</td><td>一亩田</td></tr><tr><td>河南焦作武陟县</td><td>小葱</td><td>1.27</td><td>2.54</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>河南焦作武陟县</td><td>四季小葱</td><td>1.05</td><td>2.10</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>河北邯郸永年区</td><td>小葱</td><td>1.39</td><td>2.78</td><td><span class='flat'>0.00</span></td><td>大量上市</td><td>一亩田</td></tr><tr><td>河北邯郸永年区</td><td>四季小葱</td><td>1.30</td><td>2.60</td><td><span class='flat'>0.00</span></td><td>大量上市</td><td>一亩田</td></tr><tr><td>河北唐山滦南县</td><td>小葱</td><td>1.40</td><td>2.80</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>河北唐山滦南县</td><td>四季小葱</td><td>1.07</td><td>2.14</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>广西柳州柳江区</td><td>小葱</td><td>1.57</td><td>3.14</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>广西柳州柳江区</td><td>四季小葱</td><td>1.54</td><td>3.08</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>江苏盐城大丰区</td><td>小葱</td><td>1.33</td><td>2.66</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>江苏盐城大丰区</td><td>四季小葱</td><td>1.68</td><td>3.36</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>山东临沂郯城县</td><td>小葱</td><td>1.55</td><td>3.10</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>山东临沂郯城县</td><td>四季小葱</td><td>1.30</td><td>2.60</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>山东菏泽牡丹区</td><td>四季小葱</td><td>0.62</td><td>1.24</td><td><span class='dn'>-0.13</span></td><td>大量上市</td><td>一亩田</td></tr><tr><td>广东湛江徐闻县</td><td>小葱</td><td>1.46</td><td>2.92</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>广东湛江徐闻县</td><td>四季小葱</td><td>1.47</td><td>2.94</td><td><span class='flat'>0.00</span></td><td>—</td><td>一亩田</td></tr><tr><td>吉林长春公主岭市</td><td>四季小葱</td><td>1.21</td><td>2.42</td><td><span class='flat'>0.00</span></td><td>大量上市</td><td>一亩田</td></tr></tbody></table>
+
+<h3>2.3 省/市级汇总口径（一亩田第 2 页）</h3>
+<table class="tbl"><thead><tr><th>地区口径</th><th>品种</th><th>价格(元/斤)</th><th>折元/公斤</th><th>环比</th><th>来源</th></tr></thead><tbody><tr><td>云南</td><td>四季小葱</td><td>1.13</td><td>2.26</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>云南红河</td><td>四季小葱</td><td>1.09</td><td>2.18</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>辽宁</td><td>小葱</td><td>1.54</td><td>3.08</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>辽宁</td><td>四季小葱</td><td>1.14</td><td>2.28</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>辽宁沈阳</td><td>四季小葱</td><td>1.05</td><td>2.10</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>辽宁沈阳新民市</td><td>四季小葱</td><td>1.00</td><td>2.00</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>河北</td><td>四季小葱</td><td>1.24</td><td>2.48</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>河北邯郸</td><td>四季小葱</td><td>1.22</td><td>2.44</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>河北邯郸</td><td>小葱</td><td>1.37</td><td>2.74</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>河北沧州</td><td>小葱</td><td>1.80</td><td>3.60</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>河南</td><td>小葱</td><td>1.28</td><td>2.56</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>河南</td><td>四季小葱</td><td>1.01</td><td>2.02</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>河南焦作</td><td>四季小葱</td><td>1.08</td><td>2.16</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>河南平顶山</td><td>四季小葱</td><td>0.95</td><td>1.90</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>山东</td><td>小葱</td><td>1.50</td><td>3.00</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>山东</td><td>四季小葱</td><td>1.28</td><td>2.56</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>山东潍坊</td><td>四季小葱</td><td>1.30</td><td>2.60</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>江苏</td><td>小葱</td><td>1.29</td><td>2.58</td><td><span class='dn'>-0.01</span></td><td>一亩田</td></tr><tr><td>湖北</td><td>小葱</td><td>1.08</td><td>2.16</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>湖北</td><td>四季小葱</td><td>1.21</td><td>2.42</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>湖北武汉</td><td>小葱</td><td>1.08</td><td>2.16</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>湖北宜昌</td><td>四季小葱</td><td>1.13</td><td>2.26</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>吉林</td><td>四季小葱</td><td>1.27</td><td>2.54</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr><tr><td>吉林长春</td><td>四季小葱</td><td>1.27</td><td>2.54</td><td><span class='flat'>0.00</span></td><td>一亩田</td></tr></tbody></table>
+
+<h3>2.4 惠农网产地行情（2026-10-31，三品类）</h3>
+<table class="tbl"><thead><tr><th>品类</th><th>产地</th><th>价格(元/斤)</th><th>折元/公斤</th><th>涨跌幅</th><th>来源</th></tr></thead><tbody><tr><td>香葱</td><td>河北邯郸市丛台区</td><td>1.07</td><td>2.14</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>河北邯郸市永年区</td><td>1.11</td><td>2.22</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>辽宁锦州市太和区</td><td>1.70</td><td>3.40</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>江苏南通市海安市</td><td>0.85</td><td>1.70</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>安徽阜阳市临泉县</td><td>0.88</td><td>1.76</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>山东潍坊市坊子区</td><td>0.85</td><td>1.70</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>山东潍坊市安丘市</td><td>0.85</td><td>1.70</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>山东潍坊市诸城市</td><td>0.85</td><td>1.70</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>河南开封市通许县</td><td>0.77</td><td>1.54</td><td><span class='up'>+28.57%</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>河南焦作市博爱县</td><td>0.85</td><td>1.70</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>湖北宜昌市当阳市</td><td>1.74</td><td>3.48</td><td><span class='up'>+20.59%</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>广东湛江市徐闻县</td><td>2.72</td><td>5.44</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>广西柳州市柳南区</td><td>1.70</td><td>3.40</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>广西柳州市柳江区</td><td>1.49</td><td>2.98</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>四川成都市金堂县</td><td>1.79</td><td>3.58</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>贵州毕节市威宁彝族回族苗族自治县</td><td>2.25</td><td>4.50</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>云南大理白族自治州宾川县</td><td>2.98</td><td>5.96</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>香葱</td><td>北京市房山区</td><td>1.23</td><td>2.46</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>四季葱</td><td>山东潍坊市安丘市</td><td>4.25</td><td>8.50</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>四季葱</td><td>山东潍坊市诸城市</td><td>0.85</td><td>1.70</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>四季葱</td><td>湖北黄冈市黄州区</td><td>4.25</td><td>8.50</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>四季葱</td><td>广西柳州市柳江区</td><td>1.15</td><td>2.30</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>四季葱</td><td>云南大理白族自治州宾川县</td><td>1.70</td><td>3.40</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>火葱</td><td>湖南永州市东安县</td><td>4.42</td><td>8.84</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>火葱</td><td>四川成都市金堂县</td><td>2.72</td><td>5.44</td><td><span class='flat'>—</span></td><td>惠农网</td></tr><tr><td>火葱</td><td>云南大理白族自治州弥渡县</td><td>3.51</td><td>7.02</td><td><span class='flat'>—</span></td><td>惠农网</td></tr></tbody></table>
+
+<h3>2.5 销地批发市场价格（④销地批发价）</h3>
+<table class="tbl"><thead><tr><th>批发市场</th><th>产地/规格</th><th>今日价(元/斤)</th><th>折元/公斤</th><th>本周均价(元/斤)</th><th>价格类型</th><th>来源</th></tr></thead><tbody><tr><td>北京京丰岳各庄农副批发市场</td><td>北京产|通货</td><td>4.50（4.0–5.0）</td><td>9.00</td><td>3.5–4.5</td><td>④销地批发价</td><td>一亩田</td></tr><tr><td>湖北武汉白沙洲果蔬市场</td><td>湖北产|通货</td><td>3.50（3.25–3.75）</td><td>7.00</td><td>3.25–3.75</td><td>④销地批发价</td><td>一亩田</td></tr><tr><td>新疆乌鲁木齐北园春水果批发</td><td>新疆产|通货</td><td>3.25（2.75–3.75）</td><td>6.50</td><td>2.75–3.75</td><td>④销地批发价</td><td>一亩田</td></tr><tr><td>河南郑州万邦国际市场</td><td>云南产|通货</td><td>3.00（2.5–3.5）</td><td>6.00</td><td>2.5–3.0</td><td>④销地批发价</td><td>一亩田</td></tr><tr><td>北京新发地农产品批发市场</td><td>冀产|通货</td><td>1.90（1.3–2.5）</td><td>3.80</td><td>1.3–2.5</td><td>④销地批发价</td><td>一亩田</td></tr></tbody></table>
+<div class="note danger"><b>口径警示（延续第006/007期）：</b>一亩田"销地批发市场价格"板块的<b>页面今日均价</b>历期为 3.18（10-27）/ 3.18（10-28·记录3.20）/ 4.64（10-29）/ 2.91（10-30）/ <b>2.85</b>（10-31）。该数值无法由本期页面结构复现其生成规则，判定为取数路径/样本集合不稳定，<b>历期数值全部禁止跨期比较</b>，仅作形态参考。本期起继续固化"页面均价 + N 市场今日价中值均价"双口径：本期 2.85 / 3.23（上期 2.91 / 3.23）。</div>
+
+<h3>2.6 葱类/叶菜类替代关联品价格</h3>
+<table class="tbl"><thead><tr><th>关联品</th><th>产地</th><th>价格(元/斤)</th><th>折元/公斤</th><th>数据日</th><th>与泸西小葱价差</th><th>用途</th></tr></thead><tbody><tr><td>火葱</td><td>云南弥渡县</td><td>3.51</td><td>7.02</td><td>2026-10-31</td><td>+2.24</td><td>同为葱属调味品，口径不同（疑精品/小包装），不可直接替代</td></tr><tr><td>火葱</td><td>四川金堂县</td><td>2.72</td><td>5.44</td><td>2026-10-31</td><td>+1.45</td><td>跨省替代参考</td></tr><tr><td>火葱</td><td>湖南东安县</td><td>4.42</td><td>8.84</td><td>2026-10-31</td><td>+3.15</td><td>华中高价区，对泸西无实质竞争</td></tr><tr><td>四季葱</td><td>山东安丘市</td><td>4.25</td><td>8.50</td><td>2026-10-31</td><td>+2.98</td><td>疑为精品/加工口径，已剔除出均价</td></tr><tr><td>四季葱</td><td>广西柳江区</td><td>1.15</td><td>2.30</td><td>2026-10-31</td><td>−0.12</td><td>华南同类竞品，价格贴近泸西，<b>为最可比替代项</b></td></tr><tr><td>红根蒜苗</td><td>泸西县（县域口径）</td><td>1.28</td><td>2.56</td><td>最近有效（第003期起启用）</td><td>+0.01</td><td>★县域替代价格锚，与泸西小葱几乎同价</td></tr></tbody></table>
+<div class="note"><b>替代关系判断：</b>县域口径的红根蒜苗（1.28）与泸西小葱（1.27）几乎同价，说明本地调味葱蒜类整体处于同一价格平台，<b>未出现单品结构性溢价</b>；华南柳江四季葱 1.15 为最接近的可比竞品，其低于泸西 0.12 元/斤，对泸西外销议价构成一定压制。</div>
+</section>
+
+<!-- ============ 三、全国种植省份与品种分析 ============ -->
+<section id="s3">
+<h2>三、全国种植省份与品种分析</h2>
+<h3>3.1 已核实规模化产区（本期可核验报价产地）</h3>
+<table class="tbl"><thead><tr><th>区域</th><th>省/区</th><th>已核实县市区</th><th>本期报价区间(元/斤)</th><th>规模判定依据</th><th>季节性</th></tr></thead><tbody><tr><td>西南主产区</td><td>云南</td><td>泸西县（红河州）、宾川县、弥渡县（大理州）</td><td>1.10–3.51</td><td>平台标注“主产地”、持续“大量上市”标记</td><td>全年可种，秋冬为外销旺季</td></tr><tr><td>华南产区</td><td>广西</td><td>柳江区、柳南区</td><td>1.15–1.70</td><td>平台持续报价、标注主产地</td><td>全年</td></tr><tr><td>华南产区</td><td>广东</td><td>徐闻县（湛江）</td><td>1.46–2.72</td><td>平台持续报价</td><td>秋冬为主</td></tr><tr><td>华东产区</td><td>江苏</td><td>大丰区（盐城）、海安市（南通）</td><td>0.85–1.68</td><td>平台持续报价</td><td>秋冬</td></tr><tr><td>华东产区</td><td>山东</td><td>郯城县（临沂）、坊子区/安丘市/诸城市（潍坊）、牡丹区（菏泽）</td><td>0.62–1.55（安丘4.25疑精品口径已剔除）</td><td>平台持续报价、量大</td><td>春夏为主，秋冬退市</td></tr><tr><td>华北产区</td><td>河北</td><td>永年区（邯郸）、滦南县（唐山）、丛台区（邯郸）、沧州市级</td><td>1.07–1.80</td><td>平台持续报价</td><td>春夏为主</td></tr><tr><td>中原产区</td><td>河南</td><td>汝州市（平顶山）、武陟县/博爱县（焦作）、通许县（开封）</td><td>0.62–1.27</td><td>平台持续报价</td><td>全年</td></tr><tr><td>东北产区</td><td>辽宁</td><td>太和区（锦州）、沈阳市级、新民市</td><td>1.00–1.70</td><td>平台持续报价</td><td>夏秋为主，冬季退市</td></tr><tr><td>东北产区</td><td>吉林</td><td>公主岭市（长春）</td><td>1.21–1.27</td><td>平台持续报价</td><td>夏秋为主</td></tr><tr><td>华中产区</td><td>湖北</td><td>当阳市（宜昌）、黄州区（黄冈）、武汉市级</td><td>1.08–1.74</td><td>平台持续报价</td><td>全年</td></tr><tr><td>西南邻近</td><td>四川</td><td>金堂县（成都）</td><td>1.79–2.72</td><td>平台持续报价</td><td>全年</td></tr><tr><td>西南邻近</td><td>贵州</td><td>威宁县（毕节）</td><td>2.25</td><td>平台持续报价（高海拔错季）</td><td>夏秋为主</td></tr><tr><td>华北直辖市</td><td>北京</td><td>房山区</td><td>1.23</td><td>平台持续报价</td><td>春夏</td></tr></tbody></table>
+
+<h3>3.2 有种植记录但规模未知地区</h3>
+<p>以下地区在平台上有零星报价或货源信息，<b>无公开可核实的规模化种植面积数据</b>，仅记录为"有种植记录、规模未知"：湖南永州东安县（火葱 4.42）、安徽阜阳临泉县（0.88）、新疆乌鲁木齐（销地报价，非产地）、上海市、福建、陕西、山西、浙江、内蒙古、甘肃、重庆、黑龙江（一亩田省份筛选栏存在但本期无有效报价条目）。</p>
+<div class="note"><b>数据缺失：</b>泸西县及全国各产区的<b>香葱种植面积、产量、商品率、成本</b>均无可核实公开数据。按任务规则第六.6条，本报告<b>不给出任何亩产、利润与盈亏平衡价数字</b>。</div>
+
+<h3>3.3 品种名录（常见商品香葱）</h3>
+<table class="tbl"><thead><tr><th>层级</th><th>名称</th><th>说明</th><th>本期可核实报价</th></tr></thead><tbody><tr><td>平台品类</td><td>小葱</td><td>一亩田品类 ID 7300；云南泸西主力口径</td><td>泸西 1.27、宾川 1.34、郯城 1.55 等</td></tr><tr><td>商品类型</td><td>四季小葱</td><td>一亩田品类 ID 494177；耐寒、四季可播</td><td>泸西 1.10、宾川 1.42、汝州 0.95</td></tr><tr><td>商品类型</td><td>火葱</td><td>一亩田 494178 / 惠农网 13902；辛辣味浓</td><td>弥渡 3.51、金堂 2.72、东安 4.42</td></tr><tr><td>商品类型</td><td>四季葱</td><td>惠农网 10913；与一亩田“四季小葱”是否同物未获官方确认</td><td>宾川 1.70、柳江 1.15</td></tr><tr><td>商品类型</td><td>西昌小香葱</td><td>一亩田 494179；四川西昌地方商品类型</td><td>本期无有效报价</td></tr><tr><td>地方品种</td><td>泸西香葱（惠农网口径）</td><td>惠农网 6222 在泸西县的报价口径</td><td><b>本期缺失</b>，最近有效 1.31（10-29）</td></tr><tr><td>市场俗称</td><td>香葱 / 细香葱 / 小香葱</td><td>市场通用俗称，<b>与“小葱”经常混用但不等价</b></td><td>惠农网 6222 全国 18 条</td></tr><tr><td>规格口径</td><td>通货 / 50~60cm / 45~50cm</td><td>一亩田产地页规格筛选项，本期未取到分规格价差</td><td>—</td></tr></tbody></table>
+<div class="note"><b>口径纪律（跨期沿用）：</b>严禁混用"小葱 / 四季小葱 / 香葱 / 火葱"四个口径。平台间品类 ID 不同（一亩田小葱 7300、四季小葱 494177、火葱 494178、西昌小香葱 494179；惠农网香葱 6222、四季葱 10913、火葱 13902），跨平台数值仅可作形态参考，不可直接相减。</div>
+</section>
+
+<!-- ============ 四、历史行情分析 ============ -->
+<section id="s4">
+<h2>四、历史行情分析（12 个月 / 24 个月 / 36 个月 / 5 年 / 10 年）</h2>
+<div class="note danger"><b>无数据声明（最严重缺口，连续 8 期）：</b>五个历史窗口——12 个月、24 个月、36 个月、5 年、10 年——<b>均无任何可核实的历史香葱价格序列数据</b>。一亩田"近7天/近30天/近60天"走势以图表图片渲染，文本不可提取；惠农网走势同样为图形；农业农村部平台无香葱条目；无商业数据库访问权限。<b>本报告严禁插补或编造历史价格</b>，下列窗口全部标注"无数据"。</div>
+
+<table class="tbl"><thead><tr><th>分析窗口</th><th>状态</th><th>均价</th><th>中位数</th><th>最高价及时间</th><th>最低价及时间</th><th>环比</th><th>同比</th><th>波动幅度</th><th>季节性规律</th><th>地区价差</th></tr></thead><tbody><tr><td>12 个月</td><td><b>无数据</b></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>24 个月</td><td><b>无数据</b></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>36 个月</td><td><b>无数据</b></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>5 年</td><td><b>无数据</b></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>10 年</td><td><b>无数据</b></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></tbody></table>
+
+<h3>4.1 唯一可用的短期实测序列（本系列自建，2026-10-26 起）</h3>
+<p class="cap">说明：以下为本监测系列自第001期起每日采集的自建序列，<b>仅覆盖 6 个交易日，不构成任何历史周期分析</b>。</p>
+<table class="tbl"><thead><tr><th>日期</th><th>泸西小葱(元/斤)</th><th>全国小葱产地均价</th><th>全国四季小葱均价</th><th>销地页面均价(不可比)</th><th>备注</th></tr></thead><tbody><tr><td>10-26</td><td>1.27</td><td>1.54</td><td>无数据</td><td>无数据</td><td>第001期</td></tr><tr><td>10-27</td><td>1.27</td><td>1.54</td><td>无数据</td><td>3.20</td><td>第003期</td></tr><tr><td>10-28</td><td>1.27</td><td>1.54</td><td>无数据</td><td>3.18</td><td>第004期</td></tr><tr><td>10-29</td><td>1.27</td><td>1.54</td><td>1.35</td><td>3.18</td><td>第005期</td></tr><tr><td>10-30</td><td>1.27</td><td>1.53</td><td>无数据</td><td>4.64</td><td>第006期→第007期</td></tr><tr><td>10-31</td><td>1.27</td><td>1.54</td><td>1.33</td><td>2.91</td><td><b>第008期（本期）</b></td></tr></tbody></table>
+<div class="note"><b>可核实结论（仅限 6 日窗口）：</b>① 泸西小葱连续 6 个观测日全部为 1.27 元/斤，<b>区间波动率严格为零</b>；② 全国小葱产地均价 1.54→1.53→1.54，波动幅度 0.01 元/斤（0.65%），同样极低；③ 全国四季小葱均价 1.35→1.33，−0.02（−1.5%）；④ 销地页面均价序列 3.18/3.20/4.64/2.91 波动剧烈但<b>口径不可比，不解读为真实涨跌</b>。</div>
+
+<h3>4.2 历史相似行情对比（定性）</h3>
+<p>无历史价格序列，无法做真实的历史相似行情匹配。可用的替代锚点为<b>气象历史同期均值</b>（中国天气网 40 天页随预报给出）——见第五部分与图表 5。</p>
+</section>
+
+<!-- ============ 五、天气与自然灾害风险分析 ============ -->
+<section id="s5">
+<h2>五、天气与自然灾害风险分析</h2>
+<p class="cap">数据源：中国天气网泸西站（101290311）。7 天页与 1 日页 2026-10-31 更新；15 天页与 40 天页 <b>2026-10-31 18:00 发布</b>（来源：中央气象台）。云南省站城市预报列表 2026-10-31 18:00 发布。</p>
+
+<h3>5.1 实况（过去 24 小时，1 日页整点天气实况，10-31）</h3>
+<table class="tbl"><thead><tr><th>指标</th><th>数值</th><th>判读</th></tr></thead><tbody><tr><td>最高气温</td><td>26.7 ℃</td><td>高于历史均值（21/8℃）约 <span class='up'>+5.7℃</span></td></tr><tr><td>最低气温</td><td>15.4 ℃</td><td>高于历史均值最低（8℃）约 <span class='up'>+7.4℃</span></td></tr><tr><td>过去24小时总降水量</td><td><b>0 mm</b></td><td>★暖干延续——泸西已连续 ≥7 个自然日无可核实有效降水（10-25 至 10-31）</td></tr><tr><td>最大相对湿度</td><td>92 %</td><td>夜间偏湿，叶面结露时间长，真菌性病害（霜霉/灰霉）风险偏高</td></tr><tr><td>最大风力</td><td>4 级</td><td>对露地香葱无机械损伤风险</td></tr></tbody></table>
+
+<h3>5.2 未来 15 天逐日预报（含历史同期均值与降水概率）</h3>
+<table class="tbl"><thead><tr><th>日期</th><th>天气现象</th><th>预报最高℃</th><th>预报最低℃</th><th>历史均值(高/低)</th><th>气温偏离</th><th>降水概率%</th><th>风险提示</th></tr></thead><tbody><tr><td>11-01</td><td>多云转小雨</td><td>27</td><td>14</td><td>21/8</td><td><span class='up'>+6 / +6</span></td><td>30</td><td>短间歇·可采收</td></tr><tr><td>11-02</td><td>小雨转多云</td><td>21</td><td>14</td><td>22/9</td><td><span class='dn'>-1 / +5</span></td><td>40</td><td>连雨·采收受阻</td></tr><tr><td>11-03</td><td>多云转阵雨</td><td>24</td><td>14</td><td>20/7</td><td><span class='up'>+4 / +7</span></td><td>47</td><td>连雨·采收受阻</td></tr><tr><td>11-04</td><td>阵雨转多云</td><td>26</td><td>14</td><td>18/10</td><td><span class='up'>+8 / +4</span></td><td>33</td><td>连雨·采收受阻</td></tr><tr><td>11-05</td><td>小雨</td><td>25</td><td>14</td><td>19/10</td><td><span class='up'>+6 / +4</span></td><td>23</td><td>连雨·采收受阻</td></tr><tr><td>11-06</td><td>小雨</td><td>22</td><td>14</td><td>21/10</td><td><span class='up'>+1 / +4</span></td><td>30</td><td>连雨·采收受阻</td></tr><tr><td>11-07</td><td>小雨转雨</td><td>21</td><td>14</td><td>20/10</td><td><span class='up'>+1 / +4</span></td><td>17</td><td>连雨·采收受阻</td></tr><tr><td>11-08</td><td>雨</td><td>20</td><td>12</td><td>20/11</td><td><span class='dn'>+0 / +1</span></td><td>17</td><td>连雨·采收受阻</td></tr><tr><td>11-09</td><td>雨</td><td>15</td><td>10</td><td>19/10</td><td><span class='dn'>-4 / +0</span></td><td>30</td><td>连雨·采收受阻</td></tr><tr><td>11-10</td><td>雨</td><td>12</td><td>8</td><td>20/8</td><td><span class='dn'>-8 / +0</span></td><td>20</td><td>连雨·采收受阻</td></tr><tr><td>11-11</td><td>雨</td><td>13</td><td>8</td><td>21/9</td><td><span class='dn'>-8 / -1</span></td><td>13</td><td>连雨·采收受阻</td></tr><tr><td>11-12</td><td>雨</td><td>12</td><td>9</td><td>19/10</td><td><span class='dn'>-7 / -1</span></td><td>13</td><td>连雨·采收受阻</td></tr><tr><td>11-13</td><td>多云转阴</td><td>20</td><td>9</td><td>19/9</td><td><span class='up'>+1 / +0</span></td><td>27</td><td>短间歇·可采收</td></tr><tr><td>11-14</td><td>雨</td><td>19</td><td>11</td><td>19/10</td><td><span class='dn'>+0 / +1</span></td><td>23</td><td>连雨·采收受阻</td></tr></tbody></table>
+<div class="note danger"><b>本期气象重大修订（对比第007期 10-30 18:00 版）：</b>
+<ul>
+<li><b>连雨大幅延长</b>：第007期为 11/04–11/10 连续 7 个雨日；本期为 <b>11/01–11/12 的 12 天中 11 天有降水</b>（仅 11/13 间歇，11/14 复有雨），<b>为本系列监测以来最长连续降水过程</b>，且提前 3 天开始。</li>
+<li><b>降温幅度收窄</b>：11/09 最低温 6℃ → <b>10℃</b>；11/10 最高温 9℃ → <b>12℃</b>；11/08 16℃ → <b>20℃</b>；11/05 22℃ → <b>25℃</b>。最高/最低温整体上修 3–4℃。</li>
+<li><b>霜冻判定</b>：全程最低温 8℃（11/10–11/11），<b>远高于 0℃ 霜冻阈值 → 属低温寡照型生长延缓，非冻害，无需防寒投入</b>。</li>
+<li><b>转折点</b>：11/01–11/08 气温高于历史均值（最高 +1~+8℃）；<b>11/09–11/12 转为低于历史均值 4–8℃</b>，即"先暖后冷"。</li>
+</ul></div>
+
+<h3>5.3 更长周期趋势（40 天页，11/15–12/05）</h3>
+<table class="tbl"><thead><tr><th>时段</th><th>平均最高℃</th><th>平均最低℃</th><th>趋势判读</th></tr></thead><tbody><tr><td>11/15–11/21</td><td>19.7</td><td>8.9</td><td>气温回升企稳，降水间歇增多</td></tr><tr><td>11/22–11/30（小雪 11/22）</td><td>19.4</td><td>7.7</td><td>持续降温，昼夜温差加大至 12℃ 左右，利于品质积累</td></tr><tr><td>12/01–12/05</td><td>18.4</td><td>6.4</td><td>最低温降至 6℃，<b>仍高于霜冻阈值</b>；生长速度明显放缓</td></tr></tbody></table>
+<div class="note"><b>15 天以上为气候趋势外推，非确定性预报</b>，仅用于中长期方向判断，不作为短期定价依据。</div>
+
+<h3>5.4 灾害事件台账</h3>
+<table class="tbl"><thead><tr><th>事件</th><th>时间/区域</th><th>等级</th><th>受影响作物</th><th>预计持续时间</th><th>证据等级</th><th>来源</th></tr></thead><tbody><tr><td>连续降水（11 日）</td><td>2026-11-01 至 11-12（预报）·泸西县</td><td>小雨/阵雨量级（无暴雨预警）</td><td>露地香葱（采收、运输）</td><td>12 天</td><td><b>正在发展的风险</b>（7 天页已确认 11/01–11/06 段；11/07–11/12 段仍为 8–15 天预报）</td><td>中国天气网 7 天页/40 天页 10-31 18:00</td></tr><tr><td>降温过程（转凉）</td><td>2026-11-09 至 11-12·泸西县</td><td>最高温低于历史均值 4–8℃，最低 8–10℃</td><td>露地香葱（生长速度）</td><td>4 天</td><td><b>仅由预报推测的潜在影响</b>（且不成立为冻害）</td><td>中国天气网 40 天页</td></tr><tr><td>暖干实况</td><td>2026-10-25 至 10-31·泸西县</td><td>连续 ≥7 日 0 mm 有效降水</td><td>露地香葱（土壤墒情）</td><td>已结束（11/01 起转雨）</td><td><b>已发生并有证据</b></td><td>1 日页整点实况 + 40 天页实况栏</td></tr><tr><td>霜冻 / 寒潮</td><td>—</td><td><b>未发生，预报亦不支持</b></td><td>—</td><td>—</td><td><b>仅由预报推测且判定为不成立</b></td><td>最低温 8–10℃ &gt; 0℃</td></tr><tr><td>高温 / 大风 / 冰雹 / 暴雨 / 洪涝 / 地质灾害</td><td>—</td><td><b>无任何预警</b></td><td>—</td><td>—</td><td>无</td><td>中国天气网泸西站、云南省站均无相关预警条目</td></tr></tbody></table>
+
+<div class="note info"><b>⚠ 防"见雨喊涨"纪律（跨期核心反例）：</b>泸西 2026-10-21 实测 20 mm 降雨后，产地收购价<b>零异动</b>（维持 1.27），且此后连续 ≥11 个交易日未变。本期连雨虽延长至 11 日，但：① 量级均为小雨/阵雨，无暴雨预警；② 前期气温高于历史均值 1–8℃，非低温渍害；③ 泸西为坝区排水条件较好的主产地；④ 无受灾面积、无供给占比、无库存、无到货量数据。<b>因此不得由连雨直接推断涨价</b>。本报告仅将连雨作为"采收节奏与品质"的上行风险因子计入，单档上修幅度按固化原则不超过 0.01 元/斤。</div>
+</section>
+
+<!-- ============ 六、未来价格预测 ============ -->
+<section id="s6">
+<h2>六、未来价格预测（六阶段）</h2>
+<p class="cap">预测对象：泸西县小葱·通货·②产地收购价·元/斤。基准价 1.27（2026-10-31）。<b>区间为情景区间，非统计置信区间</b>；中枢为情景加权期望，非单一模型输出。</p>
+
+<table class="tbl"><thead><tr><th>窗口</th><th>起止</th><th>参考价/日期</th><th>中枢价</th><th>可能下限(情景条件)</th><th>可能上限(情景条件)</th><th>预计涨跌幅</th><th>行情方向</th><th>置信度</th></tr></thead><tbody><tr><td>未来3天</td><td>2026-11-01 → 2026-11-03</td><td>1.27（2026-10-31）</td><td><b>1.27</b></td><td>1.25（北方低价货持续外溢+连雨量级不及预期）</td><td>1.30（连雨致采收中断≥5日+外销订单集中）</td><td>+0.0%</td><td>平稳</td><td><span class="badge b-h">高</span></td></tr><tr><td>未来7天</td><td>2026-11-01 → 2026-11-07</td><td>1.27（2026-10-31）</td><td><b>1.27</b></td><td>1.24（北方低价货持续外溢+连雨量级不及预期）</td><td>1.32（连雨致采收中断≥5日+外销订单集中）</td><td>+0.0%</td><td>平稳偏强震荡</td><td><span class="badge b-m">中</span></td></tr><tr><td>未来15天</td><td>2026-11-01 → 2026-11-15</td><td>1.27（2026-10-31）</td><td><b>1.28</b></td><td>1.22（北方低价货持续外溢+连雨量级不及预期）</td><td>1.37（连雨致采收中断≥5日+外销订单集中）</td><td>+0.8%</td><td>震荡偏强</td><td><span class="badge b-m">中低</span></td></tr><tr><td>未来1个月</td><td>2026-11-01 → 2026-11-30</td><td>1.27（2026-10-31）</td><td><b>1.30</b></td><td>1.20（北方低价货持续外溢+连雨量级不及预期）</td><td>1.45（连雨致采收中断≥5日+外销订单集中）</td><td>+2.4%</td><td>震荡偏强</td><td><span class="badge b-m">中低</span></td></tr><tr><td>未来2个月</td><td>2026-11-01 → 2026-12-31</td><td>1.27（2026-10-31）</td><td><b>1.33</b></td><td>1.21（北方低价货持续外溢+连雨量级不及预期）</td><td>1.54（连雨致采收中断≥5日+外销订单集中）</td><td>+4.7%</td><td>偏强</td><td><span class="badge b-l">低</span></td></tr><tr><td>未来3个月</td><td>2026-11-01 → 2027-01-31</td><td>1.27（2026-10-31）</td><td><b>1.36</b></td><td>1.22（北方低价货持续外溢+连雨量级不及预期）</td><td>1.64（连雨致采收中断≥5日+外销订单集中）</td><td>+7.1%</td><td>偏强</td><td><span class="badge b-l">低</span></td></tr></tbody></table>
+
+<h3>6.1 各窗口驱动因素、关键风险与置信依据</h3>
+<table class="tbl"><thead><tr><th>窗口</th><th>主要驱动因素</th><th>关键风险</th><th>置信程度与依据</th></tr></thead><tbody><tr><td>未来3天</td><td>7天预报确认11/01-03均有降水（小雨/阵雨），但泸西价格黏性极强（连续≥11个交易日零变动）；历史反例：10/21实测20mm降雨后价格零异动</td><td>连雨致田块泥泞短期采收推迟；销地到货节奏变化；平台报价刷新滞后</td><td><span class="badge b-h">高</span> — 中国天气网7天页10-31更新；一亩田10-31 09:00快照</td></tr><tr><td>未来7天</td><td>11/01-07连续7个雨日（本轮前半段），同期气温高于历史均值1-8℃；供应端'大量上市'标记未撤；外销旺季尚未启动</td><td>连雨累积致叶菜品质下降（黄叶/腐烂）压价；北方低价货源（菏泽0.62）外溢压制；7天预报仍可能修订</td><td><span class="badge b-m">中</span> — 40天页10-31 18:00发布；一亩田产地'大量上市'标签</td></tr><tr><td>未来15天</td><td>11/01-12连续12日中11日有雨（本系列监测以来最长连雨过程），采收中断概率上升；11/09-12转凉（低于历史均值4-8℃）延缓生长；立冬(11/07)后叶菜消费渐增</td><td>雨量级均为小雨/阵雨，实际减产证据不足；最低温8-10℃远高于霜冻阈值，无冻害；8-15天预报历史上曾单日大幅修订（第004期先例）</td><td><span class="badge b-m">中低</span> — 中国天气网40天页；第007期→第008期降温幅度已收窄3-4℃</td></tr><tr><td>未来1个月</td><td>云南秋冬外销旺季渐进；11月下旬气温回落至19/7℃利于品质；全国部分北方产区退市（菏泽0.62已跌至成本线附近，供给或收缩）</td><td>无种植面积/产量/到货量实测数据，中长期预测缺乏供给端硬约束；周边产区（宾川、弥渡、通海）集中上市冲击；替代叶菜充足</td><td><span class="badge b-m">中低</span> — 历史同期均值对比；一亩田北方产区报价；无官方面积数据</td></tr><tr><td>未来2个月</td><td>12月气温进一步降至18-19/6-7℃，生长放缓、单产下降；元旦备货窗口；北方产区基本退市，云南定价权增强</td><td>12月预报为气候趋势外推，非确定性预报；若暖冬延续则涨幅落空；无成本与面积数据，无法判断供给弹性</td><td><span class="badge b-l">低</span> — 40天页11/26-12/05段；往期季节性假设（无实测价格序列支撑）</td></tr><tr><td>未来3个月</td><td>2027年春节为2月6日，1月下旬进入备货高峰；1月为云南香葱传统高价窗口（历史经验，非本序列实测）</td><td>超3个月属气候与经验外推；春节时点、宏观消费、燃油与物流成本均不可预测；样本期内未观察到任何季节性强上涨</td><td><span class="badge b-l">低</span> — 春节日期2027-02-06；行业季节性常识（无本地实测序列）</td></tr></tbody></table>
+
+<h3>6.2 分区域展望</h3>
+<table class="tbl"><thead><tr><th>区域</th><th>未来3天</th><th>未来7天</th><th>未来15天</th><th>未来1个月</th><th>说明</th></tr></thead><tbody><tr><td>全国主要市场（销地批发）</td><td>3.23 附近窄幅震荡</td><td>3.20–3.30</td><td>3.15–3.40</td><td>3.10–3.50</td><td><b>④销地批发价口径，与产地价不可直接换算</b>；无到货量数据，仅作形态参考</td></tr><tr><td>云南省及主要供应区域</td><td>1.13（省级四季小葱）持稳</td><td>1.13–1.16</td><td>1.15–1.20</td><td>1.18–1.25</td><td>省级口径；宾川/弥渡高价品类（2.98/3.51）为精品口径不参与</td></tr><tr><td>红河州及泸西县产地</td><td><b>1.27</b></td><td>1.27</td><td>1.28</td><td>1.30</td><td>★本报告核心预测对象；②产地收购价</td></tr><tr><td>泸西县外销主要市场</td><td>无数据</td><td>无数据</td><td>无数据</td><td>无数据</td><td><b>未获取到货地市场的泸西货源专项报价与到货量</b>，本期不作数值预测</td></tr></tbody></table>
+
+<h3>6.3 阶段高低点判断</h3>
+<ul>
+<li><b>未来3天（11/01–11/03）</b>：中枢 1.27，预期区间 1.25–1.30。低点大概率出现在 11/02（雨后转多云，采收恢复）；高点需连雨致采收中断才会触及。</li>
+<li><b>未来7天（11/01–11/07）</b>：中枢 1.27，区间 1.24–1.32。阶段高点更可能出现在 <b>11/06–11/07</b>（连续 6 日降雨后田间作业受阻累积）。</li>
+<li><b>未来15天（11/01–11/15）</b>：中枢 1.28，区间 1.22–1.37。<b>阶段高点窗口为 11/09–11/12</b>（连雨末端叠加降温，供应最紧）；低点在 11/13–11/14（雨歇后集中出货）。</li>
+<li><b>未来1个月（11 月全月）</b>：中枢 1.30，区间 1.20–1.45。高点更可能在 <b>11 月下旬</b>（外销旺季＋气温回落）。</li>
+<li><b>未来2–3个月</b>：中枢 1.33 / 1.36。高点逻辑为 <b>12 月单产下降＋元旦至春节（2027-02-06）备货</b>，属季节性外推，置信度低。</li>
+</ul>
+</section>
+
+<!-- ============ 七、泸西县专项研判 ============ -->
+<section id="s7">
+<h2>七、泸西县专项研判</h2>
+
+<h3>7.1 三情景分析（15 天窗口：2026-11-01 → 2026-11-15）</h3>
+<table class="tbl"><thead><tr><th>情景</th><th>价格中枢</th><th>区间</th><th>概率</th><th>成立前提</th><th>触发信号</th></tr></thead><tbody><tr><td><b>基准情景</b></td><td>1.28</td><td>1.23–1.32</td><td><b>50%</b></td><td>连雨量级维持小雨/阵雨，采收可间歇进行；无冻害；北方低价货外溢有限；外销订单平稳</td><td>一亩田泸西报价继续维持 1.27 或小幅上移至 1.28–1.29；'大量上市'标签保留</td></tr><tr><td><b>偏强情景</b></td><td>1.33</td><td>1.31–1.42</td><td><b>30%</b></td><td>11/01–11/12 连雨导致累计 ≥5 个采收中断日；叶菜品质下降致合格货源收缩；外销旺季订单提前启动；北方产区加速退市</td><td>一亩田泸西报价突破 1.30；'大量上市'标签撤销；宾川/弥渡同步上行</td></tr><tr><td><b>偏弱情景</b></td><td>1.22</td><td>1.17–1.26</td><td><b>20%</b></td><td>降雨量级不及预期且气温偏高，供应不减反增；菏泽等北方低价货（0.62）大举南下；销地到货积压</td><td>一亩田泸西报价跌破 1.25；郑州万邦云南产报价下调；周边产区同步走弱</td></tr></tbody></table>
+<p class="cap">概率为分析判断（主观赋权），非统计频率；三情景概率之和为 100%。</p>
+
+<h3>7.2 专项七问</h3>
+<table class="tbl"><thead><tr><th>问题</th><th>研判结论</th><th>依据与证据等级</th></tr></thead><tbody><tr><td>趋势如何？</td><td><b>短期（3–7天）横盘；15天起转震荡偏强</b></td><td>连续 ≥11 个交易日零波动，价格黏性极强；15 天内连雨 11 日＋转凉，供给端边际收紧（分析判断，无到货量佐证）</td></tr><tr><td>价格区间与依据？</td><td>3天 1.25–1.30｜7天 1.24–1.32｜15天 1.22–1.37｜中枢 1.27/1.27/1.28</td><td>基准价 1.27（2026-10-31 实测）；区间由历史波动率（近 6 日严格为 0，故下限取 −0.03 作保护性缓冲）＋情景条件推得</td></tr><tr><td>天气灾害影响？</td><td><b>无灾害，仅'暖湿寡照'型生长与采收影响</b></td><td>11/01–11/12 连雨 11 日（小雨/阵雨量级）；11/09–12 降温低于历史均值 4–8℃但最低温 8–10℃＞0℃；<b>无霜冻、无暴雨、无大风冰雹预警</b></td></tr><tr><td>周边产区上市冲击？</td><td>压力温和，未见集中上市冲击证据</td><td>宾川（小葱1.34/四季小葱1.42/香葱2.98）、弥渡（火葱3.51）报价本期全部持平；柳江四季葱 1.15 低于泸西 0.12 元/斤为最接近竞品</td></tr><tr><td>到货与物流？</td><td><b>无数据</b></td><td>两个平台均不公开成交量/到货量；中国天气网未发布运输通道预警；本期不作数值判断</td></tr><tr><td>涨跌条件？</td><td>涨：连续 ≥5 个采收中断日 + 外销订单集中 + 北方退市；跌：降雨量级不足 + 北方低价货南下 + 销地积压</td><td>情景条件化表述，非点预测</td></tr><tr><td>种植户/收购商注意事项？</td><td>见 7.3</td><td>—</td></tr></tbody></table>
+
+<h3>7.3 采收与销售决策建议</h3>
+<div class="two">
+<div>
+<h4>种植户</h4>
+<ul>
+<li><b>抢收窗口</b>：11/13（唯一雨歇日）前后为未来两周最重要的集中采收窗口，建议在 11/12 前完成田间排水与采前准备，11/13–11/14 集中出货。</li>
+<li><b>分批采收</b>：连雨期内避免一次性集中采收导致积压腐烂，建议按"雨前小批 + 雨歇大批"节奏。</li>
+<li><b>病害防控</b>：湿度已连续多日 ≥92%，霜霉病/灰霉病风险高，雨后及时喷施保护性药剂并注意安全间隔期。</li>
+<li><b>品质分级</b>：连雨易致黄叶、泥沙附着，建议加强清洗与分级，争取精品溢价而非通货竞价。</li>
+<li><b>不建议</b>因连雨预期而惜售囤货——历史反例（10/21 雨后价格零异动）表明本地价格对天气的弹性极低。</li>
+</ul>
+</div>
+<div>
+<h4>收购商</h4>
+<ul>
+<li><b>短期（3–7天）按需采购</b>：价格黏性极强，无囤货价值，维持常规库存周转即可。</li>
+<li><b>15 天窗口</b>：建议在 11/13–11/14 雨歇集中出货期锁定部分货源，规避 11/09–11/12 供应最紧时段。</li>
+<li><b>关注替代货源</b>：广西柳江四季葱 1.15 低于泸西 0.12 元/斤，可作为议价与备选供应参考；菏泽 0.62 需核实规格（疑为次品/加工级）后再考虑。</li>
+<li><b>风险对冲</b>：1 个月以上不建议签固定价长约（无成本与面积数据，供给弹性未知）。</li>
+<li><b>每日跟踪</b>：一亩田泸西报价是否突破 1.27、"大量上市"标签是否撤销、40 天页连雨是否继续延长。</li>
+</ul>
+</div>
+</div>
+<div class="note"><b>利润说明（合规声明）：</b>泸西县香葱的亩产、商品率、亩总成本、流通损耗率均<b>无可核实公开数据</b>。按任务规则第六.6条，本报告<b>不给出任何利润数字，也不计算盈亏平衡价</b>。如需测算，请先提供亩产、成本、商品率与损耗率的实测值。</div>
+</section>
+
+<!-- ============ 八、图表展示 ============ -->
+<section id="s8">
+<h2>八、图表展示（8 张）</h2>
+
+<h3>图表 1 · 全国香葱价格趋势图</h3>
+<div id="c1" class="chart"></div>
+<p class="cap">单位：元/斤。时间范围：2026-10-26 至 2026-10-31（本系列自建序列，仅 6 个交易日）。来源：一亩田小葱/四季小葱聚合页"今日均价"、一亩田销地批发板块页面均价。<b>缺失说明</b>：无更长历史序列，四季小葱 10-26/27/28 与销地 10-26 为无数据；销地均价口径不稳定，虚线仅示形态、禁止跨期比较。</p>
+
+<h3>图表 2 · 历史价格周期对比图（12/24/36 月 / 5 年 / 10 年）</h3>
+<div id="c2" class="chart"></div>
+<p class="cap">单位：元/斤。<b>缺失说明：五个历史窗口全部无数据</b>（连续 8 期采集失败），图中以"无数据"占位条表示，<b>未做任何插补或编造</b>。仅有的 6 日自建序列以浅色对照显示，明确标注不构成历史周期。</p>
+
+<h3>图表 3 · 泸西县价格走势与预测图</h3>
+<div id="c3" class="chart tall"></div>
+<p class="cap">单位：元/斤。图例区分：<b>历史实测</b>（实线＋圆点，10-26 至 10-31）、<b>预测中枢</b>（虚线＋方点，11-03 至 2027-01-31）、<b>预测区间</b>（阴影带，情景下限–上限，非统计置信区间）。基准价 1.27（2026-10-31）。</p>
+
+<h3>图表 4 · 全国主要产区价格对比图</h3>
+<div id="c4" class="chart"></div>
+<p class="cap">单位：元/斤。口径统一：小葱·通货·②产地收购价·2026-10-31。数据来源：一亩田县级产地行情。<b>缺失说明</b>：部分省份（陕西、山西、浙江、福建等）本期无有效县级报价，未纳入对比。</p>
+
+<h3>图表 5 · 泸西县价格与天气关联图</h3>
+<div id="c5" class="chart tall"></div>
+<p class="cap">左轴：温度（℃）；右轴：价格（元/斤）。时间范围：2026-10-26 至 2026-11-15（10-26 至 10-31 为实况/实测价，11-01 起为预报）。<b>重要声明：本图仅展示相关关系的形态，不构成因果结论</b>。核心反例：泸西 10-21 实测 20 mm 降雨后价格零异动；10-26 至 10-31 暖干期间价格亦零变动。<b>价格对天气的弹性在本序列中未获实证支持</b>。</p>
+
+<h3>图表 6 · 香葱季节性价格图</h3>
+<div id="c6" class="chart"></div>
+<p class="cap">单位：元/斤。<b>缺失说明：无完整年度实测价格序列</b>，1–9 月全部为"无实测价"，图中以空值断开处理；10 月的 1.27 为本序列唯一实测月。<b>灰色虚线为定性季节性推测（分析判断），非实测数据，不得当作历史规律使用</b>。</p>
+
+<h3>图表 7 · 香葱行情影响因素与风险图</h3>
+<div id="c7" class="chart tall"></div>
+<p class="cap">横轴：影响强度（1–5，分析判断赋分）；纵轴：证据充分度（1–5）；气泡大小：不确定性（越大越不确定）。<b>标注说明</b>：每个因素同时给出"证据等级"（已发生并有证据 / 正在发展的风险 / 仅由预报推测 / 分析判断）。赋分为主观判断，非统计测度。</p>
+
+<h3>图表 8 · 未来六阶段价格预测对比图（基准 / 偏强 / 偏弱）</h3>
+<div id="c8" class="chart tall"></div>
+<p class="cap">单位：元/斤。三条线分别为三情景中枢；阴影带为各情景区间（情景区间，非统计置信区间）。阶段高低点已在第六部分 6.3 节文字标注。</p>
+</section>
+
+<!-- ============ 九、风险清单与行动建议 ============ -->
+<section id="s9">
+<h2>九、风险清单与行动建议</h2>
+<table class="tbl"><thead><tr><th>等级</th><th>风险项</th><th>依据</th><th>潜在影响</th><th>跟踪指标</th><th>应对建议</th></tr></thead><tbody><tr><td><span class="badge b-h">高</span></td><td>连雨致采收中断与品质下降</td><td>11/01-12连续12日中11日有降水，为本系列监测以来最长连雨过程；田块泥泞→采收推迟、黄叶腐烂率上升→有效供给下降、压级压价并存</td><td>已发生/正在发展的风险（预报已由7天页确认前半段）</td><td>泸西产地收购价是否突破1.27零波动、一亩田'大量上市'标签是否撤销</td><td>每日跟踪一亩田泸西报价与40天页降水预报修订</td></tr><tr><td><span class="badge b-h">高</span></td><td>历史价格序列缺失导致预测无硬约束</td><td>12个月至10年窗口全部无数据，所有季节性/周期结论均为外推，无法验证</td><td>已发生并有证据（连续8期采集失败）</td><td>能否获取任一历史价格序列源</td><td>每期记录失败项，优先尝试农业农村部平台与商业数据库</td></tr><tr><td><span class="badge b-m">中</span></td><td>北方产区低价货源外溢</td><td>山东菏泽牡丹区四季小葱0.62元/斤（-17.3%，全国最低），江苏省级小葱1.29（-0.01）；若北货南下将压制南方价格</td><td>已发生并有证据</td><td>菏泽/潍坊/徐州等地报价是否继续下探、郑州万邦云南产到货价是否松动</td><td>每期同产地配对环比</td></tr><tr><td><span class="badge b-m">中</span></td><td>8-15天预报不稳定性</td><td>第007期曾预报11/09最低6℃、11/10最高9℃，第008期上修至10℃/12℃；降温幅度两期内波动3-4℃</td><td>已发生并有证据</td><td>每日比对15天/40天页与前一日版本</td><td>逐日记录各页面发布日期与数值</td></tr><tr><td><span class="badge b-m">中</span></td><td>销地批发口径不可跨期比较</td><td>历期页面均价3.18/3.20/4.64/2.91/2.85，样本集合与取数路径不稳定</td><td>已发生并有证据</td><td>能否固定同一市场样本集合</td><td>每期同时记录页面均价与N市场中值均价双口径</td></tr><tr><td><span class="badge b-l">低</span></td><td>霜冻/寒潮风险</td><td>11/09-12最低温8-10℃，40天页全程最低6℃（12/03-05），均高于0℃霜冻阈值</td><td>仅由预报推测的潜在影响且当前判为不成立</td><td>最低温是否跌破3℃（接近霜冻警戒）</td><td>每日跟踪最低温序列</td></tr><tr><td><span class="badge b-l">低</span></td><td>周边产区集中上市冲击</td><td>宾川（小葱1.34/四季小葱1.42/香葱2.98）、弥渡（火葱3.51）、通海等滇中产区同步供应</td><td>分析判断（无到货量与上市量数据）</td><td>宾川/弥渡报价与泸西价差是否收窄</td><td>每期同省配对环比</td></tr><tr><td><span class="badge b-l">低</span></td><td>物流与燃油成本</td><td>外销华南/华中干线运距长，油价与季节性运力紧张可能压缩产地净价</td><td>分析判断（无运价实测数据）</td><td>柴油价格、冷链运价指数</td><td>列为长期跟踪项，暂不纳入中枢定价</td></tr></tbody></table>
+</section>
+
+<!-- ============ 十、数据质量与预测可靠性 ============ -->
+<section id="s10">
+<h2>十、数据质量与预测可靠性</h2>
+
+<h3>10.1 本期成功获取项</h3>
+<ul>
+<li>一亩田小葱/四季小葱聚合页：全国产地均价、县级产地 22 条、省市级口径 24 条、销地批发 5 市场（数据日 2026-10-31 09:00 快照）</li>
+<li>一亩田泸西县小葱产地详情页：1.27 元/斤（与聚合页一致，双源交叉验证通过）</li>
+<li>惠农网香葱（18 条）、四季葱（5 条）、火葱（3 条），全部更新至 2026-10-31</li>
+<li>中国天气网泸西站：1 日页整点实况（过去 24h 温湿度/降水/风力）、7 天页、15 天页、40 天页（10-31 18:00 发布）</li>
+<li>中国天气网云南站：全省 16 州市城市预报（10-31 18:00 发布），红河 20/32℃</li>
+</ul>
+
+<h3>10.2 未获取项（失败清单与补数需求）</h3>
+<table class="tbl"><thead><tr><th>缺失项</th><th>原因</th><th>影响</th><th>补数需求</th></tr></thead><tbody><tr><td><b>历史香葱价格序列（12月/24月/36月/5年/10年）</b></td><td>连续8期采集失败</td><td>最严重缺口，导致第四部分无法做真实周期分析，季节性结论全部为外推</td><td>优先补充</td></tr><tr><td><b>2026-11-01 当日公开报价</b></td><td>采集时点00:06，一亩田09:00快照未发布、惠农网未刷新</td><td>本期使用2026-10-31最近有效报价，已标注</td><td>常规跟踪</td></tr><tr><td><b>惠农网泸西县香葱报价</b></td><td>本期香葱列表第1-2页共18条均无泸西条目</td><td>最近有效报价1.31元/斤（2026-10-29），已标注为缺失</td><td>常规跟踪</td></tr><tr><td><b>成交量 / 到货量</b></td><td>一亩田与惠农网均不公开</td><td>无法量化供需缺口，所有供给判断为间接推断</td><td>优先补充</td></tr><tr><td><b>泸西县香葱种植面积 / 亩产 / 成本</b></td><td>无任何公开可核实数据</td><td>按任务规则第六.6条，不给出任何利润数字与盈亏平衡价</td><td>优先补充</td></tr><tr><td><b>定量降水量预报（毫米级）</b></td><td>中国天气网仅给降水概率%，不给量级</td><td>无法判断是否为灾害性强降水，连雨影响只能定性</td><td>常规跟踪</td></tr><tr><td><b>农业农村部重点农产品市场信息平台 ncpscxx.moa.gov.cn</b></td><td>本期未取得香葱品种分析/批发价排名数据</td><td>上期为404，本期无香葱条目，列为失败项</td><td>常规跟踪</td></tr><tr><td><b>国家气候中心 ncc-cma.net</b></td><td>需登录/无公开逐日产品</td><td>长期气候趋势改用中国天气网40天页与历史均值替代</td><td>常规跟踪</td></tr><tr><td><b>墨迹天气泸西（cityid=2925）</b></td><td>页面加载失败</td><td>以中国天气网为主源，影响有限</td><td>常规跟踪</td></tr><tr><td><b>食价搜 price.21food.cn</b></td><td>未取得有效香葱报价</td><td>列为失败项</td><td>常规跟踪</td></tr></tbody></table>
+
+<h3>10.3 数据来源与更新时间</h3>
+<table class="tbl"><thead><tr><th>数据源</th><th>URL</th><th>本期数据时间</th><th>可用性</th></tr></thead><tbody><tr><td>一亩田 小葱行情</td><td>ymt.com/hangqing/juhe-7300</td><td>2026-10-31 09:00（页面标注“今日9:00”）</td><td>✅ 可用</td></tr><tr><td>一亩田 四季小葱</td><td>ymt.com/hangqing/juhe-7300-494177</td><td>2026-10-31 09:00</td><td>✅ 可用</td></tr><tr><td>一亩田 泸西小葱产地详情</td><td>ymt.com/hangqing/chandi_detail-7300-0-2770</td><td>2026-10-31</td><td>✅ 可用</td></tr><tr><td>惠农网 香葱产地行情</td><td>cnhnb.com/hangqing/cdlist-2000478-6222-0-0-0-1</td><td>2026-10-31（第1–2页）</td><td>✅ 可用（泸西条目缺失）</td></tr><tr><td>惠农网 云南小葱</td><td>cnhnb.com/hangqing/q-2000478-0-0-25</td><td>2026-10-31</td><td>✅ 可用</td></tr><tr><td>中国天气网 泸西 7 天</td><td>weather.com.cn/weather/101290311.shtml</td><td>2026-10-31</td><td>✅ 可用</td></tr><tr><td>中国天气网 泸西 15 天</td><td>weather.com.cn/weather15d/101290311.shtml</td><td>2026-10-31（8–15天段）</td><td>✅ 可用</td></tr><tr><td>中国天气网 泸西 40 天</td><td>weather.com.cn/weather40d/101290311.shtml</td><td>2026-10-31 18:00</td><td>✅ 可用（含历史均值与降水概率）</td></tr><tr><td>中国天气网 云南站</td><td>yn.weather.com.cn</td><td>2026-10-31 18:00</td><td>✅ 可用</td></tr><tr><td>农业农村部重点农产品市场信息平台</td><td>ncpscxx.moa.gov.cn</td><td>—</td><td>❌ 无香葱条目</td></tr><tr><td>国家气候中心</td><td>ncc-cma.net</td><td>—</td><td>❌ 需登录</td></tr><tr><td>墨迹天气 泸西（cityid=2925）</td><td>—</td><td>—</td><td>❌ 加载失败</td></tr><tr><td>食价搜</td><td>price.21food.cn</td><td>—</td><td>❌ 无有效数据</td></tr></tbody></table>
+
+<h3>10.4 数值性质标注</h3>
+<table class="tbl"><thead><tr><th>性质</th><th>本期涉及内容</th><th>标注方式</th></tr></thead><tbody><tr><td><span class="badge b-meas">实测值</span></td><td>泸西气温/降水量实况（中国天气网整点实况、40天页实况栏）</td><td>直接引用，注明发布时点</td></tr><tr><td><span class="badge b-quote">公开报价</span></td><td>全部一亩田/惠农网产地与销地价格</td><td>标明平台、数据日、口径（②/④）</td></tr><tr><td><span class="badge b-est">估算值</span></td><td><b>本期无估算值</b></td><td>本期未用估算替代任何实测缺失</td></tr><tr><td><span class="badge b-pred">模型预测值</span></td><td>六阶段中枢价与区间、三情景中枢</td><td>标注为情景分析，非统计置信区间</td></tr><tr><td><span class="badge b-judge">分析判断</span></td><td>驱动因素、风险赋分、三情景概率、季节性推测</td><td>明确标注为判断，可证伪</td></tr></tbody></table>
+
+<h3>10.5 历史覆盖与缺失</h3>
+<p>历史价格序列覆盖：<b>0 / 5 个窗口</b>（12 月、24 月、36 月、5 年、10 年<b>全部无数据</b>）。本系列自建序列仅 6 个交易日（2026-10-26 起）。<b>所有关于季节性、周期性、历史高低点的表述均为外推或行业常识，未经本地数据验证</b>。</p>
+
+<h3>10.6 预测回测</h3>
+<p>本期回填到期窗口 <b>3 组</b>（第001期"7天"、第002期"7天"、第006期"未来3天"，窗口止 2026-11-01），累计样本 <b>n = 8</b>。</p>
+<table class="tbl"><thead><tr><th>指标</th><th>数值</th><th>说明</th></tr></thead><tbody><tr><td>样本数 n</td><td><b>8</b></td><td><b>样本不足 30 组，本报告不宣称任何预测准确度</b></td></tr><tr><td>MAE</td><td>0.0075 元/斤</td><td>平均绝对误差；受 1.27 零波动行情主导，误差极小但不具代表性</td></tr><tr><td>MAPE</td><td>0.59%</td><td>平均绝对百分比误差</td></tr><tr><td>方向准确率</td><td>50%</td><td>4/8 组；判定规则：预测涨跌幅符号 vs 实际涨跌幅符号，双方均为 0（持平）判正确</td></tr><tr><td>区间覆盖率</td><td>100%</td><td>8/8 组；<b>区间为情景区间，非统计置信区间，覆盖率不代表统计置信水平</b></td></tr></tbody></table>
+<table class="tbl"><thead><tr><th>报告日期</th><th>窗口</th><th>窗口止</th><th>中枢价</th><th>实际价</th><th>实际日期</th><th>绝对误差</th><th>百分比误差</th><th>方向</th><th>落入区间</th><th>备注</th></tr></thead><tbody><tr><td>2026-10-26</td><td>7天</td><td>2026-11-01</td><td>1.29</td><td>1.27</td><td>2026-10-31</td><td>0.02</td><td>1.57</td><td>否</td><td>是</td><td>第008期回填·窗口到期·实际1.27(10-31)·预测+1.6%未兑现·MAE贡献0.02/MAPE1.57%/方向否/区间覆盖是</td></tr><tr><td>2026-10-26</td><td>7天</td><td>2026-11-01</td><td>1.28</td><td>1.27</td><td>2026-10-31</td><td>0.01</td><td>0.79</td><td>否</td><td>是</td><td>第008期回填·窗口到期·实际1.27(10-31)·预测+0.8%未兑现·MAE贡献0.01/MAPE0.79%/方向否/区间覆盖是</td></tr><tr><td>2026-10-30</td><td>未来3天</td><td>2026-11-01</td><td>1.27</td><td>1.27</td><td>2026-10-31</td><td>0.00</td><td>0.00</td><td>是</td><td>是</td><td>第008期回填·窗口到期·实际1.27(10-31)·中枢1.27误差0·方向正确/区间覆盖是</td></tr></tbody></table>
+<div class="note danger"><b>回测局限：</b>① 样本 n=8 &lt; 30，不具统计意义；② 全部 8 组样本均落在泸西价格"零波动"区间内（1.27），<b>MAE/MAPE 偏低是行情本身缺乏波动的结果，不代表模型预测能力</b>；③ 方向准确率 50% 中，3 组失败全部来自"预测小幅上涨（+0.8%~+1.6%）而实际持平"，反映本模型存在<b>系统性偏乐观倾向</b>——已在第007–008期通过"单档上修不超过 0.01 元/斤"的固化原则加以约束。</div>
+
+<h3>10.7 方法说明与局限</h3>
+<ul>
+<li><b>方法</b>：历史同期与季节性比较（受限于无历史序列，主要用气象历史均值替代）、趋势与移动平均（6 日窗口过短，仅作参考）、同比环比与波动率、天气与生产周期关联、节假日与物流影响、历史相似行情对比（无数据，未能执行）。短期重天气/采收/运输，中长期重生产周期/集中上市/替代供应/消费需求。</li>
+<li><b>不得将单一模型输出当作确定价格</b>：本报告中枢价为情景加权期望，非模型点估计。</li>
+<li><b>核心局限</b>：无历史价格序列、无成交量/到货量、无种植面积/产量/成本、无定量降水预报。这四项缺失使所有中长期预测缺乏硬约束。</li>
+<li><b>重大不确定因素</b>：① 8–15 天预报历史上曾单日大幅修订（第004期删除降温、第007期新增强降温、第008期又收窄降温）；② 销地口径不稳定；③ 北方产区价格战的外溢程度未知；④ 2027 年春节（2-6）备货节奏；⑤ 平台报价刷新时点不一致（一亩田通常领先惠农网 1 日，且各页面更新时间不同）。</li>
+</ul>
+
+<h3>10.8 版本信息</h3>
+<table class="tbl"><thead><tr><th>字段</th><th>值</th></tr></thead><tbody><tr><td>报告日期</td><td>2026-11-01</td></tr><tr><td>期次</td><td>第008期</td></tr><tr><td>版本</td><td>v1.7</td></tr><tr><td>生成时间</td><td>2026-11-01 00:06</td></tr><tr><td>价格数据截止</td><td>2026-10-31（一亩田 09:00 快照 / 惠农网 10-31）</td></tr><tr><td>气象数据截止</td><td>2026-10-31 18:00（中国天气网，来源中央气象台）</td></tr><tr><td>基准口径</td><td>泸西县·小葱·通货·②产地收购价·元/斤（CNY）</td></tr><tr><td>图表数量</td><td>8 张（ECharts，浅色主题）</td></tr><tr><td>上一期</td><td>第007期 v1.6（2026-10-31）</td></tr></tbody></table>
+</section>
+
+<footer>
+全国香葱产业每日监测报告 · 2026-11-01 · 第008期 v1.7<br>
+本报告严格区分实测值、公开报价、估算值、模型预测值与分析判断；未获取的数据一律标注"无数据"，不作插补或编造。<br>
+样本不足 30 组，不宣称预测准确度；预测区间为情景区间，非统计置信区间。
+</footer>
+</div>
+
+<script>
+var LUXI_BASE = 1.27;
+var fc = [{"h": "未来3天", "s": "2026-11-01", "e": "2026-11-03", "c": 1.27, "lo": 1.25, "hi": 1.3, "base_lo": 1.25, "base_hi": 1.29, "up_lo": 1.28, "up_hi": 1.34, "dn_lo": 1.2, "dn_hi": 1.26, "pct": 0.0, "dirn": "平稳", "conf": "高", "drv": "7天预报确认11/01-03均有降水（小雨/阵雨），但泸西价格黏性极强（连续≥11个交易日零变动）；历史反例：10/21实测20mm降雨后价格零异动", "risk": "连雨致田块泥泞短期采收推迟；销地到货节奏变化；平台报价刷新滞后", "ev": "中国天气网7天页10-31更新；一亩田10-31 09:00快照"}, {"h": "未来7天", "s": "2026-11-01", "e": "2026-11-07", "c": 1.27, "lo": 1.24, "hi": 1.32, "base_lo": 1.24, "base_hi": 1.3, "up_lo": 1.29, "up_hi": 1.37, "dn_lo": 1.19, "dn_hi": 1.26, "pct": 0.0, "dirn": "平稳偏强震荡", "conf": "中", "drv": "11/01-07连续7个雨日（本轮前半段），同期气温高于历史均值1-8℃；供应端'大量上市'标记未撤；外销旺季尚未启动", "risk": "连雨累积致叶菜品质下降（黄叶/腐烂）压价；北方低价货源（菏泽0.62）外溢压制；7天预报仍可能修订", "ev": "40天页10-31 18:00发布；一亩田产地'大量上市'标签"}, {"h": "未来15天", "s": "2026-11-01", "e": "2026-11-15", "c": 1.28, "lo": 1.22, "hi": 1.37, "base_lo": 1.23, "base_hi": 1.32, "up_lo": 1.31, "up_hi": 1.42, "dn_lo": 1.17, "dn_hi": 1.26, "pct": 0.8, "dirn": "震荡偏强", "conf": "中低", "drv": "11/01-12连续12日中11日有雨（本系列监测以来最长连雨过程），采收中断概率上升；11/09-12转凉（低于历史均值4-8℃）延缓生长；立冬(11/07)后叶菜消费渐增", "risk": "雨量级均为小雨/阵雨，实际减产证据不足；最低温8-10℃远高于霜冻阈值，无冻害；8-15天预报历史上曾单日大幅修订（第004期先例）", "ev": "中国天气网40天页；第007期→第008期降温幅度已收窄3-4℃"}, {"h": "未来1个月", "s": "2026-11-01", "e": "2026-11-30", "c": 1.3, "lo": 1.2, "hi": 1.45, "base_lo": 1.22, "base_hi": 1.35, "up_lo": 1.33, "up_hi": 1.5, "dn_lo": 1.15, "dn_hi": 1.27, "pct": 2.4, "dirn": "震荡偏强", "conf": "中低", "drv": "云南秋冬外销旺季渐进；11月下旬气温回落至19/7℃利于品质；全国部分北方产区退市（菏泽0.62已跌至成本线附近，供给或收缩）", "risk": "无种植面积/产量/到货量实测数据，中长期预测缺乏供给端硬约束；周边产区（宾川、弥渡、通海）集中上市冲击；替代叶菜充足", "ev": "历史同期均值对比；一亩田北方产区报价；无官方面积数据"}, {"h": "未来2个月", "s": "2026-11-01", "e": "2026-12-31", "c": 1.33, "lo": 1.21, "hi": 1.54, "base_lo": 1.23, "base_hi": 1.4, "up_lo": 1.36, "up_hi": 1.62, "dn_lo": 1.14, "dn_hi": 1.29, "pct": 4.7, "dirn": "偏强", "conf": "低", "drv": "12月气温进一步降至18-19/6-7℃，生长放缓、单产下降；元旦备货窗口；北方产区基本退市，云南定价权增强", "risk": "12月预报为气候趋势外推，非确定性预报；若暖冬延续则涨幅落空；无成本与面积数据，无法判断供给弹性", "ev": "40天页11/26-12/05段；往期季节性假设（无实测价格序列支撑）"}, {"h": "未来3个月", "s": "2026-11-01", "e": "2027-01-31", "c": 1.36, "lo": 1.22, "hi": 1.64, "base_lo": 1.24, "base_hi": 1.44, "up_lo": 1.4, "up_hi": 1.75, "dn_lo": 1.13, "dn_hi": 1.3, "pct": 7.1, "dirn": "偏强", "conf": "低", "drv": "2027年春节为2月6日，1月下旬进入备货高峰；1月为云南香葱传统高价窗口（历史经验，非本序列实测）", "risk": "超3个月属气候与经验外推；春节时点、宏观消费、燃油与物流成本均不可预测；样本期内未观察到任何季节性强上涨", "ev": "春节日期2027-02-06；行业季节性常识（无本地实测序列）"}];
+var prov = [["云南红河泸西县", 1.27, "★研究对象"], ["云南大理宾川县", 1.34, "滇中产区"], ["河南焦作武陟县", 1.27, "中原产区"], ["河南平顶山汝州市", 1.14, "中原产区"], ["河北邯郸永年区", 1.39, "华北产区"], ["河北唐山滦南县", 1.4, "华北产区"], ["山东临沂郯城县", 1.55, "华东产区"], ["江苏盐城大丰区", 1.33, "华东产区"], ["广西柳州柳江区", 1.57, "华南产区"], ["广东湛江徐闻县", 1.46, "华南产区"]];
+var wx = [["11-01", "多云转小雨", 27, 14, 21, 8, 30], ["11-02", "小雨转多云", 21, 14, 22, 9, 40], ["11-03", "多云转阵雨", 24, 14, 20, 7, 47], ["11-04", "阵雨转多云", 26, 14, 18, 10, 33], ["11-05", "小雨", 25, 14, 19, 10, 23], ["11-06", "小雨", 22, 14, 21, 10, 30], ["11-07", "小雨转雨", 21, 14, 20, 10, 17], ["11-08", "雨", 20, 12, 20, 11, 17], ["11-09", "雨", 15, 10, 19, 10, 30], ["11-10", "雨", 12, 8, 20, 8, 20], ["11-11", "雨", 13, 8, 21, 9, 13], ["11-12", "雨", 12, 9, 19, 10, 13], ["11-13", "多云转阴", 20, 9, 19, 9, 27], ["11-14", "雨", 19, 11, 19, 10, 23]];
+var season = [["1月", null, "历史经验高价窗口（春节）·无实测价"], ["2月", null, "春节后回落·无实测价"], ["3月", null, "春茬上市·供应恢复·无实测价"], ["4月", null, "供应充足·季节性低位（推测）"], ["5月", null, "夏季茬口启动·无实测价"], ["6月", null, "雨季·品质风险·无实测价"], ["7月", null, "高温高湿·供应偏紧（推测）"], ["8月", null, "台风季·波动加大·无实测价"], ["9月", null, "秋茬定植·过渡期·无实测价"], ["10月", 1.27, "★本序列实测：连续零波动"], ["11月", null, "外销旺季启动·连雨风险（本期预测中枢1.28-1.30）"], ["12月", null, "气温回落·单产下降（推测偏强）"]];
+var ymtCountyXiaocong = [{"n": "云南红河泸西县", "v": 1.27, "c": 0.0}, {"n": "云南大理宾川县", "v": 1.34, "c": 0.0}, {"n": "河南平顶山汝州市", "v": 1.14, "c": 0.0}, {"n": "河南焦作武陟县", "v": 1.27, "c": 0.0}, {"n": "河北邯郸永年区", "v": 1.39, "c": 0.0}, {"n": "河北唐山滦南县", "v": 1.4, "c": 0.0}, {"n": "广西柳州柳江区", "v": 1.57, "c": 0.0}, {"n": "江苏盐城大丰区", "v": 1.33, "c": 0.0}, {"n": "山东临沂郯城县", "v": 1.55, "c": 0.0}, {"n": "广东湛江徐闻县", "v": 1.46, "c": 0.0}];
+var hnn = [{"p": "香葱", "v": 1.07, "w": ""}, {"p": "香葱", "v": 1.11, "w": ""}, {"p": "香葱", "v": 1.7, "w": ""}, {"p": "香葱", "v": 0.85, "w": ""}, {"p": "香葱", "v": 0.88, "w": ""}, {"p": "香葱", "v": 0.85, "w": ""}, {"p": "香葱", "v": 0.85, "w": ""}, {"p": "香葱", "v": 0.85, "w": ""}, {"p": "香葱", "v": 0.77, "w": "+28.57%"}, {"p": "香葱", "v": 0.85, "w": ""}, {"p": "香葱", "v": 1.74, "w": "+20.59%"}, {"p": "香葱", "v": 2.72, "w": ""}, {"p": "香葱", "v": 1.7, "w": ""}, {"p": "香葱", "v": 1.49, "w": ""}, {"p": "香葱", "v": 1.79, "w": ""}, {"p": "香葱", "v": 2.25, "w": ""}, {"p": "香葱", "v": 2.98, "w": ""}, {"p": "香葱", "v": 1.23, "w": ""}, {"p": "四季葱", "v": 4.25, "w": ""}, {"p": "四季葱", "v": 0.85, "w": ""}, {"p": "四季葱", "v": 4.25, "w": ""}, {"p": "四季葱", "v": 1.15, "w": ""}, {"p": "四季葱", "v": 1.7, "w": ""}, {"p": "火葱", "v": 4.42, "w": ""}, {"p": "火葱", "v": 2.72, "w": ""}, {"p": "火葱", "v": 3.51, "w": ""}];
+
+function mk(id, opt){ var el=document.getElementById(id); if(!el) return; var ch=echarts.init(el); ch.setOption(opt); window.addEventListener('resize',function(){ch.resize();}); }
+var AX = {axisLine:{lineStyle:{color:'#94a3b8'}}, axisLabel:{color:'#475569',fontSize:11}};
+var TT = {trigger:'axis', backgroundColor:'rgba(255,255,255,.96)', borderColor:'#cbd5e1', textStyle:{color:'#1f2937',fontSize:12}};
+var GR = {left:60,right:60,top:60,bottom:60,containLabel:true};
+
+// 图1 全国价格趋势
+mk('c1', {
+ title:{text:'全国香葱价格趋势（本系列自建序列）',left:'center',textStyle:{fontSize:14,color:'#0f172a'}},
+ tooltip:TT, legend:{data:['泸西小葱(元/斤)','全国小葱产地均价','全国四季小葱均价','销地批发页面均价(不可比)'],bottom:0,textStyle:{fontSize:11}},
+ grid:GR, xAxis:{type:'category',data:["10-26", "10-27", "10-28", "10-29", "10-30", "10-31"], ...AX},
+ yAxis:{type:'value',name:'元/斤',min:1.0,max:5.0,nameTextStyle:{color:'#475569'}, ...AX},
+ series:[
+  {name:'泸西小葱(元/斤)',type:'line',data:[1.27, 1.27, 1.27, 1.27, 1.27, 1.27],smooth:false,symbolSize:8,itemStyle:{color:'#2563eb'},lineStyle:{width:3}},
+  {name:'全国小葱产地均价',type:'line',data:[1.54, 1.54, 1.54, 1.54, 1.53, 1.54],smooth:false,itemStyle:{color:'#0ea5e9'},connectNulls:true},
+  {name:'全国四季小葱均价',type:'line',data:[null, null, null, 1.35, null, 1.33],smooth:false,itemStyle:{color:'#8b5cf6'},connectNulls:true},
+  {name:'销地批发页面均价(不可比)',type:'line',data:[null, 3.2, 3.18, 3.18, 4.64, 2.91],smooth:false,itemStyle:{color:'#f59e0b'},lineStyle:{type:'dashed'},connectNulls:true,
+    markArea:{silent:true,itemStyle:{color:'rgba(245,158,11,.06)'},data:[[{name:'口径不稳定·禁跨期比较'},{xAxis:'10-26'},{xAxis:'10-31'}]]}}
+ ]
+});
+
+// 图2 历史周期对比（全无数据）
+mk('c2', {
+ title:{text:'历史价格周期对比（12/24/36月 / 5年 / 10年）—— 全部无数据',left:'center',textStyle:{fontSize:14,color:'#0f172a'}},
+ tooltip:{trigger:'axis',formatter:function(p){return p[0].name+'<br/>状态：<b>无数据</b><br/>未做任何插补或编造';}},
+ grid:GR, xAxis:{type:'category',data:['12个月','24个月','36个月','5年','10年','本系列自建(6日)'], ...AX, axisLabel:{color:'#475569',fontSize:11,interval:0}},
+ yAxis:{type:'value',name:'元/斤',min:0,max:1.6,nameTextStyle:{color:'#475569'}, ...AX},
+ series:[
+  {name:'历史窗口',type:'bar',data:[0,0,0,0,0,1.27],barWidth:'42%',
+    itemStyle:{color:function(p){return p.dataIndex<5 ? '#e2e8f0' : '#93c5fd';}},
+    label:{show:true,position:'top',formatter:function(p){return p.dataIndex<5?'无数据':'1.27';},color:'#64748b',fontSize:12}}
+ ]
+});
+
+// 图3 泸西价格走势与预测
+var fcLabels = ['10-26','10-27','10-28','10-29','10-30','10-31','11-03(3天)','11-07(7天)','11-15(15天)','11-30(1月)','12-31(2月)','2027-01-31(3月)'];
+var histArr = [1.27,1.27,1.27,1.27,1.27,1.27,null,null,null,null,null,null];
+var fcArr   = [null,null,null,null,null,1.27,1.27,1.27,1.28,1.30,1.33,1.36];
+var loArr   = [null,null,null,null,null,1.27,1.25,1.24,1.22,1.20,1.21,1.22];
+var hiArr   = [null,null,null,null,null,1.27,1.30,1.32,1.37,1.45,1.54,1.64];
+mk('c3', {
+ title:{text:'泸西县小葱价格走势与预测（基准 1.27 元/斤）',left:'center',textStyle:{fontSize:14,color:'#0f172a'}},
+ tooltip:TT, legend:{data:['历史实测','预测中枢','预测上限','预测下限'],bottom:0,textStyle:{fontSize:11}},
+ grid:{left:60,right:40,top:60,bottom:78,containLabel:true},
+ xAxis:{type:'category',data:fcLabels, ...AX, axisLabel:{color:'#475569',fontSize:10,interval:0,rotate:28}},
+ yAxis:{type:'value',name:'元/斤',min:1.15,max:1.70,nameTextStyle:{color:'#475569'}, ...AX},
+ series:[
+  {name:'预测上限',type:'line',data:hiArr,lineStyle:{opacity:0},stack:'band',symbol:'none',areaStyle:{color:'rgba(139,92,246,.14)'}},
+  {name:'预测下限',type:'line',data:loArr,lineStyle:{opacity:0},stack:'band',symbol:'none',areaStyle:{color:'rgba(255,255,255,.9)'}},
+  {name:'历史实测',type:'line',data:histArr,symbol:'circle',symbolSize:8,itemStyle:{color:'#2563eb'},lineStyle:{width:3,color:'#2563eb'}},
+  {name:'预测中枢',type:'line',data:fcArr,symbol:'rect',symbolSize:8,itemStyle:{color:'#7c3aed'},lineStyle:{width:3,type:'dashed',color:'#7c3aed'}}
+ ]
+});
+
+// 图4 全国主要产区对比
+var pv = prov.slice().sort(function(a,b){return a[1]-b[1];});
+mk('c4', {
+ title:{text:'全国主要产区小葱价格对比（②产地收购价·2026-10-31）',left:'center',textStyle:{fontSize:14,color:'#0f172a'}},
+ tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){var i=p[0].dataIndex;return pv[i][0]+'<br/>'+(pv[i][2]||'')+'<br/><b>'+pv[i][1]+' 元/斤</b>';}},
+ grid:{left:150,right:70,top:50,bottom:40,containLabel:true},
+ xAxis:{type:'value',name:'元/斤',min:0.8,max:1.7,nameTextStyle:{color:'#475569'}, ...AX},
+ yAxis:{type:'category',data:pv.map(function(x){return x[0];}), ...AX},
+ series:[{type:'bar',data:pv.map(function(x){return {value:x[1],itemStyle:{color: x[0].indexOf('泸西')>=0 ? '#dc2626' : (x[0].indexOf('云南')>=0 ? '#2563eb' : '#7dd3fc')}};}),
+  barWidth:'58%', label:{show:true,position:'right',formatter:'{c}',color:'#334155',fontSize:11}}]
+});
+
+// 图5 价格与天气关联
+var wxd = wx.map(function(x){return x[0];});
+var wHi = wx.map(function(x){return x[2];});
+var wLo = wx.map(function(x){return x[3];});
+var wHm = wx.map(function(x){return x[4];});
+var wPp = wx.map(function(x){return x[6];});
+var px = [1.27,1.27,1.27,1.27,1.27,1.27,null,null,null,null,null,null,null,null];
+mk('c5', {
+ title:{text:'泸西县价格与天气关联（相关 ≠ 因果）',left:'center',textStyle:{fontSize:14,color:'#0f172a'}},
+ tooltip:TT, legend:{data:['预报最高温','预报最低温','历史均值最高','降水概率%','泸西小葱价(元/斤)'],bottom:0,textStyle:{fontSize:11}},
+ grid:{left:56,right:66,top:56,bottom:76,containLabel:true},
+ xAxis:{type:'category',data:wxd, ...AX, axisLabel:{color:'#475569',fontSize:10,interval:0,rotate:26}},
+ yAxis:[
+  {type:'value',name:'℃',min:0,max:34,nameTextStyle:{color:'#475569'}, ...AX},
+  {type:'value',name:'元/斤 / %',min:1.0,max:50,nameTextStyle:{color:'#475569'}, ...AX, splitLine:{show:false}}
+ ],
+ series:[
+  {name:'预报最高温',type:'line',data:wHi,itemStyle:{color:'#ef4444'},smooth:true},
+  {name:'预报最低温',type:'line',data:wLo,itemStyle:{color:'#3b82f6'},smooth:true},
+  {name:'历史均值最高',type:'line',data:wHm,itemStyle:{color:'#f59e0b'},lineStyle:{type:'dashed'},smooth:true},
+  {name:'降水概率%',type:'bar',yAxisIndex:1,data:wPp,itemStyle:{color:'rgba(14,165,233,.42)'},barWidth:'36%'},
+  {name:'泸西小葱价(元/斤)',type:'line',yAxisIndex:1,data:px,symbol:'circle',symbolSize:9,
+    itemStyle:{color:'#7c3aed'},lineStyle:{width:3,color:'#7c3aed'},connectNulls:false,
+    markPoint:{data:[{coord:['11-01',1.27],value:'实测末值',itemStyle:{color:'#dc2626'}}]}}
+ ]
+});
+
+// 图6 季节性
+mk('c6', {
+ title:{text:'香葱季节性价格图（无完整历史序列，仅示意）',left:'center',textStyle:{fontSize:14,color:'#0f172a'}},
+ tooltip:{trigger:'axis',formatter:function(p){var i=p[0].dataIndex;return season[i][0]+'<br/>'+(season[i][1]!==null? '<b>实测 '+season[i][1]+' 元/斤</b>' : '<b>无实测价</b>')+'<br/>'+season[i][2];}},
+ legend:{data:['实测月均','定性推测(非实测)'],bottom:0,textStyle:{fontSize:11}},
+ grid:GR, xAxis:{type:'category',data:season.map(function(x){return x[0];}), ...AX},
+ yAxis:{type:'value',name:'元/斤',min:1.15,max:1.50,nameTextStyle:{color:'#475569'}, ...AX},
+ series:[
+  {name:'实测月均',type:'line',data:season.map(function(x){return x[1];}),symbol:'circle',symbolSize:10,
+    itemStyle:{color:'#2563eb'},lineStyle:{width:3,color:'#2563eb'},connectNulls:false},
+  {name:'定性推测(非实测)',type:'line',data:[1.42,1.36,1.30,1.24,1.22,1.25,1.32,1.35,1.30,1.27,1.30,1.35],
+    symbol:'none',itemStyle:{color:'#cbd5e1'},lineStyle:{width:2,type:'dashed',color:'#cbd5e1'},
+    markArea:{silent:true,itemStyle:{color:'rgba(148,163,184,.07)'},data:[[{name:'无实测数据区间'},{xAxis:'1月'},{xAxis:'9月'}]]}}
+ ]
+});
+
+// 图7 影响因素与风险
+var fac = [
+ {n:'连雨致采收中断',x:4.0,y:4.2,u:4,e:'正在发展的风险（7天页已确认前半段）'},
+ {n:'历史价格序列缺失',x:4.6,y:5.0,u:5,e:'已发生并有证据（连续8期失败）'},
+ {n:'北方低价货外溢',x:2.8,y:3.6,u:3,e:'已发生并有证据（菏泽0.62 −17.3%）'},
+ {n:'8-15天预报不稳定',x:3.2,y:4.4,u:4,e:'已发生并有证据（007→008降温收窄3-4℃）'},
+ {n:'销地口径不可比',x:2.4,y:4.6,u:4,e:'已发生并有证据（历期3.18/4.64/2.91/2.85）'},
+ {n:'霜冻/寒潮',x:1.0,y:2.0,u:2,e:'仅由预报推测且当前判定不成立（最低8-10℃）'},
+ {n:'周边产区集中上市',x:2.0,y:2.2,u:3,e:'分析判断（无到货量数据）'},
+ {n:'物流与燃油成本',x:1.8,y:1.8,u:2,e:'分析判断（无运价实测数据）'},
+ {n:'外销旺季需求',x:3.0,y:2.4,u:3,e:'分析判断（无成交量数据）'},
+ {n:'暖干实况延续',x:1.6,y:4.8,u:1,e:'已发生并有证据（≥7日0mm）'}
+];
+mk('c7', {
+ title:{text:'香葱行情影响因素与风险图（大小=不确定性）',left:'center',textStyle:{fontSize:14,color:'#0f172a'}},
+ tooltip:{formatter:function(p){var d=fac[p.dataIndex];return '<b>'+d.n+'</b><br/>影响强度：'+d.x+'/5<br/>证据充分度：'+d.y+'/5<br/>不确定性：'+d.u+'/5<br/>证据等级：'+d.e;}},
+ grid:{left:66,right:50,top:56,bottom:56,containLabel:true},
+ xAxis:{type:'value',name:'影响强度（1-5，主观赋分）',min:0,max:5,nameLocation:'middle',nameGap:30,nameTextStyle:{color:'#475569'}, ...AX},
+ yAxis:{type:'value',name:'证据充分度（1-5）',min:0,max:5.6,nameTextStyle:{color:'#475569'}, ...AX},
+ series:[{type:'scatter',data:fac.map(function(d,i){return [d.x,d.y,d.u];}),
+  symbolSize:function(v){return 10+v[2]*5;},
+  itemStyle:{color:function(p){var y=fac[p.dataIndex].y; return y>=4 ? 'rgba(220,38,38,.62)' : (y>=3 ? 'rgba(245,158,11,.62)' : 'rgba(5,150,105,.55)');}},
+  label:{show:true,position:'right',formatter:function(p){return fac[p.dataIndex].n;},color:'#334155',fontSize:11}}]
+});
+
+// 图8 六阶段三情景
+var hz = fc.map(function(f){return f.h;});
+mk('c8', {
+ title:{text:'未来六阶段价格预测对比（基准 / 偏强 / 偏弱）',left:'center',textStyle:{fontSize:14,color:'#0f172a'}},
+ tooltip:TT, legend:{data:['基准情景中枢','偏强情景','偏弱情景','基准区间(情景)','全国参考-销地(不可比)'],bottom:0,textStyle:{fontSize:11}},
+ grid:{left:60,right:40,top:56,bottom:78,containLabel:true},
+ xAxis:{type:'category',data:hz, ...AX, axisLabel:{color:'#475569',fontSize:11,interval:0}},
+ yAxis:{type:'value',name:'元/斤',min:1.10,max:1.80,nameTextStyle:{color:'#475569'}, ...AX},
+ series:[
+  {name:'基准区间(情景)',type:'line',data:fc.map(function(f){return f.hi;}),lineStyle:{opacity:0},stack:'b',symbol:'none',areaStyle:{color:'rgba(37,99,235,.10)'}},
+  {name:'基准情景中枢',type:'line',data:fc.map(function(f){return f.c;}),symbol:'circle',symbolSize:9,
+    itemStyle:{color:'#2563eb'},lineStyle:{width:3,color:'#2563eb'},
+    markLine:{silent:true,symbol:'none',data:[{yAxis:1.27,name:'基准价1.27',lineStyle:{color:'#94a3b8',type:'dashed'},label:{formatter:'基准 1.27',color:'#64748b'}}]}},
+  {name:'偏强情景',type:'line',data:fc.map(function(f){return (f.up_lo+f.up_hi)/2;}),symbol:'triangle',symbolSize:9,
+    itemStyle:{color:'#dc2626'},lineStyle:{width:2,type:'dashed',color:'#dc2626'}},
+  {name:'偏弱情景',type:'line',data:fc.map(function(f){return (f.dn_lo+f.dn_hi)/2;}),symbol:'diamond',symbolSize:9,
+    itemStyle:{color:'#059669'},lineStyle:{width:2,type:'dashed',color:'#059669'}}
+ ]
+});
+</script>
+</body></html>
