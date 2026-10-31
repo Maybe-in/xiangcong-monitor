@@ -1,6 +1,6 @@
 {
   "date": "2026-11-01",
-  "generated_at": "2026-11-01 01:26（北京时间）",
+  "generated_at": "2026-11-01 01:29（北京时间）",
   "price_source": "人工录入实测观测点（24 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -27,18 +27,18 @@
     "h1": {
       "tmax_avg": 16.6,
       "tmin_avg": 10.8,
-      "precip_total": 55.2,
-      "rainy_days": 6,
+      "precip_total": 59.2,
+      "rainy_days": 7,
       "heavy_rain_days": 3,
       "gale_days": 1,
       "wind_max": 17.4,
-      "dominant": "阵雨"
+      "dominant": "毛毛雨"
     },
     "m1": {
       "tmax_avg": 20.2,
       "tmin_avg": 12.8,
-      "precip_total": 79.9,
-      "rainy_days": 11,
+      "precip_total": 84.0,
+      "rainy_days": 12,
       "heavy_rain_days": 4,
       "gale_days": 4,
       "wind_max": 22.9,
@@ -190,11 +190,11 @@
       "date": "2026-11-15",
       "tmax": 16.5,
       "tmin": 9.0,
-      "precip": 0,
+      "precip": 4.05,
       "pop": 52,
-      "wind": 8.0,
-      "code": 45,
-      "weather": "雾"
+      "wind": 10.0,
+      "code": 53,
+      "weather": "毛毛雨"
     },
     {
       "date": "2026-11-16",
@@ -9858,6 +9858,6 @@
     "task_count": 5,
     "window_days": 3,
     "files_scanned": 35,
-    "dir": "C:\\Users\\不言不语\\WorkBuddy\\automation-2026-10-24-02-17-56\\xiangcong-monitor\\data\\sources"
+    "dir": "/home/runner/work/xiangcong-monitor/xiangcong-monitor/data/sources"
   }
 }
