@@ -36,3 +36,9 @@
 - 流水线成功，生成 `outputs/香葱行情日报_2026-11-01.html`；新发地 41 条（最新 10-31，报告内全量明细表 41 行）、灾害预警 100 条、天气 16 天/15 观测点；红香葱六档中枢 3.45→3.59/3.79/4.13/4.28/4.44/4.43；data/sources 5 任务/636 报价/36 预测（35 文件）。
 - 提交 `87fb05c`；`git pull --no-rebase -X ours` 与远端 CI 提交 ort 自动合并 → 合并提交 `4ba7702`，推送成功（41e7d1b..4ba7702），未走 rebase 分支。
 - 经验：后台执行不要再用 `nohup ... &`（父 shell 退出会杀掉进程、日志为空）；直接对命令使用 run_in_background 由工具托管。本次天气接口正常，全流程仅 23 秒。
+
+## 2026-11-01 01:25（北京时间）执行
+- 流水线成功，生成 `outputs/香葱行情日报_2026-11-01.html`；新发地 41 条（最新 10-31，报告内全量明细表 41 行）、灾害预警 100 条、天气 16 天/15 观测点；红香葱六档中枢 3.45→3.59/3.79/4.13/4.28/4.44/4.43；data/sources 5 任务/636 报价/36 预测（35 文件）。
+- 提交 `f491e3b`；`git pull -X ours` 因分支分叉报错（hint 要求指定 reconcile 策略）→ 走 rebase 分支：`git fetch && git rebase origin/main`，5 个文件冲突（outputs/archive.json、data.json、index.html、latest.html、香葱行情日报_2026-11-01.html），按策略用 `git checkout --theirs` 逐个解决，`git add -A` + `git -c core.editor=true rebase --continue` 完成 rebase（f491e3b）。
+- 首次 `git push origin main` 因 SSH 443 连接被对端重置（Connection reset by peer / remote end hung up）失败；本地状态已干净（rebase 完成、无未合并），重试 `git push origin main` 成功（d437341..f491e3b main -> main）。
+- 经验：SSH 443 偶发连接重置属瞬断，rebase 改完本地后仅需重试 push 即可，无需重新拉取；循环重试 push 有效。
