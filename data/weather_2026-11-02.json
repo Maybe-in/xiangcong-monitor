@@ -1,0 +1,474 @@
+{
+  "generated_at": "2026-11-02 01:29:34",
+  "core": {
+    "name": "泸西县",
+    "daily": [
+      {
+        "date": "2026-11-02",
+        "tmax": 21.7,
+        "tmin": 13.6,
+        "precip": 1.8,
+        "pop": 72,
+        "wind": 12.3,
+        "code": 51,
+        "weather": "毛毛雨"
+      },
+      {
+        "date": "2026-11-03",
+        "tmax": 24.7,
+        "tmin": 16.3,
+        "precip": 0.9,
+        "pop": 76,
+        "wind": 22.7,
+        "code": 51,
+        "weather": "毛毛雨"
+      },
+      {
+        "date": "2026-11-04",
+        "tmax": 27.1,
+        "tmin": 16.4,
+        "precip": 0,
+        "pop": 4,
+        "wind": 20.3,
+        "code": 3,
+        "weather": "阴"
+      },
+      {
+        "date": "2026-11-05",
+        "tmax": 25.8,
+        "tmin": 15.5,
+        "precip": 0.9,
+        "pop": 33,
+        "wind": 13.8,
+        "code": 51,
+        "weather": "毛毛雨"
+      },
+      {
+        "date": "2026-11-06",
+        "tmax": 26.1,
+        "tmin": 15.5,
+        "precip": 3.6,
+        "pop": 73,
+        "wind": 17.5,
+        "code": 53,
+        "weather": "毛毛雨"
+      },
+      {
+        "date": "2026-11-07",
+        "tmax": 22.1,
+        "tmin": 14.5,
+        "precip": 6.3,
+        "pop": 100,
+        "wind": 17.4,
+        "code": 53,
+        "weather": "毛毛雨"
+      },
+      {
+        "date": "2026-11-08",
+        "tmax": 18.9,
+        "tmin": 9.7,
+        "precip": 15.3,
+        "pop": 95,
+        "wind": 16.2,
+        "code": 80,
+        "weather": "阵雨"
+      },
+      {
+        "date": "2026-11-09",
+        "tmax": 13.3,
+        "tmin": 9.5,
+        "precip": 0.9,
+        "pop": 81,
+        "wind": 15.6,
+        "code": 51,
+        "weather": "毛毛雨"
+      },
+      {
+        "date": "2026-11-10",
+        "tmax": 18.5,
+        "tmin": 9.4,
+        "precip": 0,
+        "pop": 26,
+        "wind": 10.5,
+        "code": 3,
+        "weather": "阴"
+      },
+      {
+        "date": "2026-11-11",
+        "tmax": 20.1,
+        "tmin": 9.8,
+        "precip": 0.6,
+        "pop": 51,
+        "wind": 17.6,
+        "code": 51,
+        "weather": "毛毛雨"
+      },
+      {
+        "date": "2026-11-12",
+        "tmax": 18.5,
+        "tmin": 13.7,
+        "precip": 6.0,
+        "pop": 57,
+        "wind": 15.1,
+        "code": 53,
+        "weather": "毛毛雨"
+      },
+      {
+        "date": "2026-11-13",
+        "tmax": 18.3,
+        "tmin": 13.1,
+        "precip": 6.0,
+        "pop": 61,
+        "wind": 19.3,
+        "code": 53,
+        "weather": "毛毛雨"
+      },
+      {
+        "date": "2026-11-14",
+        "tmax": 20.4,
+        "tmin": 10.9,
+        "precip": 0,
+        "pop": 44,
+        "wind": 20.2,
+        "code": 45,
+        "weather": "雾"
+      },
+      {
+        "date": "2026-11-15",
+        "tmax": 21.5,
+        "tmin": 9.6,
+        "precip": 0,
+        "pop": 25,
+        "wind": 15.6,
+        "code": 2,
+        "weather": "局部多云"
+      },
+      {
+        "date": "2026-11-16",
+        "tmax": 18.4,
+        "tmin": 9.2,
+        "precip": 0,
+        "pop": 19,
+        "wind": 16.1,
+        "code": 45,
+        "weather": "雾"
+      },
+      {
+        "date": "2026-11-17",
+        "tmax": null,
+        "tmin": null,
+        "precip": 0,
+        "pop": 37,
+        "wind": 0,
+        "code": null,
+        "weather": "—"
+      }
+    ],
+    "climatology": {
+      "tmax_mean": 24.338709677419356,
+      "tmin_mean": 14.638709677419355,
+      "precip_mean": 1.7838709677419353,
+      "samples": 31,
+      "window": "2026-10-02 ~ 2026-11-01"
+    },
+    "windows": {
+      "d3": {
+        "tmax_avg": 24.5,
+        "tmin_avg": 15.4,
+        "precip_total": 2.7,
+        "rainy_days": 1,
+        "heavy_rain_days": 0,
+        "gale_days": 2,
+        "wind_max": 22.7,
+        "dominant": "毛毛雨"
+      },
+      "w1": {
+        "tmax_avg": 23.8,
+        "tmin_avg": 14.5,
+        "precip_total": 28.8,
+        "rainy_days": 4,
+        "heavy_rain_days": 1,
+        "gale_days": 4,
+        "wind_max": 22.7,
+        "dominant": "毛毛雨"
+      },
+      "h1": {
+        "tmax_avg": 18.6,
+        "tmin_avg": 10.7,
+        "precip_total": 13.5,
+        "rainy_days": 2,
+        "heavy_rain_days": 0,
+        "gale_days": 3,
+        "wind_max": 20.2,
+        "dominant": "毛毛雨"
+      },
+      "m1": {
+        "tmax_avg": 21.0,
+        "tmin_avg": 12.4,
+        "precip_total": 42.3,
+        "rainy_days": 6,
+        "heavy_rain_days": 1,
+        "gale_days": 7,
+        "wind_max": 22.7,
+        "dominant": "毛毛雨"
+      }
+    }
+  },
+  "points": [
+    {
+      "name": "泸西",
+      "province": "云南",
+      "lat": 24.5355,
+      "lon": 103.7615,
+      "role": "核心产区",
+      "w7": {
+        "tmax_avg": 23.8,
+        "tmin_avg": 14.5,
+        "precip_total": 28.8,
+        "rainy_days": 4,
+        "heavy_rain_days": 1,
+        "gale_days": 4,
+        "wind_max": 22.7,
+        "dominant": "毛毛雨"
+      }
+    },
+    {
+      "name": "昆明",
+      "province": "云南",
+      "lat": 25.0389,
+      "lon": 102.7183,
+      "role": "产区/销区",
+      "w7": {
+        "tmax_avg": 23.2,
+        "tmin_avg": 13.5,
+        "precip_total": 33.8,
+        "rainy_days": 4,
+        "heavy_rain_days": 1,
+        "gale_days": 1,
+        "wind_max": 18.9,
+        "dominant": "毛毛雨"
+      }
+    },
+    {
+      "name": "师宗",
+      "province": "云南",
+      "lat": 24.8306,
+      "lon": 103.995,
+      "role": "产区",
+      "w7": {
+        "tmax_avg": 23.1,
+        "tmin_avg": 13.9,
+        "precip_total": 34.1,
+        "rainy_days": 3,
+        "heavy_rain_days": 1,
+        "gale_days": 4,
+        "wind_max": 26.2,
+        "dominant": "阴"
+      }
+    },
+    {
+      "name": "南宁",
+      "province": "广西",
+      "lat": 22.817,
+      "lon": 108.3665,
+      "role": "产区",
+      "w7": {
+        "tmax_avg": 28.1,
+        "tmin_avg": 21.0,
+        "precip_total": 59.2,
+        "rainy_days": 6,
+        "heavy_rain_days": 1,
+        "gale_days": 1,
+        "wind_max": 18.0,
+        "dominant": "毛毛雨"
+      }
+    },
+    {
+      "name": "玉林",
+      "province": "广西",
+      "lat": 22.654,
+      "lon": 110.181,
+      "role": "产区",
+      "w7": {
+        "tmax_avg": 30.5,
+        "tmin_avg": 22.0,
+        "precip_total": 33.0,
+        "rainy_days": 7,
+        "heavy_rain_days": 0,
+        "gale_days": 0,
+        "wind_max": 16.0,
+        "dominant": "毛毛雨"
+      }
+    },
+    {
+      "name": "湛江",
+      "province": "广东",
+      "lat": 21.271,
+      "lon": 110.3572,
+      "role": "产区",
+      "w7": {
+        "tmax_avg": 29.1,
+        "tmin_avg": 23.8,
+        "precip_total": 44.9,
+        "rainy_days": 6,
+        "heavy_rain_days": 2,
+        "gale_days": 4,
+        "wind_max": 24.7,
+        "dominant": "毛毛雨"
+      }
+    },
+    {
+      "name": "寿光",
+      "province": "山东",
+      "lat": 36.856,
+      "lon": 118.79,
+      "role": "产区",
+      "w7": {
+        "tmax_avg": 17.2,
+        "tmin_avg": 7.2,
+        "precip_total": 6.5,
+        "rainy_days": 1,
+        "heavy_rain_days": 0,
+        "gale_days": 1,
+        "wind_max": 17.4,
+        "dominant": "阴"
+      }
+    },
+    {
+      "name": "兴化",
+      "province": "江苏",
+      "lat": 32.9386,
+      "lon": 119.842,
+      "role": "加工带",
+      "w7": {
+        "tmax_avg": 18.6,
+        "tmin_avg": 12.0,
+        "precip_total": 19.2,
+        "rainy_days": 2,
+        "heavy_rain_days": 1,
+        "gale_days": 3,
+        "wind_max": 22.0,
+        "dominant": "阴"
+      }
+    },
+    {
+      "name": "北京",
+      "province": "北京",
+      "lat": 39.9042,
+      "lon": 116.4074,
+      "role": "销区",
+      "w7": {
+        "tmax_avg": 13.6,
+        "tmin_avg": 3.5,
+        "precip_total": 0,
+        "rainy_days": 0,
+        "heavy_rain_days": 0,
+        "gale_days": 0,
+        "wind_max": 14.8,
+        "dominant": "阴"
+      }
+    },
+    {
+      "name": "上海",
+      "province": "上海",
+      "lat": 31.2304,
+      "lon": 121.4737,
+      "role": "销区",
+      "w7": {
+        "tmax_avg": 19.2,
+        "tmin_avg": 13.7,
+        "precip_total": 37.7,
+        "rainy_days": 3,
+        "heavy_rain_days": 1,
+        "gale_days": 0,
+        "wind_max": 16.5,
+        "dominant": "毛毛雨"
+      }
+    },
+    {
+      "name": "广州",
+      "province": "广东",
+      "lat": 23.1291,
+      "lon": 113.2644,
+      "role": "销区",
+      "w7": {
+        "tmax_avg": 30.2,
+        "tmin_avg": 22.8,
+        "precip_total": 14.3,
+        "rainy_days": 5,
+        "heavy_rain_days": 0,
+        "gale_days": 0,
+        "wind_max": 15.7,
+        "dominant": "毛毛雨"
+      }
+    },
+    {
+      "name": "杭州",
+      "province": "浙江",
+      "lat": 30.2741,
+      "lon": 120.1551,
+      "role": "销区",
+      "w7": {
+        "tmax_avg": 20.0,
+        "tmin_avg": 13.1,
+        "precip_total": 83.1,
+        "rainy_days": 5,
+        "heavy_rain_days": 2,
+        "gale_days": 1,
+        "wind_max": 17.4,
+        "dominant": "阴"
+      }
+    },
+    {
+      "name": "武汉",
+      "province": "湖北",
+      "lat": 30.5928,
+      "lon": 114.3055,
+      "role": "销区",
+      "w7": {
+        "tmax_avg": 18.8,
+        "tmin_avg": 12.9,
+        "precip_total": 102.7,
+        "rainy_days": 4,
+        "heavy_rain_days": 3,
+        "gale_days": 1,
+        "wind_max": 18.3,
+        "dominant": "阴"
+      }
+    },
+    {
+      "name": "成都",
+      "province": "四川",
+      "lat": 30.5728,
+      "lon": 104.0668,
+      "role": "销区",
+      "w7": {
+        "tmax_avg": 19.2,
+        "tmin_avg": 13.0,
+        "precip_total": 6.6,
+        "rainy_days": 3,
+        "heavy_rain_days": 0,
+        "gale_days": 0,
+        "wind_max": 13.9,
+        "dominant": "阴"
+      }
+    },
+    {
+      "name": "西安",
+      "province": "陕西",
+      "lat": 34.3416,
+      "lon": 108.9398,
+      "role": "销区",
+      "w7": {
+        "tmax_avg": 16.2,
+        "tmin_avg": 7.3,
+        "precip_total": 8.2,
+        "rainy_days": 3,
+        "heavy_rain_days": 0,
+        "gale_days": 1,
+        "wind_max": 18.5,
+        "dominant": "毛毛雨"
+      }
+    }
+  ]
+}
