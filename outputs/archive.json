@@ -4,11 +4,15 @@
     "file": "香葱行情日报_2026-11-03.html",
     "red_current": 3.45,
     "black_current": 2.96,
-    "generated_at": "2026-11-03 00:36（北京时间）",
+    "generated_at": "2026-11-03 00:38（北京时间）",
     "task_prices": [
       {
         "name": "ChatGPT",
         "price": 2.5
+      },
+      {
+        "name": "香葱行情",
+        "price": 3.53
       },
       {
         "name": "全国监测",
@@ -21,10 +25,6 @@
       {
         "name": "Gemini",
         "price": 5.5
-      },
-      {
-        "name": "香葱行情",
-        "price": 3.6
       }
     ]
   },
