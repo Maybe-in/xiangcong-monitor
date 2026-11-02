@@ -825,13 +825,17 @@ else:
     MONO_DESC = ("六档<b>前五档单调递增</b>，第 6 档（3 个月）与第 5 档（2 个月）<b>基本持平</b>"
                  "（{0:+.2f} 元 / {1:+.1f}%）".format(_gap, _gap / _centers[-2] * 100))
 
+def _nf(v):
+    return "—" if v is None else "{:.2f}".format(v)
+
+
 qrows = []
 for q in QUOTES:
     qrows.append("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td>"
-                 "<td class='num'>{5:.2f}</td><td class='num'>{6:.2f}</td><td class='num'><b>{7:.2f}</b></td>"
+                 "<td class='num'>{5}</td><td class='num'>{6}</td><td class='num'><b>{7}</b></td>"
                  "<td class='src'>{8}</td></tr>".format(
                      q["date"], q["item"], q["variety"] or "—", q["market"], q["price_type"],
-                     q["low"], q["high"], q["mid"], q["source"]))
+                     _nf(q["low"]), _nf(q["high"]), _nf(q["mid"]), q["source"]))
 
 cultivars = "".join(
     "<tr><td><b>{0}</b></td><td>{1}</td><td>{2}</td><td>{3}</td></tr>".format(

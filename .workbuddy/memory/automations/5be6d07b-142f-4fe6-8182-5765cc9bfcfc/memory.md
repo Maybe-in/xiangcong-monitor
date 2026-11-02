@@ -42,3 +42,7 @@
 - 提交 `f491e3b`；`git pull -X ours` 因分支分叉报错（hint 要求指定 reconcile 策略）→ 走 rebase 分支：`git fetch && git rebase origin/main`，5 个文件冲突（outputs/archive.json、data.json、index.html、latest.html、香葱行情日报_2026-11-01.html），按策略用 `git checkout --theirs` 逐个解决，`git add -A` + `git -c core.editor=true rebase --continue` 完成 rebase（f491e3b）。
 - 首次 `git push origin main` 因 SSH 443 连接被对端重置（Connection reset by peer / remote end hung up）失败；本地状态已干净（rebase 完成、无未合并），重试 `git push origin main` 成功（d437341..f491e3b main -> main）。
 - 经验：SSH 443 偶发连接重置属瞬断，rebase 改完本地后仅需重试 push 即可，无需重新拉取；循环重试 push 有效。
+
+## 2026-11-02 07:16（北京时间）执行
+- 流水线成功，生成 `outputs/香葱行情日报_2026-11-02.html`；新发地 41 条（最新 11-01，报告内全量明细表 41 行）、灾害预警 100 条、天气 16 天/15 观测点；红香葱六档中枢 3.45→3.61/3.82/4.12/4.27/4.43/4.42；data/sources 5 任务/611 报价/36 预测（38 文件）。
+- 提交日报 `07343d4`；`git pull -X ours` 因分支分叉（远端 CI 已推进至 f449534）需显式 reconcile → 改 `git pull --no-rebase -X ours`，ort 自动合并 outputs/*.html、data/*.json 等，生成合并提交 `fb3a5dc`，`git push origin main` 成功（f449534..fb3a5dc），未走 rebase 分支。
