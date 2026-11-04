@@ -53,6 +53,11 @@
 - 提交日报 `08c9029`；过程中远端 CI 多次抢先推进（d1093f3/7bee39e），`git pull --no-rebase -X ours` 均 ort 自动合并 outputs/*.html、data/*.json 等，未走 rebase 分支；推送 `7bee39e..839fd55`（合并提交 839fd55）成功。
 - 经验：本任务触发时间（00:29）早于其余香葱生成任务集中落盘时刻（约 00:37），导致首次报告遗漏当日 xiangcong 源；已用二次运行补齐。若后续仍在此窗口运行，建议先等待/触发 sources 落盘再跑 run.py，或容忍次日报告补齐。两次运行均因天气接口 SSL 握手超时耗时约 5–11 分钟，须后台执行。
 
+## 2026-11-04 00:34（北京时间）执行
+- 流水线成功，生成 `outputs/香葱行情日报_2026-11-04.html`（约 6m23s，天气接口大量 SSL 握手超时但已正常降级）。
+- 数据：新发地接口 41 条（最新 11-03，报告「接口全部明细」全量 41 行）、灾害预警 100 条、天气 16 天/15 观测点；红香葱六档中枢 3.45→3.46/3.85/3.98/4.08/4.17/4.21；data/sources 5 任务/534 报价/36 预测（扫描 49 文件），「九、多源行情汇总」按任务全量展示。
+- 提交日报 `d6f1bc2`；远端 CI 已推进至 `ddaf4e5`，`git pull -X ours` 因分叉需显式 reconcile → `git pull --no-rebase -X ours`，ort 自动合并 outputs/*.html、data/*.json 等（无冲突），生成合并提交 `bba6980`，`git push origin main` 成功（ddaf4e5..bba6980），未走 rebase 分支。
+
 ## 2026-11-03 23:48（北京时间）执行
 - 流水线成功，生成 `outputs/香葱行情日报_2026-11-03.html`；新发地 41 条（最新 11-03，当天接口已含 11-03 当日数据，比 00:49 那次更新鲜）、灾害预警 100 条、天气 16 天/15 观测点；红香葱六档中枢 3.45→3.52/3.89/4.06/4.19/4.28/4.33；data/sources 5 任务/863 报价/36 预测（45 文件，含 chatgpt/gemini/grok/national/xiangcong 五个 11-03 源）。
 - 提交 `d596f15`；远端 CI 已推进至 `0e831e6`，`git pull -X ours` 因分叉需显式 reconcile 策略 → 走 rebase 分支：`git fetch && git rebase origin/main`，5 个文件冲突（outputs/archive.json、data.json、index.html、latest.html、香葱行情日报_2026-11-03.html），按策略用 `git checkout --theirs` 逐个解决（中文文件名需在 for 循环中关闭 quotePath 直接引用，否则 pathspec 含引号报错），`git add -A` + `git -c core.editor=true rebase --continue` 完成 rebase（802182f）。
