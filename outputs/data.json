@@ -1,6 +1,6 @@
 {
   "date": "2026-11-07",
-  "generated_at": "2026-11-07 06:51（北京时间）",
+  "generated_at": "2026-11-07 07:42（北京时间）",
   "price_source": "人工录入实测观测点（39 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -27,7 +27,7 @@
     "h1": {
       "tmax_avg": 19.9,
       "tmin_avg": 9.5,
-      "precip_total": 0.1,
+      "precip_total": 0.6,
       "rainy_days": 0,
       "heavy_rain_days": 0,
       "gale_days": 5,
@@ -35,14 +35,14 @@
       "dominant": "晴"
     },
     "m1": {
-      "tmax_avg": 18.7,
-      "tmin_avg": 9.8,
-      "precip_total": 36.6,
-      "rainy_days": 6,
+      "tmax_avg": 18.2,
+      "tmin_avg": 9.5,
+      "precip_total": 39.2,
+      "rainy_days": 7,
       "heavy_rain_days": 1,
       "gale_days": 11,
       "wind_max": 24.6,
-      "dominant": "晴"
+      "dominant": "毛毛雨"
     }
   },
   "weather_daily": [
@@ -81,7 +81,7 @@
       "tmax": 14.3,
       "tmin": 6.6,
       "precip": 1.6,
-      "pop": 31,
+      "pop": 49,
       "wind": 12.3,
       "code": 53,
       "weather": "毛毛雨"
@@ -91,7 +91,7 @@
       "tmax": 17.8,
       "tmin": 8.4,
       "precip": 3.3,
-      "pop": 56,
+      "pop": 71,
       "wind": 18.0,
       "code": 51,
       "weather": "毛毛雨"
@@ -101,7 +101,7 @@
       "tmax": 17.1,
       "tmin": 11.8,
       "precip": 10.5,
-      "pop": 68,
+      "pop": 66,
       "wind": 18.1,
       "code": 55,
       "weather": "强毛毛雨"
@@ -111,7 +111,7 @@
       "tmax": 18.9,
       "tmin": 11.4,
       "precip": 0,
-      "pop": 35,
+      "pop": 39,
       "wind": 18.9,
       "code": 45,
       "weather": "雾"
@@ -121,7 +121,7 @@
       "tmax": 20.2,
       "tmin": 10.3,
       "precip": 0,
-      "pop": 2,
+      "pop": 6,
       "wind": 15.8,
       "code": 0,
       "weather": "晴"
@@ -141,7 +141,7 @@
       "tmax": 20.9,
       "tmin": 10.7,
       "precip": 0,
-      "pop": 14,
+      "pop": 8,
       "wind": 17.6,
       "code": 0,
       "weather": "晴"
@@ -161,7 +161,7 @@
       "tmax": 14.5,
       "tmin": 6.8,
       "precip": 0,
-      "pop": 14,
+      "pop": 12,
       "wind": 10.4,
       "code": 3,
       "weather": "阴"
@@ -171,7 +171,7 @@
       "tmax": 19.5,
       "tmin": 5.7,
       "precip": 0,
-      "pop": 12,
+      "pop": 5,
       "wind": 24.6,
       "code": 45,
       "weather": "雾"
@@ -181,7 +181,7 @@
       "tmax": 20.4,
       "tmin": 10.1,
       "precip": 0,
-      "pop": 12,
+      "pop": 8,
       "wind": 24.0,
       "code": 45,
       "weather": "雾"
@@ -190,52 +190,52 @@
       "date": "2026-11-21",
       "tmax": 21.9,
       "tmin": 10.9,
-      "precip": 0.15,
+      "precip": 0.6,
       "pop": 29,
       "wind": 15.7,
-      "code": 2,
-      "weather": "局部多云"
+      "code": 51,
+      "weather": "毛毛雨"
     },
     {
       "date": "2026-11-22",
-      "tmax": null,
-      "tmin": null,
-      "precip": 0,
+      "tmax": 11.5,
+      "tmin": 6.1,
+      "precip": 2.1,
       "pop": 48,
-      "wind": 0,
-      "code": null,
-      "weather": "—"
+      "wind": 12.1,
+      "code": 51,
+      "weather": "毛毛雨"
     }
   ],
   "disaster": {
     "total": 100,
     "hazard_stats": [
       [
-        "大雾",
-        40
+        "雷电",
+        33
       ],
       [
-        "雷电",
+        "大雾",
         31
       ],
       [
         "暴雨",
-        14
+        15
       ],
       [
         "大风",
-        5
+        12
       ],
       [
-        "山洪风险",
-        3
-      ],
-      [
-        "地质灾害",
+        "暴雪",
         2
       ],
       [
         "冰雹",
+        1
+      ],
+      [
+        "地质灾害",
         1
       ],
       [
@@ -244,6 +244,10 @@
       ],
       [
         "海上大风",
+        1
+      ],
+      [
+        "山洪风险",
         1
       ],
       [
@@ -305,8 +309,8 @@
         "hazard": "暴雨",
         "level": "橙色",
         "rank": 3,
-        "issuetime": "2026/11/07 03:58",
-        "url": "http://www.nmc.cn/publish/alarm/53082841600000_20261107040020.html",
+        "issuetime": "2026/11/07 06:57",
+        "url": "http://www.nmc.cn/publish/alarm/53082841600000_20261107065923.html",
         "weight": 4,
         "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
         "is_production_area": true,
@@ -325,6 +329,34 @@
         "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
         "is_production_area": true,
         "risk_score": 12
+      },
+      {
+        "region": "云南省文山壮族苗族自治州文山市",
+        "province": "云南",
+        "city": "省文山壮族苗族自治州文山",
+        "hazard": "暴雨",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/07 06:54",
+        "url": "http://www.nmc.cn/publish/alarm/53260141600000_20261107065625.html",
+        "weight": 4,
+        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "is_production_area": true,
+        "risk_score": 8
+      },
+      {
+        "region": "云南省文山壮族苗族自治州西畴县",
+        "province": "云南",
+        "city": "省文山壮族苗族自治州西畴",
+        "hazard": "暴雨",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/07 07:03",
+        "url": "http://www.nmc.cn/publish/alarm/53262341600000_20261107070520.html",
+        "weight": 4,
+        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "is_production_area": true,
+        "risk_score": 8
       },
       {
         "region": "云南省文山壮族苗族自治州麻栗坡县",
@@ -453,18 +485,18 @@
         "risk_score": 8
       },
       {
-        "region": "云南省文山壮族苗族自治州文山市",
-        "province": "云南",
-        "city": "省文山壮族苗族自治州文山",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/07 00:51",
-        "url": "http://www.nmc.cn/publish/alarm/53260141600000_20261107005403.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 4
+        "region": "河北省承德市滦平县",
+        "province": "河北",
+        "city": "省承德",
+        "hazard": "暴雪",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/07 07:30",
+        "url": "http://www.nmc.cn/publish/alarm/13082441600000_20261107073029.html",
+        "weight": 3,
+        "impact": "运输中断、设施受压",
+        "is_production_area": false,
+        "risk_score": 6
       },
       {
         "region": "浙江省台州市临海市",
@@ -475,6 +507,20 @@
         "rank": 2,
         "issuetime": "2026/11/07 06:40",
         "url": "http://www.nmc.cn/publish/alarm/33108241600000_20261107064239.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省台州市路桥区",
+        "province": "浙江",
+        "city": "省台州",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/07 07:15",
+        "url": "http://www.nmc.cn/publish/alarm/33100441600000_20261107071338.html",
         "weight": 2,
         "impact": "设施受损、蒸腾加剧",
         "is_production_area": true,
@@ -493,48 +539,6 @@
         "impact": "设施受损、蒸腾加剧",
         "is_production_area": true,
         "risk_score": 4
-      },
-      {
-        "region": "云南省红河哈尼族彝族自治州河口瑶族自治县",
-        "province": "云南",
-        "city": "省红河哈尼族彝族自治州河口瑶族自治",
-        "hazard": "地质灾害",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/07 05:36",
-        "url": "http://www.nmc.cn/publish/alarm/53253241600000_20261107053842.html",
-        "weight": 1,
-        "impact": "影响轻微",
-        "is_production_area": true,
-        "risk_score": 3
-      },
-      {
-        "region": "安徽省合肥市肥西县",
-        "province": "安徽",
-        "city": "省合肥",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/07 02:20",
-        "url": "http://www.nmc.cn/publish/alarm/34012341600000_20261107022009.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "山东省",
-        "province": "山东",
-        "city": "省",
-        "hazard": "寒潮",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/07 06:18",
-        "url": "http://www.nmc.cn/publish/alarm/37000041600000_20261107061835.html",
-        "weight": 3,
-        "impact": "生长停滞，但常推高菜价（双刃剑）",
-        "is_production_area": true,
-        "risk_score": 3
       }
     ]
   },
@@ -607,7 +611,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)11天",
-            "气温较常年偏低5.9℃，生长放缓供给延后",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         },
@@ -625,7 +629,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)11天",
-            "气温较常年偏低5.9℃，生长放缓供给延后",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 31 天，备货需求抬升"
           ]
@@ -644,7 +648,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)11天",
-            "气温较常年偏低5.9℃，生长放缓供给延后",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 1 天，备货需求抬升"
           ]
@@ -719,7 +723,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)11天",
-            "气温较常年偏低5.9℃，生长放缓供给延后",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         },
@@ -737,7 +741,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)11天",
-            "气温较常年偏低5.9℃，生长放缓供给延后",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 31 天，备货需求抬升"
           ]
@@ -756,7 +760,7 @@
           "reasons": [
             "强降水(≥10mm)1天，采收受阻",
             "大风(≥8级)11天",
-            "气温较常年偏低5.9℃，生长放缓供给延后",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 1 天，备货需求抬升"
           ]
