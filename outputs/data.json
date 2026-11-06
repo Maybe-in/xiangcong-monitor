@@ -1,6 +1,6 @@
 {
   "date": "2026-11-07",
-  "generated_at": "2026-11-07 06:48（北京时间）",
+  "generated_at": "2026-11-07 06:51（北京时间）",
   "price_source": "人工录入实测观测点（39 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -212,7 +212,7 @@
     "hazard_stats": [
       [
         "大雾",
-        42
+        40
       ],
       [
         "雷电",
@@ -220,11 +220,11 @@
       ],
       [
         "暴雨",
-        13
+        14
       ],
       [
         "大风",
-        4
+        5
       ],
       [
         "山洪风险",
@@ -325,6 +325,20 @@
         "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
         "is_production_area": true,
         "risk_score": 12
+      },
+      {
+        "region": "云南省文山壮族苗族自治州麻栗坡县",
+        "province": "云南",
+        "city": "省文山壮族苗族自治州麻栗坡",
+        "hazard": "暴雨",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/07 06:44",
+        "url": "http://www.nmc.cn/publish/alarm/53262441600000_20261107064620.html",
+        "weight": 4,
+        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "is_production_area": true,
+        "risk_score": 8
       },
       {
         "region": "云南省普洱市江城哈尼族彝族自治县",
@@ -453,6 +467,20 @@
         "risk_score": 4
       },
       {
+        "region": "浙江省台州市临海市",
+        "province": "浙江",
+        "city": "省台州",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/07 06:40",
+        "url": "http://www.nmc.cn/publish/alarm/33108241600000_20261107064239.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
         "region": "浙江省温州市平阳县",
         "province": "浙江",
         "city": "省温州",
@@ -506,34 +534,6 @@
         "weight": 3,
         "impact": "生长停滞，但常推高菜价（双刃剑）",
         "is_production_area": true,
-        "risk_score": 3
-      },
-      {
-        "region": "山东省",
-        "province": "山东",
-        "city": "省",
-        "hazard": "海上大风",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/07 06:11",
-        "url": "http://www.nmc.cn/publish/alarm/37000041600000_20261107061225.html",
-        "weight": 1,
-        "impact": "影响轻微",
-        "is_production_area": true,
-        "risk_score": 3
-      },
-      {
-        "region": "江西省吉安市井冈山市",
-        "province": "江西",
-        "city": "省吉安",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/07 05:31",
-        "url": "http://www.nmc.cn/publish/alarm/36088141600000_20261107053339.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
         "risk_score": 3
       }
     ]
@@ -16508,6 +16508,6 @@
     "task_count": 5,
     "window_days": 3,
     "files_scanned": 59,
-    "dir": "C:\\Users\\不言不语\\WorkBuddy\\automation-2026-10-24-02-17-56\\xiangcong-monitor\\data\\sources"
+    "dir": "/home/runner/work/xiangcong-monitor/xiangcong-monitor/data/sources"
   }
 }
