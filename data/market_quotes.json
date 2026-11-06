@@ -720,6 +720,36 @@
       "places": "",
       "unit": "元/公斤",
       "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-11-06",
+      "low": 1.4,
+      "high": 2.0,
+      "mid": 1.7,
+      "places": "冀蒙",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-11-06",
+      "low": 2.6,
+      "high": 5.0,
+      "mid": 3.8,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-11-06",
+      "low": 6.2,
+      "high": 8.2,
+      "mid": 7.2,
+      "places": "",
+      "unit": "元/公斤",
+      "source": "xinfadi"
     }
   ],
   "cnhnb_history": [
@@ -1158,6 +1188,66 @@
     {
       "item": "香葱",
       "date": "2026-11-05",
+      "origin": "云南红河哈尼族彝族自治州泸西县",
+      "low": 2.52,
+      "high": 2.52,
+      "mid": 2.52,
+      "ton": 2520,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    },
+    {
+      "item": "四季葱",
+      "date": "2026-11-06",
+      "origin": "云南大理白族自治州宾川县",
+      "low": 5.1,
+      "high": 5.1,
+      "mid": 5.1,
+      "ton": 5100,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-11-06",
+      "origin": "云南大理白族自治州宾川县",
+      "low": 5.96,
+      "high": 5.96,
+      "mid": 5.96,
+      "ton": 5960,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    },
+    {
+      "item": "火葱",
+      "date": "2026-11-06",
+      "origin": "云南大理白族自治州弥渡县",
+      "low": 7.02,
+      "high": 7.02,
+      "mid": 7.02,
+      "ton": 7020,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-11-06",
+      "origin": "云南红河哈尼族彝族自治州泸西县",
+      "low": 1.7,
+      "high": 1.7,
+      "mid": 1.7,
+      "ton": 1700,
+      "unit": "元/公斤",
+      "unit_ton": "元/吨",
+      "source": "cnhnb"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-11-06",
       "origin": "云南红河哈尼族彝族自治州泸西县",
       "low": 2.52,
       "high": 2.52,
