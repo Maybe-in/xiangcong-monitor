@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "generated_at": "2026-11-09 05:34（北京时间）",
+  "generated_at": "2026-11-09 06:47（北京时间）",
   "price_source": "人工录入实测观测点（45 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -51,7 +51,7 @@
       "tmax": 10.5,
       "tmin": 6.5,
       "precip": 3.7,
-      "pop": 98,
+      "pop": 100,
       "wind": 23.8,
       "code": 53,
       "weather": "毛毛雨"
@@ -61,7 +61,7 @@
       "tmax": 11.2,
       "tmin": 6.2,
       "precip": 5.0,
-      "pop": 65,
+      "pop": 76,
       "wind": 12.1,
       "code": 51,
       "weather": "毛毛雨"
@@ -71,7 +71,7 @@
       "tmax": 15.2,
       "tmin": 8.9,
       "precip": 4.4,
-      "pop": 88,
+      "pop": 75,
       "wind": 16.0,
       "code": 53,
       "weather": "毛毛雨"
@@ -81,7 +81,7 @@
       "tmax": 18.7,
       "tmin": 11.6,
       "precip": 2.8,
-      "pop": 67,
+      "pop": 76,
       "wind": 18.5,
       "code": 53,
       "weather": "毛毛雨"
@@ -91,7 +91,7 @@
       "tmax": 20.4,
       "tmin": 11.6,
       "precip": 1.2,
-      "pop": 37,
+      "pop": 39,
       "wind": 19.1,
       "code": 51,
       "weather": "毛毛雨"
@@ -111,7 +111,7 @@
       "tmax": 21.2,
       "tmin": 11.0,
       "precip": 0,
-      "pop": 4,
+      "pop": 2,
       "wind": 25.6,
       "code": 0,
       "weather": "晴"
@@ -121,7 +121,7 @@
       "tmax": 21.5,
       "tmin": 10.9,
       "precip": 0,
-      "pop": 10,
+      "pop": 2,
       "wind": 18.2,
       "code": 1,
       "weather": "晴间多云"
@@ -131,7 +131,7 @@
       "tmax": 21.0,
       "tmin": 9.4,
       "precip": 0,
-      "pop": 10,
+      "pop": 1,
       "wind": 16.2,
       "code": 45,
       "weather": "雾"
@@ -141,7 +141,7 @@
       "tmax": 15.2,
       "tmin": 8.3,
       "precip": 0,
-      "pop": 14,
+      "pop": 10,
       "wind": 7.7,
       "code": 45,
       "weather": "雾"
@@ -161,7 +161,7 @@
       "tmax": 14.8,
       "tmin": 7.2,
       "precip": 0,
-      "pop": 5,
+      "pop": 12,
       "wind": 9.9,
       "code": 45,
       "weather": "雾"
@@ -171,7 +171,7 @@
       "tmax": 17.7,
       "tmin": 7.2,
       "precip": 0,
-      "pop": 8,
+      "pop": 13,
       "wind": 18.8,
       "code": 3,
       "weather": "阴"
@@ -181,7 +181,7 @@
       "tmax": 22.2,
       "tmin": 11.8,
       "precip": 0,
-      "pop": 17,
+      "pop": 6,
       "wind": 26.4,
       "code": 3,
       "weather": "阴"
@@ -191,7 +191,7 @@
       "tmax": 21.7,
       "tmin": 5.6,
       "precip": 0.45,
-      "pop": 43,
+      "pop": 25,
       "wind": 29.3,
       "code": 51,
       "weather": "毛毛雨"
@@ -212,66 +212,50 @@
     "hazard_stats": [
       [
         "大风",
-        39
+        53
       ],
       [
         "大雾",
-        29
+        18
       ],
       [
         "暴雨",
-        19
-      ],
-      [
-        "地质灾害",
-        5
+        13
       ],
       [
         "雷雨大风",
-        5
+        4
+      ],
+      [
+        "强季风",
+        3
       ],
       [
         "道路结冰",
+        2
+      ],
+      [
+        "地质灾害",
+        2
+      ],
+      [
+        "道路冰雪",
+        2
+      ],
+      [
+        "海上大风",
+        1
+      ],
+      [
+        "海上雷雨大风",
         1
       ],
       [
         "寒潮",
         1
-      ],
-      [
-        "强降温",
-        1
       ]
     ],
     "top": [
-      {
-        "region": "云南省保山市昌宁县",
-        "province": "云南",
-        "city": "省保山",
-        "hazard": "暴雨",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/09 01:22",
-        "url": "http://www.nmc.cn/publish/alarm/53052441600000_20261109012423.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 12
-      },
-      {
-        "region": "云南省普洱市澜沧拉祜族自治县",
-        "province": "云南",
-        "city": "省普洱",
-        "hazard": "暴雨",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/09 02:57",
-        "url": "http://www.nmc.cn/publish/alarm/53082841600000_20261109025921.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 12
-      },
       {
         "region": "云南省楚雄彝族自治州大姚县",
         "province": "云南",
@@ -281,20 +265,6 @@
         "rank": 3,
         "issuetime": "2026/11/09 03:47",
         "url": "http://www.nmc.cn/publish/alarm/53232641600000_20261109034923.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 12
-      },
-      {
-        "region": "广西壮族自治区北海市合浦县",
-        "province": "广西",
-        "city": "壮族自治",
-        "hazard": "暴雨",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/08 23:00",
-        "url": "http://www.nmc.cn/publish/alarm/45052141600000_20261108230542.html",
         "weight": 4,
         "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
         "is_production_area": true,
@@ -329,6 +299,34 @@
         "risk_score": 8
       },
       {
+        "region": "云南省普洱市景东彝族自治县",
+        "province": "云南",
+        "city": "省普洱",
+        "hazard": "暴雨",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/09 06:01",
+        "url": "http://www.nmc.cn/publish/alarm/53082341600000_20261109060323.html",
+        "weight": 4,
+        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "is_production_area": true,
+        "risk_score": 8
+      },
+      {
+        "region": "云南省普洱市镇沅彝族哈尼族拉祜族自治县",
+        "province": "云南",
+        "city": "省普洱",
+        "hazard": "暴雨",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/09 06:12",
+        "url": "http://www.nmc.cn/publish/alarm/53082541600000_20261109061405.html",
+        "weight": 4,
+        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "is_production_area": true,
+        "risk_score": 8
+      },
+      {
         "region": "新疆维吾尔自治区乌鲁木齐市头屯河区",
         "province": "新疆",
         "city": "维吾尔自治",
@@ -343,48 +341,6 @@
         "risk_score": 6
       },
       {
-        "region": "云南省临沧市云县",
-        "province": "云南",
-        "city": "省临沧",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/08 23:01",
-        "url": "http://www.nmc.cn/publish/alarm/53092241600000_20261108230409.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
-        "region": "云南省临沧市凤庆县",
-        "province": "云南",
-        "city": "省临沧",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/08 23:40",
-        "url": "http://www.nmc.cn/publish/alarm/53092141600000_20261108234158.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
-        "region": "云南省临沧市永德县",
-        "province": "云南",
-        "city": "省临沧",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/09 00:13",
-        "url": "http://www.nmc.cn/publish/alarm/53092341600000_20261109001517.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
         "region": "云南省临沧市沧源佤族自治县",
         "province": "云南",
         "city": "省临沧",
@@ -393,20 +349,6 @@
         "rank": 1,
         "issuetime": "2026/11/09 01:20",
         "url": "http://www.nmc.cn/publish/alarm/53092741600000_20261109012252.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
-        "region": "云南省临沧市耿马傣族佤族自治县",
-        "province": "云南",
-        "city": "省临沧",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/08 23:54",
-        "url": "http://www.nmc.cn/publish/alarm/53092641600000_20261108235625.html",
         "weight": 4,
         "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
         "is_production_area": true,
@@ -483,28 +425,14 @@
         "risk_score": 4
       },
       {
-        "region": "云南省昆明市富民县",
+        "region": "云南省大理白族自治州弥渡县",
         "province": "云南",
-        "city": "省昆明",
+        "city": "省大理白族自治州弥渡",
         "hazard": "暴雨",
         "level": "蓝色",
         "rank": 1,
-        "issuetime": "2026/11/08 22:43",
-        "url": "http://www.nmc.cn/publish/alarm/53012441600000_20261108224522.html",
-        "weight": 4,
-        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
-        "region": "云南省昆明市晋宁区",
-        "province": "云南",
-        "city": "省昆明",
-        "hazard": "暴雨",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/08 23:34",
-        "url": "http://www.nmc.cn/publish/alarm/53011541600000_20261108233646.html",
+        "issuetime": "2026/11/09 05:45",
+        "url": "http://www.nmc.cn/publish/alarm/53292541600000_20261109054757.html",
         "weight": 4,
         "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
         "is_production_area": true,
@@ -521,6 +449,90 @@
         "url": "http://www.nmc.cn/publish/alarm/53060241600000_20261109005412.html",
         "weight": 2,
         "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省楚雄彝族自治州姚安县",
+        "province": "云南",
+        "city": "省楚雄彝族自治州姚安",
+        "hazard": "暴雨",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/11/09 01:02",
+        "url": "http://www.nmc.cn/publish/alarm/53232541600000_20261109010428.html",
+        "weight": 4,
+        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "内蒙古自治区锡林郭勒盟太仆寺旗",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/09 06:41",
+        "url": "http://www.nmc.cn/publish/alarm/15252741600000_20261109064126.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": false,
+        "risk_score": 4
+      },
+      {
+        "region": "新疆维吾尔自治区昌吉回族自治州昌吉市",
+        "province": "新疆",
+        "city": "维吾尔自治",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/09 02:23",
+        "url": "http://www.nmc.cn/publish/alarm/65230141600000_20261109022340.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": false,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省台州市仙居县",
+        "province": "浙江",
+        "city": "省台州",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/09 06:20",
+        "url": "http://www.nmc.cn/publish/alarm/33102441600000_20261109062131.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省杭州市",
+        "province": "浙江",
+        "city": "省杭州",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/09 06:19",
+        "url": "http://www.nmc.cn/publish/alarm/33010041600000_20261109062302.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "浙江省杭州市临平区",
+        "province": "浙江",
+        "city": "省杭州",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/09 02:30",
+        "url": "http://www.nmc.cn/publish/alarm/33011341600000_20261109023346.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
         "is_production_area": true,
         "risk_score": 4
       }
