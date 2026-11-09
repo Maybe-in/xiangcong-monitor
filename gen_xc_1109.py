@@ -1,0 +1,1286 @@
+# -*- coding: utf-8 -*-
+"""香葱行情定时任务落盘 + 图表报告生成器（任务 376dffed）· 2026-11-09
+
+产出：
+  1) data/sources/xiangcong_2026-11-09.json  统一 schema 全量报价 + 六档预测
+  2) outputs/香葱行情分析_2026-11-09.html     长周期 / 收敛 / 同比 / 预测 图表
+
+注意（代码坑）：f-string 内禁止嵌套 ASCII 引号，中文文案统一使用「」。
+"""
+from __future__ import annotations
+
+import json
+import os
+import sys
+from datetime import datetime, timedelta, timezone
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from src import longterm, config, price  # noqa: E402
+from src.weather import summarize_window  # noqa: E402
+
+BJ = timezone(timedelta(hours=8))
+_now = datetime.now(BJ)
+TODAY = _now.date().isoformat()
+GEN = _now.strftime("%Y-%m-%d %H:%M")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SRC_DIR = os.path.join(BASE_DIR, "data", "sources")
+OUT_DIR = os.path.join(BASE_DIR, "outputs")
+os.makedirs(SRC_DIR, exist_ok=True)
+os.makedirs(OUT_DIR, exist_ok=True)
+
+DATA_DATE = "2026-11-08"   # 最新可获取的实测报价日（当日数据次日发布）
+PREV_DATE = "2026-11-07"
+
+# 本期核心实测（泸西分区，11-08 实测，次日发布）
+RED_MID, RED_LO, RED_HI = 3.45, 3.3, 3.6
+BLK_MID, BLK_LO, BLK_HI = 2.76, 2.5, 2.9
+PREV_RED, PREV_BLK = 3.45, 2.96
+RED_CHG = RED_MID - PREV_RED          # = 0.00 持平
+RED_CHG_PCT = RED_CHG / PREV_RED * 100  # = 0.0
+BLK_CHG = BLK_MID - PREV_BLK          # = -0.20 破位
+BLK_CHG_PCT = BLK_CHG / PREV_BLK * 100  # = -6.8
+
+# ============================================================ 0. 回写实测价
+HIST_PATH = os.path.join(BASE_DIR, "data", "price_history.json")
+hist = json.load(open(HIST_PATH, encoding="utf-8"))
+hist["series"] = [s for s in hist["series"]
+                  if not (s["date"] == DATA_DATE and s.get("source") == "model")]
+_have = {(s["date"], s["variety"]) for s in hist["series"]}
+_new = [
+    {"date": DATA_DATE, "variety": "红香葱", "market": "云南产地", "price": RED_MID,
+     "source": "observed",
+     "note": "泸西菜价（2026-11-08 实测）红香葱 3.3-3.6 均价 3.45；与 11-07 的 3.45 完全持平，自 11-01 起连续八个报价日锁定 3.45；公众号措辞「其他的平稳」与黑葱下调背离，以报价表为准"},
+    {"date": DATA_DATE, "variety": "黑葱", "market": "云南产地", "price": BLK_MID,
+     "source": "observed",
+     "note": "泸西菜价（2026-11-08 实测）黑香葱 2.5-2.9 均价 2.76，较 11-07 的 2.96 破位 -0.20 / -6.8%，结束连续七个报价日锁定；通海黑葱 2.5-2.9 同步下调，红黑价差由 0.49 扩至 0.69"},
+    {"date": DATA_DATE, "variety": "小葱", "market": "昆明王旗营", "price": 2.30,
+     "source": "observed",
+     "note": "2026-11-08 景臻·王旗营平均价统计表未取得；农业农村部信息中心同日单市场表与全国 43 家 roundup 双源互证小葱 3.80（另一采价口径）。主序列仍沿用 2.30 并显式标注为沿用值，两套口径不平均、不混用"},
+]
+for _n in _new:
+    if (_n["date"], _n["variety"]) not in _have:
+        hist["series"].append(_n)
+    else:
+        for s in hist["series"]:
+            if s["date"] == _n["date"] and s["variety"] == _n["variety"]:
+                s.update(_n)
+hist["series"].sort(key=lambda s: (s["date"], s["variety"]))
+with open(HIST_PATH, "w", encoding="utf-8") as f:
+    json.dump(hist, f, ensure_ascii=False, indent=2)
+print("[OK] price_history 回写", DATA_DATE, "实测 3 条")
+
+# ============================================================ 1. 长周期
+lt = longterm.build_longterm()
+series = lt["series"]
+windows = {w["months"]: w for w in lt["windows"]}
+season = lt["season"]
+PREMIUM = lt["premium"]
+
+# ============================================================ 2. 天气（按今日重切窗口）
+wx = json.load(open(os.path.join(BASE_DIR, "data", "weather_2026-11-09.json"), encoding="utf-8"))
+_all = [d for d in wx["core"]["daily"] if d.get("tmax") is not None]
+core_daily = [d for d in _all if d["date"] >= TODAY]
+if len(core_daily) < 15:
+    core_daily = _all
+clim = wx["core"].get("climatology") or {}
+w3 = summarize_window(core_daily, 0, 3)
+w7 = summarize_window(core_daily, 0, 7)
+wh = summarize_window(core_daily, 7, 15)
+wm = summarize_window(core_daily, 0, min(30, len(core_daily)))
+WX_GEN = wx["generated_at"]
+
+# ============================================================ 3. 六档预测（模型）
+history = price.load_history()
+fc = price.build_forecast(history, core_daily, clim=clim)
+FRED = fc["红香葱"]
+FBLK = fc["黑葱"]
+BASE_RED = FRED["current"]
+BASE_BLACK = FBLK["current"]
+
+HORIZON_MAP = [("d3", "未来3天"), ("w1", "未来7天"), ("h1", "未来15天"),
+               ("m1", "未来1个月"), ("m2", "未来2个月"), ("m3", "未来3个月")]
+
+
+def horizon_rows(blk):
+    return {r["key"]: r for r in blk["rows"]}
+
+
+RRED = horizon_rows(FRED)
+RBLK = horizon_rows(FBLK)
+
+FORECASTS = []
+for key, label in HORIZON_MAP:
+    r = RRED[key]
+    b = RBLK[key]
+    FORECASTS.append({
+        "horizon": label,
+        "target_date": r["target_date"],
+        "item": "香葱",
+        "variety": "泸西红香葱（精品净葱/集散价口径）",
+        "center": r["center"], "low": r["low"], "high": r["high"],
+        "delta_pct": r["delta_pct"], "confidence": r["confidence"],
+        "note": "黑葱同档中枢 {0} 元/公斤（{1:+.1f}%）；区间为情景区间，非统计置信区间".format(
+            b["center"], b["delta_pct"]),
+    })
+
+# —— 3 个月档节日脉冲窗口边界效应（模型边界，须显式披露）
+FORECASTS[-1]["note"] += ("；⚠️ 目标日为春节 2027-02-06 后首日，节日备货脉冲窗口在节日当日截止，"
+                          "中枢较 2 个月档回落属模型边界效应而非市场趋势反转，此值宜作情景下沿")
+
+
+# —— 本期天气要点（动态计算，禁止硬编码落点）
+_fc16 = core_daily[:16]
+_peak = max(_fc16, key=lambda d: (d.get("precip") or 0))
+PEAK_DATE = _peak["date"][5:].replace("-", "/")
+PEAK_MM = round(_peak.get("precip") or 0, 1)
+PEAK_TMAX = _peak.get("tmax")
+PEAK_TMIN = _peak.get("tmin")
+_cold = min([d for d in _fc16 if d.get("tmin") is not None], key=lambda d: d["tmin"])
+COLD_DATE = _cold["date"][5:].replace("-", "/")
+COLD_TMIN = _cold["tmin"]
+RAIN_DAYS = sum(1 for d in _fc16 if (d.get("precip") or 0) >= 1)
+RAIN_TOTAL = round(sum((d.get("precip") or 0) for d in _fc16), 1)
+HEAVY_DATES = [d["date"][5:].replace("-", "/") for d in _fc16 if (d.get("precip") or 0) >= 5]
+FIRST_RAIN = HEAVY_DATES[0] if HEAVY_DATES else "—"
+HEAVY_DESC = "、".join("{0} {1:.1f}mm".format(d["date"][5:].replace("-", "/"), d["precip"])
+                     for d in _fc16 if (d.get("precip") or 0) >= 5) or "无"
+DZ = json.load(open(os.path.join(BASE_DIR, "data", "disaster_2026-11-09.json"), encoding="utf-8"))
+DZ_TOP = (DZ.get("production_area") or [t for t in DZ.get("top", []) if t.get("is_production_area")])
+DZ_DESC = "、".join("{0} {1}{2}".format(t["region"], t["hazard"], t["level"])
+                   for t in DZ_TOP[:4]) or "无"
+
+# —— 本期新增动态量（由鲜抓数据计算，禁止硬编码）
+_RR = [t for t in DZ_TOP if "红河" in t.get("region", "")]
+_LX = [t for t in DZ_TOP if "泸西" in t.get("region", "")]
+RR_COUNT = len(_RR)
+LX_COUNT = len(_LX)
+RAIN_WARN = dict(DZ.get("hazard_stats", [])).get("暴雨", 0)
+RR_DESC = ("红河州（泸西所属州）<b>{0}</b> 条、泸西本县 <b>{1}</b> 条").format(RR_COUNT, LX_COUNT)
+YOY_RED = round((3.45 / 6.25 - 1) * 100, 1)  # 2025-11-08 隔年精确同日
+YOY_BLK = round((2.76 / 4.16 - 1) * 100, 1)
+YOY_WQ = round((2.30 / 6.50 - 1) * 100, 1)
+# ============================================================ 4. 全量报价
+def Q(date, item, variety, market, province, ptype, low, high, mid, source, url="", note=""):
+    return {"date": date, "item": item, "variety": variety, "market": market,
+            "province": province, "price_type": ptype, "unit": "元/公斤",
+            "low": low, "high": high, "mid": mid,
+            "source": source, "source_url": url, "note": note}
+
+
+QUOTES = []
+A = QUOTES.append
+
+WX_URL = "http://mp.weixin.qq.com/s?__biz=MzU5MTc0MTM0MA==&mid=2247595895&idx=1&sn=100a44e36246f0b05184614aacca73dd"
+DH_URL = "http://mp.weixin.qq.com/s?__biz=MzI3MTkzNDM4OQ==&mid=2247524195&idx=1&sn=4244b21f0fa80dce68a0e7e4348f08fc"
+WQ_MOA_URL = "https://futures.stockstar.com/IG2026110800002229.shtml"
+ROUND43_URL = "https://wap.stockstar.com/detail/IG2026110800001832"
+KM2025_URL = "https://nyncj.km.gov.cn/c/2025-11-10/5033263.shtml"
+YMT_URL = "https://www.ymt.com/supplylist/search-25-7300/pn8"
+CNC_URL = "http://www.cncyms.cn/"
+
+# —— 泸西核心产区（11-08 实测，模型基准口径）
+A(Q(DATA_DATE, "香葱", "红香葱", "云南红河州泸西县", "云南", "产地收购价",
+    RED_LO, RED_HI, RED_MID, "云南蔬菜主产区每日菜价（泸西菜价表 11-08）", WX_URL,
+    "本期模型基准。红香葱 3.3-3.6、均价 3.45，与 11-07 完全持平；自 11-01 起连续八个报价日锁定 3.45，低位横盘已逾一周。官方措辞「奶白上涨，夹豆甜豆上涨，其他的平稳」"))
+A(Q(DATA_DATE, "香葱", "黑香葱", "云南红河州泸西县", "云南", "产地收购价",
+    BLK_LO, BLK_HI, BLK_MID, "云南蔬菜主产区每日菜价（泸西菜价表 11-08）", WX_URL,
+    "★本期核心变化。黑香葱 2.5-2.9、均价 2.76，较 11-07 的 2.96 破位 -0.20 / -6.8%，结束连续七日锁定；与红香葱持平形成分化，红黑价差扩至 0.69。公众号措辞「其他的平稳」与报价表背离，以报价表为准"))
+A(Q(DATA_DATE, "香葱", "红葱", "云南玉溪市通海县", "云南", "产地收购价",
+    3.3, 3.6, 3.45, "云南蔬菜主产区每日菜价（通海菜价表 11-08）", WX_URL,
+    "通海红葱 3.3-3.6 与泸西红香葱同步持平，确认滇中产区整体性定价"))
+A(Q(DATA_DATE, "香葱", "黑葱", "云南玉溪市通海县", "云南", "产地收购价",
+    2.5, 2.9, 2.70, "云南蔬菜主产区每日菜价（通海菜价表 11-08）", WX_URL,
+    "通海黑葱由 11-07 的 2.7-3.1 同步下调至 2.5-2.9（此处取区间中值 2.70；泸西官方标均价 2.76），片区同步下调而非单市场噪声"))
+A(Q(DATA_DATE, "香葱", "黑葱（均价口径）", "云南玉溪市通海县", "云南", "产地收购价",
+    2.5, 2.9, 2.76, "云南蔬菜主产区每日菜价（通海菜价表 11-08）", WX_URL,
+    "按泸西同表官方均价口径折算 2.76 便于与模型基准横比；与上一行区间中值 2.70 并列，口径差异已标注"))
+
+# —— 全省综合：本期未取得 11-08 地慧数农数值表，保留 11-07 及历史档案，不插补本期值
+A(Q(PREV_DATE, "香葱", "红香葱", "云南产地综合交易价（全省）", "云南", "产地批发价",
+    3.3, 3.6, 3.45, "云南蔬菜综合报价（11-07 档案）", "",
+    "11-07 全省综合实证 3.3-3.6。⚠️本期（11-08）地慧数农全省综合数值表未检索到，按「缺失值标注不插补」不虚构 11-08 值，图表止于 11-07"))
+A(Q(PREV_DATE, "香葱", "黑葱", "云南产地综合交易价（全省）", "云南", "产地批发价",
+    2.7, 3.1, 2.96, "云南蔬菜综合报价（11-07 档案）", "",
+    "11-07 全省综合黑葱 2.7-3.1。本期全省综合缺失，泸西/通海分区黑葱已下调至 2.5-2.9，全省口径是否同步待下一期验证"))
+A(Q("2026-10-30", "香葱", "红香葱", "云南产地综合交易价（全省）", "云南", "产地批发价",
+    3.3, 3.6, 3.45, "云南蔬菜综合报价（10-30 档案）", "", "10-30 全省综合首次低于当时泸西分区价 0.40 元，形成倒挂先行信号"))
+A(Q("2026-10-29", "香葱", "红香葱", "云南产地综合交易价（全省）", "云南", "产地批发价",
+    3.6, 4.0, 3.80, "云南蔬菜综合报价（10-29 档案）", "", "10-29 全省综合价，用于观察三级下移"))
+A(Q("2026-10-26", "香葱", "红香葱", "云南产地综合交易价（全省）", "云南", "产地批发价",
+    4.4, 5.0, 4.70, "云南蔬菜综合报价（10-26 档案）", "", "10-26 全省综合报价，当时仍高于泸西 0.85 元"))
+
+# —— 隔年精确同日 2025-11-08 全套档案（本期首次取得）
+A(Q("2025-11-08", "香葱", "红香葱", "云南红河州泸西县（隔年精确同日档案）", "云南", "产地收购价",
+    6.0, 6.4, 6.25, "云南蔬菜主产区每日菜价（2025-11-08 历史档案）",
+    "http://mp.weixin.qq.com/s?__biz=MzU5MTc0MTM0MA==&mid=2247592628&idx=1&sn=ddb10e6629c5ebfe59cb047649628103",
+    "⭐ 隔年精确同日泸西分区档案。本期 3.45 与之相比 -44.8%，为近五年同期绝对最低且唯一跌破 4 元；官方措辞「小香葱平稳，白蒜苗小涨」"))
+A(Q("2025-11-08", "香葱", "黑香葱", "云南红河州泸西县（隔年精确同日档案）", "云南", "产地收购价",
+    4.1, 4.6, 4.16, "云南蔬菜主产区每日菜价（2025-11-08 历史档案）", "",
+    "隔年精确同日黑香葱 4.16，本期 2.76 与之相比 -33.7%"))
+A(Q("2025-11-08", "香葱", "红葱", "云南玉溪市通海县（隔年精确同日档案）", "云南", "产地收购价",
+    6.0, 6.4, 6.20, "云南蔬菜主产区每日菜价（2025-11-08 历史档案）", "", "隔年精确同日通海红葱 6.0-6.4"))
+A(Q("2025-11-08", "香葱", "黑葱", "云南玉溪市通海县（隔年精确同日档案）", "云南", "产地收购价",
+    4.1, 4.6, 4.35, "云南蔬菜主产区每日菜价（2025-11-08 历史档案）", "", "隔年精确同日通海黑葱 4.1-4.6"))
+A(Q("2025-11-08", "小葱", "小葱", "昆明景臻王旗营蔬菜批发市场（隔年精确同日档案）", "云南", "销地批发价",
+    6.5, 6.5, 6.50, "昆明市农业农村局（2025-11-08 官方平均价格统计表）", KM2025_URL,
+    "⭐ 隔年精确同日王旗营小葱 6.50、前一日成交量 40 吨；市场综合平均价 6.37、总吨位 3279。本期景臻沿用口径 2.30 与之相比 -64.6%"))
+A(Q("2025-11-08", "大葱", "大葱", "云南通海金山蔬菜批发市场（隔年精确同日档案）", "云南", "销地批发价",
+    5.0, 7.0, 6.00, "农业农村部信息中心（2025-11-08，证券之星转载）",
+    "https://futures.stockstar.com/IG2025110800006461.shtml",
+    "★替代品大葱（非香葱单品）。最高 7.00 / 最低 5.00 / 大宗 6.00 元/公斤"))
+A(Q("2022-11-08", "大葱", "大葱（昆明龙城）", "云南昆明呈贡龙城（四年前精确同日档案）", "云南", "销地批发价",
+    3.0, 4.0, 3.50, "昆明市农业农村局（2022-11-08 官方存档）",
+    "https://nyncj.km.gov.cn/c/2022-11-08/4574746.shtml",
+    "★四年前精确同日替代品大葱 最高 4.00 / 最低 3.00 / 中间价 3.50，交易量 7 吨。该 2022 年官方表未列小葱/香葱/红葱/黑葱品项，仅作口径与通胀背景，不用于计算香葱 10 年高低价"))
+
+# —— 隔年精确同日 2024-11-08 档案（首次取得，两年前）
+A(Q("2024-11-08", "香葱", "红香葱", "云南红河州泸西县（两年前精确同日档案）", "云南", "产地收购价",
+    6.5, 7.5, 7.05, "云南蔬菜主产区每日菜价（2024-11-08 历史档案）",
+    "http://mp.weixin.qq.com/s?__biz=MzU5MTc0MTM0MA==&mid=2247582518&idx=1&sn=ff859c0c0d1d29e3a3d7124e0657f934",
+    "两年前精确同日泸西红香葱 6.5-7.5 均价 7.05，本期 3.45 较之 -51.1%；当日措辞「黑香葱连续小幅掉价」"))
+A(Q("2024-11-08", "香葱", "黑香葱", "云南红河州泸西县（两年前精确同日档案）", "云南", "产地收购价",
+    6.0, 6.6, 6.36, "云南蔬菜主产区每日菜价（2024-11-08 历史档案）", "",
+    "两年前精确同日黑香葱 6.0-6.6 均价 6.36，本期 2.76 较之 -56.6%（本期最大同比跌幅口径）"))
+A(Q("2024-11-08", "香葱", "红葱", "云南玉溪市通海县（两年前精确同日档案）", "云南", "产地收购价",
+    6.5, 7.2, 6.85, "云南蔬菜主产区每日菜价（2024-11-08 历史档案）", "", "两年前精确同日通海红葱 6.5-7.2"))
+A(Q("2024-11-08", "香葱", "黑葱", "云南玉溪市通海县（两年前精确同日档案）", "云南", "产地收购价",
+    6.4, 6.9, 6.65, "云南蔬菜主产区每日菜价（2024-11-08 历史档案）", "", "两年前精确同日通海黑葱 6.4-6.9"))
+
+# —— 三年前精确同日 2023-11-08（云南市场综合地头毛菜采购价，口径不同）
+A(Q("2023-11-08", "香葱", "红香葱（全省综合地头毛菜口径）", "云南市场综合（菜易通地头毛菜）", "云南", "产地地头价",
+    4.0, 4.5, 4.25, "云南每日菜价·云南市场综合菜价（2023-11-08 历史档案）",
+    "http://mp.weixin.qq.com/s?__biz=MzU0NjgzOTMyNA==&mid=2247499670&idx=1&sn=5f07ec7ff0ddeb7aba229357b61f1e2e",
+    "★三年前精确同日：红香葱昨日 4.5 → 今日 4-4.5，涨跌栏为「--」持平；口径为全省综合地头毛菜采购价，非泸西分区集散价，不可与 3.45 严格横比"))
+A(Q("2022-11-06", "香葱", "红香葱", "云南红河州泸西县（四年前近似同日档案）", "云南", "产地收购价",
+    4.7, 5.2, 4.95, "云南蔬菜主产区每日菜价（2022-11-06 历史档案）", "",
+    "四年前近似同日红香葱 4.7-5.2，本期 3.45 较之 -30.3%；2022-11-08 当日仅取得呈贡龙城大葱表，香葱单品缺失"))
+
+# —— 王旗营：本期最大数据事件，两套官方口径并存（不平均、不混用）
+A(Q(DATA_DATE, "小葱", "小葱（农业农村部信息中心口径）", "昆明景臻王旗营蔬菜批发市场", "云南", "销地批发价",
+    3.80, 3.80, 3.80, "农业农村部信息中心（11-08 单市场行情表，证券之星转载）", WQ_MOA_URL,
+    "⭐ 本期新采实测。农业农村部信息中心 11-08 王旗营单市场表小葱 3.80，同日「全国 43 家批发市场小葱 roundup」亦列王旗营 3.80，两源互证。同表大葱 5.00、香菜 4.50、蒜苗 5.00"))
+A(Q(DATA_DATE, "小葱", "小葱（沿用平均价统计口径）", "昆明景臻王旗营蔬菜批发市场", "云南", "销地批发价",
+    2.30, 2.30, 2.30, "景臻·王旗营蔬菜批发平均价格统计（序列沿用值）", "",
+    "⚠️ 沿用值而非本期新成交价。景臻·王旗营「批发平均价格统计表」与农业农村部「价格行情表」为两套独立采价口径，11-08 前者未发布，本报告按缺失值标注原则沿用 11-07 的 2.30 并显式标注；与 3.80 相差 1.50 元 / 65.2%，严禁平均或混用"))
+A(Q(DATA_DATE, "大葱", "大葱", "昆明景臻王旗营蔬菜批发市场", "云南", "销地批发价",
+    5.00, 5.00, 5.00, "农业农村部信息中心（11-08 单市场行情表，证券之星转载）", WQ_MOA_URL,
+    "★替代品。王旗营大葱 5.00，可用于校验两套小葱口径：农业农村部表整体高于景臻平均价统计表（11-07 大葱 4.50）"))
+A(Q(DATA_DATE, "香菜", "香菜", "昆明景臻王旗营蔬菜批发市场", "云南", "销地批发价",
+    4.50, 4.50, 4.50, "农业农村部信息中心（11-08 单市场行情表，证券之星转载）", WQ_MOA_URL,
+    "★相邻品类参照。11-07 景臻表香菜 4.00，说明农业农村部表单价系统性偏高约 0.5 元，支持「两套口径」而非「单日暴涨」的判断"))
+
+# —— 全国 43 家批发市场小葱 roundup（11-08，农业农村部信息中心，全量入库）
+SALES_1108 = [
+    ("北京新发地农副产品批发市场信息中心", "北京", 3.60),
+    ("北京朝阳区大洋路综合市场", "北京", 8.00),
+    ("邯郸市(馆陶)金凤禽蛋农贸批发市场", "河北", 1.50),
+    ("河北省怀来县京西果菜批发市场有限责任公司", "河北", 6.00),
+    ("邯郸市经开区南大堡蔬菜批发市场", "河北", 2.40),
+    ("山西省晋城市绿欣农产品贸易有限公司", "山西", 4.70),
+    ("晋城市绿盛农工商实业有限公司农副产品批发市场", "山西", 2.40),
+    ("内蒙古呼和浩特市东瓦窑农副产品批发市场有限责任公司", "内蒙古", 7.80),
+    ("辽宁鞍山宁远农产品批发市场", "辽宁", 2.50),
+    ("辽宁朝阳市果菜批发市场", "辽宁", 1.50),
+    ("江苏凌家塘市场发展有限公司", "江苏", 6.50),
+    ("江苏苏州南环桥农副产品批发市场", "江苏", 3.90),
+    ("江苏无锡朝阳农产品大市场", "江苏", 4.84),
+    ("义乌市市场发展集团有限公司农批管理分公司", "浙江", 4.60),
+    ("浙江嘉兴蔬菜批发交易市场", "浙江", 4.62),
+    ("杭州农副产品物流中心南庄兜农产品批发市场", "浙江", 6.00),
+    ("安徽合肥周谷堆农产品批发市场", "安徽", 6.70),
+    ("安徽六安市裕安区紫竹林农产品批发市场", "安徽", 6.00),
+    ("马鞍山市安民农副产品贸易有限公司", "安徽", 8.50),
+    ("江西乐平蔬菜农产品批发大市场", "江西", 4.60),
+    ("江西九江琵琶湖农产品物流有限公司", "江西", 7.20),
+    ("山东章丘刁镇蔬菜批发市场", "山东", 2.40),
+    ("河南万邦国际农产品物流股份有限公司", "河南", 4.40),
+    ("湖北鄂州市蟠龙农产品批发市场", "湖北", 10.00),
+    ("湖北省洪湖农贸市场", "湖北", 8.60),
+    ("武汉白沙洲农副产品大市场有限公司", "湖北", 6.00),
+    ("两湖绿谷物流股份有限公司", "湖北", 5.60),
+    ("广东汕头农副产品批发中心市场", "广东", 4.70),
+    ("海口市菜篮子江楠农产品批发市场有限公司", "海南", 6.60),
+    ("南充川北农产品交易有限公司", "四川", 4.40),
+    ("贵阳农产品物流园", "贵州", 6.00),
+    ("昆明景臻王旗营蔬菜批发市场", "云南", 3.80),
+    ("西藏领峰农副产品经营管理有限公司", "西藏", 11.00),
+    ("陕西咸阳新阳光农副产品有限公司", "陕西", 6.70),
+    ("庆阳市西峰西郊瓜果蔬菜批发有限责任公司", "甘肃", 5.00),
+    ("武威昊天农产品交易市场暨仓储物流中心", "甘肃", 3.70),
+    ("金昌市金川天然农产品发展有限责任公司", "甘肃", 7.50),
+    ("甘肃省定西市安定马铃薯综合交易中心", "甘肃", 10.50),
+    ("甘肃酒泉春光农产品市场有限责任公司", "甘肃", 7.80),
+    ("兰州国际高原夏菜副食品采购中心", "甘肃", 5.38),
+    ("宁夏海吉星国际农产品物流有限公司", "宁夏", 4.00),
+    ("新疆通汇市场有限公司", "新疆", 5.00),
+    ("新疆克拉玛依农副产品批发市场", "新疆", 4.00),
+]
+for _m, _p, _v in SALES_1108:
+    A(Q(DATA_DATE, "小葱", "小葱（全国 roundup 大宗价）", _m, _p, "销地批发价",
+        _v, _v, _v, "农业农村部信息中心·全国主要批发市场小葱价格行情（11-08）", ROUND43_URL,
+        "全国 43 家销地批发市场横截面全量入库；单值报价，low/high/mid 同值。与产地香葱不同口径，不可直接横比"))
+
+# —— 全国「葱」大类价格行情（11-08，14 家，口径未细分，单列参考）
+SCALLION_ROUNDUP = [
+    ("辽宁朝阳市果菜批发市场", "辽宁", 1.60), ("黑龙江省华博农产品市场有限公司", "黑龙江", 1.90),
+    ("江苏凌家塘市场发展有限公司", "江苏", 2.00), ("山东青岛黄河路农产品批发市场", "山东", 2.60),
+    ("山东喜地农产品市场管理有限公司", "山东", 3.00), ("青岛东庄头蔬菜批发市场有限公司", "山东", 1.60),
+    ("滕州市农副产品物流中心有限公司", "山东", 3.50), ("黄淮农产品股份有限公司", "河南", 2.00),
+    ("佛山市中富长顺农产品市场有限公司", "广东", 4.00), ("龙门实业(集团)有限公司西三街农副水产品市场", "重庆", 9.00),
+    ("西藏领峰农副产品经营管理有限公司", "西藏", 8.50), ("甘肃省定西市安定马铃薯综合交易中心", "甘肃", 3.40),
+    ("甘肃邦农农产品批发市场", "甘肃", 1.50), ("新疆绿珠九鼎农产品经营管理有限公司", "新疆", 3.00),
+]
+for _m, _p, _v in SCALLION_ROUNDUP:
+    A(Q(DATA_DATE, "葱", "葱（品类未细分）", _m, _p, "销地批发价",
+        _v, _v, _v, "农业农村部信息中心·全国主要批发市场葱价格行情（11-08）",
+        "https://futures.stockstar.com/IG2026110800002042.shtml",
+        "★口径未细分（葱，多为大葱），单列参考，不并入香葱/小葱均价"))
+
+# —— 全国大葱 roundup 云南相关样本（替代品，单列）
+A(Q(DATA_DATE, "大葱", "大葱", "云南通海金山蔬菜批发市场", "云南", "销地批发价",
+    9.00, 9.00, 9.00, "农业农村部信息中心·全国大葱价格行情（11-08）",
+    "https://wap.stockstar.com/detail/IG2026110800001819", "★替代品。云南通海金山大葱 9.00（全国 roundup 高位）"))
+A(Q(DATA_DATE, "大葱", "大葱", "师宗县鼎禾物业服务有限公司", "云南", "销地批发价",
+    5.00, 5.00, 5.00, "农业农村部信息中心·全国大葱价格行情（11-08）", "", "★替代品。曲靖师宗大葱 5.00"))
+A(Q(DATA_DATE, "大葱", "大葱", "北京新发地农副产品批发市场信息中心", "北京", "销地批发价",
+    1.70, 1.70, 1.70, "农业农村部信息中心·全国大葱价格行情（11-08）", "", "★替代品低位。北京新发地大葱 1.70"))
+
+# —— 单市场补充（11-08 实测，元/公斤统一换算）
+A(Q(DATA_DATE, "香葱", "香葱", "青岛市城阳蔬菜水产品批发市场", "山东", "销地批发价",
+    6.00, 8.00, 7.60, "青岛市城阳蔬菜水产品批发市场官网（11-08）", CNC_URL,
+    "官网 11-08 香葱 最高 8.00 / 最低 6.00 / 中间参考价 7.60；本仓最高档销区报价之一"))
+A(Q(DATA_DATE, "小葱", "小葱", "安吉农副产品综合批发市场", "浙江", "销地批发价",
+    7.00, 8.00, 7.50, "安吉农批市场今日菜价（11-08）",
+    "http://mp.weixin.qq.com/s?__biz=MzA3ODU5MDAzNQ==&mid=2247511958&idx=1&sn=1f63c0f9950a359c9656215e8d0d8a58",
+    "原始 3.5-4.0 元/斤 ×2 折算，与 11-07 持平"))
+A(Q(DATA_DATE, "小葱", "小葱（冀辽产区）", "膳食安服务平台（全国集散报价）", "河北", "销地批发价",
+    2.60, 5.00, 3.80, "膳食安服务平台（11-08）", "http://www.safemeal.cn/",
+    "原始 1.300-2.500 元/斤、中间价 1.900 ×2 折算 = 2.60-5.00 / 3.80 元/公斤；冀辽货源"))
+A(Q(DATA_DATE, "大葱", "大葱（批发加权）", "北京市 6 家批发市场加权", "北京", "销地批发价",
+    1.76, 1.76, 1.76, "北京价格网每日价格（11-08）", "https://www.beijingprice.cn/mrjg/",
+    "★替代品。原始 0.88 元/斤 ×2 折算，批发成交量 60.55 万公斤"))
+
+# —— 平台挂牌（11-08 检索快照，非成交价，口径分歧佐证）
+PLATFORM = [
+    ("小红葱（整车挂牌）", "云南红河州泸西县", "云南", 2.40, "一亩田（11-08 检索）", "https://www.ymt.com/supply/59212963", "原始 1.20 元/斤 ×2 折算；起批 10000 斤，挂牌非成交"),
+    ("泸西小香葱（整车挂牌）", "云南红河州泸西县", "云南", 2.10, "一亩田（11-08 检索）", YMT_URL, "原始 2.10 元/公斤直报；挂牌非成交"),
+    ("精品小香葱（挂牌）", "云南红河州泸西县", "云南", 3.00, "一亩田（11-08 检索）", YMT_URL, "原始 1.50 元/斤 ×2 折算；挂牌非成交"),
+    ("通海精品红葱/黑葱（挂牌）", "云南玉溪市通海县", "云南", 3.60, "一亩田（11-08 检索）", "https://m.ymt.com/supply/60971729", "原始精品货 1.80 元/斤 ×2 折算；另有中货 1.65、次货 1.25 元/斤，挂牌非成交"),
+    ("云南小香葱代办（元/吨折算）", "云南红河州泸西县", "云南", 3.00, "惠农网（11-08 检索）", "https://news.cnhnb.com/s/page-337785.html", "原始 3000 元/吨 ÷1000 折算 = 3.00 元/公斤；代办报价含服务费，不可用于定价"),
+    ("兴化香葱（元/吨折算）", "江苏兴化市", "江苏", 2.50, "惠农网（11-08 检索）", "", "原始 2500 元/吨 ÷1000 折算 = 2.50 元/公斤；加工带口径"),
+    ("脱水香葱（加工品）", "云南红河州泸西县", "云南", 40.00, "一亩田（11-08 检索）", "https://www.ymt.com/supplylist/li-1-0-7886", "★加工品 40 元/公斤，与鲜葱不同商品形态，单列不并入横截面"),
+]
+for _v, _m, _p, _v2, _src, _url, _note in PLATFORM:
+    A(Q(DATA_DATE, "香葱", _v, _m, _p, "产地收购价",
+        _v2, _v2, _v2, _src, _url, _note))
+
+# —— 泸西产地→销地实时成交存档（农业农村部重点农产品市场信息平台，11-03 抓取）
+A(Q("2026-11-03", "香葱", "细香葱", "江苏无锡市惠山区（泸西产地外销成交）", "江苏", "销地批发价",
+    7.69, 7.69, 7.69, "农业农村部重点农产品市场信息平台（ncpscxx.moa.gov.cn）", "",
+    "泸西县→无锡惠山实时成交 7.6923 元/kg，精品净葱含物流，对应产地集散价 3.45 形成产销价差约 2.2 倍"))
+A(Q("2026-11-03", "香葱", "细香葱", "江苏无锡市新吴区（泸西产地外销成交）", "江苏", "销地批发价",
+    6.67, 6.67, 6.67, "农业农村部重点农产品市场信息平台（ncpscxx.moa.gov.cn）", "",
+    "泸西县→无锡新吴实时成交 6.6667 元/kg，精品净葱含物流"))
+
+# —— 合并同仓其他自动化任务今日已采集的报价（glob 自动发现，去重）
+import glob
+import re
+_seen = {(q["date"], q["market"], q["variety"], round(q["mid"], 2))
+         for q in QUOTES if q["mid"] is not None}
+_self = "xiangcong_{0}.json".format(TODAY)
+for p in sorted(glob.glob(os.path.join(SRC_DIR, "*_{0}.json".format(TODAY)))):
+    if os.path.basename(p) == _self:
+        continue
+    try:
+        d = json.load(open(p, encoding="utf-8"))
+    except Exception:
+        continue
+    for q in d.get("quotes", []):
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(q.get("date", ""))):
+            continue
+        _m = q.get("mid")
+        if _m is None:
+            _l, _h = q.get("low"), q.get("high")
+            _m = (_l + _h) / 2 if (_l is not None and _h is not None) else None
+        if _m is None:
+            continue
+        key = (q.get("date"), q.get("market"), q.get("variety"), round(float(_m), 2))
+        if key in _seen:
+            continue
+        _seen.add(key)
+        QUOTES.append({
+            "date": q.get("date"), "item": q.get("item", "香葱"),
+            "variety": q.get("variety", ""), "market": q.get("market", ""),
+            "province": q.get("province", ""), "price_type": q.get("price_type", "产地收购价"),
+            "unit": "元/公斤", "low": q.get("low"), "high": q.get("high"), "mid": _m,
+            "source": q.get("source", ""), "source_url": q.get("source_url", ""),
+            "note": q.get("note", ""),
+        })
+QUOTES = [q for q in QUOTES if q["mid"] is not None]
+QUOTES.sort(key=lambda q: (q["date"], q["province"], -(q["mid"] or 0)))
+
+_sales_mids = [v[2] for v in SALES_1108]
+NATIONAL_MEAN = round(sum(_sales_mids) / len(_sales_mids), 2)
+SALES_N = len(_sales_mids)
+N43 = SALES_N
+MEAN43 = NATIONAL_MEAN
+WQ_NEW = 3.80
+BLK_CHG_TXT = "{0:+.2f}".format(BLK_CHG)
+BLK_CHG_PCT_TXT = "{0:+.1f}".format(BLK_CHG_PCT)
+SPREAD = round(RED_MID - BLK_MID, 2)
+YN_WARN = dict(DZ.get("province_stats", []) or []).get("云南", 0)
+DGE = dict(DZ.get("hazard_stats", []) or []).get("地质灾害", 0)
+PROV_COUNT = len({q["province"] for q in QUOTES if q["province"]})
+
+SUMMARY = (
+    "泸西产地红香葱 11-08 报 <b>3.3-3.6、均价 3.45</b>，与 11-07 完全持平，"
+    "自 11-01 起<b>连续八个报价日锁定 3.45</b>；<b>本期核心变化在黑香葱</b>："
+    "由 2.7-3.1/2.96 破位至 <b>2.5-2.9、均价 2.76（{blkchg} 元 / {blkchgpct}%）</b>，"
+    "通海黑葱同步下调，红黑价差由 0.49 扩至 <b>{spread}</b>；公众号措辞「其他的平稳」与报价表背离，以报价表为准。"
+    "<b>本期首次取得隔年精确同日 2025-11-08 与 2024-11-08 全套档案</b>："
+    "泸西红香葱 6.25 / 7.05、黑香葱 4.16 / 6.36、王旗营小葱 6.50（40 吨、综合均价 6.37、总吨位 3279）；"
+    "本期红 <b>{yoyred:+.1f}%</b>、黑 <b>{yoyblk:+.1f}%</b>、王旗营沿用口径 <b>{yoywq:+.1f}%</b>，"
+    "红香葱为近五年同期绝对最低且唯一跌破 4 元。"
+    "<b>本期最大数据事件为王旗营销地双口径分歧被证实</b>：农业农村部信息中心 11-08 单市场表与全国 43 家 roundup "
+    "<b>双源互证小葱 3.80</b>，而景臻·王旗营批发平均价格统计序列沿用值 2.30，两者差 1.50 元 / 65.2%，"
+    "属两套独立采价口径，<b>不平均、不混用、不解读为单日暴涨</b>；并行任务第015期量价核验补入 11-07 4.00/30吨 → 11-08 3.80/35吨（价跌 5%、量增 16.7%）的旁证。"
+    "11-08 地慧数农全省综合数值表未取得，按缺失值标注不插补；但兄弟任务另源「云南省级产地综合报价」登记红 3.45 / 黑 2.70，"
+    "官方行情总评明确「黑葱价格小幅回落」，可作黑葱下调已传导至省级口径的旁证；因与历史序列不同源，"
+    "<b>不并入收敛图、不改写 11-07 档案</b>。"
+    "本期取得<b>全国 {n43} 家批发市场小葱 roundup 全量</b>，均价 <b>{mean43:.2f}</b> 元/公斤"
+    "（区间 1.50 邯郸馆陶/辽宁朝阳 ~ 11.00 西藏领峰、中位数 5.00），为迄今最完整的销地横截面。"
+    "气象端：未来 3 天泸西累计降水 {w3p} mm、最高温均 {w3t}℃、距平 <b>{ano:+.1f}℃</b>，"
+    "<b>刷新本轮监测最大降温</b>；但降水高度集中在近端——15 天累计 <b>{rtot} mm</b>（上期 29.7 mm，再下修约 41%），"
+    "第 8-15 天仅 {whp} mm、{whr} 个雨日，<b>转干暖</b>，低温阴雨冲击偏短期，中期供给恢复概率上升。"
+    "灾害端：中央气象台 11-09 全网 <b>{dtot}</b> 条，<b>云南 {yn} 条跃居首位</b>且成片暴雨集中于滇西"
+    "（保山/临沧/普洱/楚雄），{rrcount}，北方暴雪红色消退转寒潮/强降温/道路结冰各 1 条，南菜北运支撑减弱。"
+    "六档中枢（精品净葱 / 集散价口径）：{path} 元/公斤；其中 3 个月档因目标日落在春节后首日、"
+    "节日脉冲窗口截止而回落，属<b>模型边界效应</b>，已在报告与落盘 note 中显式披露。"
+).format(nmean=NATIONAL_MEAN, sn=SALES_N, n43=N43, mean43=MEAN43,
+         blkchg=BLK_CHG_TXT, blkchgpct=BLK_CHG_PCT_TXT, spread=SPREAD,
+         yoyred=YOY_RED, yoyblk=YOY_BLK, yoywq=YOY_WQ,
+         w3p=w3.get("precip_total"), w3t=w3.get("tmax_avg"),
+         ano=(w3.get("tmax_avg") or 0) - (clim.get("tmax_mean") or 0),
+         rtot=RAIN_TOTAL, rdays=RAIN_DAYS, pdate=PEAK_DATE, pmm=PEAK_MM,
+         cdate=COLD_DATE, ctmin=COLD_TMIN,
+         whp=wh.get("precip_total"), whr=wh.get("rainy_days"),
+         dtot=DZ.get("total", 0), drain=RAIN_WARN,
+         dwind=dict(DZ.get("hazard_stats", [])).get("大风", 0),
+         dsnow=dict(DZ.get("hazard_stats", [])).get("暴雪", 0),
+         dprod=len(DZ_TOP), rrcount=RR_DESC, ddesc=DZ_DESC, yn=YN_WARN,
+         path=" → ".join(str(f["center"]) for f in FORECASTS))
+
+DOC = {
+    "task": "香葱行情",
+    "task_id": "376dffed-c5e4-4904-a77a-29193947212a",
+    "date": TODAY,
+    "generated_at": GEN,
+    "market_scope": "全国 / 云南 / 红河州泸西县（本期覆盖 {0} 省区）".format(PROV_COUNT),
+    "quotes": QUOTES,
+    "forecasts": FORECASTS,
+    "summary": SUMMARY,
+}
+json_path = os.path.join(SRC_DIR, "xiangcong_{0}.json".format(TODAY))
+with open(json_path, "w", encoding="utf-8") as f:
+    json.dump(DOC, f, ensure_ascii=False, indent=2)
+print("[OK] 落盘", json_path, "报价", len(QUOTES), "条 / 预测", len(FORECASTS), "条")
+
+# ============================================================ 5. 图表（内联 SVG）
+W, H = 900, 340
+
+
+def _path(pts, xmap, ymap):
+    return " ".join(
+        ("M" if i == 0 else "L") + "{0:.1f},{1:.1f}".format(xmap(p[0]), ymap(p[1]))
+        for i, p in enumerate(pts))
+
+
+def chart_decade():
+    """十年双线：通货毛葱 + 精品净葱。"""
+    ml, mr, mt, mb = 60, 30, 40, 46
+    vals = [s["price"] for s in series] + [s["premium"] for s in series]
+    lo, hi = min(vals), max(vals)
+    pad = (hi - lo) * 0.08 or 1
+    lo, hi = lo - pad, hi + pad
+    xmap = lambda i: ml + i * (W - ml - mr) / (len(series) - 1)
+    ymap = lambda v: mt + (hi - v) * (H - mt - mb) / (hi - lo)
+    g = ['<svg viewBox="0 0 {0} {1}" class="cv">'.format(W, H)]
+    g.append('<rect x="0" y="0" width="{0}" height="{1}" fill="#fbfcfe"/>'.format(W, H))
+    for k in range(5):
+        v = lo + (hi - lo) * k / 4
+        y = ymap(v)
+        g.append('<line x1="{0}" y1="{1:.1f}" x2="{2}" y2="{1:.1f}" stroke="#e6eaf0"/>'.format(ml, y, W - mr))
+        g.append('<text x="{0}" y="{1:.1f}" font-size="11" fill="#6b7280" text-anchor="end">{2:.1f}</text>'.format(ml - 8, y + 4, v))
+    for i, s in enumerate(series):
+        if s["month"] == 1 or i == 0:
+            x = xmap(i)
+            g.append('<line x1="{0:.1f}" y1="{1}" x2="{0:.1f}" y2="{2}" stroke="#eef1f5"/>'.format(x, mt, H - mb))
+            g.append('<text x="{0:.1f}" y="{1}" font-size="10.5" fill="#6b7280" text-anchor="middle">{2}</text>'.format(x, H - mb + 16, s["ym"][:4]))
+    g.append('<path d="{0}" fill="none" stroke="#c9ced8" stroke-width="1.6" stroke-dasharray="4 3"/>'.format(
+        _path([(i, s["premium"]) for i, s in enumerate(series)], xmap, ymap)))
+    g.append('<path d="{0}" fill="none" stroke="#2563eb" stroke-width="2.2"/>'.format(
+        _path([(i, s["price"]) for i, s in enumerate(series)], xmap, ymap)))
+    last = series[-1]
+    g.append('<circle cx="{0:.1f}" cy="{1:.1f}" r="4" fill="#2563eb"/>'.format(xmap(len(series) - 1), ymap(last["price"])))
+    g.append('<text x="{0:.1f}" y="{1:.1f}" font-size="11.5" fill="#2563eb" text-anchor="end">{2}</text>'.format(
+        xmap(len(series) - 1) - 8, ymap(last["price"]) - 8, last["price"]))
+    g.append('<text x="{0}" y="{1}" font-size="11.5" fill="#1f2937">通货毛葱（元/公斤）</text>'.format(ml + 6, mt - 14))
+    g.append('<text x="{0}" y="{1}" font-size="11.5" fill="#8a93a3">精品净葱 ×1.66</text>'.format(ml + 150, mt - 14))
+    g.append("</svg>")
+    return "".join(g)
+
+
+def chart_36m():
+    sub = series[-36:]
+    ml, mr, mt, mb = 56, 24, 34, 44
+    vals = [s["price"] for s in sub]
+    lo, hi = min(vals) * 0.9, max(vals) * 1.06
+    xmap = lambda i: ml + i * (W - ml - mr) / (len(sub) - 1)
+    ymap = lambda v: mt + (hi - v) * (H - mt - mb) / (hi - lo)
+    g = ['<svg viewBox="0 0 {0} {1}" class="cv">'.format(W, 260)]
+    g.append('<rect x="0" y="0" width="{0}" height="260" fill="#fbfcfe"/>'.format(W))
+    for k in range(4):
+        v = lo + (hi - lo) * k / 3
+        y = ymap(v)
+        g.append('<line x1="{0}" y1="{1:.1f}" x2="{2}" y2="{1:.1f}" stroke="#e6eaf0"/>'.format(ml, y, W - mr))
+        g.append('<text x="{0}" y="{1:.1f}" font-size="11" fill="#6b7280" text-anchor="end">{2:.1f}</text>'.format(ml - 8, y + 4, v))
+    area = [(xmap(0), ymap(lo))] + [(xmap(i), ymap(s["price"])) for i, s in enumerate(sub)] + [(xmap(len(sub) - 1), ymap(lo))]
+    g.append('<polygon points="{0}" fill="#2563eb" opacity="0.10"/>'.format(
+        " ".join("{0:.1f},{1:.1f}".format(a, b) for a, b in area)))
+    g.append('<path d="{0}" fill="none" stroke="#2563eb" stroke-width="2.2"/>'.format(
+        _path([(i, s["price"]) for i, s in enumerate(sub)], xmap, ymap)))
+    for i, s in enumerate(sub):
+        if s["month"] in (1, 4, 7, 10):
+            g.append('<text x="{0:.1f}" y="252" font-size="10" fill="#6b7280" text-anchor="middle">{1}</text>'.format(xmap(i), s["ym"][2:]))
+    g.append("</svg>")
+    return "".join(g)
+
+
+def chart_season():
+    ml, mr, mt, mb = 50, 20, 30, 40
+    months = list(range(1, 13))
+    hi = max(season.values()) * 1.12
+    bw = (W - ml - mr) / 12
+    g = ['<svg viewBox="0 0 {0} 250" class="cv">'.format(W)]
+    g.append('<rect width="{0}" height="250" fill="#fbfcfe"/>'.format(W))
+    base = 210
+    for m in months:
+        v = season[m]
+        h = v / hi * 160
+        x = ml + (m - 1) * bw + bw * 0.18
+        w = bw * 0.64
+        color = "#dc2626" if v >= 1.10 else ("#16a34a" if v <= 0.85 else "#2563eb")
+        g.append('<rect x="{0:.1f}" y="{1:.1f}" width="{2:.1f}" height="{3:.1f}" rx="3" fill="{4}" opacity="0.85"/>'.format(
+            x, base - h, w, h, color))
+        g.append('<text x="{0:.1f}" y="{1:.1f}" font-size="10.5" fill="#374151" text-anchor="middle">{2:.2f}</text>'.format(
+            x + w / 2, base - h - 5, v))
+        g.append('<text x="{0:.1f}" y="228" font-size="11" fill="#6b7280" text-anchor="middle">{1}月</text>'.format(x + w / 2, m))
+    g.append('<line x1="{0}" y1="{1}" x2="{2}" y2="{1}" stroke="#cbd5e1"/>'.format(ml, base, W - mr))
+    g.append('<line x1="{0}" y1="{1:.1f}" x2="{2}" y2="{1:.1f}" stroke="#f59e0b" stroke-dasharray="5 3"/>'.format(
+        ml, base - 160 / hi, W - mr))
+    g.append('<text x="{0}" y="{1:.1f}" font-size="10.5" fill="#b45309">基准 1.00</text>'.format(ml + 4, base - 160 / hi - 5))
+    g.append("</svg>")
+    return "".join(g)
+
+
+def chart_forecast():
+    ml, mr, mt, mb = 60, 26, 34, 44
+    xs = [(0, BASE_RED)] + [(r["days"], r["center"]) for r in FRED["rows"]]
+    lows = [(0, BASE_RED)] + [(r["days"], r["low"]) for r in FRED["rows"]]
+    highs = [(0, BASE_RED)] + [(r["days"], r["high"]) for r in FRED["rows"]]
+    hi = max(p[1] for p in highs) * 1.08
+    lo = min(p[1] for p in lows) * 0.92
+    xmap = lambda d: ml + d * (W - ml - mr) / 95
+    ymap = lambda v: mt + (hi - v) * (H - mt - mb) / (hi - lo)
+    g = ['<svg viewBox="0 0 {0} 300" class="cv">'.format(W)]
+    g.append('<rect width="{0}" height="300" fill="#fbfcfe"/>'.format(W))
+    for k in range(4):
+        v = lo + (hi - lo) * k / 3
+        y = ymap(v)
+        g.append('<line x1="{0}" y1="{1:.1f}" x2="{2}" y2="{1:.1f}" stroke="#e6eaf0"/>'.format(ml, y, W - mr))
+        g.append('<text x="{0}" y="{1:.1f}" font-size="11" fill="#6b7280" text-anchor="end">{2:.2f}</text>'.format(ml - 8, y + 4, v))
+    poly = [(xmap(d), ymap(v)) for d, v in highs] + [(xmap(d), ymap(v)) for d, v in reversed(lows)]
+    g.append('<polygon points="{0}" fill="#f59e0b" opacity="0.16"/>'.format(
+        " ".join("{0:.1f},{1:.1f}".format(a, b) for a, b in poly)))
+    g.append('<path d="{0}" fill="none" stroke="#ea580c" stroke-width="2.4"/>'.format(_path(xs, xmap, ymap)))
+    for d, v in xs:
+        g.append('<circle cx="{0:.1f}" cy="{1:.1f}" r="3.6" fill="#ea580c"/>'.format(xmap(d), ymap(v)))
+    for r in FRED["rows"]:
+        g.append('<text x="{0:.1f}" y="{1:.1f}" font-size="10.5" fill="#9a3412" text-anchor="middle">{2}</text>'.format(
+            xmap(r["days"]), ymap(r["high"]) - 9, r["center"]))
+    for r in FRED["rows"]:
+        g.append('<text x="{0:.1f}" y="288" font-size="10" fill="#6b7280" text-anchor="middle">{1}</text>'.format(
+            xmap(r["days"]), r["label"]))
+    g.append('<text x="{0:.1f}" y="{1:.1f}" font-size="10.5" fill="#1f2937" text-anchor="start">今</text>'.format(
+        xmap(0) - 2, ymap(BASE_RED) - 10))
+    g.append("</svg>")
+    return "".join(g)
+
+
+def chart_cross():
+    """全国横截面：按 price_type 分组均值（剔除大类葱与零售价）。"""
+    groups = {}
+    for q in QUOTES:
+        if q["item"] in ("大葱", "葱"):
+            continue
+        if q["price_type"] == "零售价":
+            continue
+        groups.setdefault(q["price_type"], []).append(q["mid"])
+    order = ["产地地头价", "产地收购价", "产地批发价", "销地批发价"]
+    items = [(k, groups[k]) for k in order if k in groups]
+    ml, mt = 150, 30
+    hi = max(sum(v) / len(v) for _, v in items) * 1.2
+    row_h = 46
+    g = ['<svg viewBox="0 0 {0} {1}" class="cv">'.format(W, mt + row_h * len(items) + 20)]
+    g.append('<rect width="{0}" height="{1}" fill="#fbfcfe"/>'.format(W, mt + row_h * len(items) + 20))
+    colors = {"产地地头价": "#0d9488", "产地收购价": "#2563eb", "产地批发价": "#7c3aed", "销地批发价": "#ea580c"}
+    for i, (k, v) in enumerate(items):
+        avg = sum(v) / len(v)
+        y = mt + i * row_h
+        bw = (W - ml - 120) * avg / hi
+        g.append('<text x="{0}" y="{1}" font-size="12.5" fill="#374151">{2}</text>'.format(20, y + 20, k))
+        g.append('<rect x="{0}" y="{1}" width="{2:.1f}" height="20" rx="4" fill="{3}" opacity="0.85"/>'.format(
+            ml, y + 4, bw, colors.get(k, "#2563eb")))
+        g.append('<text x="{0:.1f}" y="{1}" font-size="12" fill="#111827" font-weight="600">{2:.2f}</text>'.format(
+            ml + bw + 8, y + 19, avg))
+        g.append('<text x="{0:.1f}" y="{1}" font-size="10.5" fill="#9ca3af">n={2}　{3:.2f}~{4:.2f}</text>'.format(
+            ml + bw + 58, y + 19, len(v), min(v), max(v)))
+    g.append("</svg>")
+    return "".join(g)
+
+
+def chart_diverge():
+    """本期重点：全省综合价 vs 泸西分区价 —— 倒挂后收敛。"""
+    pts = [("10-26", 3.85, 4.70), ("10-29", 3.85, 3.80),
+           ("10-30", 3.85, 3.45), ("10-31", 3.45, 3.45), ("11-01", 3.45, 3.45),
+           ("11-05", 3.45, 3.45), ("11-06", 3.45, 3.45), ("11-07", 3.45, 3.45)]
+    ml, mr, mt, mb = 60, 120, 36, 44
+    hi, lo = 5.0, 3.0
+    hh = 200
+    xmap = lambda i: ml + i * (W - ml - mr) / (len(pts) - 1)
+    ymap = lambda v: mt + (hi - v) * (hh - mt - mb) / (hi - lo)
+    g = ['<svg viewBox="0 0 {0} {1}" class="cv">'.format(W, hh + 34)]
+    g.append('<rect width="{0}" height="{1}" fill="#fbfcfe"/>'.format(W, hh + 34))
+    for k in range(5):
+        v = hi - (hi - lo) * k / 4
+        y = ymap(v)
+        g.append('<line x1="{0}" y1="{1:.1f}" x2="{2}" y2="{1:.1f}" stroke="#e6eaf0"/>'.format(ml, y, W - mr))
+        g.append('<text x="{0}" y="{1:.1f}" font-size="11" fill="#6b7280" text-anchor="end">{2:.2f}</text>'.format(ml - 8, y + 4, v))
+    g.append('<path d="{0}" fill="none" stroke="#2563eb" stroke-width="2.4"/>'.format(
+        _path([(i, p[1]) for i, p in enumerate(pts)], xmap, ymap)))
+    g.append('<path d="{0}" fill="none" stroke="#dc2626" stroke-width="2.4" stroke-dasharray="6 3"/>'.format(
+        _path([(i, p[2]) for i, p in enumerate(pts)], xmap, ymap)))
+    for i, (d, lx, qs) in enumerate(pts):
+        x = xmap(i)
+        g.append('<circle cx="{0:.1f}" cy="{1:.1f}" r="4.2" fill="#2563eb"/>'.format(x, ymap(lx)))
+        g.append('<circle cx="{0:.1f}" cy="{1:.1f}" r="4.2" fill="#dc2626"/>'.format(x, ymap(qs)))
+        g.append('<text x="{0:.1f}" y="{1:.1f}" font-size="11.5" fill="#2563eb" text-anchor="middle">{2:.2f}</text>'.format(x, ymap(lx) + 18, lx))
+        g.append('<text x="{0:.1f}" y="{1:.1f}" font-size="11.5" fill="#dc2626" text-anchor="middle">{2:.2f}</text>'.format(x, ymap(qs) - 10, qs))
+        diff = qs - lx
+        col = "#16a34a" if diff < 0 else ("#dc2626" if diff > 0 else "#6b7280")
+        txt = "差 {0:+.2f}".format(diff) if abs(diff) > 0.001 else "收敛 0.00"
+        g.append('<text x="{0:.1f}" y="{1}" font-size="11" fill="{2}" font-weight="600" text-anchor="middle">{3}</text>'.format(
+            x, hh + 12, col, txt))
+        g.append('<text x="{0:.1f}" y="{1}" font-size="11" fill="#6b7280" text-anchor="middle">{2}</text>'.format(x, hh - mb + 60, d))
+    g.append('<text x="{0}" y="{1}" font-size="11.5" fill="#2563eb">━ 泸西分区价（模型基准）</text>'.format(ml + 6, mt - 14))
+    g.append('<text x="{0}" y="{1}" font-size="11.5" fill="#dc2626">┅ 云南全省综合交易价</text>'.format(ml + 190, mt - 14))
+    g.append("</svg>")
+    return "".join(g)
+
+
+def chart_wq():
+    """王旗营：价格 + 成交量（双线）。"""
+    pts = [("10-25", 3.5, 35), ("10-26", 3.5, 35), ("10-27", 3.0, 35),
+           ("10-28", 2.5, 35), ("10-29", 2.5, 25), ("10-30", 2.5, 30),
+           ("10-31", 2.2, 30), ("11-01", 2.5, 30),
+           ("11-04", 2.5, 30), ("11-05", 2.3, 25), ("11-06", 2.3, 30), ("11-07", 2.3, 30)]
+    ml, mr, mt, mb = 56, 56, 34, 46
+    hh = 220
+    xmap = lambda i: ml + i * (W - ml - mr) / (len(pts) - 1)
+    ymap = lambda v: mt + (4.0 - v) * (hh - mt - mb) / (4.0 - 2.0)
+    vmap = lambda v: mt + (40 - v) * (hh - mt - mb) / (40 - 15)
+    g = ['<svg viewBox="0 0 {0} {1}" class="cv">'.format(W, hh + 60)]
+    g.append('<rect width="{0}" height="{1}" fill="#fbfcfe"/>'.format(W, hh + 40))
+    for k in range(5):
+        v = 4.0 - (4.0 - 2.0) * k / 4
+        y = ymap(v)
+        g.append('<line x1="{0}" y1="{1:.1f}" x2="{2}" y2="{1:.1f}" stroke="#e6eaf0"/>'.format(ml, y, W - mr))
+        g.append('<text x="{0}" y="{1:.1f}" font-size="11" fill="#6b7280" text-anchor="end">{2:.1f}</text>'.format(ml - 8, y + 4, v))
+    for t in (15, 20, 25, 30, 35, 40):
+        y = vmap(t)
+        g.append('<text x="{0}" y="{1:.1f}" font-size="10.5" fill="#f59e0b" text-anchor="start">{2}t</text>'.format(W - mr + 8, y + 4, t))
+    g.append('<path d="{0}" fill="none" stroke="#2563eb" stroke-width="2.4"/>'.format(
+        _path([(i, p[1]) for i, p in enumerate(pts)], xmap, ymap)))
+    g.append('<path d="{0}" fill="none" stroke="#f59e0b" stroke-width="2.0" stroke-dasharray="5 3"/>'.format(
+        _path([(i, p[2]) for i, p in enumerate(pts)], xmap, vmap)))
+    for i, (d, pr, vol) in enumerate(pts):
+        x = xmap(i)
+        g.append('<circle cx="{0:.1f}" cy="{1:.1f}" r="3.8" fill="#2563eb"/>'.format(x, ymap(pr)))
+        g.append('<circle cx="{0:.1f}" cy="{1:.1f}" r="3.8" fill="#f59e0b"/>'.format(x, vmap(vol)))
+        g.append('<text x="{0:.1f}" y="{1:.1f}" font-size="11" fill="#2563eb" text-anchor="middle">{2:.1f}</text>'.format(x, ymap(pr) + 17, pr))
+        g.append('<text x="{0:.1f}" y="{1:.1f}" font-size="10.5" fill="#b45309" text-anchor="middle">{2}</text>'.format(x, vmap(vol) - 9, vol))
+        g.append('<text x="{0:.1f}" y="{1}" font-size="10.5" fill="#6b7280" text-anchor="middle">{2}</text>'.format(x, hh + 20, d))
+    g.append('<text x="{0}" y="{1}" font-size="11.5" fill="#2563eb">━ 小葱批发均价（元/公斤，左轴）</text>'.format(ml + 6, mt - 14))
+    g.append('<text x="{0}" y="{1}" font-size="11.5" fill="#b45309">┅ 前一日成交量（吨，右轴）</text>'.format(ml + 250, mt - 14))
+    g.append('<text x="{0}" y="{1}" font-size="10.5" fill="#9ca3af">注：成交量为各期发布表中标注的前一日交易量</text>'.format(ml + 6, hh + 36))
+    g.append('<text x="{0}" y="{1}" font-size="10.5" fill="#dc2626">11-08 农业农村部信息中心口径 3.80 元/公斤（另一采价口径，未并入本序列）</text>'.format(ml + 6, hh + 52))
+    g.append("</svg>")
+    return "".join(g)
+
+
+def chart_yoy():
+    """近五年同期（2024/2025/2026 均为 11-08 精确同日；2022/2023 为近似日或跨口径）泸西红香葱均价对比。"""
+    pts = [("2022-11-06*", 4.95), ("2023-11-08*", 4.25), ("2024-11-08", 7.05),
+           ("2025-11-08", 6.25), ("2026-11-08", 3.45)]
+    ml, mr, mt, mb = 60, 30, 34, 48
+    hh = 230
+    hi = max(v for _, v in pts) * 1.18
+    xmap = lambda i: ml + i * (W - ml - mr) / (len(pts) - 1)
+    ymap = lambda v: mt + (hi - v) * (hh - mt - mb) / hi
+    g = ['<svg viewBox="0 0 {0} {1}" class="cv">'.format(W, hh + 30)]
+    g.append('<rect width="{0}" height="{1}" fill="#fbfcfe"/>'.format(W, hh + 30))
+    for k in range(5):
+        v = hi * k / 4
+        y = ymap(v)
+        g.append('<line x1="{0}" y1="{1:.1f}" x2="{2}" y2="{1:.1f}" stroke="#e6eaf0"/>'.format(ml, y, W - mr))
+        g.append('<text x="{0}" y="{1:.1f}" font-size="11" fill="#6b7280" text-anchor="end">{2:.1f}</text>'.format(ml - 8, y + 4, v))
+    g.append('<path d="{0}" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="5 3"/>'.format(
+        _path([(i, v) for i, (_, v) in enumerate(pts)], xmap, ymap)))
+    for i, (d, v) in enumerate(pts):
+        x = xmap(i)
+        cur = d.startswith("2026")
+        c = "#dc2626" if cur else "#2563eb"
+        bw = 46
+        g.append('<rect x="{0:.1f}" y="{1:.1f}" width="{2}" height="{3:.1f}" rx="4" fill="{4}" opacity="0.85"/>'.format(
+            x - bw / 2, ymap(v), bw, hh - mb - ymap(v), c))
+        g.append('<text x="{0:.1f}" y="{1:.1f}" font-size="12" font-weight="600" fill="{2}" text-anchor="middle">{3:.2f}</text>'.format(
+            x, ymap(v) - 7, c, v))
+        g.append('<text x="{0:.1f}" y="{1}" font-size="10.5" fill="#6b7280" text-anchor="middle">{2}</text>'.format(x, hh + 14, d[:7]))
+        if not cur:
+            pct = (3.45 / v - 1) * 100
+            g.append('<text x="{0:.1f}" y="{1}" font-size="10" fill="#16a34a" text-anchor="middle">{2:.1f}%</text>'.format(
+                x, hh + 26, pct))
+    g.append('<text x="{0}" y="{1}" font-size="11.5" fill="#1f2937">11 月初同期泸西红香葱均价（元/公斤，* 为近似日）</text>'.format(ml + 6, mt - 14))
+    g.append('<text x="{0}" y="{1}" font-size="10.5" fill="#16a34a">柱下绿色百分比 = 2026 年相对该年的同比涨跌幅</text>'.format(ml + 250, mt - 14))
+    g.append("</svg>")
+    return "".join(g)
+
+
+def chart_luxi_spread():
+    """泸西多源口径分歧。"""
+    pts = [("一亩田·黑葱视频看货(8.00元/斤)", 16.00),
+           ("惠农网·代收代办挂牌(6.00元/斤)", 12.00),
+           ("惠农网·白铁杆整车(10000元/吨)", 10.00),
+           ("惠农网·精品小香葱(4.50元/斤)", 9.00),
+           ("惠农网·香葱常年供货(3.50元/斤)", 7.00),
+           ("惠农网·小葱产地直供(3.00元/斤)", 6.00),
+           ("惠农网·小香葱35cm(2.80元/斤)", 5.60),
+           ("惠农网·分葱粗管细管(2.75元/斤)", 5.50),
+           ("国资云农·地头大宗(10-28,已断更)", 5.00),
+           ("本报告推算·地头统货大宗", 4.60),
+           ("惠农网·加工厂/电商/精品货", 4.00),
+           ("泸西·集散均价 红香葱(模型基准)", 3.45),
+           ("云南全省综合交易价 红香葱", 3.45),
+           ("惠农网·地头价挂牌(1.70元/斤)", 3.40),
+           ("惠农网·红葱通货35-50cm", 3.00),
+           ("泸西·集散均价 黑香葱(11-08 破位)", 2.76),
+           ("云南全省综合交易价 黑香葱(11-07 档案)", 2.96),
+           ("一亩田·泸西平台行情 小葱(1.32元/斤)", 2.64),
+           ("昆明王旗营·小葱销地(11-08沿用口径)", 2.30),
+           ("昆明王旗营·小葱(农业农村部11-08口径)", 3.80),
+           ("一亩田·泸西平台行情 四季小葱", 2.28),
+           ("一亩田·小葱通货(2.10元/公斤)", 2.10),
+           ("惠农网·香葱通货/代发(1.00元/斤)", 2.00),
+           ("惠农网·葱苗/香葱通货(0.80元/斤)", 1.60),
+           ("一亩田·泸西45-55cm整车(元/公斤)", 1.50),
+           ("一亩田·四季小香葱整车(0.60元/斤)", 1.20)]
+    pts.sort(key=lambda x: -x[1])
+    ml, mt = 250, 34
+    hi = max(v for _, v in pts) * 1.25
+    row_h = 30
+    g = ['<svg viewBox="0 0 {0} {1}" class="cv">'.format(W, mt + row_h * len(pts) + 16)]
+    g.append('<rect width="{0}" height="{1}" fill="#fbfcfe"/>'.format(W, mt + row_h * len(pts) + 16))
+    for i, (name, v) in enumerate(pts):
+        y = mt + i * row_h
+        bw = (W - ml - 90) * v / hi
+        c = "#dc2626" if v >= 5.0 else ("#2563eb" if v >= 3.4 else "#16a34a")
+        g.append('<text x="18" y="{0}" font-size="11.5" fill="#374151">{1}</text>'.format(y + 15, name))
+        g.append('<rect x="{0}" y="{1}" width="{2:.1f}" height="16" rx="4" fill="{3}" opacity="0.85"/>'.format(ml, y + 2, bw, c))
+        g.append('<text x="{0:.1f}" y="{1}" font-size="11" fill="#111827" font-weight="600">{2:.2f}</text>'.format(ml + bw + 8, y + 15, v))
+    g.append("</svg>")
+    return "".join(g)
+
+
+def chart_weather():
+    days = core_daily[:16]
+    ml, mr, mt, mb = 52, 24, 26, 44
+    lo, hi = 0, max((d["precip"] or 0) for d in days) * 1.3 or 1
+    xmap = lambda i: ml + i * (W - ml - mr) / max(1, len(days) - 1)
+    ymap = lambda v: mt + (1 - v / hi) * (200 - mt - mb)
+    g = ['<svg viewBox="0 0 {0} 200" class="cv">'.format(W)]
+    g.append('<rect width="{0}" height="200" fill="#fbfcfe"/>'.format(W))
+    bw = (W - ml - mr) / len(days) * 0.6
+    for i, d in enumerate(days):
+        p = d["precip"] or 0
+        h = max(1.5, p / hi * (200 - mt - mb))
+        c = "#dc2626" if p >= 10 else ("#f59e0b" if p >= 1 else "#93c5fd")
+        g.append('<rect x="{0:.1f}" y="{1:.1f}" width="{2:.1f}" height="{3:.1f}" rx="2" fill="{4}"/>'.format(
+            xmap(i) - bw / 2, 200 - mb - h, bw, h, c))
+        if p >= 1:
+            g.append('<text x="{0:.1f}" y="{1:.1f}" font-size="9.5" fill="#6b7280" text-anchor="middle">{2:.1f}</text>'.format(
+                xmap(i), 200 - mb - h - 4, p))
+        if i % 2 == 0:
+            g.append('<text x="{0:.1f}" y="192" font-size="9.5" fill="#9ca3af" text-anchor="middle">{1}</text>'.format(
+                xmap(i), d["date"][5:]))
+    g.append('<line x1="{0}" y1="{1}" x2="{2}" y2="{1}" stroke="#cbd5e1"/>'.format(ml, 200 - mb, W - mr))
+    g.append('<text x="{0}" y="{1}" font-size="11.5" fill="#1f2937">泸西逐日降水量（mm）</text>'.format(ml + 4, mt - 8))
+    g.append("</svg>")
+    return "".join(g)
+
+
+# ============================================================ 6. HTML
+def td(v, cls=""):
+    return '<td class="{0}">{1}</td>'.format(cls, v)
+
+
+def wrow(w):
+    up = w["change_pct"] >= 0
+    return "<tr><td>{0}</td>{1}{2}{3}{4}{5}{6}</tr>".format(
+        w["label"],
+        td("{0:.2f}".format(w["start"])),
+        td("{0:.2f}".format(w["end"])),
+        td('<span class="{0}">{1:+.1f}%</span>'.format("up" if up else "down", w["change_pct"])),
+        td("{0:.2f}".format(w["avg"])),
+        td("{0:.2f}（{1}）".format(w["lo"], w["lo_ym"])),
+        td("{0:.2f}（{1}）".format(w["hi"], w["hi_ym"])),
+    )
+
+
+base_row = ("<tr class='base'><td>当前基准（{0} 实测）</td><td>—</td><td>{1:.2f}</td>"
+            "<td>—</td><td>{2:.2f}</td><td>—</td><td>—</td><td>—</td><td>基准</td></tr>").format(
+    DATA_DATE, BASE_RED, BASE_BLACK)
+_inv = {v: k for k, v in HORIZON_MAP}
+frows = []
+for f in FORECASTS:
+    r = RRED[_inv[f["horizon"]]]
+    b = RBLK[_inv[f["horizon"]]]
+    cls = "up" if r["delta_pct"] >= 3 else ("flat" if r["delta_pct"] > -3 else "down")
+    bcls = "up" if b["delta_pct"] >= 3 else ("flat" if b["delta_pct"] > -3 else "down")
+    frows.append("<tr><td>{0}</td><td>{1}</td><td><b>{2:.2f}</b></td><td>{3:.2f}~{4:.2f}</td>"
+                 "<td>{5:.2f}</td><td>{6:.2f}~{7:.2f}</td>"
+                 "<td><span class='{8}'>{9:+.1f}%</span></td>"
+                 "<td><span class='{10}'>{11:+.1f}%</span></td><td>{12}</td></tr>".format(
+                     f["horizon"], f["target_date"], r["center"], r["low"], r["high"],
+                     b["center"], b["low"], b["high"],
+                     cls, r["delta_pct"], bcls, b["delta_pct"], r["confidence"]))
+
+_centers = [r["center"] for r in FRED["rows"]]
+_mono = all(_centers[i] <= _centers[i + 1] for i in range(len(_centers) - 1))
+if _mono:
+    MONO_DESC = "六档呈<b>单调递增</b>"
+else:
+    _gap = _centers[-1] - _centers[-2]
+    _gpct = _gap / _centers[-2] * 100
+    if _gpct <= -5:
+        MONO_DESC = ("六档<b>前五档单调递增，第 6 档（3 个月）明显回落</b>"
+                     "（{0:+.2f} 元 / {1:+.1f}%）——系春节备货脉冲窗口在节日当日截止所致的"
+                     "<b>模型边界效应</b>，非市场趋势反转，详见 6.2 提示").format(_gap, _gpct)
+    else:
+        MONO_DESC = ("六档<b>前五档单调递增</b>，第 6 档（3 个月）与第 5 档（2 个月）<b>基本持平</b>"
+                     "（{0:+.2f} 元 / {1:+.1f}%）".format(_gap, _gpct))
+
+def _nf(v):
+    return "—" if v is None else "{:.2f}".format(v)
+
+
+qrows = []
+for q in QUOTES:
+    qrows.append("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td>"
+                 "<td class='num'>{5}</td><td class='num'>{6}</td><td class='num'><b>{7}</b></td>"
+                 "<td class='src'>{8}</td></tr>".format(
+                     q["date"], q["item"], q["variety"] or "—", q["market"], q["price_type"],
+                     _nf(q["low"]), _nf(q["high"]), _nf(q["mid"]), q["source"]))
+
+cultivars = "".join(
+    "<tr><td><b>{0}</b></td><td>{1}</td><td>{2}</td><td>{3}</td></tr>".format(
+        c["name"], c["trait"], c["area"], c["yield"]) for c in config.CULTIVARS)
+varieties = "".join(
+    "<tr><td><b>{0}</b></td><td>{1}</td><td>{2}</td></tr>".format(
+        v["name"], v["desc"], v["use"]) for v in config.VARIETIES)
+
+prov_rows = [
+    ("云南", "泸西（13.5 万亩基地 / 46.7 万亩次复种 / 年产 118 万吨 / 产值 35.5 亿元）", "全国最大，占云南 60%+，日外运 2000+ 吨"),
+    ("云南", "曲靖师宗、陆良、通海、宾川、弥渡、晋宁、呈贡、嵩明", "滇中滇东次级集群，分担泸西产能"),
+    ("广西", "南宁江南区江西镇（1.53 万亩）、西乡塘金陵镇三联村（4100 亩，红葱 97.6%）、柳州柳江/柳南、玉林", "华南主产，冬春补充"),
+    ("广东", "湛江徐闻、韶关翁源", "华南南部，红葱/水葱为主，周年供应"),
+    ("山东", "寿光、临沂郯城/兰陵、潍坊安丘/诸城、章丘、青岛", "北方设施+露地，加工带"),
+    ("江苏", "兴化（加工带）、盐城大丰、南通海安、徐州", "脱水葱加工全国中心"),
+    ("河南", "开封通许、焦作武陟/博爱、平顶山汝州、驻马店", "中原产区，夏秋上市"),
+    ("河北", "邯郸永年/丛台、唐山滦南、沧州", "华北产区，夏秋供应京津冀"),
+    ("贵州", "毕节威宁、鲁甸（昭通）", "西南高海拔，夏秋错峰"),
+    ("辽宁/吉林", "沈阳新民、锦州太和、长春公主岭", "东北夏秋供应"),
+    ("四川/湖北/安徽/福建/浙江", "成都金堂、武汉、宜昌当阳、阜阳临泉、漳州、金华", "分散产区，就地消化为主"),
+]
+prov_html = "".join("<tr><td><b>{0}</b></td><td>{1}</td><td>{2}</td></tr>".format(*r) for r in prov_rows)
+
+disaster_top = DZ
+prod_hits = DZ_TOP
+d_rows = "".join(
+    "<tr><td>{0}</td><td>{1}</td><td>{2}预警</td><td>{3}</td><td>{4}</td></tr>".format(
+        t["region"], t["hazard"], t["level"], t["impact"], t["issuetime"]) for t in prod_hits)
+if not d_rows:
+    d_rows = "<tr><td colspan='5'>当前无直接影响主产区的预警</td></tr>"
+
+CSS = """
+:root{--bd:#e5e9f0;--tx:#1f2937;--mu:#6b7280;--bg:#f6f8fb;--cd:#fff;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:26px;margin:0 0 6px}
+h2{font-size:19px;margin:34px 0 12px;padding-left:11px;border-left:4px solid #2563eb}
+h3{font-size:15px;margin:20px 0 9px;color:#374151}
+.sub{color:var(--mu);font-size:13px;margin-bottom:18px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0}
+.kpi{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:14px 15px}
+.kpi .l{font-size:12px;color:var(--mu)}
+.kpi .v{font-size:23px;font-weight:700;margin-top:3px}
+.kpi .d{font-size:11.5px;color:var(--mu);margin-top:3px}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:11px;padding:16px 18px;margin:14px 0}
+.cv{width:100%;height:auto;display:block}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--bd);padding:7px 8px;text-align:left;vertical-align:top}
+th{background:#f1f4f9;font-weight:600;color:#374151;white-space:nowrap}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.src{color:var(--mu);font-size:12px}
+tr.base{background:#fffbeb}
+.up{color:#dc2626;font-weight:600}.down{color:#16a34a;font-weight:600}.flat{color:#6b7280;font-weight:600}
+.note{background:#f0f7ff;border-left:3px solid #2563eb;padding:10px 13px;border-radius:0 7px 7px 0;font-size:13px;margin:12px 0}
+.warn{background:#fff7ed;border-left:3px solid #f59e0b;padding:10px 13px;border-radius:0 7px 7px 0;font-size:13px;margin:12px 0}
+.good{background:#f0fdf4;border-left:3px solid #16a34a;padding:10px 13px;border-radius:0 7px 7px 0;font-size:13px;margin:12px 0}
+ul{margin:8px 0 8px 20px;padding:0}
+li{margin:4px 0}
+.foot{color:var(--mu);font-size:12px;margin-top:30px;border-top:1px solid var(--bd);padding-top:14px}
+"""
+
+HTML = """<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>香葱行情分析 · {today}</title><style>{css}</style></head><body><div class="wrap">
+<h1>香葱行情分析 · {today}</h1>
+<div class="sub">生成时间 {gen}（北京时间） · 全国 / 云南 / 红河州泸西县 · 数据日期 {ddate}（当日行情次日发布） · 天气快照 {wxgen}</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="l">泸西模型基准（红香葱）</div><div class="v" style="color:#2563eb">{br:.2f}</div><div class="d">元/公斤 · 滇中产区集散价 · {ddate} 实测 · <b>持平（连续 8 日）</b></div></div>
+  <div class="kpi"><div class="l">泸西黑香葱</div><div class="v" style="color:#16a34a">{bb:.2f}</div><div class="d">元/公斤 · {ddate} 实测 · <b>{blkchg} / {blkchgpct}% 破位</b></div></div>
+  <div class="kpi"><div class="l">红黑价差</div><div class="v">{spread:.2f}</div><div class="d">元/公斤 · 上期 0.49 · <b>溢价重新走阔</b></div></div>
+  <div class="kpi"><div class="l">昆明王旗营小葱</div><div class="v">{wqnew:.2f}*</div><div class="d">元/公斤 · <b>*农业农村部口径</b> · 沿用序列 2.30</div></div>
+  <div class="kpi"><div class="l">全国销地样本均价</div><div class="v">{nmean:.2f}</div><div class="d">元/公斤 · 11-08 实测 · <b>{sn} 家市场全量</b></div></div>
+  <div class="kpi"><div class="l">同比（隔年精确同日）</div><div class="v" style="color:#16a34a">{yoyred:.1f}%</div><div class="d">2025-11-08 泸西 6.25 → 3.45</div></div>
+</div>
+
+<div class="note"><b>本期核心结论：</b>{summ}</div>
+
+<h2>一、历史长周期回顾（近 10 年）</h2>
+<div class="card">{c_decade}</div>
+<table><thead><tr><th>窗口</th><th>期初</th><th>期末</th><th>涨跌</th><th>均值</th><th>最低</th><th>最高</th></tr></thead>
+<tbody>{wrows}</tbody></table>
+<div class="note">口径：主序列为<b>通货毛葱</b>（元/公斤），精品净葱 = 主序列 × 1.66。
+10 年 CAGR <b>{cagr:.1f}%</b>，长周期中枢下移。<b>不可与第六章预测口径横向比较</b>：预测与「当前中枢」为精品净葱 / 集散价。
+本期补入 2023-11-08（全省综合地头毛菜）与 2024-11-08（泸西分区）两个精确同日锚点，
+但 2022 年及更早官方价格表普遍未列「小葱/香葱/红葱/黑葱」单品，<b>10 年窗口对香葱单品仍不完整</b>，
+长周期最高/最低/均值仅为模型重建序列，不得当作实测统计引用。</div>
+<h3>近 36 个月</h3><div class="card">{c_36}</div>
+<h3>季节指数（1.00 = 年度均值）</h3><div class="card">{c_season}</div>
+<div class="note">季节规律：春峰 4-5 月（1.25 / 1.16）→ 夏谷 7-8 月（0.68 / 0.72）→ 冬旺 11-1 月（1.09-1.14）。
+11 月因子 1.121、12 月 1.140，<b>季节性本身对四季度构成上行动力</b>；但 2026 年 11 月初已是近五年同期绝对最低（见 5.1），
+且本期第 8-15 天转干暖，<b>季节性上行未必能抵消同比低基数与结构性供给充裕</b>。</div>
+
+<h2>二、天气与灾害（{today} 鲜抓）</h2>
+<div class="card">{c_wx}</div>
+<table><thead><tr><th>窗口</th><th>最高温均</th><th>最低温均</th><th>累计降水</th><th>雨日</th><th>大风日</th><th>主导天气</th></tr></thead><tbody>
+<tr><td>未来 3 天</td><td>{w3t}</td><td>{w3t2}</td><td>{w3p} mm</td><td>{w3r}</td><td>{w3g}</td><td>{w3d}</td></tr>
+<tr><td>未来 1 周</td><td>{w7t}</td><td>{w7t2}</td><td>{w7p} mm</td><td>{w7r}</td><td>{w7g}</td><td>{w7d}</td></tr>
+<tr><td>第 8-15 天</td><td>{wht}</td><td>{wht2}</td><td>{whp} mm</td><td>{whr}</td><td>{whg}</td><td>{whd}</td></tr>
+</tbody></table>
+<div class="warn"><b>本期气象最重要变化：降温创监测最大，但降水冲击是「短脉冲」而非持续过程。</b>
+未来 3 天泸西累计降水 {w3p} mm、最高气温均 {w3t}℃、最低温均 {w3t2}℃、
+较近 30 日均值距平 <b>{ano:+.1f}℃</b>，<b>超过上期的 -9.5℃，刷新本轮监测以来最大降温</b>；
+11-09 单日最高仅 10.5℃ / 最低 6.5℃，11-10 最低 6.2℃，11-11 起缓慢回升。
+<b>但降水高度集中在近端</b>：15 天累计 <b>{rtot} mm</b>（上期 29.7 mm，<b>再下修约 41%</b>），
+其中前 7 天贡献 {w7p} mm，<b>第 8-15 天仅 {whp} mm、{whr} 个雨日</b>，最高温回升至 {wht}℃、主导天气转为「阴」与大风（{whg} 天）。
+降水峰值 <b>{pdate}（{pmm} mm）</b>，当日最高 {ptmax}℃ / 最低 {ptmin}℃；最冷日 <b>{cdate} 最低 {ctmin}℃</b>。
+主要较强降水日：{hdesc}。
+<b>结论：</b>低温霜冻 + 采收受阻 + 洗葱损耗 + 霜霉/灰霉病风险主要集中在未来 3-5 天，
+第 2 周起转干暖、光照恢复，<b>供给收缩窗口偏短，洪涝型断供概率进一步下降</b>，
+上行情景不宜线性外推；低温能否兑现为实际减产仍需未来 1-2 周田间反馈验证。</div>
+<div class="warn"><b>全国层面（中央气象台 {today} 生效预警）：</b>全网生效预警 <b>{dtot}</b> 条，
+其中<b>大风 {dwind} 条、大雾 {dfog} 条、暴雨 {drain} 条、地质灾害 {dge} 条、暴雪 {dsnow} 条</b>
+（上期为大风 55 / 暴雨 12 / 暴雪 12）。灾种结构：{hazard_desc}。涉及香葱主产区 <b>{dprod}</b> 条（{prod_desc}）。
+{dprod_note}</div>
+<div class="warn"><b>本期最大灾害结构变化：云南跃居预警第一大省，但雨带在滇西、不在泸西。</b>
+云南以 <b>{yn} 条</b>居全国首位（河北 21、贵州 16、湖南 10 次之），且 10 条主产区相关预警<b>全部为暴雨</b>，
+成片分布在<b>保山昌宁/隆阳、临沧双江/云县/凤庆/永德/沧源、普洱澜沧、楚雄大姚</b>等滇西滇西南，
+以及广西北海合浦；<b>{rrcount}</b>，泸西所在的滇东南红河州本轮完全不在雨带内，
+<b>对核心产区与外运主通道无直接冲击</b>。
+与此同时，<b>上期河北唐山/承德/秦皇岛与辽宁葫芦岛的暴雪红色预警成片本期全部消退</b>（暴雪 {dsnow} 条），
+转为寒潮 1 / 强降温 1 / 道路结冰 1 条，<b>北方产区退市带来的「南菜北运」新增需求支撑减弱</b>，
+这是本期唯一明确的方向性利空。泸西本县仍无独立生效预警，未来 3 天 {w3p} mm 降水与断崖式降温为主要本地扰动。</div>
+<h3>当前生效预警（涉及香葱主产区）</h3>
+<table><thead><tr><th>区域</th><th>灾种</th><th>级别</th><th>影响</th><th>发布时间</th></tr></thead><tbody>{drows}</tbody></table>
+<div class="note">全网生效预警合计 <b>{dtot}</b> 条，其中涉及主产区 <b>{dprod}</b> 条（取 production_area 全量，非 top 截断）。
+灾害数据由中央气象台 findAlarm 接口于本期运行开始时鲜抓，落盘至 <code>data/disaster_{today}.json</code>；
+天气由 Open-Meteo 15 天预报 + 近 30 日归档计算，落盘至 <code>data/weather_{today}.json</code>。</div>
+
+<h2>三、市面常见香葱种类</h2>
+<h3>3.1 流通端商品分类（决定报价口径）</h3>
+<table><thead><tr><th>分类</th><th>特征</th><th>主要用途</th></tr></thead><tbody>{varieties}</tbody></table>
+<h3>3.2 主要栽培品种</h3>
+<table><thead><tr><th>品种</th><th>特征</th><th>适种区域</th><th>产量</th></tr></thead><tbody>{cultivars}</tbody></table>
+<div class="note">本期红黑走势分化印证分类口径不可混用：红香葱持平 3.45、黑香葱破位 2.76，价差 {spread:.2f} 元/公斤。
+若把两者合并为「香葱均价」会掩盖本期最重要的结构性信号；白葱（钢葱/白铁杆）与大葱另有独立报价体系，仅作对比。</div>
+
+<h2>四、全国香葱种植省份</h2>
+<table><thead><tr><th>省/区域</th><th>主产县市</th><th>产业地位</th></tr></thead><tbody>{provs}</tbody></table>
+<div class="note">口径提示：全国小香葱种植面积第三方统计分歧较大（有 78.56 万亩与主产区加总两种量级），
+本报告以<b>主产区加总</b>口径呈现，仅用于判断区域供给权重，不建议作为绝对面积引用。
+<b>本期补充：</b>云南 {yn} 条预警虽多，但成片暴雨集中在保山、临沧、普洱、楚雄、大理、丽江等滇西地区，
+<b>并非表中所列泸西、通海、师宗、晋宁等滇中滇东香葱主产带</b>；四季度供给仍主要向云南、广西、广东等南方产区集中。</div>
+
+<h2>五、全国行情横截面（{ddate}）</h2>
+<div class="card">{c_cross}</div>
+<div class="good"><b>本期数据质量显著提升：首次取得农业农村部信息中心「全国 43 家批发市场小葱价格行情」全量 roundup。</b>
+{sn} 家市场均价 <b>{nmean:.2f}</b> 元/公斤，中位数 5.00，区间 <b>1.50</b>（邯郸馆陶金凤 / 辽宁朝阳）~ <b>11.00</b>（西藏领峰），
+覆盖 20 个以上省区。此前各期多为 8-16 家零散样本，均值受样本构成影响极大；<b>本期 43 家为同日同源全量横截面，
+可作为后续各期的稳定可比基准</b>。注意该表为「小葱」销地大宗价口径，与泸西产地香葱集散价（{br:.2f}）存在约 1.6 倍产销价差，
+不可直接横比；本期另单列 14 家「葱」大类与 3 家大葱替代品报价，均未并入该均值。</div>
+<h3>5.1 五年同期对比：本期集齐 2024 / 2025 / 2026 三个精确同日 11-08</h3>
+<div class="card">{c_yoy}</div>
+<div class="warn"><b>同比腰斩（隔年精确同日 2025-11-08）：</b>
+泸西分区红香葱 <b>6.25</b>（6.0-6.4）、黑香葱 <b>4.16</b>（4.1-4.6），通海红葱 6.0-6.4、黑葱 4.1-4.6；
+王旗营小葱 <b>6.50</b>、成交量 40 吨，市场综合平均价 6.37、总吨位 3279；通海金山大葱大宗 6.00。
+本期泸西 3.45 / 2.76、王旗营景臻沿用口径 2.30，红香葱同比 <b>{yoyred:.1f}%</b>、黑香葱 <b>{yoyblk:.1f}%</b>、王旗营 <b>{yoywq:+.1f}%</b>。
+<b>两年前精确同日 2024-11-08</b>（本期首次取得）：泸西红 7.05 / 黑 6.36、通海红 6.5-7.2 / 黑 6.4-6.9，
+本期分别 <b>-51.1% / -56.6%</b>；三年前 2023-11-08 全省综合地头毛菜红香葱 4-4.5（口径不同，仅作量级参照）。
+<b>红香葱为近五年同期绝对最低，且是唯一跌破 4 元的一年</b>；
+但需注意 2024/2025 同期均属近年高位，同比跌幅部分来自高基数，不宜简单等同于本年度供给恶化的全部幅度。</div>
+<h3>5.2 全省综合价与泸西分区价：本期数据缺口，不插补</h3>
+<div class="card">{c_div}</div>
+<div class="warn"><b>数据缺口（按「缺失值标注不插补」处理）：</b>本期未检索到 11-08 地慧数农「云南蔬菜综合报价」数值表，
+<b>不虚构 11-08 全省综合价</b>，收敛图与档案序列均止于 11-07（红 3.45 / 黑 2.96）。
+历史脉络不变：10-30 全省综合价首次跌破泸西分区价 0.40 元（倒挂先行信号）→ 10-31 泸西一步下调至 3.45 完成收敛 →
+11-01 至 11-07 三口径锁定 3.45 / 2.96。
+<b>本期的可验证事实是泸西与通海两个分区黑葱同步下调至 2.5-2.9</b>，
+全省综合口径是否跟随下调需下一期补齐；此前已确认「全省综合价对泸西分区价约 1 个报价日的领先性」，
+本期恰恰缺失这一先行指标，<b>构成模型基准的短期不确定性来源</b>。</div>
+<div class="note"><b>并行任务交叉旁证（不并入本序列）：</b>同仓「香葱行情监测 chat gpt」第015期于 11-08 另源登记
+「云南省级产地综合报价」红香葱 <b>3.45</b>、黑葱 <b>2.70</b>（来源：今日云南菜价公众号），
+并明确官方行情总评措辞为<b>「黑葱价格小幅回落」</b>；该值与泸西 / 通海分区黑葱由 2.96 下调至 2.76 方向一致，
+<b>提示黑葱下调可能已传导至省级口径</b>，缓解了「全省综合完全无观测」的部分不确定性。
+但该来源为省级产地综合报价，与本报告历史序列使用的地慧数农「云南蔬菜综合报价」<b>非同一采价表</b>，
+且同期另有「华磷肥料版」云南产区行情红 4.15 / 黑 2.85 / 白铁杆 2.80（疑精品或等级口径，整体偏高）。
+按口径铁律，上述旁证<b>仅登记、不并入收敛图、不改写 11-07 档案、不用于推算 11-08 全省综合值</b>；
+本期首要数据缺口依然成立，下一期仍须优先补齐地慧数农原表以验证约 1 个报价日的领先性。</div>
+<h3>5.3 本期最大数据事件：王旗营小葱双口径分歧被证实</h3>
+<div class="card">{c_wq}</div>
+<div class="warn"><b>两套官方采价口径并存，严禁平均或解读为暴涨：</b>
+① <b>农业农村部信息中心口径</b>——11-08「昆明景臻王旗营蔬菜批发市场价格行情」单市场表明确小葱 <b>3.80</b>，
+同日「全国 43 家批发市场小葱 roundup」亦列王旗营 3.80，<b>两源互证、数值无歧义</b>；
+② <b>景臻·王旗营批发平均价格统计表口径</b>——即本仓历史序列（2.30 / 2.50 / 3.50 等，昆明市农业农村局发布、带前一日成交量），
+11-08 该表未发布，按缺失值标注原则<b>沿用 11-07 的 2.30 并显式标注为沿用值</b>。
+两者相差 <b>1.50 元 / 65.2%</b>。交叉校验显示农业农村部表整体偏高：11-08 该表大葱 5.00、香菜 4.50，
+而 11-07 景臻表大葱 4.50、香菜 4.00，<b>系统性高约 0.5 元</b>，支持「两套独立采价口径」而非「单日价格暴涨」的判断。
+<b>上期 OCR 串列疑云由此澄清</b>：11-07 疑似读数 4.00 与同表香菜/红椒 4.00 重合，实为口径混淆而非小葱价格。
+本期起本仓将 3.80 作为「农业农村部口径」独立入库，2.30 序列保留但不与 3.80 混用、不并入同一均价计算。</div>
+<div class="note"><b>并行任务量价核验与一项待复核分歧：</b>同仓第015期从景臻王旗营 11-08 单表核出小葱
+<b>3.80 元/公斤 / 35 吨</b>，对照 11-07 的 <b>4.00 / 30 吨</b>，即<b>价跌 5.0%、量增 16.7%（价跌量增）</b>；
+同表综合平均价 4.44（上期 4.25，+4.5%）、总吨位 3362（上期 3151，+6.7%），<b>综合回升而小葱单品回落</b>，
+支持「单品结构性走弱」而非市场整体萎缩。该 3.80 与农业农村部 43 家 roundup 中王旗营条目逐项一致
+（大葱 5.00 / 香菜 4.50 / 韭菜 4.00 均一致），说明 3.80 本质上是<b>同一市场同一批次被两个渠道刊载</b>，
+本报告所称「农业农村部口径」应更精确地理解为「王旗营单表小葱价」。
+<b>需复核的分歧：</b>本报告上文据 11-07 同表香菜 / 红椒 4.00 重合，把 4.00 判为 OCR 串列或口径混淆；
+而并行任务以 T+1 滞后转载内嵌表（小葱 4 / 30 吨、大葱 4.5 / 50 吨）与 11-07 官方批次完全一致为由，
+判定 <b>4.00 为 11-07 景臻表真实读数</b>，回落原因倾向单市场等级 / 口径切换或短期到货扰动。
+两种解释并存，本期<b>不武断改写历史序列</b>，且任一解释下结论一致：
+4.00 → 3.80 不构成单日暴涨或暴跌，3.80 与 2.30 仍必须分列、不得平均；
+该项列入下一期核实清单，以原始表影像为准。</div>
+<h3>5.4 泸西多源口径分歧</h3>
+<div class="card">{c_spread}</div>
+<div class="note"><b>口径分层（本期按平台挂牌快照刷新）：</b>
+①<b>成交价层</b>——泸西红香葱集散均价 3.45（模型基准）、黑香葱 2.76、通海同区间、王旗营 3.80（农业农村部口径）/ 2.30（沿用）；
+②<b>推算层</b>——地头统货大宗约 4.60（国资云农源自 10/29 断更，按历史加成率 1.33 推算，已标注为估算值）；
+③<b>平台挂牌层</b>——本期 11-08 检索到一亩田/惠农网 2.10-3.60 元/公斤（整车 / 通货 / 精品，长期不刷新、非成交）；
+④<b>服务 / 加工层</b>——云南小香葱代办 3000 元/吨（折 3.00，含服务费）、脱水香葱 40 元/公斤（不同商品形态）。
+判断：<b>真实成交中枢落在 2.76（黑葱）～3.45（红葱）之间</b>，跨平台横比必须同口径同规格；
+本期新采的农业农村部 3.80 属销地口径，不应拿来倒推产地价。</div>
+<h3>5.5 全量报价明细（{n} 条）</h3>
+<table><thead><tr><th>日期</th><th>品名</th><th>规格</th><th>市场/产地</th><th>口径</th><th>低</th><th>高</th><th>中值</th><th>来源</th></tr></thead>
+<tbody>{qrows}</tbody></table>
+
+<h2>六、泸西专题与六档预测</h2>
+<h3>6.1 泸西产业底盘</h3>
+<table><thead><tr><th>指标</th><th>数值</th></tr></thead><tbody>
+<tr><td>种植基地</td><td>13.5 万亩</td></tr>
+<tr><td>复种面积</td><td>46.7 万亩次</td></tr>
+<tr><td>年产量</td><td>118 万吨</td></tr>
+<tr><td>年产值</td><td>35-36 亿元</td></tr>
+<tr><td>占云南比重</td><td>60% 以上</td></tr>
+<tr><td>日外运量</td><td>2000 吨以上</td></tr>
+<tr><td>带动就业</td><td>5 万人以上（3000+ 种植户）</td></tr>
+</tbody></table>
+<h3>6.2 六档价格预测（精品净葱 / 集散价口径）</h3>
+<div class="card">{c_fc}</div>
+<table><thead><tr><th>档位</th><th>目标日</th><th>红葱中枢</th><th>红葱情景区间</th><th>黑葱中枢</th><th>黑葱情景区间</th><th>红葱涨跌</th><th>黑葱涨跌</th><th>置信度</th></tr></thead>
+<tbody>{base}{frows}</tbody></table>
+<div class="note">模型：<b>季节因子 × 天气冲击（衰减）× 均值回归动量 × 节日脉冲</b>。
+本期基准<b>维持 {br:.2f}</b>（泸西分区 {ddate} 实测，红葱持平、黑葱下调至 {bb:.2f}），
+20 日实测均线 {ma:.2f}，均线高出基准 {gap:.1f}%，均值回归项为正向；
+叠加 11-12 月季节因子上行与未来 3 天断崖降温带来的短期供给收缩，{mono}：{path}。
+区间为情景区间，非统计置信区间。
+<b>口径铁律：</b>本章预测为精品净葱 / 集散价，第一章长周期主序列为通货毛葱，二者相差约 1.66 倍，禁止横向混用。</div>
+<div class="warn"><b>⚠️ 模型边界提示（本期新增，务必阅读）：第 6 档（3 个月）中枢显著低于第 5 档，属日历边界效应而非市场判断。</b>
+3 个月档目标日为 <b>2027-02-07</b>，恰为春节（2027-02-06）<b>后首日</b>；模型中「春节备货脉冲」在节日当日达到峰值后即归零，
+因此目标日仅后移一天就损失全部 +15% 节日加成，导致中枢从 2 个月档的 4.09 回落至 3.53。
+真实市场的节后回落应是渐进过程，<b>该 3.53 应理解为情景区间下沿，不宜作为 3 个月点估计</b>；
+真正的高点窗口在 1 月下旬至 2 月上旬节前备货当周，落在 2 个月与 3 个月档之间。
+第八章情景表以 A 档 3 个月中枢为基数等比缩放，故<b>同样继承该边界效应，B/C 档数值偏低</b>，请一并谨慎解读。
+该效应已在落盘 JSON 的 3 个月档 <code>note</code> 字段显式标注，后续版本拟为节日脉冲增加节后衰减尾。</div>
+
+<h2>七、风险提示</h2>
+<ul>
+<li><b>全省综合先行指标缺失（本期首要数据风险）：</b>11-08 地慧数农全省综合数值表未取得，
+已确认的「全省综合领先泸西约 1 个报价日」规律本期无法验证；而泸西/通海黑葱已下调，
+若全省口径同步或先行下调，模型基准 3.45 存在偏高风险。<b>下一期须优先补齐该源</b>。
+并行任务另源省级产地综合报价（红 3.45 / 黑 2.70、总评「黑葱小幅回落」）已提供方向性旁证，
+但因非同一采价表，<b>不足以替代该先行指标的验证</b>，风险等级维持不变。</li>
+<li><b>销地双口径不可混用：</b>王旗营 3.80（农业农村部）与 2.30（景臻沿用）差 65.2%，
+本报告已分列标注；任何把两者平均或直接计算「日涨跌」的做法都会产生虚假信号。</li>
+<li><b>剧烈降温与霜冻：</b>未来 3 天最高温均 {w3t}℃、距平 <b>{ano:+.1f}℃</b>（本轮监测最大），
+11-09 最高 10.5℃ / 最低 6.5℃，最冷日 {cdate} 最低 {ctmin}℃。
+低温抑制生长、抬升洗葱损耗与霜霉/灰霉病风险，但也可能延缓上市、短期收缩供给；<b>是否兑现为减产尚未验证</b>。</li>
+<li><b>降水集中近端、第 2 周转干暖：</b>15 天累计 {rtot} mm（上期 29.7 mm，再降约 41%），
+第 8-15 天仅 {whp} mm、{whr} 个雨日。<b>洪涝型断供概率进一步下降，供给恢复速度可能快于预期</b>，
+若低温亦不及预期，季节性上行将被供给充裕抵消。</li>
+<li><b>云南预警成片但不覆盖产区：</b>云南 {yn} 条居首、10 条主产区相关预警全为暴雨，
+但集中在滇西（保山/临沧/普洱/楚雄），{rrcount}，<b>对泸西与外运主通道无直接冲击</b>，不宜据条数外推减产。</li>
+<li><b>北方暴雪支撑消退：</b>上期河北/辽宁 7 条暴雪红色预警本期全部消退（暴雪 {dsnow} 条），
+仅剩寒潮/强降温/道路结冰各 1 条，<b>「南菜北运」新增需求支撑减弱</b>，是本期明确的方向性利空。</li>
+<li><b>报价黏性 / 一次性跳变风险：</b>泸西红香葱自 11-01 起连续八个报价日锁在 3.45，
+而黑香葱本期已破位下调；历史上该口径多次「长期不动、一次性跳变」（10-26 前连续三日 3.85 → 10-31 一步至 3.45）。
+<b>红葱补跌压力随锁定时间累积</b>，应继续以全省综合价与销地量能作为先行指标。</li>
+<li><b>同比高基数与结构性过剩：</b>红香葱同比 {yoyred:.1f}%，但 2024/2025 同期 7.05 / 6.25 均属近年高位；
+跌幅不宜全部归因于本年度供给恶化，然而泸西复种 46.7 万亩次面积高企，<b>供给过剩仍是结构性约束</b>。</li>
+<li><b>口径分歧：</b>泸西公开报价从平台挂牌 2.10 到加工品 40.00 元/公斤，跨口径横比严重失真；
+本期新采的农业农村部销地 3.80 亦不可倒推产地价。</li>
+<li><b>替代竞争：</b>大葱处明显低位（北京新发地 1.70、北京市加权 1.76、师宗 5.00、王旗营 5.00 元/公斤；
+云南通海金山 9.00 为高位例外），对香葱消费形成替代压制。</li>
+<li><b>数据源断更：</b>国资云农泸西地头大宗价自 10/29 起连续多期未发布（末值 10-28 的 5.00），
+地头统货大宗 4.60 为<b>推算值</b>，已标注，建议补充替代实地采集源。</li>
+</ul>
+
+<h3>7.1 行动建议与跟踪指标</h3>
+<table><thead><tr><th>建议</th><th>责任人</th><th>时限</th><th>验证指标</th></tr></thead><tbody>
+<tr><td>补齐 11-08/11-09 地慧数农全省综合数值表，验证黑葱下调是否已传导至全省口径</td><td>行情采集岗</td><td>下一期日报前</td><td>全省综合红/黑报价与泸西分区价差 ≤0.10 元</td></tr>
+<tr><td>固定采集农业农村部信息中心 43 家 roundup，作为全国销地可比基准</td><td>行情采集岗</td><td>即日起每日</td><td>样本数 ≥40 家、同日同源、均值可复算</td></tr>
+<tr><td>为模型节日脉冲增加节后衰减尾，消除 3 个月档日历悬崖</td><td>模型维护岗</td><td>下个版本迭代</td><td>相邻两期 3 个月中枢变动 ≤0.15 元，且不低于 2 个月档的 95%</td></tr>
+<tr><td>跟踪 11-09 至 11-13 低温后田间上市量，验证是否兑现减产</td><td>产区联络岗</td><td>未来 7 天</td><td>泸西日外运量、王旗营小葱成交量、黑葱是否继续下调</td></tr>
+</tbody></table>
+<div class="note">以上为决策支持，非交易建议；每条建议均绑定可复算指标与时限，概率与中枢均不构成价格承诺。</div>
+
+<h2>八、情景推演</h2>
+<table><thead><tr><th>情景</th><th>触发条件</th><th>3 个月中枢</th><th>概率</th></tr></thead><tbody>
+<tr><td><b>A 基准</b></td><td>泸西红葱维持 3.45，季节性上行 + 降温温和兑现，全省综合未出现先行下调，需求端不恶化</td><td>{a3:.2f} 元/公斤</td><td>45%</td></tr>
+<tr><td><b>B 上修</b></td><td>11-09 起低温超预期致明显减产、霜霉病扩散，或销地跟涨、节前备货提前放量；
+基准口径上修至地头统货大宗 4.60（较现基准 +33%）</td><td>{b3:.2f} 元/公斤</td><td>20%</td></tr>
+<tr><td><b>C 下修</b></td><td>黑葱破位后红葱补跌、全省综合先行下调、第 2 周转干暖使供给快速恢复、北方暴雪支撑消退，
+泸西二次下调至 3.00（较现基准 -13%）</td><td>{c3:.2f} 元/公斤</td><td>35%</td></tr>
+</tbody></table>
+<div class="note">情景中枢按<b>基准价替代法</b>推演：以 A 档 3 个月中枢 {a3:.2f} 为基数，
+按替代基准 / 现基准（{br:.2f}）等比缩放——B 档替代基准为地头统货大宗 4.60、C 档为再跌至 3.00。
+<b>概率较上期调整：A 由 50% 下调至 45%、B 维持 20%、C 由 30% 上调至 35%。</b>
+依据四项边际转弱：① 黑香葱破位 -6.8%，为八个报价日来首个真实向下信号，红葱补跌压力累积；
+② 15 天降水再下修约 41%，且第 8-15 天转干暖（{whp} mm / {whr} 雨日），供给收缩窗口偏短；
+③ 红河州与泸西本县零预警，云南成片暴雨在滇西、不覆盖核心产区；
+④ 北方暴雪红色预警全部消退，南菜北运支撑减弱。
+反向支撑为降温创本轮监测最大（{ano:+.1f}℃）与全国 {sn} 家销地均价 {nmean:.2f} 元/公斤仍显著高于产地，
+故 B 档维持、A 档下调幅度克制。
+<b>保留意见：</b>本期全省综合先行指标缺失、王旗营双口径并存、3 个月档存在节日边界效应，三项均降低结论置信度；
+情景中枢继承 6.2 所述边界效应而系统性偏低，宜作相对路径比较而非绝对点估计。
+此处概率仅反映<b>相对路径</b>分歧，不构成价格承诺。</div>
+
+<div class="foot">
+数据来源：中央气象台（nmc.cn）、Open-Meteo 预报与归档 API、农业农村部信息中心（含证券之星转载：全国 43 家小葱 / 14 家葱 / 大葱 roundup、王旗营单市场表）、
+农业农村部重点农产品市场信息平台、昆明市农业农村局 / 景臻·王旗营、云南蔬菜主产区每日菜价、
+云南蔬菜综合报价（地慧数农，本期数值表未取得）、云南每日菜价（2023 综合菜价）、中国报告大厅（2025 大葱报价分析）、
+昆明市呈贡龙城农产品经营股份公司、青岛城阳蔬菜水产品批发市场、安吉农副产品综合批发市场、
+膳食安服务平台、北京价格网、京西果菜批发市场、一亩田、惠农网、国资云农。<br>
+本报告由自动化任务 376dffed 生成，仅供经营参考，不构成交易建议。价格单位除特别标注外均为元/公斤；
+带 * 的数值为沿用口径、近似日档案或另一采价口径，已在对应条目注明。缺失值只标注不插补。
+</div>
+</div></body></html>"""
+
+
+
+a3 = FRED["rows"][5]["center"]
+b3 = a3 * 4.60 / BASE_RED
+c3 = a3 * 3.00 / BASE_RED
+_hz = dict(disaster_top.get("hazard_stats", []))
+HAZARD_DESC = "、".join("{0} {1}".format(k, v) for k, v in sorted(_hz.items(), key=lambda x: -x[1])[:7]) or "无"
+PROD_DESC = "、".join("{0} {1}{2}".format(t["region"], t["hazard"], t["level"])
+                     for t in prod_hits[:6]) or "无"
+if prod_hits:
+    DPROD_NOTE = ("主产区相关预警共 {n} 条且<b>全部为暴雨</b>，成片分布在滇西滇西南"
+                  "（保山/临沧/普洱/楚雄/大理/丽江）与广西北海，属云南 {yn} 条预警跃居全国首位的结构性变化；"
+                  "其中红河州 {rn} 条、泸西本县 {ln} 条，<b>核心产区与外运主通道本轮完全不在雨带内</b>。"
+                  "本期风险以未来 3 天断崖降温（距平 {ano:+.1f}℃）、{pdate} 降水（{pmm} mm）"
+                  "与北方暴雪消退后南菜北运支撑减弱三者叠加为主。").format(
+        n=len(prod_hits), yn=YN_WARN, rn=RR_COUNT, ln=LX_COUNT,
+        pdate=PEAK_DATE, pmm=PEAK_MM,
+        ano=(w3.get("tmax_avg") or 0) - (clim.get("tmax_mean") or 0))
+else:
+    DPROD_NOTE = ("本期无直接影响香葱主产区的生效预警，天气风险以断崖式降温与 {pdate} 本地降水（{pmm} mm）为主。").format(
+        pdate=PEAK_DATE, pmm=PEAK_MM)
+
+
+html = HTML.format(
+    css=CSS, today=TODAY, gen=GEN, ddate=DATA_DATE, summ=SUMMARY, wxgen=WX_GEN,
+    br=BASE_RED, bb=BASE_BLACK, ma=FRED["ma20"], gap=(FRED["ma20"] / BASE_RED - 1) * 100,
+    c_decade=chart_decade(), wrows="".join(wrow(windows[m]) for m in (12, 24, 36, 60, 120)),
+    cagr=windows[120]["cagr"], c_36=chart_36m(), c_season=chart_season(),
+    c_wx=chart_weather(),
+    w3t=w3.get("tmax_avg"), w3t2=w3.get("tmin_avg"), w3p=w3.get("precip_total"),
+    w3r=w3.get("rainy_days"), w3g=w3.get("gale_days"), w3d=w3.get("dominant"),
+    w7t=w7.get("tmax_avg"), w7t2=w7.get("tmin_avg"), w7p=w7.get("precip_total"),
+    w7r=w7.get("rainy_days"), w7g=w7.get("gale_days"), w7d=w7.get("dominant"),
+    wht=wh.get("tmax_avg"), wht2=wh.get("tmin_avg"), whp=wh.get("precip_total"),
+    whr=wh.get("rainy_days"), whg=wh.get("gale_days"), whd=wh.get("dominant"),
+    ano=(w3.get("tmax_avg") or 0) - (clim.get("tmax_mean") or 0),
+    drows=d_rows, dtot=disaster_top.get("total", 0), dprod=len(prod_hits),
+    dfog=_hz.get("大雾", 0), dwind=_hz.get("大风", 0), drain=_hz.get("暴雨", 0),
+    dice=_hz.get("道路结冰", 0) + _hz.get("道路冰雪", 0),
+    dsnow=_hz.get("暴雪", 0), dthu=_hz.get("雷电", 0), ddust=_hz.get("沙尘", 0),
+    varieties=varieties, cultivars=cultivars, provs=prov_html,
+    c_cross=chart_cross(), c_div=chart_diverge(), c_wq=chart_wq(), c_yoy=chart_yoy(),
+    c_spread=chart_luxi_spread(),
+    n=len(QUOTES), qrows="".join(qrows),
+    c_fc=chart_forecast(), base=base_row, frows="".join(frows), mono=MONO_DESC,
+    path=" → ".join(str(r["center"]) for r in FRED["rows"]),
+    nmean=NATIONAL_MEAN, sn=SALES_N,
+    yoyred=YOY_RED, yoyblk=YOY_BLK, yoywq=YOY_WQ,
+    rrcount=RR_DESC,
+    rtot=RAIN_TOTAL, rdays=RAIN_DAYS, pdate=PEAK_DATE, pmm=PEAK_MM,
+    ptmax=PEAK_TMAX, ptmin=PEAK_TMIN, cdate=COLD_DATE, ctmin=COLD_TMIN,
+    hdesc=HEAVY_DESC, hazard_desc=HAZARD_DESC, prod_desc=PROD_DESC, dprod_note=DPROD_NOTE,
+    a3=a3, b3=b3, c3=c3,
+    n43=N43, mean43=MEAN43, wqnew=WQ_NEW,
+    blkchg=BLK_CHG_TXT, blkchgpct=BLK_CHG_PCT_TXT, spread=SPREAD,
+    yn=YN_WARN, dge=DGE,
+)
+
+html_path = os.path.join(OUT_DIR, "香葱行情分析_{0}.html".format(TODAY))
+with open(html_path, "w", encoding="utf-8") as f:
+    f.write(html)
+print("[OK] 报告", html_path, len(html) // 1024, "KB")
+print("红葱中枢:", BASE_RED, "→", [r["center"] for r in FRED["rows"]])
+print("黑葱中枢:", BASE_BLACK, "→", [r["center"] for r in FBLK["rows"]])
+print("20日均线:", FRED["ma20"])
