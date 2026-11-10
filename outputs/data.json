@@ -1,28 +1,28 @@
 {
   "date": "2026-11-10",
-  "generated_at": "2026-11-10 09:58（北京时间）",
+  "generated_at": "2026-11-10 10:21（北京时间）",
   "price_source": "人工录入实测观测点（48 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
     "d3": {
-      "tmax_avg": 14.9,
-      "tmin_avg": 7.9,
-      "precip_total": 14.8,
+      "tmax_avg": 13.9,
+      "tmin_avg": 8.3,
+      "precip_total": 21.9,
       "rainy_days": 3,
       "heavy_rain_days": 0,
-      "gale_days": 2,
-      "wind_max": 18.9,
-      "dominant": "毛毛雨"
+      "gale_days": 1,
+      "wind_max": 17.0,
+      "dominant": "强毛毛雨"
     },
     "w1": {
-      "tmax_avg": 18.3,
-      "tmin_avg": 9.4,
-      "precip_total": 14.9,
+      "tmax_avg": 17.9,
+      "tmin_avg": 9.6,
+      "precip_total": 21.9,
       "rainy_days": 3,
       "heavy_rain_days": 0,
-      "gale_days": 5,
-      "wind_max": 23.3,
-      "dominant": "毛毛雨"
+      "gale_days": 4,
+      "wind_max": 23.8,
+      "dominant": "晴"
     },
     "h1": {
       "tmax_avg": 17.4,
@@ -35,74 +35,74 @@
       "dominant": "阴"
     },
     "m1": {
-      "tmax_avg": 17.8,
-      "tmin_avg": 9.7,
-      "precip_total": 17.8,
+      "tmax_avg": 17.6,
+      "tmin_avg": 9.8,
+      "precip_total": 24.8,
       "rainy_days": 5,
       "heavy_rain_days": 0,
-      "gale_days": 9,
-      "wind_max": 23.3,
+      "gale_days": 8,
+      "wind_max": 23.8,
       "dominant": "毛毛雨"
     }
   },
   "weather_daily": [
     {
       "date": "2026-11-10",
-      "tmax": 10.6,
-      "tmin": 5.4,
-      "precip": 5.3,
+      "tmax": 11.0,
+      "tmin": 5.3,
+      "precip": 6.0,
       "pop": 96,
       "wind": 13.6,
-      "code": 53,
-      "weather": "毛毛雨"
+      "code": 55,
+      "weather": "强毛毛雨"
     },
     {
       "date": "2026-11-11",
-      "tmax": 16.5,
-      "tmin": 6.7,
-      "precip": 3.1,
+      "tmax": 13.3,
+      "tmin": 8.7,
+      "precip": 7.1,
       "pop": 91,
-      "wind": 17.2,
+      "wind": 15.2,
       "code": 53,
       "weather": "毛毛雨"
     },
     {
       "date": "2026-11-12",
       "tmax": 17.5,
-      "tmin": 11.5,
-      "precip": 6.4,
+      "tmin": 10.9,
+      "precip": 8.8,
       "pop": 84,
-      "wind": 18.9,
+      "wind": 17.0,
       "code": 80,
       "weather": "阵雨"
     },
     {
       "date": "2026-11-13",
       "tmax": 19.5,
-      "tmin": 10.6,
-      "precip": 0.1,
+      "tmin": 10.8,
+      "precip": 0,
       "pop": 33,
-      "wind": 21.0,
-      "code": 51,
-      "weather": "毛毛雨"
+      "wind": 20.3,
+      "code": 45,
+      "weather": "雾"
     },
     {
       "date": "2026-11-14",
       "tmax": 21.1,
-      "tmin": 9.8,
+      "tmin": 9.7,
       "precip": 0,
       "pop": 0,
-      "wind": 15.4,
+      "wind": 14.8,
       "code": 0,
       "weather": "晴"
     },
     {
       "date": "2026-11-15",
       "tmax": 21.2,
-      "tmin": 10.9,
+      "tmin": 10.6,
       "precip": 0,
       "pop": 0,
-      "wind": 23.3,
+      "wind": 23.8,
       "code": 1,
       "weather": "晴间多云"
     },
@@ -212,23 +212,31 @@
     "hazard_stats": [
       [
         "道路结冰",
-        30
-      ],
-      [
-        "大雾",
-        29
+        35
       ],
       [
         "大风",
-        26
+        28
+      ],
+      [
+        "大雾",
+        17
       ],
       [
         "地质灾害",
-        6
+        7
       ],
       [
         "道路冰雪",
         4
+      ],
+      [
+        "暴雨",
+        3
+      ],
+      [
+        "霜冻",
+        2
       ],
       [
         "海上大风",
@@ -239,11 +247,7 @@
         1
       ],
       [
-        "暴雨",
-        1
-      ],
-      [
-        "霜冻",
+        "寒潮",
         1
       ]
     ],
@@ -275,6 +279,34 @@
         "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
         "is_production_area": true,
         "risk_score": 8
+      },
+      {
+        "region": "云南省临沧市镇康县",
+        "province": "云南",
+        "city": "省临沧",
+        "hazard": "暴雨",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 04:30",
+        "url": "http://www.nmc.cn/publish/alarm/53092441600000_20261110043221.html",
+        "weight": 4,
+        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "is_production_area": true,
+        "risk_score": 8
+      },
+      {
+        "region": "云南省临沧市临翔区",
+        "province": "云南",
+        "city": "省临沧",
+        "hazard": "暴雨",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/11/10 09:57",
+        "url": "http://www.nmc.cn/publish/alarm/53090241600000_20261110095924.html",
+        "weight": 4,
+        "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+        "is_production_area": true,
+        "risk_score": 4
       },
       {
         "region": "云南省丽江市古城区",
@@ -473,6 +505,20 @@
         "risk_score": 4
       },
       {
+        "region": "云南省昭通市镇雄县",
+        "province": "云南",
+        "city": "省昭通",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 09:57",
+        "url": "http://www.nmc.cn/publish/alarm/53062741600000_20261110095942.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
         "region": "云南省曲靖市会泽县",
         "province": "云南",
         "city": "省曲靖",
@@ -481,48 +527,6 @@
         "rank": 2,
         "issuetime": "2026/11/10 09:37",
         "url": "http://www.nmc.cn/publish/alarm/53032641600000_20261110093928.html",
-        "weight": 2,
-        "impact": "运输受阻",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
-        "region": "云南省曲靖市马龙区",
-        "province": "云南",
-        "city": "省曲靖",
-        "hazard": "道路结冰",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/11/10 07:25",
-        "url": "http://www.nmc.cn/publish/alarm/53030441600000_20261110072730.html",
-        "weight": 2,
-        "impact": "运输受阻",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
-        "region": "云南省楚雄彝族自治州元谋县",
-        "province": "云南",
-        "city": "省楚雄彝族自治州元谋",
-        "hazard": "道路结冰",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/11/10 06:41",
-        "url": "http://www.nmc.cn/publish/alarm/53232841600000_20261110064414.html",
-        "weight": 2,
-        "impact": "运输受阻",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
-        "region": "云南省楚雄彝族自治州双柏县",
-        "province": "云南",
-        "city": "省楚雄彝族自治州双柏",
-        "hazard": "道路结冰",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/11/10 06:48",
-        "url": "http://www.nmc.cn/publish/alarm/53232241600000_20261110065042.html",
         "weight": 2,
         "impact": "运输受阻",
         "is_production_area": true,
@@ -547,8 +551,8 @@
           "band_pct": 5.5,
           "confidence": "高",
           "reasons": [
-            "大风(≥8级)2天",
-            "气温较常年偏低9.1℃，生长放缓供给延后"
+            "大风(≥8级)1天",
+            "气温较常年偏低10.0℃，生长放缓供给延后"
           ]
         },
         {
@@ -563,8 +567,8 @@
           "band_pct": 6.5,
           "confidence": "较高",
           "reasons": [
-            "大风(≥8级)5天",
-            "气温较常年偏低5.7℃，生长放缓供给延后"
+            "大风(≥8级)4天",
+            "气温较常年偏低6.1℃，生长放缓供给延后"
           ]
         },
         {
@@ -579,8 +583,8 @@
           "band_pct": 8.5,
           "confidence": "中",
           "reasons": [
-            "大风(≥8级)8天",
-            "气温较常年偏低6.1℃，生长放缓供给延后"
+            "大风(≥8级)7天",
+            "气温较常年偏低6.3℃，生长放缓供给延后"
           ]
         },
         {
@@ -595,8 +599,8 @@
           "band_pct": 10.5,
           "confidence": "中低",
           "reasons": [
-            "大风(≥8级)9天",
-            "气温较常年偏低6.1℃，生长放缓供给延后",
+            "大风(≥8级)8天",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         },
@@ -612,8 +616,8 @@
           "band_pct": 13.5,
           "confidence": "低",
           "reasons": [
-            "大风(≥8级)9天",
-            "气温较常年偏低6.1℃，生长放缓供给延后",
+            "大风(≥8级)8天",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 28 天，备货需求抬升"
           ]
@@ -630,8 +634,8 @@
           "band_pct": 16.5,
           "confidence": "低（情景推演）",
           "reasons": [
-            "大风(≥8级)9天",
-            "气温较常年偏低6.1℃，生长放缓供给延后",
+            "大风(≥8级)8天",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         }
@@ -653,8 +657,8 @@
           "band_pct": 5.5,
           "confidence": "高",
           "reasons": [
-            "大风(≥8级)2天",
-            "气温较常年偏低9.1℃，生长放缓供给延后"
+            "大风(≥8级)1天",
+            "气温较常年偏低10.0℃，生长放缓供给延后"
           ]
         },
         {
@@ -669,8 +673,8 @@
           "band_pct": 6.5,
           "confidence": "较高",
           "reasons": [
-            "大风(≥8级)5天",
-            "气温较常年偏低5.7℃，生长放缓供给延后"
+            "大风(≥8级)4天",
+            "气温较常年偏低6.1℃，生长放缓供给延后"
           ]
         },
         {
@@ -685,8 +689,8 @@
           "band_pct": 8.5,
           "confidence": "中",
           "reasons": [
-            "大风(≥8级)8天",
-            "气温较常年偏低6.1℃，生长放缓供给延后"
+            "大风(≥8级)7天",
+            "气温较常年偏低6.3℃，生长放缓供给延后"
           ]
         },
         {
@@ -701,8 +705,8 @@
           "band_pct": 10.5,
           "confidence": "中低",
           "reasons": [
-            "大风(≥8级)9天",
-            "气温较常年偏低6.1℃，生长放缓供给延后",
+            "大风(≥8级)8天",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         },
@@ -718,8 +722,8 @@
           "band_pct": 13.5,
           "confidence": "低",
           "reasons": [
-            "大风(≥8级)9天",
-            "气温较常年偏低6.1℃，生长放缓供给延后",
+            "大风(≥8级)8天",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 28 天，备货需求抬升"
           ]
@@ -736,8 +740,8 @@
           "band_pct": 16.5,
           "confidence": "低（情景推演）",
           "reasons": [
-            "大风(≥8级)9天",
-            "气温较常年偏低6.1℃，生长放缓供给延后",
+            "大风(≥8级)8天",
+            "气温较常年偏低6.3℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         }
