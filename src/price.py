@@ -195,19 +195,27 @@ def weather_impact(daily: Sequence[dict], start: int, end: int,
 def festival_factor(target: date) -> tuple[float, str]:
     """节日备货带来的月内额外拉升（月尺度季节性之外的增量部分）。
 
-    越临近节日，渠道/加工端集中备货越强，产区收购价中枢上抬；节日一过即回落。
+    越临近节日，渠道/加工端集中备货越强，产区收购价中枢上抬；节日一过渐进回落。
+    节前按 ramp_days 线性爬升，节后按 tail_days 线性衰减（三角形脉冲），
+    两侧在节日当日连续取峰值，避免「节日次日脉冲归零」造成的日历悬崖。
     返回 (增量系数, 说明文案)，无节日窗口时返回 (0.0, '')。
     """
     best, label = 0.0, ""
     for f in FESTIVALS:
         fdate = datetime.strptime(f["date"], "%Y-%m-%d").date()
         delta = (fdate - target).days
-        if delta < 0 or delta > f["ramp_days"]:
+        ramp = float(f["ramp_days"])
+        tail = float(f.get("tail_days", 15))
+        if 0 <= delta <= ramp:
+            adj = f["peak_adj"] * (1.0 - delta / ramp)
+            lab = "{0}前 {1} 天，备货需求抬升".format(f["name"], delta)
+        elif -tail <= delta < 0:
+            adj = f["peak_adj"] * (1.0 + delta / tail)
+            lab = "{0}后 {1} 天，备货需求渐退".format(f["name"], -delta)
+        else:
             continue
-        adj = f["peak_adj"] * (1.0 - delta / float(f["ramp_days"]))
         if adj > best:
-            best = adj
-            label = "{0}前 {1} 天，备货需求抬升".format(f["name"], delta)
+            best, label = adj, lab
     return best, label
 
 

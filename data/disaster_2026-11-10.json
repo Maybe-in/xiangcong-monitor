@@ -1,0 +1,762 @@
+{
+  "generated_at": "2026-11-10 05:34:22",
+  "total": 100,
+  "top": [
+    {
+      "region": "四川省凉山彝族自治州会东县",
+      "province": "四川",
+      "city": "省凉山彝族自治州会东",
+      "hazard": "暴雪",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/10 02:53",
+      "url": "http://www.nmc.cn/publish/alarm/51342641600000_20261110025357.html",
+      "weight": 3,
+      "impact": "运输中断、设施受压",
+      "is_production_area": true,
+      "risk_score": 9
+    },
+    {
+      "region": "云南省临沧市耿马傣族佤族自治县",
+      "province": "云南",
+      "city": "省临沧",
+      "hazard": "暴雨",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 01:09",
+      "url": "http://www.nmc.cn/publish/alarm/53092641600000_20261110011142.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 8
+    },
+    {
+      "region": "云南省临沧市镇康县",
+      "province": "云南",
+      "city": "省临沧",
+      "hazard": "暴雨",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 04:30",
+      "url": "http://www.nmc.cn/publish/alarm/53092441600000_20261110043221.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 8
+    },
+    {
+      "region": "云南省德宏傣族景颇族自治州芒市",
+      "province": "云南",
+      "city": "省德宏傣族景颇族自治州芒",
+      "hazard": "暴雨",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 00:23",
+      "url": "http://www.nmc.cn/publish/alarm/53310341600000_20261110002536.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 8
+    },
+    {
+      "region": "云南省德宏傣族景颇族自治州陇川县",
+      "province": "云南",
+      "city": "省德宏傣族景颇族自治州陇川",
+      "hazard": "暴雨",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 23:59",
+      "url": "http://www.nmc.cn/publish/alarm/53312441600000_20261110000138.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 8
+    },
+    {
+      "region": "云南省临沧市凤庆县",
+      "province": "云南",
+      "city": "省临沧",
+      "hazard": "暴雨",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/10 00:02",
+      "url": "http://www.nmc.cn/publish/alarm/53092141600000_20261110000523.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省临沧市永德县",
+      "province": "云南",
+      "city": "省临沧",
+      "hazard": "暴雨",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/10 01:09",
+      "url": "http://www.nmc.cn/publish/alarm/53092341600000_20261110011136.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省临沧市沧源佤族自治县",
+      "province": "云南",
+      "city": "省临沧",
+      "hazard": "暴雨",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/10 03:17",
+      "url": "http://www.nmc.cn/publish/alarm/53092741600000_20261110031900.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省大理白族自治州剑川县",
+      "province": "云南",
+      "city": "省大理白族自治州剑川",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 23:32",
+      "url": "http://www.nmc.cn/publish/alarm/53293141600000_20261109233422.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省大理白族自治州弥渡县",
+      "province": "云南",
+      "city": "省大理白族自治州弥渡",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 23:24",
+      "url": "http://www.nmc.cn/publish/alarm/53292541600000_20261109232623.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省大理白族自治州洱源县",
+      "province": "云南",
+      "city": "省大理白族自治州洱源",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 23:36",
+      "url": "http://www.nmc.cn/publish/alarm/53293041600000_20261109233800.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省大理白族自治州祥云县",
+      "province": "云南",
+      "city": "省大理白族自治州祥云",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 00:15",
+      "url": "http://www.nmc.cn/publish/alarm/53292341600000_20261110001722.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省怒江傈僳族自治州泸水市",
+      "province": "云南",
+      "city": "省怒江傈僳族自治州泸水",
+      "hazard": "暴雨",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/10 03:28",
+      "url": "http://www.nmc.cn/publish/alarm/53330141600000_20261110033107.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省昆明市官渡区",
+      "province": "云南",
+      "city": "省昆明",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 02:56",
+      "url": "http://www.nmc.cn/publish/alarm/53011141600000_20261110025851.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省昭通市昭阳区",
+      "province": "云南",
+      "city": "省昭通",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 02:57",
+      "url": "http://www.nmc.cn/publish/alarm/53060241600000_20261110025932.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省昭通市永善县",
+      "province": "云南",
+      "city": "省昭通",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 22:27",
+      "url": "http://www.nmc.cn/publish/alarm/53062541600000_20261109223011.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省昭通市镇雄县",
+      "province": "云南",
+      "city": "省昭通",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 22:20",
+      "url": "http://www.nmc.cn/publish/alarm/53062741600000_20261109222314.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省普洱市景谷傣族彝族自治县",
+      "province": "云南",
+      "city": "省普洱",
+      "hazard": "暴雨",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/10 01:19",
+      "url": "http://www.nmc.cn/publish/alarm/53082441600000_20261110012122.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省普洱市澜沧拉祜族自治县",
+      "province": "云南",
+      "city": "省普洱",
+      "hazard": "暴雨",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/10 00:37",
+      "url": "http://www.nmc.cn/publish/alarm/53082841600000_20261110003922.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省曲靖市宣威市",
+      "province": "云南",
+      "city": "省曲靖",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 21:14",
+      "url": "http://www.nmc.cn/publish/alarm/53038141600000_20261109211754.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    }
+  ],
+  "production_area": [
+    {
+      "region": "四川省凉山彝族自治州会东县",
+      "province": "四川",
+      "city": "省凉山彝族自治州会东",
+      "hazard": "暴雪",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/10 02:53",
+      "url": "http://www.nmc.cn/publish/alarm/51342641600000_20261110025357.html",
+      "weight": 3,
+      "impact": "运输中断、设施受压",
+      "is_production_area": true,
+      "risk_score": 9
+    },
+    {
+      "region": "云南省临沧市耿马傣族佤族自治县",
+      "province": "云南",
+      "city": "省临沧",
+      "hazard": "暴雨",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 01:09",
+      "url": "http://www.nmc.cn/publish/alarm/53092641600000_20261110011142.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 8
+    },
+    {
+      "region": "云南省临沧市镇康县",
+      "province": "云南",
+      "city": "省临沧",
+      "hazard": "暴雨",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 04:30",
+      "url": "http://www.nmc.cn/publish/alarm/53092441600000_20261110043221.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 8
+    },
+    {
+      "region": "云南省德宏傣族景颇族自治州芒市",
+      "province": "云南",
+      "city": "省德宏傣族景颇族自治州芒",
+      "hazard": "暴雨",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 00:23",
+      "url": "http://www.nmc.cn/publish/alarm/53310341600000_20261110002536.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 8
+    },
+    {
+      "region": "云南省德宏傣族景颇族自治州陇川县",
+      "province": "云南",
+      "city": "省德宏傣族景颇族自治州陇川",
+      "hazard": "暴雨",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 23:59",
+      "url": "http://www.nmc.cn/publish/alarm/53312441600000_20261110000138.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 8
+    },
+    {
+      "region": "云南省临沧市凤庆县",
+      "province": "云南",
+      "city": "省临沧",
+      "hazard": "暴雨",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/10 00:02",
+      "url": "http://www.nmc.cn/publish/alarm/53092141600000_20261110000523.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省临沧市永德县",
+      "province": "云南",
+      "city": "省临沧",
+      "hazard": "暴雨",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/10 01:09",
+      "url": "http://www.nmc.cn/publish/alarm/53092341600000_20261110011136.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省临沧市沧源佤族自治县",
+      "province": "云南",
+      "city": "省临沧",
+      "hazard": "暴雨",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/10 03:17",
+      "url": "http://www.nmc.cn/publish/alarm/53092741600000_20261110031900.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省大理白族自治州剑川县",
+      "province": "云南",
+      "city": "省大理白族自治州剑川",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 23:32",
+      "url": "http://www.nmc.cn/publish/alarm/53293141600000_20261109233422.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "云南省大理白族自治州弥渡县",
+      "province": "云南",
+      "city": "省大理白族自治州弥渡",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 23:24",
+      "url": "http://www.nmc.cn/publish/alarm/53292541600000_20261109232623.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": true,
+      "risk_score": 4
+    }
+  ],
+  "sales_area": [
+    {
+      "region": "江西省赣州市上犹县",
+      "province": "江西",
+      "city": "省赣州",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 22:01",
+      "url": "http://www.nmc.cn/publish/alarm/36072441600000_20261109220332.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "辽宁省葫芦岛市绥中县",
+      "province": "辽宁",
+      "city": "省葫芦岛",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/09 21:45",
+      "url": "http://www.nmc.cn/publish/alarm/21142141600000_20261109214200.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "安徽省宣城市宁国市",
+      "province": "安徽",
+      "city": "省宣城",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/10 02:47",
+      "url": "http://www.nmc.cn/publish/alarm/34188141600000_20261110024710.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "贵州省毕节市大方县",
+      "province": "贵州",
+      "city": "省毕节",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/09 22:08",
+      "url": "http://www.nmc.cn/publish/alarm/52052141600000_20261109220816.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "贵州省毕节市赫章县",
+      "province": "贵州",
+      "city": "省毕节",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/09 21:52",
+      "url": "http://www.nmc.cn/publish/alarm/52052741600000_20261109215202.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "贵州省黔西南布依族苗族自治州普安县",
+      "province": "贵州",
+      "city": "省黔西南布依族苗族自治州普安",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/10 01:18",
+      "url": "http://www.nmc.cn/publish/alarm/52232341600000_20261110011852.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "贵州省黔西南布依族苗族自治州晴隆县",
+      "province": "贵州",
+      "city": "省黔西南布依族苗族自治州晴隆",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/09 22:58",
+      "url": "http://www.nmc.cn/publish/alarm/52232441600000_20261109225814.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "辽宁省盘锦市大洼区",
+      "province": "辽宁",
+      "city": "省盘锦",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/10 05:12",
+      "url": "http://www.nmc.cn/publish/alarm/21110441600000_20261110051000.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "安徽省合肥市庐江县",
+      "province": "安徽",
+      "city": "省合肥",
+      "hazard": "大雾",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 05:23",
+      "url": "http://www.nmc.cn/publish/alarm/34012441600000_20261110052300.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 2
+    },
+    {
+      "region": "安徽省合肥市肥东县",
+      "province": "安徽",
+      "city": "省合肥",
+      "hazard": "大雾",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/10 03:13",
+      "url": "http://www.nmc.cn/publish/alarm/34012241600000_20261110031344.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 2
+    }
+  ],
+  "hazard_stats": [
+    [
+      "道路结冰",
+      25
+    ],
+    [
+      "大风",
+      23
+    ],
+    [
+      "大雾",
+      19
+    ],
+    [
+      "暴雨",
+      10
+    ],
+    [
+      "寒潮",
+      8
+    ],
+    [
+      "地质灾害",
+      8
+    ],
+    [
+      "道路冰雪",
+      2
+    ],
+    [
+      "暴雪",
+      1
+    ],
+    [
+      "霜冻",
+      1
+    ],
+    [
+      "山洪风险",
+      1
+    ],
+    [
+      "低温凝冻",
+      1
+    ],
+    [
+      "强降温",
+      1
+    ]
+  ],
+  "province_stats": [
+    [
+      "云南",
+      47
+    ],
+    [
+      "贵州",
+      11
+    ],
+    [
+      "四川",
+      10
+    ],
+    [
+      "福建",
+      10
+    ],
+    [
+      "安徽",
+      7
+    ],
+    [
+      "辽宁",
+      4
+    ],
+    [
+      "江西",
+      3
+    ],
+    [
+      "浙江",
+      2
+    ],
+    [
+      "黑龙江",
+      2
+    ],
+    [
+      "广西",
+      1
+    ]
+  ],
+  "red_orange": [
+    {
+      "region": "四川省凉山彝族自治州会东县",
+      "province": "四川",
+      "city": "省凉山彝族自治州会东",
+      "hazard": "暴雪",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/10 02:53",
+      "url": "http://www.nmc.cn/publish/alarm/51342641600000_20261110025357.html",
+      "weight": 3,
+      "impact": "运输中断、设施受压",
+      "is_production_area": true,
+      "risk_score": 9
+    },
+    {
+      "region": "安徽省宣城市宁国市",
+      "province": "安徽",
+      "city": "省宣城",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/10 02:47",
+      "url": "http://www.nmc.cn/publish/alarm/34188141600000_20261110024710.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "贵州省毕节市大方县",
+      "province": "贵州",
+      "city": "省毕节",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/09 22:08",
+      "url": "http://www.nmc.cn/publish/alarm/52052141600000_20261109220816.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "贵州省毕节市赫章县",
+      "province": "贵州",
+      "city": "省毕节",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/09 21:52",
+      "url": "http://www.nmc.cn/publish/alarm/52052741600000_20261109215202.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "贵州省黔西南布依族苗族自治州普安县",
+      "province": "贵州",
+      "city": "省黔西南布依族苗族自治州普安",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/10 01:18",
+      "url": "http://www.nmc.cn/publish/alarm/52232341600000_20261110011852.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "贵州省黔西南布依族苗族自治州晴隆县",
+      "province": "贵州",
+      "city": "省黔西南布依族苗族自治州晴隆",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/09 22:58",
+      "url": "http://www.nmc.cn/publish/alarm/52232441600000_20261109225814.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "辽宁省盘锦市大洼区",
+      "province": "辽宁",
+      "city": "省盘锦",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/10 05:12",
+      "url": "http://www.nmc.cn/publish/alarm/21110441600000_20261110051000.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    }
+  ]
+}
