@@ -4,7 +4,7 @@
     "file": "香葱行情日报_2026-11-11.html",
     "red_current": 3.45,
     "black_current": 2.76,
-    "generated_at": "2026-11-11 08:12（北京时间）",
+    "generated_at": "2026-11-11 09:14（北京时间）",
     "task_prices": [
       {
         "name": "ChatGPT",
@@ -20,11 +20,11 @@
       },
       {
         "name": "grok",
-        "price": 3.38
+        "price": 3.4
       },
       {
         "name": "Gemini",
-        "price": 5.5
+        "price": 5.6
       }
     ]
   },
