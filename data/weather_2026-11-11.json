@@ -1,167 +1,167 @@
 {
-  "generated_at": "2026-11-11 05:50:43",
+  "generated_at": "2026-11-11 23:45:48",
   "core": {
     "name": "泸西县",
     "daily": [
       {
         "date": "2026-11-11",
-        "tmax": 14.8,
-        "tmin": 8.0,
-        "precip": 3.3,
-        "pop": 88,
-        "wind": 16.1,
+        "tmax": 14.1,
+        "tmin": 7.8,
+        "precip": 4.1,
+        "pop": 98,
+        "wind": 14.6,
         "code": 53,
         "weather": "毛毛雨"
       },
       {
         "date": "2026-11-12",
-        "tmax": 15.5,
-        "tmin": 11.2,
-        "precip": 2.3,
-        "pop": 90,
-        "wind": 18.2,
-        "code": 51,
+        "tmax": 18.4,
+        "tmin": 10.6,
+        "precip": 3.7,
+        "pop": 94,
+        "wind": 17.7,
+        "code": 53,
         "weather": "毛毛雨"
       },
       {
         "date": "2026-11-13",
-        "tmax": 19.2,
-        "tmin": 10.9,
-        "precip": 1.6,
-        "pop": 44,
+        "tmax": 19.0,
+        "tmin": 9.8,
+        "precip": 0.6,
+        "pop": 91,
         "wind": 18.8,
-        "code": 53,
+        "code": 51,
         "weather": "毛毛雨"
       },
       {
         "date": "2026-11-14",
         "tmax": 20.7,
-        "tmin": 9.0,
+        "tmin": 9.3,
         "precip": 0,
         "pop": 0,
-        "wind": 16.7,
+        "wind": 16.5,
         "code": 0,
         "weather": "晴"
       },
       {
         "date": "2026-11-15",
-        "tmax": 21.7,
-        "tmin": 10.4,
+        "tmax": 21.1,
+        "tmin": 10.3,
         "precip": 0,
-        "pop": 4,
-        "wind": 20.9,
+        "pop": 0,
+        "wind": 21.6,
         "code": 1,
         "weather": "晴间多云"
       },
       {
         "date": "2026-11-16",
-        "tmax": 21.3,
-        "tmin": 10.8,
+        "tmax": 22.1,
+        "tmin": 11.0,
         "precip": 0,
         "pop": 0,
-        "wind": 22.1,
+        "wind": 24.3,
         "code": 0,
         "weather": "晴"
       },
       {
         "date": "2026-11-17",
-        "tmax": 22.6,
-        "tmin": 10.8,
+        "tmax": 22.7,
+        "tmin": 10.5,
         "precip": 0,
-        "pop": 0,
-        "wind": 18.0,
+        "pop": 3,
+        "wind": 14.4,
         "code": 3,
         "weather": "阴"
       },
       {
         "date": "2026-11-18",
         "tmax": 15.4,
-        "tmin": 7.2,
-        "precip": 0,
-        "pop": 4,
-        "wind": 14.5,
-        "code": 3,
-        "weather": "阴"
+        "tmin": 8.2,
+        "precip": 0.6,
+        "pop": 12,
+        "wind": 11.7,
+        "code": 51,
+        "weather": "毛毛雨"
       },
       {
         "date": "2026-11-19",
-        "tmax": 20.6,
-        "tmin": 7.2,
+        "tmax": 18.6,
+        "tmin": 8.1,
         "precip": 0,
-        "pop": 6,
-        "wind": 15.4,
+        "pop": 12,
+        "wind": 20.9,
         "code": 3,
         "weather": "阴"
       },
       {
         "date": "2026-11-20",
-        "tmax": 20.2,
-        "tmin": 8.0,
+        "tmax": 18.4,
+        "tmin": 9.0,
         "precip": 0,
-        "pop": 12,
-        "wind": 23.1,
+        "pop": 13,
+        "wind": 21.5,
         "code": 3,
         "weather": "阴"
       },
       {
         "date": "2026-11-21",
-        "tmax": 21.3,
-        "tmin": 12.4,
-        "precip": 0.3,
-        "pop": 8,
-        "wind": 20.2,
+        "tmax": 15.6,
+        "tmin": 10.2,
+        "precip": 1.8,
+        "pop": 16,
+        "wind": 14.8,
         "code": 51,
         "weather": "毛毛雨"
       },
       {
         "date": "2026-11-22",
-        "tmax": 17.3,
-        "tmin": 10.0,
-        "precip": 0.9,
-        "pop": 6,
-        "wind": 8.6,
-        "code": 51,
-        "weather": "毛毛雨"
+        "tmax": 20.6,
+        "tmin": 10.2,
+        "precip": 0,
+        "pop": 24,
+        "wind": 20.2,
+        "code": 45,
+        "weather": "雾"
       },
       {
         "date": "2026-11-23",
-        "tmax": 18.8,
-        "tmin": 10.0,
-        "precip": 0.6,
-        "pop": 12,
-        "wind": 8.7,
-        "code": 51,
-        "weather": "毛毛雨"
+        "tmax": 23.1,
+        "tmin": 12.8,
+        "precip": 0,
+        "pop": 16,
+        "wind": 31.5,
+        "code": 45,
+        "weather": "雾"
       },
       {
         "date": "2026-11-24",
-        "tmax": 20.4,
-        "tmin": 12.1,
+        "tmax": 23.1,
+        "tmin": 11.5,
         "precip": 0,
-        "pop": 11,
-        "wind": 19.9,
+        "pop": 12,
+        "wind": 20.3,
         "code": 45,
         "weather": "雾"
       },
       {
         "date": "2026-11-25",
-        "tmax": 21.1,
-        "tmin": 8.0,
-        "precip": 0,
-        "pop": 24,
-        "wind": 7.5,
-        "code": 45,
-        "weather": "雾"
+        "tmax": 18.0,
+        "tmin": 9.1,
+        "precip": 3.6,
+        "pop": 10,
+        "wind": 6.0,
+        "code": 51,
+        "weather": "毛毛雨"
       },
       {
         "date": "2026-11-26",
-        "tmax": null,
-        "tmin": null,
-        "precip": 0,
-        "pop": 47,
-        "wind": 0,
-        "code": null,
-        "weather": "—"
+        "tmax": 14.2,
+        "tmin": 8.0,
+        "precip": 0.3,
+        "pop": 45,
+        "wind": 9.0,
+        "code": 51,
+        "weather": "毛毛雨"
       }
     ],
     "climatology": {
@@ -173,43 +173,43 @@
     },
     "windows": {
       "d3": {
-        "tmax_avg": 16.5,
-        "tmin_avg": 10.0,
-        "precip_total": 7.2,
-        "rainy_days": 3,
+        "tmax_avg": 17.2,
+        "tmin_avg": 9.4,
+        "precip_total": 8.4,
+        "rainy_days": 2,
         "heavy_rain_days": 0,
         "gale_days": 2,
         "wind_max": 18.8,
         "dominant": "毛毛雨"
       },
       "w1": {
-        "tmax_avg": 19.4,
-        "tmin_avg": 10.2,
-        "precip_total": 7.2,
-        "rainy_days": 3,
+        "tmax_avg": 19.7,
+        "tmin_avg": 9.9,
+        "precip_total": 8.4,
+        "rainy_days": 2,
         "heavy_rain_days": 0,
-        "gale_days": 5,
-        "wind_max": 22.1,
+        "gale_days": 4,
+        "wind_max": 24.3,
         "dominant": "毛毛雨"
       },
       "h1": {
-        "tmax_avg": 19.4,
-        "tmin_avg": 9.4,
-        "precip_total": 1.8,
-        "rainy_days": 0,
+        "tmax_avg": 19.1,
+        "tmin_avg": 9.9,
+        "precip_total": 6.0,
+        "rainy_days": 2,
         "heavy_rain_days": 0,
-        "gale_days": 3,
-        "wind_max": 23.1,
-        "dominant": "阴"
+        "gale_days": 5,
+        "wind_max": 31.5,
+        "dominant": "毛毛雨"
       },
       "m1": {
-        "tmax_avg": 19.4,
-        "tmin_avg": 9.7,
-        "precip_total": 9.0,
-        "rainy_days": 3,
+        "tmax_avg": 19.1,
+        "tmin_avg": 9.8,
+        "precip_total": 14.7,
+        "rainy_days": 4,
         "heavy_rain_days": 0,
-        "gale_days": 8,
-        "wind_max": 23.1,
+        "gale_days": 9,
+        "wind_max": 31.5,
         "dominant": "毛毛雨"
       }
     }
@@ -222,13 +222,13 @@
       "lon": 103.7615,
       "role": "核心产区",
       "w7": {
-        "tmax_avg": 19.4,
-        "tmin_avg": 10.2,
-        "precip_total": 7.2,
-        "rainy_days": 3,
+        "tmax_avg": 19.7,
+        "tmin_avg": 9.9,
+        "precip_total": 8.4,
+        "rainy_days": 2,
         "heavy_rain_days": 0,
-        "gale_days": 5,
-        "wind_max": 22.1,
+        "gale_days": 4,
+        "wind_max": 24.3,
         "dominant": "毛毛雨"
       }
     },
@@ -239,14 +239,14 @@
       "lon": 102.7183,
       "role": "产区/销区",
       "w7": {
-        "tmax_avg": 17.5,
-        "tmin_avg": 7.1,
-        "precip_total": 5.6,
+        "tmax_avg": 17.6,
+        "tmin_avg": 7.2,
+        "precip_total": 4.7,
         "rainy_days": 2,
         "heavy_rain_days": 0,
-        "gale_days": 0,
-        "wind_max": 15.5,
-        "dominant": "晴"
+        "gale_days": 1,
+        "wind_max": 17.5,
+        "dominant": "毛毛雨"
       }
     },
     {
@@ -256,13 +256,13 @@
       "lon": 103.995,
       "role": "产区",
       "w7": {
-        "tmax_avg": 19.0,
-        "tmin_avg": 8.3,
-        "precip_total": 6.5,
+        "tmax_avg": 19.5,
+        "tmin_avg": 8.1,
+        "precip_total": 7.3,
         "rainy_days": 2,
         "heavy_rain_days": 0,
-        "gale_days": 7,
-        "wind_max": 23.3,
+        "gale_days": 6,
+        "wind_max": 24.2,
         "dominant": "毛毛雨"
       }
     },
@@ -274,13 +274,13 @@
       "role": "产区",
       "w7": {
         "tmax_avg": 25.6,
-        "tmin_avg": 17.0,
-        "precip_total": 62.4,
-        "rainy_days": 4,
+        "tmin_avg": 17.1,
+        "precip_total": 59.0,
+        "rainy_days": 3,
         "heavy_rain_days": 1,
         "gale_days": 1,
-        "wind_max": 17.0,
-        "dominant": "毛毛雨"
+        "wind_max": 19.5,
+        "dominant": "阴"
       }
     },
     {
@@ -290,14 +290,14 @@
       "lon": 110.181,
       "role": "产区",
       "w7": {
-        "tmax_avg": 26.0,
-        "tmin_avg": 17.8,
-        "precip_total": 74.7,
+        "tmax_avg": 26.3,
+        "tmin_avg": 18.0,
+        "precip_total": 64.6,
         "rainy_days": 5,
         "heavy_rain_days": 1,
         "gale_days": 0,
-        "wind_max": 12.6,
-        "dominant": "毛毛雨"
+        "wind_max": 13.6,
+        "dominant": "阴"
       }
     },
     {
@@ -307,13 +307,13 @@
       "lon": 110.3572,
       "role": "产区",
       "w7": {
-        "tmax_avg": 27.3,
-        "tmin_avg": 20.9,
-        "precip_total": 79.9,
+        "tmax_avg": 28.1,
+        "tmin_avg": 21.0,
+        "precip_total": 31.1,
         "rainy_days": 4,
         "heavy_rain_days": 1,
-        "gale_days": 2,
-        "wind_max": 21.3,
+        "gale_days": 3,
+        "wind_max": 22.6,
         "dominant": "毛毛雨"
       }
     },
@@ -324,13 +324,13 @@
       "lon": 118.79,
       "role": "产区",
       "w7": {
-        "tmax_avg": 14.6,
-        "tmin_avg": 5.2,
-        "precip_total": 3.9,
+        "tmax_avg": 14.8,
+        "tmin_avg": 5.5,
+        "precip_total": 7.5,
         "rainy_days": 1,
         "heavy_rain_days": 0,
         "gale_days": 3,
-        "wind_max": 23.6,
+        "wind_max": 20.1,
         "dominant": "阴"
       }
     },
@@ -341,14 +341,14 @@
       "lon": 119.842,
       "role": "加工带",
       "w7": {
-        "tmax_avg": 17.2,
-        "tmin_avg": 9.7,
-        "precip_total": 20.3,
-        "rainy_days": 3,
+        "tmax_avg": 18.1,
+        "tmin_avg": 9.9,
+        "precip_total": 19.2,
+        "rainy_days": 4,
         "heavy_rain_days": 0,
-        "gale_days": 2,
-        "wind_max": 17.7,
-        "dominant": "阴"
+        "gale_days": 1,
+        "wind_max": 18.3,
+        "dominant": "毛毛雨"
       }
     },
     {
@@ -358,13 +358,13 @@
       "lon": 116.4074,
       "role": "销区",
       "w7": {
-        "tmax_avg": 10.3,
-        "tmin_avg": 2.5,
-        "precip_total": 1.2,
-        "rainy_days": 1,
+        "tmax_avg": 10.8,
+        "tmin_avg": 2.3,
+        "precip_total": 0.9,
+        "rainy_days": 0,
         "heavy_rain_days": 0,
         "gale_days": 0,
-        "wind_max": 15.2,
+        "wind_max": 16.2,
         "dominant": "晴"
       }
     },
@@ -375,13 +375,13 @@
       "lon": 121.4737,
       "role": "销区",
       "w7": {
-        "tmax_avg": 19.4,
-        "tmin_avg": 12.4,
-        "precip_total": 31.4,
-        "rainy_days": 3,
+        "tmax_avg": 19.5,
+        "tmin_avg": 12.3,
+        "precip_total": 40.5,
+        "rainy_days": 4,
         "heavy_rain_days": 2,
         "gale_days": 0,
-        "wind_max": 15.1,
+        "wind_max": 15.3,
         "dominant": "阴"
       }
     },
@@ -392,13 +392,13 @@
       "lon": 113.2644,
       "role": "销区",
       "w7": {
-        "tmax_avg": 26.5,
-        "tmin_avg": 18.0,
-        "precip_total": 83.6,
+        "tmax_avg": 26.9,
+        "tmin_avg": 18.3,
+        "precip_total": 83.8,
         "rainy_days": 4,
         "heavy_rain_days": 3,
         "gale_days": 0,
-        "wind_max": 13.9,
+        "wind_max": 16.4,
         "dominant": "阴"
       }
     },
@@ -409,13 +409,13 @@
       "lon": 120.1551,
       "role": "销区",
       "w7": {
-        "tmax_avg": 18.7,
-        "tmin_avg": 11.7,
-        "precip_total": 31.0,
+        "tmax_avg": 19.2,
+        "tmin_avg": 12.0,
+        "precip_total": 33.0,
         "rainy_days": 2,
-        "heavy_rain_days": 2,
+        "heavy_rain_days": 1,
         "gale_days": 1,
-        "wind_max": 19.0,
+        "wind_max": 18.7,
         "dominant": "毛毛雨"
       }
     },
@@ -426,14 +426,14 @@
       "lon": 114.3055,
       "role": "销区",
       "w7": {
-        "tmax_avg": 17.7,
-        "tmin_avg": 12.0,
-        "precip_total": 41.9,
-        "rainy_days": 5,
-        "heavy_rain_days": 2,
-        "gale_days": 0,
-        "wind_max": 16.6,
-        "dominant": "阴"
+        "tmax_avg": 17.4,
+        "tmin_avg": 11.7,
+        "precip_total": 37.1,
+        "rainy_days": 4,
+        "heavy_rain_days": 1,
+        "gale_days": 2,
+        "wind_max": 22.5,
+        "dominant": "毛毛雨"
       }
     },
     {
@@ -443,13 +443,13 @@
       "lon": 104.0668,
       "role": "销区",
       "w7": {
-        "tmax_avg": 16.8,
-        "tmin_avg": 9.7,
-        "precip_total": 9.1,
-        "rainy_days": 3,
+        "tmax_avg": 17.0,
+        "tmin_avg": 9.4,
+        "precip_total": 3.1,
+        "rainy_days": 2,
         "heavy_rain_days": 0,
         "gale_days": 0,
-        "wind_max": 12.1,
+        "wind_max": 9.9,
         "dominant": "阴"
       }
     },
@@ -460,13 +460,13 @@
       "lon": 108.9398,
       "role": "销区",
       "w7": {
-        "tmax_avg": 14.1,
+        "tmax_avg": 14.0,
         "tmin_avg": 5.3,
-        "precip_total": 19.8,
+        "precip_total": 32.4,
         "rainy_days": 3,
         "heavy_rain_days": 1,
         "gale_days": 0,
-        "wind_max": 15.3,
+        "wind_max": 16.4,
         "dominant": "阴"
       }
     }
