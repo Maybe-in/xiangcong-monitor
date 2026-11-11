@@ -1391,17 +1391,6 @@ def render_report(ctx: dict) -> str:
     本报告仅供产业参考，不构成采销、囤货或投资建议。</div>
 </div>
 
-<div class="card">
-  <h2 id="sec9-sources">九、各定时任务独立预测报告<span class="en">Task Reports</span></h2>
-  <p>其余香葱行情定时任务落盘到 <code>data/sources/</code> 的数据，
-     <strong>按任务分别生成独立预测报告</strong>——每个任务一份，含该任务自己的六档预测走势、
-     全部报价明细与核心结论，<strong>互不合并、全量不截断</strong>。下方为入口总览，点击进入各任务独立页。</p>
-  <p><a class="back" href="tasks/index.html">→ 各定时任务 · 独立预测报告（列表页）</a></p>
-  {sources_section}
-  <div class="legend">口径提示：各任务的报价口径（地头价 / 收购价 / 销地批发价 / 零售价）与单位可能不同，
-    跨任务横向比较前请先核对「口径」与「单位」两列；不同口径不可直接横比。</div>
-</div>
-
 <footer>
   数据来源：Open-Meteo 预报与历史归档 API、中央气象台（nmc.cn）预警接口、国家气候中心、
   农业农村部信息中心、昆明市农业农村局（王旗营批发市场）、新发地市场行情、
