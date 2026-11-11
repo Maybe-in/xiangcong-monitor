@@ -1,6 +1,6 @@
 {
   "date": "2026-11-11",
-  "generated_at": "2026-11-11 07:59（北京时间）",
+  "generated_at": "2026-11-11 08:12（北京时间）",
   "price_source": "人工录入实测观测点（51 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -220,7 +220,7 @@
       ],
       [
         "大风",
-        14
+        15
       ],
       [
         "地质灾害",
@@ -232,7 +232,7 @@
       ],
       [
         "霾",
-        2
+        1
       ],
       [
         "其它气象灾害",
@@ -337,20 +337,6 @@
         "rank": 2,
         "issuetime": "2026/11/10 21:51",
         "url": "http://www.nmc.cn/publish/alarm/53292341600000_20261110215401.html",
-        "weight": 2,
-        "impact": "运输受阻",
-        "is_production_area": true,
-        "risk_score": 4
-      },
-      {
-        "region": "云南省昆明市东川区",
-        "province": "云南",
-        "city": "省昆明",
-        "hazard": "道路结冰",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/11/10 20:06",
-        "url": "http://www.nmc.cn/publish/alarm/53011341600000_20261110200931.html",
         "weight": 2,
         "impact": "运输受阻",
         "is_production_area": true,
@@ -491,6 +477,20 @@
         "rank": 2,
         "issuetime": "2026/11/11 07:21",
         "url": "http://www.nmc.cn/publish/alarm/53342341600000_20261111072359.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省迪庆藏族自治州香格里拉市",
+        "province": "云南",
+        "city": "省迪庆藏族自治州香格里拉",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/11 07:55",
+        "url": "http://www.nmc.cn/publish/alarm/53340141600000_20261111075756.html",
         "weight": 2,
         "impact": "运输受阻",
         "is_production_area": true,
