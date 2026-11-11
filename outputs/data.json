@@ -1,6 +1,6 @@
 {
   "date": "2026-11-11",
-  "generated_at": "2026-11-11 05:49（北京时间）",
+  "generated_at": "2026-11-11 08:12（北京时间）",
   "price_source": "人工录入实测观测点（51 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -26,19 +26,19 @@
     },
     "h1": {
       "tmax_avg": 19.4,
-      "tmin_avg": 9.4,
-      "precip_total": 1.8,
-      "rainy_days": 0,
+      "tmin_avg": 9.3,
+      "precip_total": 3.0,
+      "rainy_days": 1,
       "heavy_rain_days": 0,
       "gale_days": 3,
       "wind_max": 23.1,
-      "dominant": "阴"
+      "dominant": "毛毛雨"
     },
     "m1": {
-      "tmax_avg": 19.4,
-      "tmin_avg": 9.7,
-      "precip_total": 9.0,
-      "rainy_days": 3,
+      "tmax_avg": 18.8,
+      "tmin_avg": 9.5,
+      "precip_total": 13.5,
+      "rainy_days": 5,
       "heavy_rain_days": 0,
       "gale_days": 8,
       "wind_max": 23.1,
@@ -51,7 +51,7 @@
       "tmax": 14.8,
       "tmin": 8.0,
       "precip": 3.3,
-      "pop": 88,
+      "pop": 99,
       "wind": 16.1,
       "code": 53,
       "weather": "毛毛雨"
@@ -61,7 +61,7 @@
       "tmax": 15.5,
       "tmin": 11.2,
       "precip": 2.3,
-      "pop": 90,
+      "pop": 75,
       "wind": 18.2,
       "code": 51,
       "weather": "毛毛雨"
@@ -71,7 +71,7 @@
       "tmax": 19.2,
       "tmin": 10.9,
       "precip": 1.6,
-      "pop": 44,
+      "pop": 50,
       "wind": 18.8,
       "code": 53,
       "weather": "毛毛雨"
@@ -91,7 +91,7 @@
       "tmax": 21.7,
       "tmin": 10.4,
       "precip": 0,
-      "pop": 4,
+      "pop": 0,
       "wind": 20.9,
       "code": 1,
       "weather": "晴间多云"
@@ -101,7 +101,7 @@
       "tmax": 21.3,
       "tmin": 10.8,
       "precip": 0,
-      "pop": 0,
+      "pop": 2,
       "wind": 22.1,
       "code": 0,
       "weather": "晴"
@@ -121,7 +121,7 @@
       "tmax": 15.4,
       "tmin": 7.2,
       "precip": 0,
-      "pop": 4,
+      "pop": 6,
       "wind": 14.5,
       "code": 3,
       "weather": "阴"
@@ -151,7 +151,7 @@
       "tmax": 21.3,
       "tmin": 12.4,
       "precip": 0.3,
-      "pop": 8,
+      "pop": 4,
       "wind": 20.2,
       "code": 51,
       "weather": "毛毛雨"
@@ -161,7 +161,7 @@
       "tmax": 17.3,
       "tmin": 10.0,
       "precip": 0.9,
-      "pop": 6,
+      "pop": 10,
       "wind": 8.6,
       "code": 51,
       "weather": "毛毛雨"
@@ -171,7 +171,7 @@
       "tmax": 18.8,
       "tmin": 10.0,
       "precip": 0.6,
-      "pop": 12,
+      "pop": 8,
       "wind": 8.7,
       "code": 51,
       "weather": "毛毛雨"
@@ -181,7 +181,7 @@
       "tmax": 20.4,
       "tmin": 12.1,
       "precip": 0,
-      "pop": 11,
+      "pop": 13,
       "wind": 19.9,
       "code": 45,
       "weather": "雾"
@@ -189,28 +189,342 @@
     {
       "date": "2026-11-25",
       "tmax": 21.1,
-      "tmin": 8.0,
-      "precip": 0,
-      "pop": 24,
-      "wind": 7.5,
-      "code": 45,
-      "weather": "雾"
+      "tmin": 7.7,
+      "precip": 1.2,
+      "pop": 22,
+      "wind": 11.7,
+      "code": 51,
+      "weather": "毛毛雨"
     },
     {
       "date": "2026-11-26",
-      "tmax": null,
-      "tmin": null,
-      "precip": 0,
+      "tmax": 9.1,
+      "tmin": 6.7,
+      "precip": 3.3,
       "pop": 47,
-      "wind": 0,
-      "code": null,
-      "weather": "—"
+      "wind": 10.8,
+      "code": 53,
+      "weather": "毛毛雨"
     }
   ],
   "disaster": {
-    "total": 0,
-    "hazard_stats": [],
-    "top": []
+    "total": 100,
+    "hazard_stats": [
+      [
+        "大雾",
+        45
+      ],
+      [
+        "道路结冰",
+        28
+      ],
+      [
+        "大风",
+        15
+      ],
+      [
+        "地质灾害",
+        7
+      ],
+      [
+        "寒潮",
+        2
+      ],
+      [
+        "霾",
+        1
+      ],
+      [
+        "其它气象灾害",
+        1
+      ],
+      [
+        "海上大风",
+        1
+      ]
+    ],
+    "top": [
+      {
+        "region": "云南省丽江市古城区",
+        "province": "云南",
+        "city": "省丽江",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 21:00",
+        "url": "http://www.nmc.cn/publish/alarm/53070241600000_20261110210323.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省丽江市永胜县",
+        "province": "云南",
+        "city": "省丽江",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 21:32",
+        "url": "http://www.nmc.cn/publish/alarm/53072241600000_20261110213513.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省丽江市玉龙纳西族自治县",
+        "province": "云南",
+        "city": "省丽江",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 20:43",
+        "url": "http://www.nmc.cn/publish/alarm/53072141600000_20261110204654.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省大理白族自治州剑川县",
+        "province": "云南",
+        "city": "省大理白族自治州剑川",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 22:04",
+        "url": "http://www.nmc.cn/publish/alarm/53293141600000_20261110220719.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省大理白族自治州弥渡县",
+        "province": "云南",
+        "city": "省大理白族自治州弥渡",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 23:20",
+        "url": "http://www.nmc.cn/publish/alarm/53292541600000_20261110232234.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省大理白族自治州洱源县",
+        "province": "云南",
+        "city": "省大理白族自治州洱源",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 22:39",
+        "url": "http://www.nmc.cn/publish/alarm/53293041600000_20261110224229.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省大理白族自治州祥云县",
+        "province": "云南",
+        "city": "省大理白族自治州祥云",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 21:51",
+        "url": "http://www.nmc.cn/publish/alarm/53292341600000_20261110215401.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省昭通市巧家县",
+        "province": "云南",
+        "city": "省昭通",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 23:14",
+        "url": "http://www.nmc.cn/publish/alarm/53062241600000_20261110231708.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省昭通市昭阳区",
+        "province": "云南",
+        "city": "省昭通",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/11 01:03",
+        "url": "http://www.nmc.cn/publish/alarm/53060241600000_20261111010641.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省昭通市镇雄县",
+        "province": "云南",
+        "city": "省昭通",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 21:40",
+        "url": "http://www.nmc.cn/publish/alarm/53062741600000_20261110214417.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省曲靖市会泽县",
+        "province": "云南",
+        "city": "省曲靖",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 21:05",
+        "url": "http://www.nmc.cn/publish/alarm/53032641600000_20261110210735.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省楚雄彝族自治州南华县",
+        "province": "云南",
+        "city": "省楚雄彝族自治州南华",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 22:15",
+        "url": "http://www.nmc.cn/publish/alarm/53232441600000_20261110221907.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省楚雄彝族自治州楚雄市",
+        "province": "云南",
+        "city": "省楚雄彝族自治州楚雄",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 20:55",
+        "url": "http://www.nmc.cn/publish/alarm/53230141600000_20261110205911.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省楚雄彝族自治州武定县",
+        "province": "云南",
+        "city": "省楚雄彝族自治州武定",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 23:01",
+        "url": "http://www.nmc.cn/publish/alarm/53232941600000_20261110230451.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省楚雄彝族自治州禄丰市",
+        "province": "云南",
+        "city": "省楚雄彝族自治州禄丰",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 22:55",
+        "url": "http://www.nmc.cn/publish/alarm/53230241600000_20261110225831.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省迪庆藏族自治州德钦县",
+        "province": "云南",
+        "city": "省迪庆藏族自治州德钦",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/11 07:00",
+        "url": "http://www.nmc.cn/publish/alarm/53342241600000_20261111070321.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省迪庆藏族自治州维西县",
+        "province": "云南",
+        "city": "省迪庆藏族自治州维西",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/11 07:21",
+        "url": "http://www.nmc.cn/publish/alarm/53342341600000_20261111072359.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "云南省迪庆藏族自治州香格里拉市",
+        "province": "云南",
+        "city": "省迪庆藏族自治州香格里拉",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/11 07:55",
+        "url": "http://www.nmc.cn/publish/alarm/53340141600000_20261111075756.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
+      {
+        "region": "内蒙古自治区锡林郭勒盟太仆寺旗",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/11 06:11",
+        "url": "http://www.nmc.cn/publish/alarm/15252741600000_20261111061125.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": false,
+        "risk_score": 4
+      },
+      {
+        "region": "四川省凉山彝族自治州会东县",
+        "province": "四川",
+        "city": "省凉山彝族自治州会东",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/10 23:10",
+        "url": "http://www.nmc.cn/publish/alarm/51342641600000_20261110231025.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      }
+    ]
   },
   "forecast": {
     "红香葱": {
@@ -278,7 +592,7 @@
           "confidence": "中低",
           "reasons": [
             "大风(≥8级)8天",
-            "气温较常年偏低4.1℃，生长放缓供给延后",
+            "气温较常年偏低4.8℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         },
@@ -295,7 +609,7 @@
           "confidence": "低",
           "reasons": [
             "大风(≥8级)8天",
-            "气温较常年偏低4.1℃，生长放缓供给延后",
+            "气温较常年偏低4.8℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 27 天，备货需求抬升"
           ]
@@ -313,7 +627,7 @@
           "confidence": "低（情景推演）",
           "reasons": [
             "大风(≥8级)8天",
-            "气温较常年偏低4.1℃，生长放缓供给延后",
+            "气温较常年偏低4.8℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）后 3 天，备货需求渐退"
           ]
@@ -385,7 +699,7 @@
           "confidence": "中低",
           "reasons": [
             "大风(≥8级)8天",
-            "气温较常年偏低4.1℃，生长放缓供给延后",
+            "气温较常年偏低4.8℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大"
           ]
         },
@@ -402,7 +716,7 @@
           "confidence": "低",
           "reasons": [
             "大风(≥8级)8天",
-            "气温较常年偏低4.1℃，生长放缓供给延后",
+            "气温较常年偏低4.8℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）前 27 天，备货需求抬升"
           ]
@@ -420,7 +734,7 @@
           "confidence": "低（情景推演）",
           "reasons": [
             "大风(≥8级)8天",
-            "气温较常年偏低4.1℃，生长放缓供给延后",
+            "气温较常年偏低4.8℃，生长放缓供给延后",
             "超出 16 天逐日预报范围，改用气候态推演：超强厄尔尼诺背景下冬季西南降水偏多、气温冷暖起伏大",
             "春节（丁未羊年）后 3 天，备货需求渐退"
           ]
@@ -32019,6 +32333,6 @@
     "task_count": 5,
     "window_days": 3,
     "files_scanned": 79,
-    "dir": "C:\\Users\\不言不语\\WorkBuddy\\automation-2026-10-24-02-17-56\\xiangcong-monitor\\data\\sources"
+    "dir": "/home/runner/work/xiangcong-monitor/xiangcong-monitor/data/sources"
   }
 }
