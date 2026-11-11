@@ -111,3 +111,9 @@
 - 全量校验：主报告「接口全部明细」表 42 个 `<tr>`；多源总览 `outputs/sources.html`（5 张任务卡片，标注 2222 条全量不截断）+ `outputs/tasks/` 六页合计 2268 个 `<tr>` = 2222 报价 + 36 预测 + 10 表头，与 `outputs/data.json` 的 `sources.total_quotes=2222` 对齐。
 - 提交日报 `c79f4af`（15 文件）；`git pull --no-rebase -X ours origin main` 与远端 CI（3f72f2f）ort 自动合并无冲突（仅 price_history.json 有远端变更），合并提交 `b110c9e`，`git push origin main` 首次即成功（3f72f2f..b110c9e），未走 rebase 分支。
 - 经验：仓库模板已重构（提交 `fba1c51` 移除主报告第九章及之后内容），多源行情汇总改为独立页 `outputs/sources.html` + `outputs/tasks/*.html`，主报告不再含「九、」章节；校验全量展示应查接口明细表与 tasks 页 `<tr>` 总数，不要在主报告中找第九章。本次 23:44 触发时 11-11 五个源文件均已落盘，无需二次等待重跑。
+
+## 2026-11-11 23:50（北京时间）执行
+- 同日第二次触发（距 23:45 那轮约 5 分钟）；流水线后台 25s 成功，生成 `outputs/香葱行情日报_2026-11-11.html`（106006 bytes）；天气 16 天/15 观测点、预警 100 条、新发地接口 41 条（最新 11-11 当日）；红香葱六档中枢 3.45→3.77/3.81/3.87/3.95/4.07/3.91；data/sources 5 任务/2222 报价/36 预测（84 文件），接口正常、数据源非空，数据与上一轮一致。
+- 全量校验（commit 前与 pull 合并后各一次，均通过）：接口明细表 42 个 `<tr>`；`outputs/sources.html` 五任务齐全且标注全量不截断；`outputs/tasks/` 六页合计 2268 个 `<tr>` = 2222 报价 + 36 预测 + 10 表头；`outputs/data.json` 的 `sources.total_quotes=2222` 对齐。
+- 提交日报 `2c6a2be`（7 文件，含上一轮写入的 memory.md）；远端 CI 已推进到 `a2fafa1`，`git pull --no-rebase -X ours origin main` ort 自动合并 8 个 outputs/data 文件无冲突，合并提交 `93c53b5`，`git push origin main` 首次即成功（a2fafa1..93c53b5 main），未走 rebase 分支；合并后复核全量展示未受损，工作区干净。
+- 经验：同一天短时间重复触发时数据基本一致，仍按完整流水线执行；pull 合并远端 CI 变更后应再复核一次 outputs 全量指标，确认 CI 版本未覆盖本地全量结果。
