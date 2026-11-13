@@ -1,6 +1,6 @@
 {
   "date": "2026-11-13",
-  "generated_at": "2026-11-13 10:26（北京时间）",
+  "generated_at": "2026-11-13 10:28（北京时间）",
   "price_source": "人工录入实测观测点（60 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -2711,7 +2711,7 @@
         "task": "香葱行情",
         "task_id": "376dffed-c5e4-4904-a77a-29193947212a",
         "date": "2026-11-13",
-        "generated_at": "2026-11-13 10:23",
+        "generated_at": "2026-11-13 10:26",
         "market_scope": "全国 / 云南 / 泸西县",
         "file": "xiangcong_2026-11-13.json",
         "quotes": [
