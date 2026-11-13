@@ -122,3 +122,9 @@
 - 流水线 `python run.py` 成功（约 1 分钟），生成 `outputs/香葱行情日报_2026-11-12.html`（106229 bytes）；天气 16 天/15 观测点、灾害预警 100 条、新发地接口 41 条（最新 2026-11-11，「接口全部明细」全量 42 个 `<tr>`，不截断）；红香葱六档中枢 3.45→3.72/3.80/3.85/3.94/4.06/3.86；data/sources 5 任务/5242 报价/36 预测（扫描 88 文件），`outputs/sources.html` 与 `outputs/tasks/` 按任务分组全量不截断。
 - 说明：00:17 触发时 11-12 源文件已落盘 chatgpt/gemini/grok/national 四个（xiangcong_2026-11-12 尚未落盘，沿用窗口内最新快照），沿用 11-06~11-11 惯例不二次等待重跑；data/sources 非空、接口未全部失败，日报按已落盘数据全量出稿。
 - 提交日报 `5a71b8d`（含 outputs/*.html、outputs/*.json、data/*.json、data/sources/*.json）；`git pull -X ours` 因分支分叉需显式 reconcile → 改 `git pull --no-rebase -X ours`，远端 CI 已推进至 `ac060b8`，ort 自动合并（data/price_history.json、outputs/archive.json、data.json、index.html、latest.html 等无冲突），合并提交 `5204ee2`，`git push origin main` 首次即成功（ac060b8..5204ee2），未走 rebase 分支；工作区干净。
+
+## 2026-11-13 10:25（北京时间）执行
+- 流水线后台 43s 成功，生成 `outputs/香葱行情日报_2026-11-13.html`（106582 bytes）；天气 16 天/15 观测点、灾害预警 100 条、新发地接口 41 条（最新 11-12，「接口全部明细」全量 42 个 `<tr>`）；红香葱六档中枢 3.45→3.67/3.77/3.83/3.91/4.04/3.79；data/sources 5 任务/3940 报价/36 预测（扫描 93 文件）。
+- 说明：10:24 触发时 11-13 源已落盘 chatgpt/gemini/national/xiangcong 四个（grok 11-13 未落盘，沿用窗口内最新快照），沿用 11-06~11-12 惯例不二次等待重跑；data/sources 非空、接口未全部失败。
+- 全量校验（commit 前与合并后各一次，均通过）：接口明细表 42 个 `<tr>`；`outputs/sources.html` 五任务齐全、标注 3940 条全量不截断；`outputs/tasks/` 六页合计 3986 个 `<tr>` = 3940 报价 + 36 预测 + 10 表头，与 `outputs/data.json` 的 `sources.total_quotes=3940` 对齐。
+- 提交日报 `f600f52`（31 文件）；`git pull -X ours` 因分叉需显式 reconcile → `git pull --no-rebase -X ours`，远端 CI 已推进至 `ba4f6ac`，ort 自动合并 13 个 outputs/data 文件无冲突，合并提交 `a555662`，`git push origin main` 首次即成功（ba4f6ac..a555662），未走 rebase 分支；推送后工作区干净。
