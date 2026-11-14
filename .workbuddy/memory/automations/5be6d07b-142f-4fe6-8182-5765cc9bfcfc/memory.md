@@ -128,3 +128,10 @@
 - 说明：10:24 触发时 11-13 源已落盘 chatgpt/gemini/national/xiangcong 四个（grok 11-13 未落盘，沿用窗口内最新快照），沿用 11-06~11-12 惯例不二次等待重跑；data/sources 非空、接口未全部失败。
 - 全量校验（commit 前与合并后各一次，均通过）：接口明细表 42 个 `<tr>`；`outputs/sources.html` 五任务齐全、标注 3940 条全量不截断；`outputs/tasks/` 六页合计 3986 个 `<tr>` = 3940 报价 + 36 预测 + 10 表头，与 `outputs/data.json` 的 `sources.total_quotes=3940` 对齐。
 - 提交日报 `f600f52`（31 文件）；`git pull -X ours` 因分叉需显式 reconcile → `git pull --no-rebase -X ours`，远端 CI 已推进至 `ba4f6ac`，ort 自动合并 13 个 outputs/data 文件无冲突，合并提交 `a555662`，`git push origin main` 首次即成功（ba4f6ac..a555662），未走 rebase 分支；推送后工作区干净。
+
+## 2026-11-13 10:41（北京时间）执行
+- 同日第二次触发（距 10:25 那轮约 16 分钟）；流水线后台 7m46s 成功，生成 `outputs/香葱行情日报_2026-11-13.html`（102575 bytes）；天气接口本次全部失败（WinError 10054，0 天预报/15 观测点，已降级）、灾害预警 100 条、新发地接口 41 条（最新 11-12，「接口全部明细」42 个 `<tr>`）；红香葱六档中枢 3.45→3.55/3.58/3.64/3.73/3.92/3.67；data/sources 5 任务/6788 报价/36 预测（扫描 94 文件）。
+- 说明：本次 11-13 五个源文件全部已落盘（chatgpt/gemini/grok/national/xiangcong，其中 chatgpt 与 grok 于 10:38 更新，grok 单文件约 2MB），报价数由上一轮 3940 增至 6788；data/sources 非空、接口未全部失败（新发地正常），沿用惯例不二次等待重跑。
+- 全量校验（commit 前与 pull 合并后各一次，均 PASS）：接口明细表 42 `<tr>`；`outputs/sources.html` 五任务齐全、标注全量不截断；`outputs/tasks/` 六页合计 6834 `<tr>` = 6788 报价 + 36 预测 + 10 表头，与 `outputs/data.json` 的 `total_quotes=6788` 对齐。
+- 提交日报 `1cffde5`（20 文件）；`git pull -X ours` 因分叉需显式 reconcile → `git pull --no-rebase -X ours`，远端 CI 已推进至 `0f2a308`，ort 自动合并 6 个 outputs 文件无冲突，合并提交 `82dffee`，`git push origin main` 首次即成功（0f2a308..82dffee），未走 rebase 分支；推送后工作区干净。
+- 经验：天气接口全失败（WinError 10054 连接被重置）时 run.py 降级为 0 天预报但仍正常出稿，只需在汇报中说明；本次天气重试拖到 7m46s，仍须后台执行。
