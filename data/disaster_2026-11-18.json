@@ -1,0 +1,647 @@
+{
+  "generated_at": "2026-11-18 11:07:15",
+  "total": 100,
+  "top": [
+    {
+      "region": "广西壮族自治区梧州市",
+      "province": "广西",
+      "city": "壮族自治",
+      "hazard": "暴雨",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:34",
+      "url": "http://www.nmc.cn/publish/alarm/45040041600000_20261118104659.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 8
+    },
+    {
+      "region": "内蒙古自治区包头市白云鄂博矿区",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:36",
+      "url": "http://www.nmc.cn/publish/alarm/15020641600000_20261118103632.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "内蒙古自治区通辽市内蒙古通辽市扎鲁特旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:44",
+      "url": "http://www.nmc.cn/publish/alarm/15052641600000_20261118104407.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "内蒙古自治区通辽市内蒙古通辽市霍林郭勒市",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/17 22:57",
+      "url": "http://www.nmc.cn/publish/alarm/15058141600000_20261117225718.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "宁夏回族自治区石嘴山市",
+      "province": "宁夏",
+      "city": "回族自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/17 23:30",
+      "url": "http://www.nmc.cn/publish/alarm/64020041600000_20261117233457.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "宁夏回族自治区石嘴山市平罗县",
+      "province": "宁夏",
+      "city": "回族自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/17 23:04",
+      "url": "http://www.nmc.cn/publish/alarm/64022141600000_20261117230813.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省东营市",
+      "province": "山东",
+      "city": "省东营",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:36",
+      "url": "http://www.nmc.cn/publish/alarm/37050041600000_20261118103632.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省烟台市",
+      "province": "山东",
+      "city": "省烟台",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:35",
+      "url": "http://www.nmc.cn/publish/alarm/37060041600000_20261118102721.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省烟台市海阳市",
+      "province": "山东",
+      "city": "省烟台",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:28",
+      "url": "http://www.nmc.cn/publish/alarm/37068741600000_20261118102943.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省烟台市蓬莱区",
+      "province": "山东",
+      "city": "省烟台",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:30",
+      "url": "http://www.nmc.cn/publish/alarm/37061441600000_20261118102651.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省烟台市龙口市",
+      "province": "山东",
+      "city": "省烟台",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:27",
+      "url": "http://www.nmc.cn/publish/alarm/37068141600000_20261118102910.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省青岛市胶州市",
+      "province": "山东",
+      "city": "省青岛",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:40",
+      "url": "http://www.nmc.cn/publish/alarm/37028141600000_20261118103625.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山西省忻州市神池县",
+      "province": "山西",
+      "city": "省忻州",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:44",
+      "url": "http://www.nmc.cn/publish/alarm/14092741600000_20261118104400.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "河北省承德市兴隆县",
+      "province": "河北",
+      "city": "省承德",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:42",
+      "url": "http://www.nmc.cn/publish/alarm/13082241600000_20261118104248.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "河北省承德市围场满族蒙古族自治县",
+      "province": "河北",
+      "city": "省承德",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:55",
+      "url": "http://www.nmc.cn/publish/alarm/13082841600000_20261118105544.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "河北省承德市宽城满族自治县",
+      "province": "河北",
+      "city": "省承德",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:31",
+      "url": "http://www.nmc.cn/publish/alarm/13082741600000_20261118103122.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "河北省承德市滦平县",
+      "province": "河北",
+      "city": "省承德",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:48",
+      "url": "http://www.nmc.cn/publish/alarm/13082441600000_20261118104845.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "浙江省台州市天台县",
+      "province": "浙江",
+      "city": "省台州",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:25",
+      "url": "http://www.nmc.cn/publish/alarm/33102341600000_20261118102428.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "浙江省杭州市临安区",
+      "province": "浙江",
+      "city": "省杭州",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:38",
+      "url": "http://www.nmc.cn/publish/alarm/33011241600000_20261118104119.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "浙江省杭州市余杭区",
+      "province": "浙江",
+      "city": "省杭州",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:50",
+      "url": "http://www.nmc.cn/publish/alarm/33011041600000_20261118105325.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    }
+  ],
+  "production_area": [
+    {
+      "region": "广西壮族自治区梧州市",
+      "province": "广西",
+      "city": "壮族自治",
+      "hazard": "暴雨",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:34",
+      "url": "http://www.nmc.cn/publish/alarm/45040041600000_20261118104659.html",
+      "weight": 4,
+      "impact": "田间渍涝、采收受阻、损耗与病害风险上升",
+      "is_production_area": true,
+      "risk_score": 8
+    },
+    {
+      "region": "山东省东营市",
+      "province": "山东",
+      "city": "省东营",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:36",
+      "url": "http://www.nmc.cn/publish/alarm/37050041600000_20261118103632.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省烟台市",
+      "province": "山东",
+      "city": "省烟台",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:35",
+      "url": "http://www.nmc.cn/publish/alarm/37060041600000_20261118102721.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省烟台市海阳市",
+      "province": "山东",
+      "city": "省烟台",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:28",
+      "url": "http://www.nmc.cn/publish/alarm/37068741600000_20261118102943.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省烟台市蓬莱区",
+      "province": "山东",
+      "city": "省烟台",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:30",
+      "url": "http://www.nmc.cn/publish/alarm/37061441600000_20261118102651.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省烟台市龙口市",
+      "province": "山东",
+      "city": "省烟台",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:27",
+      "url": "http://www.nmc.cn/publish/alarm/37068141600000_20261118102910.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省青岛市胶州市",
+      "province": "山东",
+      "city": "省青岛",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:40",
+      "url": "http://www.nmc.cn/publish/alarm/37028141600000_20261118103625.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "浙江省台州市天台县",
+      "province": "浙江",
+      "city": "省台州",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:25",
+      "url": "http://www.nmc.cn/publish/alarm/33102341600000_20261118102428.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "浙江省杭州市临安区",
+      "province": "浙江",
+      "city": "省杭州",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:38",
+      "url": "http://www.nmc.cn/publish/alarm/33011241600000_20261118104119.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "浙江省杭州市余杭区",
+      "province": "浙江",
+      "city": "省杭州",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:50",
+      "url": "http://www.nmc.cn/publish/alarm/33011041600000_20261118105325.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    }
+  ],
+  "sales_area": [
+    {
+      "region": "内蒙古自治区包头市白云鄂博矿区",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:36",
+      "url": "http://www.nmc.cn/publish/alarm/15020641600000_20261118103632.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "内蒙古自治区通辽市内蒙古通辽市扎鲁特旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:44",
+      "url": "http://www.nmc.cn/publish/alarm/15052641600000_20261118104407.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "内蒙古自治区通辽市内蒙古通辽市霍林郭勒市",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/17 22:57",
+      "url": "http://www.nmc.cn/publish/alarm/15058141600000_20261117225718.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "宁夏回族自治区石嘴山市",
+      "province": "宁夏",
+      "city": "回族自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/17 23:30",
+      "url": "http://www.nmc.cn/publish/alarm/64020041600000_20261117233457.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "宁夏回族自治区石嘴山市平罗县",
+      "province": "宁夏",
+      "city": "回族自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/17 23:04",
+      "url": "http://www.nmc.cn/publish/alarm/64022141600000_20261117230813.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "山西省忻州市神池县",
+      "province": "山西",
+      "city": "省忻州",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:44",
+      "url": "http://www.nmc.cn/publish/alarm/14092741600000_20261118104400.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "河北省承德市兴隆县",
+      "province": "河北",
+      "city": "省承德",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:42",
+      "url": "http://www.nmc.cn/publish/alarm/13082241600000_20261118104248.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "河北省承德市围场满族蒙古族自治县",
+      "province": "河北",
+      "city": "省承德",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:55",
+      "url": "http://www.nmc.cn/publish/alarm/13082841600000_20261118105544.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "河北省承德市宽城满族自治县",
+      "province": "河北",
+      "city": "省承德",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:31",
+      "url": "http://www.nmc.cn/publish/alarm/13082741600000_20261118103122.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "河北省承德市滦平县",
+      "province": "河北",
+      "city": "省承德",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/18 10:48",
+      "url": "http://www.nmc.cn/publish/alarm/13082441600000_20261118104845.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    }
+  ],
+  "hazard_stats": [
+    [
+      "大风",
+      71
+    ],
+    [
+      "道路结冰",
+      8
+    ],
+    [
+      "大雾",
+      6
+    ],
+    [
+      "海区大风",
+      6
+    ],
+    [
+      "寒潮",
+      4
+    ],
+    [
+      "道路冰雪",
+      2
+    ],
+    [
+      "降温",
+      2
+    ],
+    [
+      "暴雨",
+      1
+    ]
+  ],
+  "province_stats": [
+    [
+      "河北",
+      17
+    ],
+    [
+      "江西",
+      17
+    ],
+    [
+      "江苏",
+      10
+    ],
+    [
+      "广西",
+      9
+    ],
+    [
+      "山东",
+      8
+    ],
+    [
+      "黑龙江",
+      6
+    ],
+    [
+      "内蒙古",
+      5
+    ],
+    [
+      "浙江",
+      4
+    ],
+    [
+      "贵州",
+      4
+    ],
+    [
+      "辽宁",
+      3
+    ]
+  ],
+  "red_orange": []
+}
