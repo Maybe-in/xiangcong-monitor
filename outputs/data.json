@@ -1,6 +1,6 @@
 {
   "date": "2026-11-20",
-  "generated_at": "2026-11-20 09:12（北京时间）",
+  "generated_at": "2026-11-20 09:24（北京时间）",
   "price_source": "人工录入实测观测点（71 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -191,7 +191,7 @@
       "tmax": 20.1,
       "tmin": 8.3,
       "precip": 0,
-      "pop": 16,
+      "pop": 8,
       "wind": 22.7,
       "code": 3,
       "weather": "阴"
@@ -201,7 +201,7 @@
       "tmax": 16.0,
       "tmin": 7.4,
       "precip": 0,
-      "pop": 26,
+      "pop": 13,
       "wind": 17.0,
       "code": 45,
       "weather": "雾"
@@ -212,19 +212,15 @@
     "hazard_stats": [
       [
         "大风",
-        65
+        72
       ],
       [
         "大雾",
-        20
+        12
       ],
       [
         "道路结冰",
-        9
-      ],
-      [
-        "道路冰雪",
-        2
+        11
       ],
       [
         "海上大风",
@@ -233,6 +229,10 @@
       [
         "其他",
         2
+      ],
+      [
+        "道路冰雪",
+        1
       ]
     ],
     "top": [
@@ -273,6 +273,20 @@
         "rank": 2,
         "issuetime": "2026/11/20 08:30",
         "url": "http://www.nmc.cn/publish/alarm/15252741600000_20261120083019.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": false,
+        "risk_score": 4
+      },
+      {
+        "region": "内蒙古自治区锡林郭勒盟正蓝旗",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/20 09:10",
+        "url": "http://www.nmc.cn/publish/alarm/15253041600000_20261120091035.html",
         "weight": 2,
         "impact": "运输受阻",
         "is_production_area": false,
@@ -363,6 +377,20 @@
         "risk_score": 4
       },
       {
+        "region": "山西省忻州市偏关县",
+        "province": "山西",
+        "city": "省忻州",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/20 09:08",
+        "url": "http://www.nmc.cn/publish/alarm/14093241600000_20261120090800.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": false,
+        "risk_score": 4
+      },
+      {
         "region": "四川省南充市营山县",
         "province": "四川",
         "city": "省南充",
@@ -371,20 +399,6 @@
         "rank": 3,
         "issuetime": "2026/11/20 06:54",
         "url": "http://www.nmc.cn/publish/alarm/51132241600000_20261120065431.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": true,
-        "risk_score": 3
-      },
-      {
-        "region": "四川省达州市渠县",
-        "province": "四川",
-        "city": "省达州",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/20 06:24",
-        "url": "http://www.nmc.cn/publish/alarm/51172541600000_20261120062453.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": true,
@@ -413,48 +427,6 @@
         "rank": 3,
         "issuetime": "2026/11/20 07:24",
         "url": "http://www.nmc.cn/publish/alarm/34102141600000_20261120072423.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "湖南省怀化市中方县",
-        "province": "湖南",
-        "city": "省怀化",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/20 06:34",
-        "url": "http://www.nmc.cn/publish/alarm/43122141600000_20261120063456.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "湖南省怀化市鹤城区",
-        "province": "湖南",
-        "city": "省怀化",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/20 06:08",
-        "url": "http://www.nmc.cn/publish/alarm/43120241600000_20261120060956.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "湖南省湘西土家族苗族自治州花垣县",
-        "province": "湖南",
-        "city": "省湘西土家族苗族自治州花垣",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/20 06:26",
-        "url": "http://www.nmc.cn/publish/alarm/43312441600000_20261120062711.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": false,
@@ -511,6 +483,34 @@
         "rank": 1,
         "issuetime": "2026/11/20 08:49",
         "url": "http://www.nmc.cn/publish/alarm/15040041600000_20261120084911.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": false,
+        "risk_score": 2
+      },
+      {
+        "region": "内蒙古自治区赤峰市敖汉旗",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "大风",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/11/20 08:59",
+        "url": "http://www.nmc.cn/publish/alarm/15043041600000_20261120085917.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": false,
+        "risk_score": 2
+      },
+      {
+        "region": "内蒙古自治区赤峰市松山区",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "大风",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/11/20 09:04",
+        "url": "http://www.nmc.cn/publish/alarm/15040441600000_20261120090441.html",
         "weight": 2,
         "impact": "设施受损、蒸腾加剧",
         "is_production_area": false,
