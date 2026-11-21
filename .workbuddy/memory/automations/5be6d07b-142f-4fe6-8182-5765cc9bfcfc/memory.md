@@ -170,3 +170,9 @@
 - 说明：18:46 触发时 11-19 五个源文件均已落盘，无需二次等待重跑；data/sources 非空、接口未全部失败。
 - 全量校验（commit 前与合并后各一次，均 PASS）：sources.html 五任务齐全；tasks 五页合计 10839 `<tr>` = 10793 报价 + 36 预测 + 10 表头，与 `outputs/data.json` 的 `total_quotes=10793` 对齐。
 - 提交日报 `0d026af`（24 文件）；远端 CI 已推进至 `c819525`（chore: 香葱预测 2026-11-19），`git pull --no-rebase -X ours` ort 自动合并无冲突（仅 11-18 报告 HTML 有远端变更），合并提交 `9fea9be`，`git push origin main` 首次即成功（c819525..9fea9be），推送后 HEAD=origin/main=9fea9be、工作区干净。
+
+## 2026-11-20 14:18（北京时间）执行
+- 流水线后台 1m27s 成功（天气接口 1 次读超时后降级恢复 16 天/15 观测点），生成 `outputs/香葱行情日报_2026-11-20.html`（106403 bytes）；灾害预警 100 条、新发地接口 41 条（最新 11-20 当日）；红香葱六档中枢 3.65 → 3.94/3.94/3.94/3.99/4.12/3.63；data/sources 5 任务/11197 报价/36 预测（扫描 126 文件）。
+- 说明：14:16 触发时 11-20 源文件已落盘 chatgpt/gemini/grok/national/xiangcong 五个（其中 gemini/xiangcong 11-20 已更新），无需二次等待重跑；data/sources 非空、接口未全部失败。
+- 全量校验（commit 前与 pull 合并后各一次，均 PASS）：主报告「接口全部明细」表 42 `<tr>`；`outputs/sources.html` 五任务齐全且标注 11197 条全量不截断；`outputs/tasks/` 五页合计 11243 `<tr>` = 11197 报价 + 36 预测 + 10 表头，与 `outputs/data.json` 的 `sources.total_quotes=11197` 对齐。
+- 提交日报 `3bb1986`（32 文件）；`git pull -X ours origin main` 因分叉需显式 reconcile → `git pull --no-rebase -X ours origin main`，远端 CI 已推进至 `df568cb`（chore: 香葱预测 2026-11-20），ort 自动合并 15 个 outputs/data 文件无冲突，合并提交 `b5ab0ed`，`git push origin main` 首次即成功（df568cb..b5ab0ed），推送后 HEAD=origin/main=b5ab0ed、工作区干净。
