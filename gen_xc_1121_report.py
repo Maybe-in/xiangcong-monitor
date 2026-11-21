@@ -250,7 +250,7 @@ risk_html = ("<table style='border-collapse:collapse;width:100%;font-size:13px'>
     "<tr style='background:#f3f6fb'><th style='padding:6px 8px;border:1px solid #e3e8ef'>分项</th><th style='padding:6px 8px;border:1px solid #e3e8ef'>等级</th><th style='padding:6px 8px;border:1px solid #e3e8ef'>说明</th></tr>"
     "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>价格</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#e0533d;font-weight:700'>高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>红 3.65 低于 5.0 成本线 27%、黑 2.76 低 46%；自 11-14 上破后 11-15 至 11-20 连续持平（平台第七日），仍处低位</td></tr>"
     "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>需求侧</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#e0533d;font-weight:700'>高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>王旗营小葱 3.00→2.00 破位 -33.3%（省级表+全国 roundup 双源互证），前一日量 25 吨；销地需求侧转弱，B2B 挂牌偏低</td></tr>"
-    "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>天气/生产</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#d98a00;font-weight:700'>中-高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>近端距平 @@ANOM3@@℃ 偏低 + 3 天 @@P3@@mm 连阴雨，采收短暂受阻支撑价格；16 天累计 @@RAIN16@@mm、峰值 @@PEAK_MM@@mm 无强降水</td></tr>"
+    "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>天气/生产</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#d98a00;font-weight:700'>中-高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>近端距平 @@ANOM3@@℃ 偏低 + 3 天降水 @@P3@@mm（少雨），采收基本正常；16 天累计 @@RAIN16@@mm、峰值 @@PEAK_MM@@mm，无强降水过程</td></tr>"
     "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>低温霜冻</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#2e8b57;font-weight:700'>低</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>全程最低 @@COLD_DATE@@ @@COLD_TMIN@@℃（>0℃ 无本地霜冻）；北方产区霜冻/道路结冰预警利多南菜北运</td></tr>"
     "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>流通传导</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#d98a00;font-weight:700'>中-高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>国资云农地头大宗价断更，挂牌-成交价差宽，产销传导不畅；全国小葱 roundup 恢复发布（50 家），样本口径改善</td></tr>"
     "<tr style='background:#fff4f2'><td style='padding:6px 8px;border:1px solid #e3e8ef;font-weight:700'>综合</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#e0533d;font-weight:800;font-size:15px'>高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>价格+需求侧双高主导（连续第 27 期）</td></tr>"
@@ -331,7 +331,7 @@ __WINROWS__
 __CHARTC__
 
 <h2>五、未来行情预测（3天 / 7天 / 半月 / 1月 / 2月 / 3月）</h2>
-<div class="card"><p><b>方法</b>：P(h) = P₀ × 季节比 × (1+天气冲击×衰减) × (1+动量) × (1+节日脉冲)，P₀=3.65（11-20 一手核验锚定），天气冲击取 __DATE2__ 鲜抓 16 天逐日预报（近端距平 __ANOM3__℃、3 天连阴雨 __P3__mm 驱动），超出预报期用气候态推演。红黑按比价折算。</p>
+<div class="card"><p><b>方法</b>：P(h) = P₀ × 季节比 × (1+天气冲击×衰减) × (1+动量) × (1+节日脉冲)，P₀=3.65（11-20 一手核验锚定），天气冲击取 __DATE2__ 鲜抓 16 天逐日预报（近端距平 __ANOM3__℃、3 天降水 __P3__mm 驱动），超出预报期用气候态推演。红黑按比价折算。</p>
 <table style="border-collapse:collapse;width:100%;font-size:13px">
 <tr style="background:#f3f6fb"><th style="padding:5px 8px;border:1px solid #e3e8ef">档位</th><th style="padding:5px 8px;border:1px solid #e3e8ef">目标日</th><th style="padding:5px 8px;border:1px solid #e3e8ef">中枢</th><th style="padding:5px 8px;border:1px solid #e3e8ef">区间(低~高)</th><th style="padding:5px 8px;border:1px solid #e3e8ef">较当前</th><th style="padding:5px 8px;border:1px solid #e3e8ef">置信度</th></tr>
 __FCROWS__
