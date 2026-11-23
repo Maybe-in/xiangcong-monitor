@@ -1,0 +1,672 @@
+{
+  "generated_at": "2026-11-23 13:09:10",
+  "total": 100,
+  "top": [
+    {
+      "region": "江苏省扬州市宝应县",
+      "province": "江苏",
+      "city": "省扬州",
+      "hazard": "寒潮",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 10:13",
+      "url": "http://www.nmc.cn/publish/alarm/32102341600000_20261123101352.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 6
+    },
+    {
+      "region": "黑龙江省伊春市铁力市",
+      "province": "黑龙江",
+      "city": "省伊春",
+      "hazard": "寒潮",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 11:00",
+      "url": "http://www.nmc.cn/publish/alarm/23078141600000_20261123110448.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": false,
+      "risk_score": 6
+    },
+    {
+      "region": "山东省威海市",
+      "province": "山东",
+      "city": "省威海",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 10:15",
+      "url": "http://www.nmc.cn/publish/alarm/37100041600000_20261123101635.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省威海市文登区",
+      "province": "山东",
+      "city": "省威海",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 11:00",
+      "url": "http://www.nmc.cn/publish/alarm/37100341600000_20261123110015.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省威海市荣成市",
+      "province": "山东",
+      "city": "省威海",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 10:35",
+      "url": "http://www.nmc.cn/publish/alarm/37108241600000_20261123103646.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省青岛市胶州市",
+      "province": "山东",
+      "city": "省青岛",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 11:20",
+      "url": "http://www.nmc.cn/publish/alarm/37028141600000_20261123111611.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省青岛市青岛西海岸新区",
+      "province": "山东",
+      "city": "省青岛",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 12:00",
+      "url": "http://www.nmc.cn/publish/alarm/37021141600000_20261123115506.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "江苏省南通市启东市",
+      "province": "江苏",
+      "city": "省南通",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:12",
+      "url": "http://www.nmc.cn/publish/alarm/32068141600000_20261123101249.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省南通市如皋市",
+      "province": "江苏",
+      "city": "省南通",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:14",
+      "url": "http://www.nmc.cn/publish/alarm/32068241600000_20261123101445.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省无锡市宜兴市",
+      "province": "江苏",
+      "city": "省无锡",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:25",
+      "url": "http://www.nmc.cn/publish/alarm/32028241600000_20261123102552.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省无锡市江阴市",
+      "province": "江苏",
+      "city": "省无锡",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:14",
+      "url": "http://www.nmc.cn/publish/alarm/32028141600000_20261123101457.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省苏州市",
+      "province": "江苏",
+      "city": "省苏州",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:26",
+      "url": "http://www.nmc.cn/publish/alarm/32050041600000_20261123102651.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省苏州市吴中区",
+      "province": "江苏",
+      "city": "省苏州",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:32",
+      "url": "http://www.nmc.cn/publish/alarm/32050641600000_20261123103254.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省苏州市吴江区",
+      "province": "江苏",
+      "city": "省苏州",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:36",
+      "url": "http://www.nmc.cn/publish/alarm/32050941600000_20261123103655.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省苏州市太仓市",
+      "province": "江苏",
+      "city": "省苏州",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:33",
+      "url": "http://www.nmc.cn/publish/alarm/32058541600000_20261123103332.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省苏州市常熟市",
+      "province": "江苏",
+      "city": "省苏州",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:33",
+      "url": "http://www.nmc.cn/publish/alarm/32058141600000_20261123103351.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省苏州市张家港市",
+      "province": "江苏",
+      "city": "省苏州",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:31",
+      "url": "http://www.nmc.cn/publish/alarm/32058241600000_20261123103106.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省苏州市昆山市",
+      "province": "江苏",
+      "city": "省苏州",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:32",
+      "url": "http://www.nmc.cn/publish/alarm/32058341600000_20261123103244.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省苏州市相城区",
+      "province": "江苏",
+      "city": "省苏州",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:34",
+      "url": "http://www.nmc.cn/publish/alarm/32050741600000_20261123103452.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省镇江市句容市",
+      "province": "江苏",
+      "city": "省镇江",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:10",
+      "url": "http://www.nmc.cn/publish/alarm/32118341600000_20261123101055.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    }
+  ],
+  "production_area": [
+    {
+      "region": "江苏省扬州市宝应县",
+      "province": "江苏",
+      "city": "省扬州",
+      "hazard": "寒潮",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 10:13",
+      "url": "http://www.nmc.cn/publish/alarm/32102341600000_20261123101352.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 6
+    },
+    {
+      "region": "山东省威海市",
+      "province": "山东",
+      "city": "省威海",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 10:15",
+      "url": "http://www.nmc.cn/publish/alarm/37100041600000_20261123101635.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省威海市文登区",
+      "province": "山东",
+      "city": "省威海",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 11:00",
+      "url": "http://www.nmc.cn/publish/alarm/37100341600000_20261123110015.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省威海市荣成市",
+      "province": "山东",
+      "city": "省威海",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 10:35",
+      "url": "http://www.nmc.cn/publish/alarm/37108241600000_20261123103646.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省青岛市胶州市",
+      "province": "山东",
+      "city": "省青岛",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 11:20",
+      "url": "http://www.nmc.cn/publish/alarm/37028141600000_20261123111611.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省青岛市青岛西海岸新区",
+      "province": "山东",
+      "city": "省青岛",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 12:00",
+      "url": "http://www.nmc.cn/publish/alarm/37021141600000_20261123115506.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "江苏省南通市启东市",
+      "province": "江苏",
+      "city": "省南通",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:12",
+      "url": "http://www.nmc.cn/publish/alarm/32068141600000_20261123101249.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省南通市如皋市",
+      "province": "江苏",
+      "city": "省南通",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:14",
+      "url": "http://www.nmc.cn/publish/alarm/32068241600000_20261123101445.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省无锡市宜兴市",
+      "province": "江苏",
+      "city": "省无锡",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:25",
+      "url": "http://www.nmc.cn/publish/alarm/32028241600000_20261123102552.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    },
+    {
+      "region": "江苏省无锡市江阴市",
+      "province": "江苏",
+      "city": "省无锡",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:14",
+      "url": "http://www.nmc.cn/publish/alarm/32028141600000_20261123101457.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": true,
+      "risk_score": 3
+    }
+  ],
+  "sales_area": [
+    {
+      "region": "黑龙江省伊春市铁力市",
+      "province": "黑龙江",
+      "city": "省伊春",
+      "hazard": "寒潮",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/23 11:00",
+      "url": "http://www.nmc.cn/publish/alarm/23078141600000_20261123110448.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": false,
+      "risk_score": 6
+    },
+    {
+      "region": "贵州省毕节市威宁县",
+      "province": "贵州",
+      "city": "省毕节",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/23 11:15",
+      "url": "http://www.nmc.cn/publish/alarm/52052641600000_20261123111511.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "贵州省黔西南布依族苗族自治州晴隆县",
+      "province": "贵州",
+      "city": "省黔西南布依族苗族自治州晴隆",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/23 11:47",
+      "url": "http://www.nmc.cn/publish/alarm/52232441600000_20261123114740.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "黑龙江省伊春市嘉荫县",
+      "province": "黑龙江",
+      "city": "省伊春",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:50",
+      "url": "http://www.nmc.cn/publish/alarm/23072241600000_20261123103818.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区包头市",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:47",
+      "url": "http://www.nmc.cn/publish/alarm/15020041600000_20261123104752.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    },
+    {
+      "region": "内蒙古自治区呼和浩特市武川县",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 11:39",
+      "url": "http://www.nmc.cn/publish/alarm/15012541600000_20261123113949.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    },
+    {
+      "region": "内蒙古自治区通辽市内蒙古通辽市科尔沁左翼中旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 11:27",
+      "url": "http://www.nmc.cn/publish/alarm/15052141600000_20261123112735.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    },
+    {
+      "region": "北京市通州区",
+      "province": "北京",
+      "city": "市通州区",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:15",
+      "url": "http://www.nmc.cn/publish/alarm/11011241600000_20261123101529.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    },
+    {
+      "region": "吉林省",
+      "province": "吉林",
+      "city": "省",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 10:23",
+      "url": "http://www.nmc.cn/publish/alarm/22000041600000_20261123104223.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    },
+    {
+      "region": "吉林省四平市双辽市",
+      "province": "吉林",
+      "city": "省四平",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/23 11:25",
+      "url": "http://www.nmc.cn/publish/alarm/22038241600000_20261123113420.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    }
+  ],
+  "hazard_stats": [
+    [
+      "大风",
+      61
+    ],
+    [
+      "寒潮",
+      17
+    ],
+    [
+      "道路冰雪",
+      10
+    ],
+    [
+      "大雾",
+      7
+    ],
+    [
+      "海区大风",
+      3
+    ],
+    [
+      "雷雨大风",
+      1
+    ],
+    [
+      "海上雷雨大风",
+      1
+    ]
+  ],
+  "province_stats": [
+    [
+      "江苏",
+      18
+    ],
+    [
+      "黑龙江",
+      18
+    ],
+    [
+      "吉林",
+      13
+    ],
+    [
+      "山东",
+      10
+    ],
+    [
+      "河北",
+      10
+    ],
+    [
+      "山西",
+      6
+    ],
+    [
+      "河南",
+      5
+    ],
+    [
+      "江西",
+      4
+    ],
+    [
+      "贵州",
+      3
+    ],
+    [
+      "内蒙古",
+      3
+    ]
+  ],
+  "red_orange": [
+    {
+      "region": "贵州省毕节市威宁县",
+      "province": "贵州",
+      "city": "省毕节",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/23 11:15",
+      "url": "http://www.nmc.cn/publish/alarm/52052641600000_20261123111511.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "贵州省黔西南布依族苗族自治州晴隆县",
+      "province": "贵州",
+      "city": "省黔西南布依族苗族自治州晴隆",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/23 11:47",
+      "url": "http://www.nmc.cn/publish/alarm/52232441600000_20261123114740.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    }
+  ]
+}

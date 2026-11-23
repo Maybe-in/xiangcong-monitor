@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""香葱行情分析 · 2026-11-21 报告生成（八章 / 8 SVG 图表），读取 xiangcong_2026-11-21.json。"""
+"""香葱行情分析 · 2026-11-22 报告生成（八章 / 8 SVG 图表），读取 xiangcong_2026-11-22.json。"""
 import json, os, sys
 from collections import Counter
 
@@ -8,11 +8,11 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(BASE, "data", "sources")
 DATA = os.path.join(BASE, "data")
 OUT = os.path.join(BASE, "outputs")
-D = json.load(open(os.path.join(SRC, "xiangcong_2026-11-21.json"), encoding="utf-8"))
+D = json.load(open(os.path.join(SRC, "xiangcong_2026-11-22.json"), encoding="utf-8"))
 TODAY = D["date"]
 GEN = D["generated_at"]
 CUR_RED, CUR_BLK = 3.65, 2.76
-DATA_DATE = "2026-11-20"
+DATA_DATE = "2026-11-21"
 
 # ---------------- 数据准备 ----------------
 # A. 泸西 红香葱 近20日
@@ -34,9 +34,9 @@ yoy = [("2022", 4.95), ("2023", 4.35), ("2024", 7.05), ("2025", 5.65), ("2026", 
 
 # C. 价格结构对比（本期实际采集样本）
 struct = [
-    ("泸西产地红香葱", CUR_RED), ("全国28种蔬菜(11-20)", 4.09),
-    ("roundup最高·喀什曙光", 13.00), ("roundup最低·邯郸馆陶", 1.50),
-    ("苏州南环桥小葱", 3.50), ("王旗营销地小葱", 2.00), ("辽宁朝阳小葱", 1.70),
+    ("泸西产地红香葱", CUR_RED), ("全国28种蔬菜(11-19参考)", 4.17),
+    ("roundup最高·鄂州蟠龙", 10.00), ("roundup最低·辽宁朝阳", 1.70),
+    ("苏州南环桥小葱", 3.50), ("王旗营销地小葱", 2.00), ("邯郸南大堡小葱", 2.60),
 ]
 
 # D. 六档预测
@@ -44,10 +44,10 @@ order = ["未来3天", "未来7天", "未来15天", "未来1个月", "未来2个
 fc = sorted(D["forecasts"], key=lambda f: order.index(f["horizon"]))
 
 # E. 天气 14 天 + 窗口 + 距平
-_wxp = os.path.join(DATA, "weather_2026-11-21.json")
+_wxp = os.path.join(DATA, "weather_2026-11-22.json")
 WX_FRESH = os.path.exists(_wxp)
 if not WX_FRESH:
-    _wxp = os.path.join(DATA, "weather_2026-11-20.json")
+    _wxp = os.path.join(DATA, "weather_2026-11-21.json")
 wx = json.load(open(_wxp, encoding="utf-8"))
 core = wx["core"]
 wdays = core["daily"][:14]
@@ -69,10 +69,10 @@ RAIN16 = round(sum((d.get("precip") or 0) for d in all16), 1)
 RAIND16 = sum(1 for d in all16 if (d.get("precip") or 0) >= 1)
 
 # F. 灾害
-_dzp = os.path.join(DATA, "disaster_2026-11-21.json")
+_dzp = os.path.join(DATA, "disaster_2026-11-22.json")
 DZ_FRESH = os.path.exists(_dzp)
 if not DZ_FRESH:
-    _dzp = os.path.join(DATA, "disaster_2026-11-20.json")
+    _dzp = os.path.join(DATA, "disaster_2026-11-21.json")
 dz = json.load(open(_dzp, encoding="utf-8"))
 HAZ = "; ".join("%s %d" % (h, n) for h, n in dz.get("hazard_stats", [])[:6])
 PROD_HITS = dz.get("production_area", [])
@@ -248,12 +248,12 @@ for x in PROD_HITS[:10]:
 
 risk_html = ("<table style='border-collapse:collapse;width:100%;font-size:13px'>"
     "<tr style='background:#f3f6fb'><th style='padding:6px 8px;border:1px solid #e3e8ef'>分项</th><th style='padding:6px 8px;border:1px solid #e3e8ef'>等级</th><th style='padding:6px 8px;border:1px solid #e3e8ef'>说明</th></tr>"
-    "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>价格</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#e0533d;font-weight:700'>高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>红 3.65 低于 5.0 成本线 27%、黑 2.76 低 46%；自 11-14 上破后 11-15 至 11-20 连续持平（平台第七日），仍处低位</td></tr>"
-    "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>需求侧</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#e0533d;font-weight:700'>高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>王旗营小葱 3.00→2.00 破位 -33.3%（省级表+全国 roundup 双源互证），前一日量 25 吨；销地需求侧转弱，B2B 挂牌偏低</td></tr>"
+    "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>价格</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#e0533d;font-weight:700'>高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>红 3.65 低于 5.0 成本线 27%、黑 2.76 低 46%；自 11-14 上破后 11-15 至 11-21 连续持平（平台第八日），仍处低位</td></tr>"
+    "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>需求侧</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#e0533d;font-weight:700'>高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>王旗营小葱 2.00 低位企稳（省级表+全国 roundup 双源互证），前一日量 30 吨；销地需求侧偏弱未改善，B2B 挂牌偏低</td></tr>"
     "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>天气/生产</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#d98a00;font-weight:700'>中-高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>近端距平 @@ANOM3@@℃ 偏低 + 3 天降水 @@P3@@mm（少雨），采收基本正常；16 天累计 @@RAIN16@@mm、峰值 @@PEAK_MM@@mm，无强降水过程</td></tr>"
     "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>低温霜冻</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#2e8b57;font-weight:700'>低</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>全程最低 @@COLD_DATE@@ @@COLD_TMIN@@℃（>0℃ 无本地霜冻）；北方产区霜冻/道路结冰预警利多南菜北运</td></tr>"
-    "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>流通传导</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#d98a00;font-weight:700'>中-高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>国资云农地头大宗价断更，挂牌-成交价差宽，产销传导不畅；全国小葱 roundup 恢复发布（50 家），样本口径改善</td></tr>"
-    "<tr style='background:#fff4f2'><td style='padding:6px 8px;border:1px solid #e3e8ef;font-weight:700'>综合</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#e0533d;font-weight:800;font-size:15px'>高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>价格+需求侧双高主导（连续第 27 期）</td></tr>"
+    "<tr><td style='padding:6px 8px;border:1px solid #e3e8ef'>流通传导</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#d98a00;font-weight:700'>中-高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>国资云农地头大宗价断更，挂牌-成交价差宽，产销传导不畅；全国小葱 roundup 本期发布（41 家），样本口径可用</td></tr>"
+    "<tr style='background:#fff4f2'><td style='padding:6px 8px;border:1px solid #e3e8ef;font-weight:700'>综合</td><td style='padding:6px 8px;border:1px solid #e3e8ef;color:#e0533d;font-weight:800;font-size:15px'>高</td><td style='padding:6px 8px;border:1px solid #e3e8ef'>价格+需求侧双高主导（连续第 28 期）</td></tr>"
     "</table>")
 risk_html = (risk_html.replace("@@ANOM3@@", "%+.1f" % ANOM3)
              .replace("@@P3@@", "%.1f" % P3)
@@ -287,21 +287,21 @@ HTML = r"""<!DOCTYPE html>
 
 <h2>一、今日核心摘要</h2>
 <div class="kpi">
- <div><b>3.65</b><small>泸西 红香葱 元/公斤（均价，较 11-19 持平·平台第七日）</small></div>
+ <div><b>3.65</b><small>泸西 红香葱 元/公斤（均价，较 11-20 持平·平台第八日）</small></div>
  <div><b>2.76</b><small>泸西 黑香葱 元/公斤（持平）</small></div>
- <div><b>4.09</b><small>全国28种蔬菜 元/公斤（11-20·农业农村部·日环比-1.9%）</small></div>
+ <div><b>4.17</b><small>全国28种蔬菜 元/公斤（11-19参考·农业农村部·日环比+1.5%）</small></div>
  <div><b>高</b><small>综合风险等级（价格+需求侧双高）</small></div>
 </div>
 <div class="card">
-<p>① <b>价格</b>：数据日 11-20 泸西红香葱 3.4-3.7 / 均价 <span class="hl">3.65</span>，与 11-19 完全持平，为 3.65 平台<span class="hl">连续第七日确认</span>；红仍低于 5.0 成本线 <span class="hl">27%</span>、黑 2.76 低 <span class="hl">46%</span>。全省综合红 3.4-3.7（中值 3.55）三源一致、与泸西对齐；华磷表黑葱 2.6-2.9、红香葱 3.5-3.7、黑葱包地价 2600 元/亩横盘（领先信号偏弱）。</p>
-<p>② <b>需求侧破位</b>：本期头号变化是王旗营小葱 <span class="hl">3.00→2.00（-33.3%）</span>，省级菜价表与全国 50 家 roundup 第 37 条双源互证，前一日交易量 <span class="hl">25 吨</span>；产地横盘而销地破位，价差传导阻塞。全国小葱 roundup 本期<span class="hl">恢复发布</span>（50 家，均值 5.70 / 中位 5.70 / 区间 1.50~13.00），全量入库；按 data-analysis 红线用<span class="hl">同市场配对 45 家</span>（vs 11-17）得 -1.33%（10 涨 22 平 13 跌），不直接比两组异样本均值。当日云南叶菜平稳、菠菜微涨而小香葱平稳，品种特异性弱势延续。</p>
+<p>① <b>价格</b>：数据日 11-21 泸西红香葱 3.4-3.7 / 均价 <span class="hl">3.65</span>，与 11-20 完全持平，为 3.65 平台<span class="hl">连续第八日确认</span>；红仍低于 5.0 成本线 <span class="hl">27%</span>、黑 2.76 低 <span class="hl">46%</span>。全省综合红 3.4-3.7（中值 3.55）三源一致、与泸西对齐；华磷表黑葱 2.6-2.9、红香葱 3.4-3.7、黑葱包地价 2600 元/亩横盘（领先信号偏弱）。</p>
+<p>② <b>需求侧</b>：王旗营小葱 <span class="hl">2.00 低位企稳</span>（11-20 破位后持平），省级菜价表与全国 41 家 roundup 第 33 条双源互证，前一日交易量 <span class="hl">30 吨</span>（较上期 25 吨回补）；产地横盘而销地仍在低位，价差传导仍待观察。全国小葱 roundup 本期<span class="hl">发布</span>（41 家，均值 5.58 / 中位 5.60 / 区间 1.70~10.00，本期无喀什曙光离群值），全量入库；按 data-analysis 红线用<span class="hl">同市场配对 39 家</span>（vs 11-20）得 +1.35%（8 涨 27 平 4 跌），近乎持平、不直接比两组异样本均值。当日云南大利黄白上青上涨、菠菜小涨而小香葱平稳，品种特异性弱势延续。</p>
 <p>③ <b>天气/灾害</b>：__WXTEXT__。__DZTEXT__</p>
-<p>④ <b>预测</b>：六档中枢（红）__FCLINE__ 元/公斤，模型锚定 3.65、近端距平 __ANOM3__℃；产地横盘 + 销地破位，综合风险维持<span class="hl">高</span>（连续第 27 期）。</p>
+<p>④ <b>预测</b>：六档中枢（红）__FCLINE__ 元/公斤，模型锚定 3.65、近端距平 __ANOM3__℃；产地横盘 + 销地低位，综合风险维持<span class="hl">高</span>（连续第 28 期）。</p>
 </div>
 
 <h2>二、全国与泸西天气 / 灾害概况</h2>
 <div class="card">
-<p><b>泸西（11-20 起 16 天）</b>：__WXTEXT__ 3 天累计 __P3__mm、16 天累计 __RAIN16__mm / __RAIND16__ 雨日，峰值 __PEAK_MM__mm（__PEAK_DATE__），__HEAVYDESC__。距平基准取近 30 日实测最高温均值 __CLIM__℃。</p>
+<p><b>泸西（11-22 起 16 天）</b>：__WXTEXT__ 3 天累计 __P3__mm、16 天累计 __RAIN16__mm / __RAIND16__ 雨日，峰值 __PEAK_MM__mm（__PEAK_DATE__），__HEAVYDESC__。距平基准取近 30 日实测最高温均值 __CLIM__℃。</p>
 <p><b>全国灾害</b>：__DZTEXT__。__HAZTEXT__</p>
 </div>
 __CHARTE__
@@ -313,8 +313,8 @@ __DZROWS__
 
 <h2>三、历史价格走势（12/24/36 月 → 10 年）</h2>
 <div class="card">
-<p><b>近 20 日</b>：泸西红香葱自 9 月末 7.0 高位，10 月下旬急跌至 3.8，10-31 起锁定 3.45 平台（连续 13 个报价日），11-14 上破至 3.65、11-15 至 11-20 连续持平确认（平台第七日）；黑香葱 2.5-2.9 区间持平。</p>
-<p><b>五年同期</b>：2026 年 11 月中旬 3.65 为近五年（2022-2026）<span class="hl">绝对最低</span>；对隔年精确同日 2025-11-20 全省综合红 5.65 同比 <span class="hl">-35.4%</span>、黑 3.85 同比 -28.3%，王旗营小葱 4.80→2.00 同比 -58.3%（去年为高基数，跌幅不宜全归因本年度供给恶化）。</p>
+<p><b>近 20 日</b>：泸西红香葱自 9 月末 7.0 高位，10 月下旬急跌至 3.8，10-31 起锁定 3.45 平台（连续 13 个报价日），11-14 上破至 3.65、11-15 至 11-21 连续持平确认（平台第八日）；黑香葱 2.5-2.9 区间持平。</p>
+<p><b>五年同期</b>：2026 年 11 月中旬 3.65 为近五年（2022-2026）<span class="hl">绝对最低</span>；对隔年精确同日 2025-11-21 全省综合红 5.65 同比 <span class="hl">-35.4%</span>、黑 3.85 同比 -28.3%，王旗营小葱 4.00→2.00 同比 -50.0%（去年为高基数，跌幅不宜全归因本年度供给恶化）。</p>
 <p><b>长周期（模型重建）</b>：香葱无官方长期月度序列，下图为通货毛葱口径（×1.66 = 精品净葱），与预测中枢不可横比；近十年呈震荡下行，2024-08 峰值后回落，2026 年处历史低位。</p>
 </div>
 __CHARTA__
@@ -327,11 +327,11 @@ __WINROWS__
 <div class="note">长周期主序列用通货毛葱（元/kg）；预测与「当前中枢」用精品净葱/集散价，两者相差约 1.66 倍，报告中禁止横向混用比较。</div>
 
 <h2>四、价格结构对比</h2>
-<div class="card"><p>本期采集的泸西产地红香葱 3.65，低于全国 28 种蔬菜 4.09、全国 roundup 高位喀什曙光 13.00，但高于苏州南环桥小葱 3.50、王旗营销地小葱 <span class="hl">2.00</span> 与 roundup 低位邯郸馆陶 1.50。全国 50 家 roundup 离散达 8.7 倍（含精品/规格差），本期王旗营跌至 2.00 与产地横盘背离，印证「品种特异性供给过剩 + 销地需求走弱」。</p></div>
+<div class="card"><p>本期采集的泸西产地红香葱 3.65，低于全国 28 种蔬菜参考 4.17、全国 roundup 高位鄂州蟠龙 10.00，但高于苏州南环桥小葱 3.50、王旗营销地小葱 <span class="hl">2.00</span> 与 roundup 低位辽宁朝阳 1.70。全国 41 家 roundup 离散约 5.9 倍（含精品/规格差，本期无喀什曙光离群值），王旗营 2.00 与产地横盘仍有价差，印证「品种特异性供给过剩 + 销地需求偏弱」。</p></div>
 __CHARTC__
 
 <h2>五、未来行情预测（3天 / 7天 / 半月 / 1月 / 2月 / 3月）</h2>
-<div class="card"><p><b>方法</b>：P(h) = P₀ × 季节比 × (1+天气冲击×衰减) × (1+动量) × (1+节日脉冲)，P₀=3.65（11-20 一手核验锚定），天气冲击取 __DATE2__ 鲜抓 16 天逐日预报（近端距平 __ANOM3__℃、3 天降水 __P3__mm 驱动），超出预报期用气候态推演。红黑按比价折算。</p>
+<div class="card"><p><b>方法</b>：P(h) = P₀ × 季节比 × (1+天气冲击×衰减) × (1+动量) × (1+节日脉冲)，P₀=3.65（11-21 一手核验锚定），天气冲击取 __DATE2__ 鲜抓 16 天逐日预报（近端距平 __ANOM3__℃、3 天降水 __P3__mm 驱动），超出预报期用气候态推演。红黑按比价折算。</p>
 <table style="border-collapse:collapse;width:100%;font-size:13px">
 <tr style="background:#f3f6fb"><th style="padding:5px 8px;border:1px solid #e3e8ef">档位</th><th style="padding:5px 8px;border:1px solid #e3e8ef">目标日</th><th style="padding:5px 8px;border:1px solid #e3e8ef">中枢</th><th style="padding:5px 8px;border:1px solid #e3e8ef">区间(低~高)</th><th style="padding:5px 8px;border:1px solid #e3e8ef">较当前</th><th style="padding:5px 8px;border:1px solid #e3e8ef">置信度</th></tr>
 __FCROWS__
@@ -353,14 +353,14 @@ __CHARTH__
 
 <h2>八、泸西县专项结论与风险提示</h2>
 <div class="card">
-<p><b>本地结论</b>：① 11-14 红香葱上破 3.45→3.65 后，11-15 至 11-20 连续持平确认（平台第七日），官方总评「叶菜平稳、菠菜微涨、小香葱平稳」，属试探性上调后低位企稳；② 黑葱 2.5-2.9 持平，华磷表黑葱包地价 2600 元/亩横盘提示种植端收益预期偏弱；③ 全省综合红 3.4-3.7 三源一致与泸西对齐；④ <span class="hl">王旗营销地小葱破位 2.00（-33.3%）为首要风险信号</span>，产地横盘与销地走弱背离；⑤ 本地近端距平 __ANOM3__℃、3 天降水 __P3__mm，最低温 __COLD_DATE__ __COLD_TMIN__℃。</p>
+<p><b>本地结论</b>：① 11-14 红香葱上破 3.45→3.65 后，11-15 至 11-21 连续持平确认（平台第八日），官方总评「大利黄白上青团生菜上扬、油麦回调、菠菜小涨、红珊瑚下滑、小香葱平稳」，属试探性上调后低位企稳；② 黑葱 2.5-2.9 持平，华磷表黑葱包地价 2600 元/亩横盘提示种植端收益预期偏弱；③ 全省综合红 3.4-3.7 三源一致与泸西对齐；④ <span class="hl">王旗营销地小葱 2.00 低位企稳（前一日量 30 吨回补）</span>，产地横盘与销地低位价差仍待传导；⑤ 本地近端距平 __ANOM3__℃、3 天降水 __P3__mm，最低温 __COLD_DATE__ __COLD_TMIN__℃。</p>
 <p><b>产业底盘</b>：泸西 46.8 万亩次、118.5 万吨、产值 36 亿元、5 万余人就业、日加工转运数千吨，为全国最大小香葱单品基地。</p>
-<p><b>风险预警</b>：综合风险等级 <span class="hl">高（第 27 期）</span>。价格与需求侧为双高主导（王旗营破位新增需求侧压力）；天气/生产「中-高」；流通传导「中-高」（挂牌-成交价差宽，roundup 样本口径改善）。</p>
+<p><b>风险预警</b>：综合风险等级 <span class="hl">高（第 28 期）</span>。价格与需求侧为双高主导（王旗营低位企稳但需求侧仍偏弱）；天气/生产「中-高」；流通传导「中-高」（挂牌-成交价差宽，roundup 样本口径可用）。</p>
 __RISK__
-<p class="warn"><b>建议措施</b>：种植端趁 11-26 后晴好窗口抢收、及时入库预冷，留意近期降水（峰值 __PEAK_MM__mm）与近端降温；流通端快进快出、控制库存，重点跟踪王旗营 2.00 破位是否向产地传导（若泸西补跌则下修基准）；3.65 平台已连续七日确认，关注能否延续（持续则六档中枢上修，回吐 3.45 则判为假突破）。</p>
+<p class="warn"><b>建议措施</b>：种植端趁 11-26 后晴好窗口抢收、及时入库预冷，留意近期降水（峰值 __PEAK_MM__mm）与 11-24/25 降温至 6.9/5.9℃；流通端快进快出、控制库存，重点跟踪王旗营 2.00 能否随量能回补回升（若持续低位或泸西补跌则下修基准）；3.65 平台已连续八日确认，关注能否延续（持续则六档中枢上修，回吐 3.45 则判为假突破）。</p>
 </div>
 
-<div class="foot">本报告由 WorkBuddy 自动化任务（376dffed）生成，仅供参考，不构成投资建议。口径、估算与风险等级详见正文与 xiangcong_2026-11-21.json。预测含置信度说明，需滚动修正。</div>
+<div class="foot">本报告由 WorkBuddy 自动化任务（376dffed）生成，仅供参考，不构成投资建议。口径、估算与风险等级详见正文与 xiangcong_2026-11-22.json。预测含置信度说明，需滚动修正。</div>
 </div></body></html>"""
 
 _d1 = wdays[0]
@@ -380,8 +380,8 @@ HAZTEXT = ("本轮预警以<span class='hl'>%s</span>主导（%s 条居前）；
     "/".join(sorted(set(x.get("province", "") for x in PROD_HITS))[:4]) or "无",
     _yn_desc))
 WX_SRC = (("%s 中央气象台/Open-Meteo 鲜抓快照（generated_at %s）" % (TODAY, wx.get("generated_at", ""))) if WX_FRESH
-          else "天气接口本轮重试超时，沿用 11-20 中央气象台/Open-Meteo 快照（generated_at %s），未虚构新数据" % wx.get("generated_at", ""))
-DZ_SRC = ("中央气象台 findAlarm 鲜抓（generated_at %s）" % dz.get("generated_at", "")) if DZ_FRESH else "11-20 中央气象台快照（本轮 findAlarm 重试超时，未虚构条数）"
+          else "天气接口本轮重试超时，沿用 11-21 中央气象台/Open-Meteo 快照（generated_at %s），未虚构新数据" % wx.get("generated_at", ""))
+DZ_SRC = ("中央气象台 findAlarm 鲜抓（generated_at %s）" % dz.get("generated_at", "")) if DZ_FRESH else "11-21 中央气象台快照（本轮 findAlarm 重试超时，未虚构条数）"
 MAP = {
  "__TODAY__": TODAY, "__DATA_DATE__": DATA_DATE, "__GEN__": GEN, "__DATE2__": TODAY,
  "__WXSRC__": WX_SRC, "__DZSRC__": DZ_SRC,
