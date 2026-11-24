@@ -1200,6 +1200,36 @@
       "places": "",
       "unit": "元/公斤",
       "source": "xinfadi"
+    },
+    {
+      "item": "大葱",
+      "date": "2026-11-24",
+      "low": 1.4,
+      "high": 2.0,
+      "mid": 1.7,
+      "places": "冀蒙鲁",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "小葱",
+      "date": "2026-11-24",
+      "low": 3.0,
+      "high": 4.0,
+      "mid": 3.5,
+      "places": "冀辽",
+      "unit": "元/公斤",
+      "source": "xinfadi"
+    },
+    {
+      "item": "香葱",
+      "date": "2026-11-24",
+      "low": 6.2,
+      "high": 7.6,
+      "mid": 6.9,
+      "places": "",
+      "unit": "元/公斤",
+      "source": "xinfadi"
     }
   ],
   "cnhnb_history": [
