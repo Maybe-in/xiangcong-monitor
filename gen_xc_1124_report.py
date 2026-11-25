@@ -301,7 +301,7 @@ HTML = r"""<!DOCTYPE html>
 
 <h2>二、全国与泸西天气 / 灾害概况</h2>
 <div class="card">
-<p><b>泸西（11-24 起 16 天）</b>：__WXTEXT__ 3 天累计 __P3__mm、16 天累计 __RAIN16__mm / __RAIND16__ 雨日，峰值 __PEAK_MM__mm（__PEAK_DATE__），__HEAVYDESC__。距平基准取近 30 日实测最高温均值 __CLIM__℃。</p>
+<p><b>泸西（11-24 起 16 天）</b>：__WXTEXT__；16 天累计 __RAIN16__mm / __RAIND16__ 雨日，峰值 __PEAK_MM__mm（__PEAK_DATE__），__HEAVYDESC__。距平基准取近 30 日实测最高温均值 __CLIM__℃。</p>
 <p><b>全国灾害</b>：__DZTEXT__。__HAZTEXT__</p>
 <p><b>定性补充（中国天气网 / 人民网云南 11-23 发布）</b>：__WXQUAL__</p>
 </div>
