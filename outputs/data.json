@@ -1,6 +1,6 @@
 {
   "date": "2026-11-26",
-  "generated_at": "2026-11-26 10:08（北京时间）",
+  "generated_at": "2026-11-26 10:23（北京时间）",
   "price_source": "人工录入实测观测点（89 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -212,11 +212,11 @@
     "hazard_stats": [
       [
         "大风",
-        66
+        70
       ],
       [
         "寒潮",
-        23
+        20
       ],
       [
         "道路结冰",
@@ -237,13 +237,23 @@
       [
         "海上大风",
         1
-      ],
-      [
-        "沙尘",
-        1
       ]
     ],
     "top": [
+      {
+        "region": "四川省阿坝藏族羌族自治州小金县",
+        "province": "四川",
+        "city": "省阿坝藏族羌族自治州小金",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/26 10:02",
+        "url": "http://www.nmc.cn/publish/alarm/51322741600000_20261126100212.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": true,
+        "risk_score": 4
+      },
       {
         "region": "四川省阿坝藏族羌族自治州金川县",
         "province": "四川",
@@ -267,20 +277,6 @@
         "rank": 2,
         "issuetime": "2026/11/26 09:20",
         "url": "http://www.nmc.cn/publish/alarm/62072241600000_20261126092001.html",
-        "weight": 2,
-        "impact": "运输受阻",
-        "is_production_area": false,
-        "risk_score": 4
-      },
-      {
-        "region": "甘肃省张掖市肃南县",
-        "province": "甘肃",
-        "city": "省张掖",
-        "hazard": "道路结冰",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/11/26 09:06",
-        "url": "http://www.nmc.cn/publish/alarm/62072141600000_20261126090602.html",
         "weight": 2,
         "impact": "运输受阻",
         "is_production_area": false,
@@ -315,56 +311,28 @@
         "risk_score": 3
       },
       {
-        "region": "内蒙古自治区乌兰察布市丰镇市",
+        "region": "内蒙古自治区乌兰察布市兴和县",
         "province": "内蒙古",
         "city": "自治",
         "hazard": "寒潮",
         "level": "蓝色",
         "rank": 1,
-        "issuetime": "2026/11/26 09:07",
-        "url": "http://www.nmc.cn/publish/alarm/15098141600000_20261126090710.html",
+        "issuetime": "2026/11/26 10:03",
+        "url": "http://www.nmc.cn/publish/alarm/15092441600000_20261126100310.html",
         "weight": 3,
         "impact": "生长停滞，但常推高菜价（双刃剑）",
         "is_production_area": false,
         "risk_score": 3
       },
       {
-        "region": "内蒙古自治区乌兰察布市凉城县",
+        "region": "内蒙古自治区乌兰察布市商都县",
         "province": "内蒙古",
         "city": "自治",
         "hazard": "寒潮",
         "level": "蓝色",
         "rank": 1,
-        "issuetime": "2026/11/26 09:06",
-        "url": "http://www.nmc.cn/publish/alarm/15092541600000_20261126090602.html",
-        "weight": 3,
-        "impact": "生长停滞，但常推高菜价（双刃剑）",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "内蒙古自治区乌兰察布市四子王旗",
-        "province": "内蒙古",
-        "city": "自治",
-        "hazard": "寒潮",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/26 09:07",
-        "url": "http://www.nmc.cn/publish/alarm/15092941600000_20261126090711.html",
-        "weight": 3,
-        "impact": "生长停滞，但常推高菜价（双刃剑）",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "内蒙古自治区乌兰察布市察哈尔右翼中旗",
-        "province": "内蒙古",
-        "city": "自治",
-        "hazard": "寒潮",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/26 09:03",
-        "url": "http://www.nmc.cn/publish/alarm/15092741600000_20261126090359.html",
+        "issuetime": "2026/11/26 09:26",
+        "url": "http://www.nmc.cn/publish/alarm/15092341600000_20261126092636.html",
         "weight": 3,
         "impact": "生长停滞，但常推高菜价（双刃剑）",
         "is_production_area": false,
@@ -385,6 +353,20 @@
         "risk_score": 3
       },
       {
+        "region": "内蒙古自治区乌兰察布市察哈尔右翼后旗",
+        "province": "内蒙古",
+        "city": "自治",
+        "hazard": "寒潮",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/11/26 09:38",
+        "url": "http://www.nmc.cn/publish/alarm/15092841600000_20261126093845.html",
+        "weight": 3,
+        "impact": "生长停滞，但常推高菜价（双刃剑）",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
         "region": "内蒙古自治区乌兰察布市集宁区",
         "province": "内蒙古",
         "city": "自治",
@@ -399,14 +381,14 @@
         "risk_score": 3
       },
       {
-        "region": "内蒙古自治区包头市固阳县",
+        "region": "内蒙古自治区乌海市",
         "province": "内蒙古",
         "city": "自治",
         "hazard": "寒潮",
         "level": "蓝色",
         "rank": 1,
-        "issuetime": "2026/11/26 09:03",
-        "url": "http://www.nmc.cn/publish/alarm/15022241600000_20261126090326.html",
+        "issuetime": "2026/11/26 09:54",
+        "url": "http://www.nmc.cn/publish/alarm/15030041600000_20261126095445.html",
         "weight": 3,
         "impact": "生长停滞，但常推高菜价（双刃剑）",
         "is_production_area": false,
@@ -427,20 +409,6 @@
         "risk_score": 3
       },
       {
-        "region": "内蒙古自治区呼和浩特市和林格尔县",
-        "province": "内蒙古",
-        "city": "自治",
-        "hazard": "寒潮",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/26 09:03",
-        "url": "http://www.nmc.cn/publish/alarm/15012341600000_20261126090352.html",
-        "weight": 3,
-        "impact": "生长停滞，但常推高菜价（双刃剑）",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
         "region": "内蒙古自治区呼和浩特市清水河",
         "province": "内蒙古",
         "city": "自治",
@@ -449,6 +417,20 @@
         "rank": 1,
         "issuetime": "2026/11/26 09:10",
         "url": "http://www.nmc.cn/publish/alarm/15012441600000_20261126091016.html",
+        "weight": 3,
+        "impact": "生长停滞，但常推高菜价（双刃剑）",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
+        "region": "山西省吕梁市临县",
+        "province": "山西",
+        "city": "省吕梁",
+        "hazard": "寒潮",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/11/26 10:15",
+        "url": "http://www.nmc.cn/publish/alarm/14112441600000_20261126101500.html",
         "weight": 3,
         "impact": "生长停滞，但常推高菜价（双刃剑）",
         "is_production_area": false,
@@ -469,28 +451,14 @@
         "risk_score": 3
       },
       {
-        "region": "山西省吕梁市孝义市",
+        "region": "山西省吕梁市兴县",
         "province": "山西",
         "city": "省吕梁",
         "hazard": "寒潮",
         "level": "蓝色",
         "rank": 1,
-        "issuetime": "2026/11/26 09:00",
-        "url": "http://www.nmc.cn/publish/alarm/14118141600000_20261126090000.html",
-        "weight": 3,
-        "impact": "生长停滞，但常推高菜价（双刃剑）",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "山西省吕梁市岚县",
-        "province": "山西",
-        "city": "省吕梁",
-        "hazard": "寒潮",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/26 09:05",
-        "url": "http://www.nmc.cn/publish/alarm/14112741600000_20261126090500.html",
+        "issuetime": "2026/11/26 10:18",
+        "url": "http://www.nmc.cn/publish/alarm/14112341600000_20261126101800.html",
         "weight": 3,
         "impact": "生长停滞，但常推高菜价（双刃剑）",
         "is_production_area": false,
@@ -511,14 +479,42 @@
         "risk_score": 3
       },
       {
-        "region": "山西省大同市浑源县",
+        "region": "山西省忻州市五寨县",
         "province": "山西",
-        "city": "省大同",
+        "city": "省忻州",
         "hazard": "寒潮",
         "level": "蓝色",
         "rank": 1,
-        "issuetime": "2026/11/26 09:04",
-        "url": "http://www.nmc.cn/publish/alarm/14022541600000_20261126090400.html",
+        "issuetime": "2026/11/26 09:09",
+        "url": "http://www.nmc.cn/publish/alarm/14092841600000_20261126090900.html",
+        "weight": 3,
+        "impact": "生长停滞，但常推高菜价（双刃剑）",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
+        "region": "山西省忻州市宁武县",
+        "province": "山西",
+        "city": "省忻州",
+        "hazard": "寒潮",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/11/26 09:19",
+        "url": "http://www.nmc.cn/publish/alarm/14092541600000_20261126091900.html",
+        "weight": 3,
+        "impact": "生长停滞，但常推高菜价（双刃剑）",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
+        "region": "山西省忻州市岢岚县",
+        "province": "山西",
+        "city": "省忻州",
+        "hazard": "寒潮",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/11/26 10:08",
+        "url": "http://www.nmc.cn/publish/alarm/14092941600000_20261126100800.html",
         "weight": 3,
         "impact": "生长停滞，但常推高菜价（双刃剑）",
         "is_production_area": false,
