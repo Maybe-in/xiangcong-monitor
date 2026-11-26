@@ -201,3 +201,9 @@
 - 说明：00:04 触发时 11-24 源文件尚未落盘，11-23 五个源文件已全部落盘（上一轮 13:07 时仅到 11-22，本轮已补齐），沿用 11-06~11-23 惯例不二次等待重跑；data/sources 非空、接口未全部失败。
 - 全量校验（commit 前与 pull 合并后各一次，均 PASS）：接口明细表 42 `<tr>`；`outputs/sources.html` 五任务齐全；`outputs/tasks/` 五页合计 13244 `<tr>` = 13198 报价 + 36 预测 + 10 表头，与 `outputs/data.json` 的 `sources.total_quotes=13198` 对齐。
 - 提交日报 `48018bb`；`git pull -X ours origin main` 因分叉需显式 reconcile → `git pull --no-rebase -X ours origin main`，远端 CI 已推进至 `624f3fb`，ort 自动合并 15 个 outputs/data 文件无冲突，合并提交 `4542151`，`git push origin main` 首次即成功（624f3fb..4542151），推送后 HEAD=origin/main=4542151。工作区残留 gen_xc_1124_report.py 修改（其余定时任务落盘），属正常。
+
+## 2026-11-25 19:59（北京时间）执行
+- 流水线后台 1m4s 成功，生成 `outputs/香葱行情日报_2026-11-25.html`；天气 16 天/15 观测点、灾害预警 100 条、新发地接口 41 条（最新 11-25 当日）；红香葱六档中枢 3.65 → 3.82/3.85/3.87/4.01/4.09/3.54；data/sources 5 任务/13629 报价/36 预测（扫描 149 文件）。
+- 说明：19:57 触发时 11-25 源文件尚未落盘（最新为 11-24 五任务），沿用 11-06~11-24 惯例不二次等待重跑，汇总采用窗口内各任务最新快照；data/sources 非空、接口未全部失败。
+- 全量校验（commit 前与 merge 后各一次，均 PASS）：主报告「接口全部明细」表 42 `<tr>`；`outputs/sources.html` 五任务齐全；`outputs/tasks/` 六页合计 13675 `<tr>` = 13629 报价 + 36 预测 + 10 表头，与 `outputs/data.json` 的 `sources.total_quotes=13629` 对齐。
+- 提交日报 `e650671`；`git pull -X ours origin main` 因分叉需显式 reconcile → `git pull --no-rebase -X ours origin main`，远端 CI 已推进至 `f483319`（chore: 香葱预测 2026-11-25），ort 自动合并无冲突，合并提交 `b7b1e17`，`git push origin main` 首次即成功（f483319..b7b1e17），推送后 HEAD=origin/main=b7b1e17。工作区残留 data/disaster_2026-11-25.json、data/weather_2026-11-25.json（其余定时任务落盘），属正常。
