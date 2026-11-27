@@ -1,0 +1,584 @@
+{
+  "generated_at": "2026-11-26 16:32:00",
+  "total": 100,
+  "top": [
+    {
+      "region": "内蒙古自治区包头市固阳县",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/26 16:11",
+      "url": "http://www.nmc.cn/publish/alarm/15022241600000_20261126161129.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "北京市昌平区",
+      "province": "北京",
+      "city": "市昌平区",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/26 15:30",
+      "url": "http://www.nmc.cn/publish/alarm/11011441600000_20261126152445.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "北京市门头沟区",
+      "province": "北京",
+      "city": "市门头沟区",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/26 15:30",
+      "url": "http://www.nmc.cn/publish/alarm/11010941600000_20261126152818.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "四川省阿坝藏族羌族自治州马尔康市",
+      "province": "四川",
+      "city": "省阿坝藏族羌族自治州马尔康",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/26 16:03",
+      "url": "http://www.nmc.cn/publish/alarm/51320141600000_20261126160340.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "甘肃省酒泉市",
+      "province": "甘肃",
+      "city": "省酒泉",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/26 15:46",
+      "url": "http://www.nmc.cn/publish/alarm/62090041600000_20261126154636.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "内蒙古自治区呼伦贝尔市扎兰屯市",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "暴雪",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:27",
+      "url": "http://www.nmc.cn/publish/alarm/15078341600000_20261126152748.html",
+      "weight": 3,
+      "impact": "运输中断、设施受压",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区呼伦贝尔市新巴尔虎左旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "暴雪",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:13",
+      "url": "http://www.nmc.cn/publish/alarm/15072641600000_20261126151337.html",
+      "weight": 3,
+      "impact": "运输中断、设施受压",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区呼伦贝尔市鄂温克族自治旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "暴雪",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:13",
+      "url": "http://www.nmc.cn/publish/alarm/15072441600000_20261126151309.html",
+      "weight": 3,
+      "impact": "运输中断、设施受压",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区巴彦淖尔市",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:56",
+      "url": "http://www.nmc.cn/publish/alarm/15080041600000_20261126155659.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区巴彦淖尔市乌拉特中旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 16:13",
+      "url": "http://www.nmc.cn/publish/alarm/15082441600000_20261126161322.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区巴彦淖尔市五原县",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 16:23",
+      "url": "http://www.nmc.cn/publish/alarm/15082141600000_20261126162333.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区巴彦淖尔市磴口县",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 16:19",
+      "url": "http://www.nmc.cn/publish/alarm/15082241600000_20261126161949.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "新疆维吾尔自治区博尔塔拉蒙古自治州博乐市",
+      "province": "新疆",
+      "city": "维吾尔自治",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/26 15:59",
+      "url": "http://www.nmc.cn/publish/alarm/65270141600000_20261126155917.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "新疆维吾尔自治区塔城地区沙湾市",
+      "province": "新疆",
+      "city": "维吾尔自治",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/26 15:14",
+      "url": "http://www.nmc.cn/publish/alarm/65420341600000_20261126151453.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "辽宁省锦州市",
+      "province": "辽宁",
+      "city": "省锦州",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/26 16:07",
+      "url": "http://www.nmc.cn/publish/alarm/21070041600000_20261126160600.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区乌兰察布市凉城县",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:53",
+      "url": "http://www.nmc.cn/publish/alarm/15092541600000_20261126155326.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    },
+    {
+      "region": "内蒙古自治区包头市土默特右旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:35",
+      "url": "http://www.nmc.cn/publish/alarm/15022141600000_20261126153527.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    },
+    {
+      "region": "内蒙古自治区锡林郭勒盟苏尼特右旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:14",
+      "url": "http://www.nmc.cn/publish/alarm/15252441600000_20261126151409.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    },
+    {
+      "region": "内蒙古自治区锡林郭勒盟西乌珠穆沁旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 16:06",
+      "url": "http://www.nmc.cn/publish/alarm/15252641600000_20261126160627.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    },
+    {
+      "region": "北京市东城区",
+      "province": "北京",
+      "city": "市东城区",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:27",
+      "url": "http://www.nmc.cn/publish/alarm/11010141600000_20261126152815.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 2
+    }
+  ],
+  "production_area": [
+    {
+      "region": "四川省阿坝藏族羌族自治州马尔康市",
+      "province": "四川",
+      "city": "省阿坝藏族羌族自治州马尔康",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/26 16:03",
+      "url": "http://www.nmc.cn/publish/alarm/51320141600000_20261126160340.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 4
+    },
+    {
+      "region": "山东省滨州市",
+      "province": "山东",
+      "city": "省滨州",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 16:00",
+      "url": "http://www.nmc.cn/publish/alarm/37160041600000_20261126155748.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 2
+    },
+    {
+      "region": "山东省滨州市沾化区",
+      "province": "山东",
+      "city": "省滨州",
+      "hazard": "大风",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 16:15",
+      "url": "http://www.nmc.cn/publish/alarm/37160341600000_20261126161103.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": true,
+      "risk_score": 2
+    }
+  ],
+  "sales_area": [
+    {
+      "region": "内蒙古自治区包头市固阳县",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/26 16:11",
+      "url": "http://www.nmc.cn/publish/alarm/15022241600000_20261126161129.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "北京市昌平区",
+      "province": "北京",
+      "city": "市昌平区",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/26 15:30",
+      "url": "http://www.nmc.cn/publish/alarm/11011441600000_20261126152445.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "北京市门头沟区",
+      "province": "北京",
+      "city": "市门头沟区",
+      "hazard": "大风",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/26 15:30",
+      "url": "http://www.nmc.cn/publish/alarm/11010941600000_20261126152818.html",
+      "weight": 2,
+      "impact": "设施受损、蒸腾加剧",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "甘肃省酒泉市",
+      "province": "甘肃",
+      "city": "省酒泉",
+      "hazard": "道路结冰",
+      "level": "黄色",
+      "rank": 2,
+      "issuetime": "2026/11/26 15:46",
+      "url": "http://www.nmc.cn/publish/alarm/62090041600000_20261126154636.html",
+      "weight": 2,
+      "impact": "运输受阻",
+      "is_production_area": false,
+      "risk_score": 4
+    },
+    {
+      "region": "内蒙古自治区呼伦贝尔市扎兰屯市",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "暴雪",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:27",
+      "url": "http://www.nmc.cn/publish/alarm/15078341600000_20261126152748.html",
+      "weight": 3,
+      "impact": "运输中断、设施受压",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区呼伦贝尔市新巴尔虎左旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "暴雪",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:13",
+      "url": "http://www.nmc.cn/publish/alarm/15072641600000_20261126151337.html",
+      "weight": 3,
+      "impact": "运输中断、设施受压",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区呼伦贝尔市鄂温克族自治旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "暴雪",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:13",
+      "url": "http://www.nmc.cn/publish/alarm/15072441600000_20261126151309.html",
+      "weight": 3,
+      "impact": "运输中断、设施受压",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区巴彦淖尔市",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 15:56",
+      "url": "http://www.nmc.cn/publish/alarm/15080041600000_20261126155659.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区巴彦淖尔市乌拉特中旗",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 16:13",
+      "url": "http://www.nmc.cn/publish/alarm/15082441600000_20261126161322.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "内蒙古自治区巴彦淖尔市五原县",
+      "province": "内蒙古",
+      "city": "自治",
+      "hazard": "寒潮",
+      "level": "蓝色",
+      "rank": 1,
+      "issuetime": "2026/11/26 16:23",
+      "url": "http://www.nmc.cn/publish/alarm/15082141600000_20261126162333.html",
+      "weight": 3,
+      "impact": "生长停滞，但常推高菜价（双刃剑）",
+      "is_production_area": false,
+      "risk_score": 3
+    }
+  ],
+  "hazard_stats": [
+    [
+      "大风",
+      59
+    ],
+    [
+      "道路冰雪",
+      27
+    ],
+    [
+      "大雾",
+      5
+    ],
+    [
+      "寒潮",
+      4
+    ],
+    [
+      "暴雪",
+      3
+    ],
+    [
+      "道路结冰",
+      2
+    ]
+  ],
+  "province_stats": [
+    [
+      "黑龙江",
+      34
+    ],
+    [
+      "北京",
+      13
+    ],
+    [
+      "内蒙古",
+      12
+    ],
+    [
+      "河北",
+      11
+    ],
+    [
+      "辽宁",
+      10
+    ],
+    [
+      "贵州",
+      5
+    ],
+    [
+      "新疆",
+      3
+    ],
+    [
+      "吉林",
+      3
+    ],
+    [
+      "山东",
+      2
+    ],
+    [
+      "山西",
+      2
+    ]
+  ],
+  "red_orange": [
+    {
+      "region": "新疆维吾尔自治区博尔塔拉蒙古自治州博乐市",
+      "province": "新疆",
+      "city": "维吾尔自治",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/26 15:59",
+      "url": "http://www.nmc.cn/publish/alarm/65270141600000_20261126155917.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "新疆维吾尔自治区塔城地区沙湾市",
+      "province": "新疆",
+      "city": "维吾尔自治",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/26 15:14",
+      "url": "http://www.nmc.cn/publish/alarm/65420341600000_20261126151453.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    },
+    {
+      "region": "辽宁省锦州市",
+      "province": "辽宁",
+      "city": "省锦州",
+      "hazard": "大雾",
+      "level": "橙色",
+      "rank": 3,
+      "issuetime": "2026/11/26 16:07",
+      "url": "http://www.nmc.cn/publish/alarm/21070041600000_20261126160600.html",
+      "weight": 1,
+      "impact": "高速封路，运输延迟",
+      "is_production_area": false,
+      "risk_score": 3
+    }
+  ]
+}
