@@ -1,6 +1,6 @@
 {
   "date": "2026-11-27",
-  "generated_at": "2026-11-27 10:07（北京时间）",
+  "generated_at": "2026-11-27 10:22（北京时间）",
   "price_source": "人工录入实测观测点（92 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -212,15 +212,15 @@
     "hazard_stats": [
       [
         "大风",
-        48
+        42
       ],
       [
         "寒潮",
-        34
+        40
       ],
       [
         "海区大风",
-        5
+        6
       ],
       [
         "大雾",
@@ -228,7 +228,7 @@
       ],
       [
         "道路冰雪",
-        4
+        3
       ],
       [
         "其他",
@@ -236,7 +236,11 @@
       ],
       [
         "道路结冰",
-        2
+        1
+      ],
+      [
+        "暴雪",
+        1
       ]
     ],
     "top": [
@@ -297,31 +301,45 @@
         "risk_score": 6
       },
       {
-        "region": "内蒙古自治区兴安盟阿尔山市",
+        "region": "内蒙古自治区包头市白云鄂博矿区",
         "province": "内蒙古",
         "city": "自治",
         "hazard": "道路结冰",
         "level": "黄色",
         "rank": 2,
-        "issuetime": "2026/11/27 09:09",
-        "url": "http://www.nmc.cn/publish/alarm/15220241600000_20261127090939.html",
+        "issuetime": "2026/11/27 10:17",
+        "url": "http://www.nmc.cn/publish/alarm/15020641600000_20261127101706.html",
         "weight": 2,
         "impact": "运输受阻",
         "is_production_area": false,
         "risk_score": 4
       },
       {
-        "region": "四川省阿坝藏族羌族自治州金川县",
-        "province": "四川",
-        "city": "省阿坝藏族羌族自治州金川",
-        "hazard": "道路结冰",
+        "region": "河北省保定市阜平县",
+        "province": "河北",
+        "city": "省保定",
+        "hazard": "大风",
         "level": "黄色",
         "rank": 2,
-        "issuetime": "2026/11/27 09:07",
-        "url": "http://www.nmc.cn/publish/alarm/51322641600000_20261127090755.html",
+        "issuetime": "2026/11/27 10:13",
+        "url": "http://www.nmc.cn/publish/alarm/13062441600000_20261127101307.html",
         "weight": 2,
-        "impact": "运输受阻",
-        "is_production_area": true,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": false,
+        "risk_score": 4
+      },
+      {
+        "region": "河南省焦作市沁阳市",
+        "province": "河南",
+        "city": "省焦作",
+        "hazard": "大风",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/27 10:05",
+        "url": "http://www.nmc.cn/publish/alarm/41088241600000_20261127100509.html",
+        "weight": 2,
+        "impact": "设施受损、蒸腾加剧",
+        "is_production_area": false,
         "risk_score": 4
       },
       {
@@ -437,6 +455,20 @@
         "risk_score": 3
       },
       {
+        "region": "江苏省宿迁市泗阳县",
+        "province": "江苏",
+        "city": "省宿迁",
+        "hazard": "寒潮",
+        "level": "蓝色",
+        "rank": 1,
+        "issuetime": "2026/11/27 10:06",
+        "url": "http://www.nmc.cn/publish/alarm/32132341600000_20261127100651.html",
+        "weight": 3,
+        "impact": "生长停滞，但常推高菜价（双刃剑）",
+        "is_production_area": true,
+        "risk_score": 3
+      },
+      {
         "region": "江苏省徐州市",
         "province": "江苏",
         "city": "省徐州",
@@ -487,34 +519,6 @@
         "rank": 1,
         "issuetime": "2026/11/27 09:43",
         "url": "http://www.nmc.cn/publish/alarm/32032241600000_20261127094324.html",
-        "weight": 3,
-        "impact": "生长停滞，但常推高菜价（双刃剑）",
-        "is_production_area": true,
-        "risk_score": 3
-      },
-      {
-        "region": "江苏省徐州市睢宁县",
-        "province": "江苏",
-        "city": "省徐州",
-        "hazard": "寒潮",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/27 09:55",
-        "url": "http://www.nmc.cn/publish/alarm/32032441600000_20261127095531.html",
-        "weight": 3,
-        "impact": "生长停滞，但常推高菜价（双刃剑）",
-        "is_production_area": true,
-        "risk_score": 3
-      },
-      {
-        "region": "江苏省徐州市贾汪区",
-        "province": "江苏",
-        "city": "省徐州",
-        "hazard": "寒潮",
-        "level": "蓝色",
-        "rank": 1,
-        "issuetime": "2026/11/27 09:44",
-        "url": "http://www.nmc.cn/publish/alarm/32030541600000_20261127094428.html",
         "weight": 3,
         "impact": "生长停滞，但常推高菜价（双刃剑）",
         "is_production_area": true,
