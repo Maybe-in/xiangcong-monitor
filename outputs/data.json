@@ -1,6 +1,6 @@
 {
   "date": "2026-11-28",
-  "generated_at": "2026-11-28 09:52（北京时间）",
+  "generated_at": "2026-11-28 10:06（北京时间）",
   "price_source": "人工录入实测观测点（95 条）+ 模型估算；批发市场接口已接入：北京新发地、惠农网（云南产地）",
   "core_region": "泸西县",
   "weather_windows": {
@@ -212,19 +212,19 @@
     "hazard_stats": [
       [
         "大雾",
-        44
+        40
       ],
       [
         "大风",
-        36
-      ],
-      [
-        "道路结冰",
-        10
+        34
       ],
       [
         "森林火险",
-        9
+        14
+      ],
+      [
+        "道路结冰",
+        11
       ],
       [
         "道路冰雪",
@@ -232,20 +232,6 @@
       ]
     ],
     "top": [
-      {
-        "region": "内蒙古自治区包头市固阳县",
-        "province": "内蒙古",
-        "city": "自治",
-        "hazard": "道路结冰",
-        "level": "黄色",
-        "rank": 2,
-        "issuetime": "2026/11/28 07:43",
-        "url": "http://www.nmc.cn/publish/alarm/15022241600000_20261128074346.html",
-        "weight": 2,
-        "impact": "运输受阻",
-        "is_production_area": false,
-        "risk_score": 4
-      },
       {
         "region": "新疆维吾尔自治区克拉玛依市",
         "province": "新疆",
@@ -331,6 +317,34 @@
         "risk_score": 4
       },
       {
+        "region": "辽宁省沈阳市沈北新区",
+        "province": "辽宁",
+        "city": "省沈阳",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/28 09:53",
+        "url": "http://www.nmc.cn/publish/alarm/21011341600000_20261128095300.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": false,
+        "risk_score": 4
+      },
+      {
+        "region": "辽宁省沈阳市苏家屯区",
+        "province": "辽宁",
+        "city": "省沈阳",
+        "hazard": "道路结冰",
+        "level": "黄色",
+        "rank": 2,
+        "issuetime": "2026/11/28 09:57",
+        "url": "http://www.nmc.cn/publish/alarm/21011141600000_20261128095700.html",
+        "weight": 2,
+        "impact": "运输受阻",
+        "is_production_area": false,
+        "risk_score": 4
+      },
+      {
         "region": "辽宁省铁岭市",
         "province": "辽宁",
         "city": "省铁岭",
@@ -381,20 +395,6 @@
         "rank": 3,
         "issuetime": "2026/11/28 07:57",
         "url": "http://www.nmc.cn/publish/alarm/53232641600000_20261128075944.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": true,
-        "risk_score": 3
-      },
-      {
-        "region": "四川省乐山市沐川县",
-        "province": "四川",
-        "city": "省乐山",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/28 07:33",
-        "url": "http://www.nmc.cn/publish/alarm/51112941600000_20261128073323.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": true,
@@ -471,6 +471,20 @@
         "risk_score": 3
       },
       {
+        "region": "新疆维吾尔自治区克拉玛依市",
+        "province": "新疆",
+        "city": "维吾尔自治",
+        "hazard": "大雾",
+        "level": "橙色",
+        "rank": 3,
+        "issuetime": "2026/11/28 09:41",
+        "url": "http://www.nmc.cn/publish/alarm/65020041600000_20261128094145.html",
+        "weight": 1,
+        "impact": "高速封路，运输延迟",
+        "is_production_area": false,
+        "risk_score": 3
+      },
+      {
         "region": "新疆维吾尔自治区阿勒泰地区阿勒泰市",
         "province": "新疆",
         "city": "维吾尔自治",
@@ -485,28 +499,14 @@
         "risk_score": 3
       },
       {
-        "region": "江西省景德镇市乐平市",
-        "province": "江西",
-        "city": "省景德镇",
-        "hazard": "大雾",
-        "level": "橙色",
-        "rank": 3,
-        "issuetime": "2026/11/28 07:44",
-        "url": "http://www.nmc.cn/publish/alarm/36028141600000_20261128074653.html",
-        "weight": 1,
-        "impact": "高速封路，运输延迟",
-        "is_production_area": false,
-        "risk_score": 3
-      },
-      {
-        "region": "江西省赣州市于都县",
+        "region": "江西省赣州市会昌县",
         "province": "江西",
         "city": "省赣州",
         "hazard": "大雾",
         "level": "橙色",
         "rank": 3,
-        "issuetime": "2026/11/28 07:35",
-        "url": "http://www.nmc.cn/publish/alarm/36073141600000_20261128073757.html",
+        "issuetime": "2026/11/28 09:25",
+        "url": "http://www.nmc.cn/publish/alarm/36073341600000_20261128092717.html",
         "weight": 1,
         "impact": "高速封路，运输延迟",
         "is_production_area": false,
